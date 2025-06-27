@@ -134,7 +134,7 @@ CREATE TABLE Users (
   Email varchar(255) UNIQUE NOT NULL,
   Phone_number varchar(10),
   Role_id int,
-  [Status] varchar(20) NOT NULL DEFAULT 'Active',
+  [Status] BIT NOT NULL DEFAULT 1,
   Created_at DATETIME DEFAULT GETDATE()
 
   FOREIGN KEY (Role_id) REFERENCES Roles(Id) ON DELETE SET NULL
