@@ -12,9 +12,6 @@ import java.util.Date;
 public class User {
     int id;
     String username;
-
-
-
     String fullname;
     String email;
     String phone_number;

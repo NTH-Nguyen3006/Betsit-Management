@@ -125,7 +125,6 @@ CREATE TABLE Roles (
   [Description] text
 );
 
-
 CREATE TABLE Users (
   Id int PRIMARY KEY IDENTITY(1, 1),
   Username varchar(50) UNIQUE NOT NULL,
