@@ -46,15 +46,9 @@ CREATE TABLE Contracts (
     Notes NVARCHAR(MAX),
 
     FOREIGN KEY(RoomId) REFERENCES Rooms(RoomId) ON DELETE SET NULL,
-    FOREIGN KEY(Tenant) REFERENCES Tenants(Citizen_id) ON DELETE CASCADE
+    FOREIGN KEY(Tenant) REFERENCES Tenants(Citizen_id) ON DELETE CASCADE 
 );
 
-CREATE TABLE Contract_Tenants (
-    Contract_id INT PRIMARY KEY,
-    Personal_id INT,
-    [Role] TINYINT -- Enum
-    FOREIGN KEY(Contract_id) REFERENCES Contracts(Id) ON DELETE CASCADE,
-);
 
 CREATE TABLE Services (
     Id INT IDENTITY(1,1) PRIMARY KEY,
@@ -141,3 +135,10 @@ CREATE TABLE Users (
 GO
 
 --DROP DATABASE BEDSIT
+
+-- CREATE TABLE Contract_Tenants (
+--     Contract_id INT PRIMARY KEY,
+--     Personal_id INT,
+--     [Role] TINYINT -- Enum
+--     FOREIGN KEY(Contract_id) REFERENCES Contracts(Id) ON DELETE CASCADE,
+-- );
