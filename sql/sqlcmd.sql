@@ -415,7 +415,7 @@ INSERT INTO Roles (Role_name, Description) VALUES
 (N'TrainingCoordinator', N'Điều phối viên đào tạo'),
 (N'LogisticsCoordinator', N'Điều phối viên hậu cần');
 */
-
+select * from Services
 -- Dữ liệu cho bảng Services (ít nhất 30 dịch vụ)
 INSERT INTO Services (ServiceName, Unit, Price, Description) VALUES
 (N'Tiền Điện', N'kWh', 3500.00, N'Giá điện tính theo kWh sử dụng hàng tháng'),
@@ -459,7 +459,8 @@ INSERT INTO Services (ServiceName, Unit, Price, Description) VALUES
 INSERT INTO Users (Username, Password, Fullname, Email, Phone_number, Role_id, Status, Created_at) VALUES
 ('admin01', '123456', N'Nguyễn Tấn Hoàng Nguyên', 'nguyenth@gmail.com', '0912345601', 1, 1, GETDATE()),
 ('manager01', '123456', N'Phạm Thùy Trinh', 'Trinhpt@gmail.com', '0912345602', 2, 1, GETDATE()),
-('staff01', '123456', N'Như Lê Hoàng Minh', 'Minhnlh@gmail.com', '0912345603', 3, 1, GETDATE());
+('staff01', '123456', N'Như Lê Hoàng Minh', 'Minhnlh@gmail.com', '0912345603', 3, 1, GETDATE()),
+('staff02', '123456', N'Nguyễn Đài Vĩnh Khánh', 'Khanhndvts02245@gmail.com', '0931489629', 3, 1, GETDATE());
 /*
 ('staff02', '123456', N'Nguyễn Thanh Tùng', 'nguyenthanhtung@gmail.com', '0912345604', 3, 1, GETDATE()),
 ('accountant01', '123456', N'Võ Thị Thu Hà', 'vothithuha@gmail.com', '0912345605', 5, 1, GETDATE()),
@@ -722,4 +723,6 @@ INSERT INTO Contracts (RoomId, Tenant, StartDate, EndDate, DepositAmount, Paymen
 (31, '004123456789', '2024-07-05', '2026-07-04', 7000000.00, 6, NULL, N'Hợp đồng 2 năm'),
 (32, '004234567890', '2024-08-10', '2025-08-09', 8400000.00, 3, NULL, N'Hợp đồng 1 năm, có điều khoản gia hạn'),
 (33, '004345678901', '2024-09-05', '2025-09-04', 5600000.00, 1, NULL, N'Hợp đồng 1 năm, thanh toán hàng tháng');
---DROP DATABASE BEDSIT
+
+
+select * from Contracts

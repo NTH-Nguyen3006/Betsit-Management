@@ -1,7 +1,7 @@
 package entity;
 
 import lombok.*;
-import lombok.experimental.FieldDefaults;
+//import lombok.experimental.FieldDefaults;
 
 import java.util.Date;
 
@@ -9,7 +9,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@FieldDefaults(level = AccessLevel.PRIVATE)
+//@FieldDefaults(level = AccessLevel.PRIVATE)
 public class ServiceUsages {
     int serviceId;
     int contractId;

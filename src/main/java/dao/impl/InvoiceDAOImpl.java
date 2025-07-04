@@ -1,0 +1,77 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package dao.impl;
+
+import dao.InvoiceDao;
+import entity.Invoice;
+import java.util.List;
+import utils.XJdbc;
+import utils.XQuery;
+
+
+public class InvoiceDAOImpl implements InvoiceDao{
+
+    private final String createSql = "INSERT INTO Invoice"
+                                   + "(Id, Contract_id, billing_period_month, billing_period_year, previous_debt, discount, total_amount, status, due_date, created_at) "
+                                   + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    private final String updateSql = "UPDATE Contracts SET "
+                                   + "Id=?, Contract_id=?, billing_period_month=?, billing_period_year=?, previous_debt=?, discount=?, total_amount=?, status=?, due_date=?, created_at=? "
+                                   + "WHERE Id=?";
+    private final String deleteByIdSql = "DELETE FROM Invoice WHERE Id=?";
+
+    private final String findAllSql = "SELECT * FROM Invoice";
+    private final String findByIdSql = findAllSql + " WHERE Id=?";
+    
+    @Override
+    public Invoice create(Invoice entity) {
+        Object[] values = {
+            entity.getId(),
+            entity.getContract_id(),
+            entity.getBilling_period_month(),
+            entity.getBilling_period_year(),
+            entity.getPrevious_debt(),
+            entity.getDiscount(),
+            entity.getTotal_amount(),
+            entity.getStatus(),
+            entity.getDue_date(),
+            entity.getCreated_at()
+        };
+        XJdbc.executeUpdate(createSql, values);
+        return entity;
+    }
+
+    @Override
+    public void update(Invoice entity) {
+        Object[] values = {
+            entity.getId(),
+            entity.getContract_id(),
+            entity.getBilling_period_month(),
+            entity.getBilling_period_year(),
+            entity.getPrevious_debt(),
+            entity.getDiscount(),
+            entity.getTotal_amount(),
+            entity.getStatus(),
+            entity.getDue_date(),
+            entity.getCreated_at()
+        };
+        XJdbc.executeUpdate(updateSql, values);
+    }
+
+    @Override
+    public void deleteById(String id) {
+        XJdbc.executeUpdate(deleteByIdSql, id); 
+    }
+
+    @Override
+    public List<Invoice> findAll() {
+        return XQuery.getBeanList(Invoice.class, findAllSql);   
+    }
+
+    @Override
+    public Invoice findById(String id) {
+        return XQuery.getSingleBean(Invoice.class, findByIdSql, id);
+    }
+    
+}
