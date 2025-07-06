@@ -6,10 +6,6 @@ package dao;
 
 import entity.Tenant;
 
-/**
- *
- * @author nhukhue
- */
-public interface TenantDAO extends CrudDAO<Tenant, String>{
-    
+public interface TenantDAO extends CrudDAO<Tenant, String> {
+
 }

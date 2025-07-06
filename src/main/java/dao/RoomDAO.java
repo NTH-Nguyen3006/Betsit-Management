@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package dao;
 
 import entity.Room;
@@ -10,6 +6,6 @@ import entity.Room;
  *
  * @author nhukhue
  */
-public interface RoomDAO extends CrudDAO<Room, String>{
-    
+public interface RoomDAO extends CrudDAO<Room, String> {
+
 }

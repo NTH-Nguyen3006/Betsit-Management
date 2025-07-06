@@ -5,7 +5,6 @@
 package entity;
 
 import java.math.BigDecimal;
-import java.text.Bidi;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
