@@ -47,15 +47,9 @@ CREATE TABLE Contracts (
     Notes NVARCHAR(MAX),
 
     FOREIGN KEY(RoomId) REFERENCES Rooms(RoomId) ON DELETE SET NULL,
-    FOREIGN KEY(Tenant) REFERENCES Tenants(Citizen_id) ON DELETE CASCADE
+    FOREIGN KEY(Tenant) REFERENCES Tenants(Citizen_id) ON DELETE CASCADE 
 );
 
-CREATE TABLE Contract_Tenants (
-    Contract_id INT PRIMARY KEY,
-    Personal_id INT,
-    [Role] TINYINT -- Enum
-    FOREIGN KEY(Contract_id) REFERENCES Contracts(Id) ON DELETE CASCADE,
-);
 
 CREATE TABLE Services (
     Id INT IDENTITY(1,1) PRIMARY KEY,
@@ -140,6 +134,16 @@ CREATE TABLE Users (
   FOREIGN KEY (Role_id) REFERENCES Roles(Id) ON DELETE SET NULL
 );
 GO
+
+--DROP DATABASE BEDSIT
+
+-- CREATE TABLE Contract_Tenants (
+--     Contract_id INT PRIMARY KEY,
+--     Personal_id INT,
+--     [Role] TINYINT -- Enum
+--     FOREIGN KEY(Contract_id) REFERENCES Contracts(Id) ON DELETE CASCADE,
+-- );
+-- );
 
 -- Dữ liệu cho bảng Rooms (ít nhất 30 phòng)
 INSERT INTO Rooms (Area, RentPrice, Status, RoomType, Notes) VALUES
@@ -724,5 +728,5 @@ INSERT INTO Contracts (RoomId, Tenant, StartDate, EndDate, DepositAmount, Paymen
 (32, '004234567890', '2024-08-10', '2025-08-09', 8400000.00, 3, NULL, N'Hợp đồng 1 năm, có điều khoản gia hạn'),
 (33, '004345678901', '2024-09-05', '2025-09-04', 5600000.00, 1, NULL, N'Hợp đồng 1 năm, thanh toán hàng tháng');
 
-
 select * from Contracts
+--DROP DATABASE BEDSIT
