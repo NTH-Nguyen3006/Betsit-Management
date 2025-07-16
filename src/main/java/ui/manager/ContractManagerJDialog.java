@@ -5,14 +5,23 @@
 package ui.manager;
 
 import dao.ContractDAO;
-import dao.ContractTenantDAO;
 import entity.Contract;
-import entity.ContractTenant;
+import entity.ContractDetail;
 import impl.ContractDAOImpl;
-import impl.ContractTenantDAOImpl;
+import impl.ContractDetailDAOImpl;
+import java.io.File;
 import java.util.List;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import utils.XDialog;
+import dao.ContractDetailDAO;
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+
 
 
 
@@ -28,6 +37,8 @@ public class ContractManagerJDialog extends javax.swing.JDialog implements Contr
     public ContractManagerJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        open(); // phải gọi sau initComponents
+        pack();
     }
 
     /**
@@ -51,6 +62,8 @@ public class ContractManagerJDialog extends javax.swing.JDialog implements Contr
         txtIdRoom = new javax.swing.JTextField();
         txtDeposit_Amount = new javax.swing.JTextField();
         txtTenant = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        txtPaymentCycleMonth = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         StartDate = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -84,13 +97,13 @@ public class ContractManagerJDialog extends javax.swing.JDialog implements Contr
 
         tblContractManager.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Mã hợp đồng", "Mã phòng", "Tiền đặt cọc", "Mã người thuê"
+                "Mã hợp đồng", "Mã phòng", "Tiền đặt cọc", "Mã người thuê", "Tháng Thanh Toán"
             }
         ));
         jScrollPane1.setViewportView(tblContractManager);
@@ -101,10 +114,37 @@ public class ContractManagerJDialog extends javax.swing.JDialog implements Contr
             }
         });
 
+        txtIdRoom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdRoomActionPerformed(evt);
+            }
+        });
+
+        txtDeposit_Amount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDeposit_AmountActionPerformed(evt);
+            }
+        });
+
+        txtTenant.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTenantActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setText("Tháng thanh toán");
+
+        txtPaymentCycleMonth.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPaymentCycleMonthActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,9 +166,12 @@ public class ContractManagerJDialog extends javax.swing.JDialog implements Contr
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(txtDeposit_Amount, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtTenant, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(176, Short.MAX_VALUE))
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(txtTenant, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtPaymentCycleMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,20 +192,48 @@ public class ContractManagerJDialog extends javax.swing.JDialog implements Contr
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtDeposit_Amount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTenant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
+                .addGap(4, 4, 4)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(txtPaymentCycleMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         tabs.addTab("Thông tin cơ bản", jPanel1);
+
+        StartDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StartDateActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Ngày bắt đầu");
 
         jLabel6.setText("Ngày kết thúc");
 
+        EndDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EndDateActionPerformed(evt);
+            }
+        });
+
         jLabel7.setText("Ảnh hợp đồng");
 
         jLabel8.setText("Ghi chú");
+
+        txtContractScanUrl.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtContractScanUrlActionPerformed(evt);
+            }
+        });
+
+        Note.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NoteActionPerformed(evt);
+            }
+        });
 
         tblContractManager2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -334,29 +405,67 @@ public class ContractManagerJDialog extends javax.swing.JDialog implements Contr
 
     private void UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateActionPerformed
         // TODO add your handling code here:
+         this.update();
     }//GEN-LAST:event_UpdateActionPerformed
 
     private void DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteActionPerformed
         // TODO add your handling code here:
+        this.delete();
     }//GEN-LAST:event_DeleteActionPerformed
 
     private void ResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetActionPerformed
         // TODO add your handling code here:
+        this.clear();
     }//GEN-LAST:event_ResetActionPerformed
 
     private void btnMovePreviousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMovePreviousActionPerformed
         // TODO add your handling code here:
+        this.movePrevious();
     }//GEN-LAST:event_btnMovePreviousActionPerformed
 
     private void btnMoveNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveNextActionPerformed
         // TODO add your handling code here:
+            this.moveNext();
+
     }//GEN-LAST:event_btnMoveNextActionPerformed
 
     private void chooseFrontImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseFrontImageActionPerformed
         // TODO add your handling code here:
+        this.chooseFrontImage();
     }//GEN-LAST:event_chooseFrontImageActionPerformed
 
-    /**
+    private void txtIdRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdRoomActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdRoomActionPerformed
+
+    private void txtDeposit_AmountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDeposit_AmountActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDeposit_AmountActionPerformed
+
+    private void txtTenantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTenantActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTenantActionPerformed
+
+    private void txtPaymentCycleMonthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPaymentCycleMonthActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPaymentCycleMonthActionPerformed
+
+    private void StartDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartDateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_StartDateActionPerformed
+
+    private void EndDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EndDateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EndDateActionPerformed
+
+    private void txtContractScanUrlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContractScanUrlActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtContractScanUrlActionPerformed
+
+    private void NoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NoteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NoteActionPerformed
+        /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -419,6 +528,7 @@ public class ContractManagerJDialog extends javax.swing.JDialog implements Contr
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -430,21 +540,38 @@ public class ContractManagerJDialog extends javax.swing.JDialog implements Contr
     private javax.swing.JTextField txtDeposit_Amount;
     private javax.swing.JTextField txtIdContractManager;
     private javax.swing.JTextField txtIdRoom;
+    private javax.swing.JTextField txtPaymentCycleMonth;
     private javax.swing.JTextField txtTenant;
     // End of variables declaration//GEN-END:variables
 
-ContractDAO dao = new ContractDAOImpl ();
-ContractTenantDAO contractDetailDAO = new ContractTenantDAOImpl();
-List<Contract> items = List.of();
+ContractDAO dao = new ContractDAOImpl();
+    ContractDetailDAO contractDetailDAO = new ContractDetailDAOImpl();
+    List<Contract> items = List.of();
+    private ContractDetail currentDetail = null;
 
-@Override
+
+ @Override
     public void open() {
         this.setLocationRelativeTo(null);
         this.fillToTable();
         this.clear();
+
+        tblContractManager.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) {
+                this.edit();
+            }
+        });
+
+        tblContractManager.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 1) {
+                    edit();
+                }
+            }
+        });
     }
-    
-    @Override
+
+@Override
     public void fillToTable() {
         DefaultTableModel model = (DefaultTableModel) tblContractManager.getModel();
         model.setRowCount(0);
@@ -455,196 +582,259 @@ List<Contract> items = List.of();
                 item.getRoomId(),
                 item.getDepositAmount(),
                 item.getTenant(),
-                false
+                item.getPayment_cycle_months()
             };
             model.addRow(rowData);
         });
     }
-    
-    @Override
+
+@Override
     public void edit() {
         int row = tblContractManager.getSelectedRow();
         if (row >= 0 && row < items.size()) {
             Contract entity = items.get(row);
-            this.setForm(entity);
-
-            ContractTenant detail = contractDetailDAO.findById(entity.getId());
-            this.setDetailForm(detail);
-
-            this.setEditable(true);        
-            tabs.setSelectedIndex(1);      
+            setForm(entity);
+            ContractDetail detail = contractDetailDAO.findById(entity.getId().toString());
+            setDetailForm(detail);
+            setEditable(true);
+            tabs.setSelectedIndex(0);
         }
     }
 
-    
-        @Override
-    public void checkAll() {
-        this.setCheckedAll(true);
-    }
+@Override
+public void checkAll() {
+    this.setCheckedAll(true);
+}
 
-    @Override
-    public void uncheckAll() {
-        this.setCheckedAll(false);
-    }
+@Override
+public void uncheckAll() {
+    this.setCheckedAll(false);
+}
 
-    private void setCheckedAll(boolean checked) {
+private void setCheckedAll(boolean checked) {
+    for (int i = 0; i < tblContractManager.getRowCount(); i++) {
+        if (tblContractManager.getColumnCount() > 5) { // cột 5 là cột check
+            tblContractManager.setValueAt(checked, i, 4);
+        }
+    }
+}
+
+@Override
+public void deleteCheckedItems() {
+    if (XDialog.confirm("Bạn thực sự muốn xóa các mục chọn?")) {
         for (int i = 0; i < tblContractManager.getRowCount(); i++) {
-            tblContractManager.setValueAt(checked, i, 6);
-        }
-    }
-
-    @Override
-    public void deleteCheckedItems() {
-        if (XDialog.confirm("Bạn thực sự muốn xóa các mục chọn?")) {
-            for (int i = 0; i < tblContractManager.getRowCount(); i++) {
-                if ((Boolean) tblContractManager.getValueAt(i, 6)) {
-                    dao.deleteById(items.get(i).getId());
-                }
+            Boolean checked = (Boolean) tblContractManager.getValueAt(i, 4); // Cột 4 là "Tháng thanh toán"
+            if (Boolean.TRUE.equals(checked)) {
+                Contract item = items.get(i);
+                dao.deleteById(item.getId().toString());
             }
-            this.fillToTable();
         }
+        this.fillToTable();
     }
-    
-    @Override
+}
+
+
+ @Override
     public void setForm(Contract entity) {
-        txtIdContractManager.setText(entity.getId());
-        txtIdRoom.setText(entity.getRoomId());
-        txtDeposit_Amount.setText(entity.getDepositAmount());
-        txtTenant.setText(entity.getTenant());
-    }
-    
-    @Override
-    public Contract getForm() {
-        Contract entity = new Contract();
-        entity.setId(txtIdContractManager.getText());
-        entity.setRoomId(txtIdRoom.getText());
-        entity.setDepositAmount(txtDeposit_Amount.getText());
-        entity.setStartDate(StartDate.getText());
-        entity.setEndDate(EndDate.getText());
-        entity.setFile_scan_url(txtContractScanUrl.getText());
-        entity.setNotes(Note.getText());
-        return entity;
-    }
-    private ContractDetail getDetailForm() {
-        ContractDetail detail = new ContractDetail();
-        detail.setCitizenId(txtCitizen_id.getText());
-        detail.setPerCardFrontImage(txtPerCard_FrontImage.getText());
-        detail.setPerCardBackImage(txtPerCard_BackImage.getText());
-        detail.setResidencyStatus(cobResidencyStatus.getSelectedIndex() == 1); 
-        detail.setOccupation(txtOccupation.getText());
-        detail.setHometown(txtHometown.getText());
-        return detail;
-    }
-    
-    private void setDetailForm(ContractDetail detail) {
-        if (detail != null) {
-            txtPerCard_FrontImage.setText(detail.getPerCardFrontImage());
-            txtPerCard_BackImage.setText(detail.getPerCardBackImage());
-            cobResidencyStatus.setSelectedIndex(detail.isResidencyStatus() ? 1 : 0); 
-            txtOccupation.setText(detail.getOccupation());
-            txtHometown.setText(detail.getHometown());
-        } else {
-            txtPerCard_FrontImage.setText("");
-            txtPerCard_BackImage.setText("");
-            cobResidencyStatus.setSelectedIndex(-1); 
-            txtOccupation.setText("");
-            txtHometown.setText("");
-        }
-    }
-    
-    @Override
-    public void create() {
-        Contract tenant = getForm();
-        ContractDetail detail = getDetailForm();
+        if (entity == null) return;
 
-        dao.create(tenant);
-        ContractDetailDAO.create(detail);
+        txtIdContractManager.setText(entity.getId() == null ? "" : entity.getId().toString());
+        txtIdRoom.setText(entity.getRoomId() == null ? "" : entity.getRoomId().toString());
+        txtTenant.setText(entity.getTenant() == null ? "" : entity.getTenant());
+        txtDeposit_Amount.setText(entity.getDepositAmount() == null ? "" : entity.getDepositAmount().toString());
 
-        fillToTable();
-        clear();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        StartDate.setText(entity.getStartDate() == null ? "" : sdf.format(entity.getStartDate()));
+        EndDate.setText(entity.getEndDate() == null ? "" : sdf.format(entity.getEndDate()));
+        txtContractScanUrl.setText(entity.getFile_scan_url() == null ? "" : entity.getFile_scan_url());
+        Note.setText(entity.getNotes() == null ? "" : entity.getNotes());
+        txtPaymentCycleMonth.setText(entity.getPayment_cycle_months() == null ? "1" : entity.getPayment_cycle_months().toString());
     }
 
-    @Override
-    public void update() {
-        Contract tenant = getForm();
-        ContractDetail detail = getDetailForm();
 
-        dao.update(tenant);
-        ContractTenantDAO.update(detail);
-
-        fillToTable();
+@Override
+public Contract getForm() {
+    Contract entity = new Contract();
+    try {
+        entity.setId(Integer.parseInt(txtIdContractManager.getText()));
+    } catch (NumberFormatException e) {
+        entity.setId(null);
     }
 
-    @Override
-    public void delete() {
-        if (XDialog.confirm("Bạn thực sự muốn xóa?")) {
-            String id = txtIdContractManager.getText();
-            dao.deleteById(id);
-            this.fillToTable();
-            this.clear();
-        }
+    try {
+        entity.setRoomId(Integer.parseInt(txtIdRoom.getText()));
+    } catch (NumberFormatException e) {
+        entity.setRoomId(null);
     }
 
-    @Override
-    public void clear() {
-        this.setForm(new Contract());
-        this.setDetailForm(null);
-        this.setEditable(false);
+    entity.setTenant(txtTenant.getText());
+
+    try {
+        entity.setDepositAmount(new BigDecimal(txtDeposit_Amount.getText()));
+    } catch (NumberFormatException e) {
+        entity.setDepositAmount(BigDecimal.ZERO);
     }
-    
-    @Override
+
+    try {
+        entity.setStartDate(new SimpleDateFormat("yyyy-MM-dd").parse(StartDate.getText()));
+    } catch (Exception e) {
+        entity.setStartDate(null);
+    }
+
+    try {
+        entity.setEndDate(new SimpleDateFormat("yyyy-MM-dd").parse(EndDate.getText()));
+    } catch (Exception e) {
+        entity.setEndDate(null);
+    }
+
+    entity.setFile_scan_url(txtContractScanUrl.getText());
+    entity.setNotes(Note.getText());
+
+    try {
+        entity.setPayment_cycle_months(Integer.parseInt(txtPaymentCycleMonth.getText()));
+    } catch (NumberFormatException e) {
+        entity.setPayment_cycle_months(1);
+    }
+
+    return entity;
+}
+
+private ContractDetail getDetailForm() {
+    ContractDetail detail = new ContractDetail();
+    detail.setId(txtIdContractManager.getText());
+    detail.setRoomId(txtIdRoom.getText());
+    detail.setTenant(txtTenant.getText());
+    detail.setStartDate(StartDate.getText());
+    detail.setEndDate(EndDate.getText());
+    detail.setDepositAmount(txtDeposit_Amount.getText());
+    try {
+        detail.setPaymentCycleMonths(Integer.parseInt(txtPaymentCycleMonth.getText()));
+    } catch (NumberFormatException e) {
+        detail.setPaymentCycleMonths(0);
+    }
+    detail.setFileScanUrl(txtContractScanUrl.getText());
+    detail.setNotes(Note.getText());
+    return detail;
+}
+
+private void setDetailForm(ContractDetail detail) {
+        if (detail == null) return;
+
+        txtIdContractManager.setText(detail.getId());
+        txtIdRoom.setText(detail.getRoomId());
+        txtTenant.setText(detail.getTenant());
+        StartDate.setText(detail.getStartDate());
+        EndDate.setText(detail.getEndDate());
+        txtDeposit_Amount.setText(detail.getDepositAmount());
+        txtPaymentCycleMonth.setText(String.valueOf(detail.getPaymentCycleMonths()));
+        txtContractScanUrl.setText(detail.getFileScanUrl());
+        Note.setText(detail.getNotes());
+    }
+
+
+@Override
+public void create() {
+    Contract tenant = getForm();
+    ContractDetail detail = getDetailForm();
+
+    dao.create(tenant);
+    contractDetailDAO.create(detail);
+
+    fillToTable();
+    clear();
+}
+
+@Override
+public void update() {
+    Contract tenant = getForm();
+    ContractDetail detail = getDetailForm();
+
+    dao.update(tenant);
+    contractDetailDAO.update(detail);
+
+    fillToTable();
+}
+
+@Override
+public void delete() {
+    if (XDialog.confirm("Bạn thực sự muốn xóa?")) {
+        String id = txtIdContractManager.getText();
+        dao.deleteById(id);
+        this.fillToTable();
+        this.clear();
+    }
+}
+
+@Override
+public void clear() {
+    this.setForm(new Contract());
+    this.setDetailForm(null);
+    this.setEditable(false);
+}
+
+ @Override
     public void setEditable(boolean editable) {
-        txtIdContractManager.setEnabled(!editable); 
-        btnCreate.setEnabled(!editable);
-        btnUpdate.setEnabled(editable);
-        btnDelete.setEnabled(editable);
+        txtIdContractManager.setEditable(!editable);
+        txtIdRoom.setEditable(!editable);
+        txtTenant.setEditable(true);
+        txtDeposit_Amount.setEditable(true);
+        txtPaymentCycleMonth.setEditable(true);
+        txtContractScanUrl.setEditable(true);
+        Note.setEditable(true);
+        StartDate.setEditable(true);
+        EndDate.setEditable(true);
+
+        Create.setEnabled(!editable);
+        Update.setEnabled(editable);
+        Delete.setEnabled(editable);
+
         int rowCount = tblContractManager.getRowCount();
         btnMoveFirst.setEnabled(rowCount > 0);
         btnMovePrevious.setEnabled(rowCount > 0);
         btnMoveNext.setEnabled(rowCount > 0);
         btnMoveLast.setEnabled(rowCount > 0);
     }
-    
-    @Override
-    public void moveFirst() {
-        this.moveTo(0);
-    }
 
-    @Override
-    public void movePrevious() {
-        this.moveTo(tblContractManager.getSelectedRow() - 1);
-    }
+@Override
+public void moveFirst() {
+    this.moveTo(0);
+}
 
-    @Override
-    public void moveNext() {
-        this.moveTo(tblContractManager.getSelectedRow() + 1);
-    }
+@Override
+public void movePrevious() {
+    this.moveTo(tblContractManager.getSelectedRow() - 1);
+}
 
-    @Override
-    public void moveLast() {
-        this.moveTo(tblContractManager.getRowCount() - 1);
-    }
+@Override
+public void moveNext() {
+    this.moveTo(tblContractManager.getSelectedRow() + 1);
+}
 
-    @Override
-    public void moveTo(int index) {
-        if (index < 0) {
-            this.moveLast();
-        } else if (index >= tblContractManager.getRowCount()) {
-            this.moveFirst();
-        } else {
-            tblContractManager.clearSelection();
-            tblContractManager.setRowSelectionInterval(index, index);
-            this.edit();
-        }
+@Override
+public void moveLast() {
+    this.moveTo(tblContractManager.getRowCount() - 1);
+}
+
+@Override
+public void moveTo(int index) {
+    if (index < 0) {
+        this.moveLast();
+    } else if (index >= tblContractManager.getRowCount()) {
+        this.moveFirst();
+    } else {
+        tblContractManager.clearSelection();
+        tblContractManager.setRowSelectionInterval(index, index);
+        this.edit();
     }
-    
-    private void chooseFrontImage() {
-        JFileChooser chooser = new JFileChooser();
-        chooser.setFileFilter(new FileNameExtensionFilter("Image files", "jpg", "jpeg", "png"));
-        int result = chooser.showOpenDialog(this);
-        if (result == JFileChooser.APPROVE_OPTION) {
-            File file = chooser.getSelectedFile();
-            txtContractScanUrl.setText(file.getAbsolutePath());
-        }
+}
+
+private void chooseFrontImage() {
+    JFileChooser chooser = new JFileChooser();
+    chooser.setFileFilter(new FileNameExtensionFilter("Image files", "jpg", "jpeg", "png"));
+    int result = chooser.showOpenDialog(this);
+    if (result == JFileChooser.APPROVE_OPTION) {
+        File file = chooser.getSelectedFile();
+        txtContractScanUrl.setText(file.getAbsolutePath());
     }
+}
 }
