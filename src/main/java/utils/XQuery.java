@@ -1,8 +1,7 @@
 package utils;
 
 import entity.Tenant;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
+
 import java.lang.reflect.Method;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -69,15 +68,16 @@ public class XQuery {
      */
     private static <B> B readBean(ResultSet resultSet, Class<B> beanClass) throws Exception {
         B bean = beanClass.getDeclaredConstructor().newInstance();
-        Field[] fs = beanClass.getDeclaredFields();
-        for(Field f: fs){
-            String name = f.getName();
-            try {
-                Object value = resultSet.getObject(name.substring(3));
-
-                f.set(bean, value); 
-            } catch (IllegalAccessException | IllegalArgumentException | SQLException e) {
-                System.out.printf("+ Column '%s' not found!\r\n", name.substring(3));
+        Method[] methods = beanClass.getDeclaredMethods();
+        for(Method method: methods){
+            String name = method.getName();
+            if (name.startsWith("set") && method.getParameterCount() == 1) {
+                try {
+                    Object value = resultSet.getObject(name.substring(3));
+                    method.invoke(bean, value);
+                } catch (IllegalAccessException | IllegalArgumentException | SQLException e) {
+                    System.out.printf("+ Column '%s' not found!\r\n", name.substring(3));
+                }
             }
         }
         return bean;

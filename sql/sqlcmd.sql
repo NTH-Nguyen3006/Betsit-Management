@@ -3,6 +3,8 @@ GO
 USE BEDSIT
 GO
 
+-- DROP DATABASE BEDSIT
+
 CREATE TABLE Rooms (
     RoomId INT IDENTITY(1,1) PRIMARY KEY,
     --RoomName NVARCHAR(100) NOT NULL,
@@ -15,7 +17,7 @@ CREATE TABLE Rooms (
 
 
 CREATE TABLE Tenants (
-    Citizen_id VARCHAR(12) PRIMARY KEY, -- Số Căn cước công dân
+    CitizenId VARCHAR(12) PRIMARY KEY, -- Số Căn cước công dân
     FullName NVARCHAR(100) NOT NULL,
     DateOfBirth DATE,
     PhoneNumber VARCHAR(10) NOT NULL UNIQUE,
@@ -24,14 +26,14 @@ CREATE TABLE Tenants (
 );
 
 CREATE TABLE Tenant_Details (
-    Citizen_id VARCHAR(12) PRIMARY KEY,
+    CitizenId VARCHAR(12) PRIMARY KEY,
     PerCard_FrontImage VARCHAR(100), -- Lưu đường dẫn tới ảnh mặt trước
     PerCard_BackImage VARCHAR(100), -- Lưu đường dẫn tới ảnh mặt sau
     ResidencyStatus BIT DEFAULT 0, -- Thông tin cư trú
     Occupation NVARCHAR(100), -- Nghề nghiệp
     Hometown NVARCHAR(255), -- Quê quán
 
-    FOREIGN KEY(Citizen_id) REFERENCES Tenants(Citizen_id) 
+    FOREIGN KEY(CitizenId) REFERENCES Tenants(CitizenId) 
         ON DELETE CASCADE
 );
 
@@ -47,7 +49,7 @@ CREATE TABLE Contracts (
     Notes NVARCHAR(MAX),
 
     FOREIGN KEY(RoomId) REFERENCES Rooms(RoomId) ON DELETE SET NULL,
-    FOREIGN KEY(Tenant) REFERENCES Tenants(Citizen_id) ON DELETE CASCADE 
+    FOREIGN KEY(Tenant) REFERENCES Tenants(CitizenId) ON DELETE CASCADE 
 );
 
 
@@ -73,50 +75,50 @@ CREATE TABLE ServiceUsages (
 
 CREATE TABLE Invoice (
     Id int PRIMARY KEY IDENTITY(1, 1),
-    Contract_id int,
+    ContractId int,
     Billing_period_month int NOT NULL, -- HÓa đơn tháng 
     Billing_period_year int NOT NULL, -- hóa đơn năm
     Previous_debt decimal(10,2) DEFAULT (0), --NỢ cũ
     Discount decimal(10,2) DEFAULT (0), -- giảm trừ
-    Total_amount decimal(12,2) NOT NULL,
+    TotalAmount decimal(12,2) NOT NULL,
     [Status] BIT NOT NULL DEFAULT (0),
     Due_date date,
     Created_at Datetime DEFAULT GETDATE()
 
-    FOREIGN KEY(Contract_id) REFERENCES Contracts(Id)
+    FOREIGN KEY(ContractId) REFERENCES Contracts(Id)
         ON DELETE SET NULL
 );
 
 CREATE TABLE Invoice_Details (
-  Invoice_id int PRIMARY KEY,
-  Service_id int NOT NULL,
+  InvoiceId int PRIMARY KEY,
+  ServiceId int NOT NULL,
   Quantity INT NOT NULL,
-  Unit_price decimal(10,2) NOT NULL,
+  UnitPrice decimal(10,2) NOT NULL,
   Subtotal decimal(12,2) NOT NULL
 
-  FOREIGN KEY(Invoice_id) REFERENCES Invoice(Id)
+  FOREIGN KEY(InvoiceId) REFERENCES Invoice(Id)
     ON DELETE CASCADE
 );
 
 CREATE TABLE Payments ( --ĐƠn thanh toán
     Id int PRIMARY KEY IDENTITY(1, 1),
-    Invoice_id int NOT NULL,
+    InvoiceId int NOT NULL,
     Tenant varchar(12),
     Amount decimal(12,2) NOT NULL,
-    Payment_date datetime NOT NULL,
-    Payment_method nvarchar(50) NOT NULL,
-    Transaction_code varchar(100),
+    PaymentDate datetime NOT NULL,
+    PaymentMethod nvarchar(50) NOT NULL,
+    TransactionCode varchar(100),
     Note text
 
-    FOREIGN KEY(Invoice_id) REFERENCES Invoice(Id)
+    FOREIGN KEY(InvoiceId) REFERENCES Invoice(Id)
         ON DELETE CASCADE,
-    FOREIGN KEY(Tenant) REFERENCES Tenants(Citizen_id)
+    FOREIGN KEY(Tenant) REFERENCES Tenants(CitizenId)
         ON DELETE CASCADE
 );
 
 CREATE TABLE Roles (
   Id int PRIMARY KEY IDENTITY(1, 1),
-  Role_name varchar(50) UNIQUE NOT NULL,
+  RoleName varchar(50) UNIQUE NOT NULL,
   [Description] text
 );
 
@@ -126,24 +128,23 @@ CREATE TABLE Users (
   [Password] varchar(100) NOT NULL,
   Fullname nvarchar(100),
   Email varchar(255) UNIQUE NOT NULL,
-  Phone_number varchar(10),
-  Role_id int,
+  PhoneNumber varchar(10),
+  RoleId int,
   [Status] BIT NOT NULL DEFAULT 1,
   Created_at DATETIME DEFAULT GETDATE()
 
-  FOREIGN KEY (Role_id) REFERENCES Roles(Id) ON DELETE SET NULL
+  FOREIGN KEY (RoleId) REFERENCES Roles(Id) ON DELETE SET NULL
 );
 GO
 
---DROP DATABASE BEDSIT
+DROP DATABASE BEDSIT
 
--- CREATE TABLE Contract_Tenants (
---     Contract_id INT PRIMARY KEY,
---     Personal_id INT,
---     [Role] TINYINT -- Enum
---     FOREIGN KEY(Contract_id) REFERENCES Contracts(Id) ON DELETE CASCADE,
--- );
--- );
+CREATE TABLE Contract_Tenants (
+    ContractId INT PRIMARY KEY,
+    PersonalId INT,
+    [Role] TINYINT -- Enum
+    FOREIGN KEY(ContractId) REFERENCES Contracts(Id) ON DELETE CASCADE,
+);
 
 -- Dữ liệu cho bảng Rooms (ít nhất 30 phòng)
 INSERT INTO Rooms (Area, RentPrice, Status, RoomType, Notes) VALUES
@@ -188,7 +189,7 @@ INSERT INTO Rooms (Area, RentPrice, Status, RoomType, Notes) VALUES
 (38.0, 5800000.00, 0, N'Phòng Gia Đình', N'Phòng rộng, thích hợp cho 3-4 người'),
 (20.0, 2800000.00, 1, N'Phòng Đơn', N'Đang có người thuê, hợp đồng đến 07/2025');
 
-INSERT INTO Tenants (Citizen_id, FullName, DateOfBirth, PhoneNumber, Email, VehiclePlate) VALUES
+INSERT INTO Tenants (CitizenId, FullName, DateOfBirth, PhoneNumber, Email, VehiclePlate) VALUES
 ('001123456789', N'Nguyễn Hoàng Anh', '1990-01-15', '0901234567', 'hoanganh.nguyen@gmail.com', '51A-123.45'),
 ('001234567890', N'Trần Thị Mai', '1992-03-22', '0902345678', 'maithu.tran@gmail.com', '59F1-678.90'),
 ('001345678901', N'Lê Minh Khôi', '1988-07-01', '0903456789', 'minhkhoi.le@gmail.com', '60G1-012.34'),
@@ -381,7 +382,7 @@ INSERT INTO Tenants (Citizen_id, FullName, DateOfBirth, PhoneNumber, Email, Vehi
 ('019012345678', N'Bùi Thanh Trúc', '1996-06-22', '0900123456', 'thanhtruc.bui2@gmail.com', '29R8-901.23');
 
 -- Dữ liệu cho bảng Roles (ít nhất 30 vai trò)
-INSERT INTO Roles (Role_name, Description) VALUES
+INSERT INTO Roles (RoleName, Description) VALUES
 (N'Admin', N'Người quản trị hệ thống toàn diện'),
 (N'Manager', N'Quản lý chung các hoạt động kinh doanh'),
 (N'Staff', N'Nhân viên điều hành hàng ngày');
@@ -492,8 +493,8 @@ INSERT INTO ServiceUsages (ServiceId, ContractId, StartDate, EndDate) VALUES
 (30, 10, '2025-10-25 15:45:00', NULL);
 
 -- Dữ liệu cho bảng Users (ít nhất 30 người dùng)
--- Giả sử Role_id 1 là Admin, 2 là Manager, 3 là Staff, 4 là Tenant, 5 là Accountant, 6 là Maintenance, v.v.
-INSERT INTO Users (Username, Password, Fullname, Email, Phone_number, Role_id, Status, Created_at) VALUES
+-- Giả sử RoleId 1 là Admin, 2 là Manager, 3 là Staff, 4 là Tenant, 5 là Accountant, 6 là Maintenance, v.v.
+INSERT INTO Users (Username, Password, Fullname, Email, PhoneNumber, RoleId, Status, Created_at) VALUES
 ('admin01', '123456', N'Nguyễn Tấn Hoàng Nguyên', 'nguyenth@gmail.com', '0912345601', 1, 1, GETDATE()),
 ('manager01', '123456', N'Phạm Thùy Trinh', 'Trinhpt@gmail.com', '0912345602', 2, 1, GETDATE()),
 ('staff01', '123456', N'Như Lê Hoàng Minh', 'Minhnlh@gmail.com', '0912345603', 3, 1, GETDATE());
@@ -528,8 +529,8 @@ INSERT INTO Users (Username, Password, Fullname, Email, Phone_number, Role_id, S
 */
 
 -- Dữ liệu cho bảng Tenant_Details (ít nhất 30 chi tiết người thuê)
--- Sử dụng Citizen_id đã tạo ở bước trước
-INSERT INTO Tenant_Details (Citizen_id, PerCard_FrontImage, PerCard_BackImage, ResidencyStatus, Occupation, Hometown) VALUES
+-- Sử dụng CitizenId đã tạo ở bước trước
+INSERT INTO Tenant_Details (CitizenId, PerCard_FrontImage, PerCard_BackImage, ResidencyStatus, Occupation, Hometown) VALUES
 ('001123456789', NULL, NULL, 1, N'Kỹ sư phần mềm', N'Hà Nội'),
 ('001234567890', NULL, NULL, 0, N'Giáo viên', N'Đà Nẵng'),
 ('001345678901', NULL, NULL, 1, N'Freelancer', N'TP. Hồ Chí Minh'),
@@ -722,9 +723,9 @@ INSERT INTO Tenant_Details (Citizen_id, PerCard_FrontImage, PerCard_BackImage, R
 ('019012345678', NULL, NULL, 0, N'Thợ điện', N'Biên Hòa');
 
 -- Dữ liệu cho bảng Contracts (ít nhất 30 hợp đồng)
--- Sử dụng RoomId và Citizen_id đã tạo ở bước trước
+-- Sử dụng RoomId và CitizenId đã tạo ở bước trước
 -- RoomId sẽ được lấy ngẫu nhiên từ 1 đến 40 (số lượng phòng đã tạo)
--- Tenant sẽ được lấy ngẫu nhiên từ các Citizen_id đã tạo (100 người)
+-- Tenant sẽ được lấy ngẫu nhiên từ các CitizenId đã tạo (100 người)
 INSERT INTO Contracts (RoomId, Tenant, StartDate, EndDate, DepositAmount, Payment_cycle_months, File_scan_url, Notes) VALUES
 (1, '001123456789', '2024-01-01', '2025-12-31', 7000000.00, 6, NULL, N'Hợp đồng 2 năm, thanh toán 6 tháng/lần'),
 (2, '001234567890', '2024-02-15', '2025-08-14', 8400000.00, 3, NULL, N'Hợp đồng 18 tháng, có điều khoản gia hạn'),
