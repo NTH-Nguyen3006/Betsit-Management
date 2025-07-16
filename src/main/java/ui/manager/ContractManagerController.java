@@ -4,10 +4,12 @@
  */
 package ui.manager;
 
+import entity.Contract;
+
 /**
  *
  * @author GAMING
  */
-public interface ContractManagerController {
-    
+public interface ContractManagerController extends CrubController<Contract>{
+   
 }

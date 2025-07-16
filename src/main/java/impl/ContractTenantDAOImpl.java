@@ -4,11 +4,11 @@ import java.util.Date;
 import java.util.List;
 import entity.ContractTenant;
 import utils.XJdbc;
-import dao.ContractTenantDao;
 import utils.XAuth;
 import utils.XQuery;
+import dao.ContractTenantDAO;
 
-public class ContractTenantDAOImpl implements ContractTenantDao {
+public class ContractTenantDAOImpl implements ContractTenantDAO {
 
     private final String createSql = "INSERT INTO Contract_Tenants"
             + "(Contract_Id, Personal_id, Role) "
