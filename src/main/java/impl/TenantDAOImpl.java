@@ -53,17 +53,7 @@ public class TenantDAOImpl implements TenantDAO{
 
     @Override
     public List<Tenant> findAll() {
-        String sql = """
-            SELECT 
-                Citizen_id AS citizenId,
-                FullName AS fullName,
-                DateOfBirth AS dateOfBirth,
-                PhoneNumber AS phoneNumber,
-                Email AS email,
-                VehiclePlate AS vehiclePlate
-            FROM Tenants
-        """;
-        return XQuery.getBeanList(Tenant.class, sql);
+        return XQuery.getBeanList(Tenant.class, SELECT_ALL_SQL);
     }
 
     @Override
