@@ -15,11 +15,11 @@ import utils.XQuery;
  * @author ADMIN
  */
 public class TenantDAOImpl implements TenantDAO{
-    private final String INSERT_SQL = "INSERT INTO Tenants (Citizen_id, FullName, DateOfBirth, PhoneNumber, Email, VehiclePlate) VALUES (?, ?, ?, ?, ?, ?)";
-    private final String UPDATE_SQL = "UPDATE Tenants SET FullName=?, DateOfBirth=?, PhoneNumber=?, Email=?, VehiclePlate=? WHERE Citizen_id=?";
-    private final String DELETE_SQL = "DELETE FROM Tenants WHERE Citizen_id=?";
+    private final String INSERT_SQL = "INSERT INTO Tenants (CitizenId, FullName, DateOfBirth, PhoneNumber, Email, VehiclePlate) VALUES (?, ?, ?, ?, ?, ?)";
+    private final String UPDATE_SQL = "UPDATE Tenants SET FullName=?, DateOfBirth=?, PhoneNumber=?, Email=?, VehiclePlate=? WHERE CitizenId=?";
+    private final String DELETE_SQL = "DELETE FROM Tenants WHERE CitizenId=?";
     private final String SELECT_ALL_SQL = "SELECT * FROM Tenants";
-    private final String SELECT_BY_ID_SQL = "SELECT * FROM Tenants WHERE Citizen_id=?";
+    private final String SELECT_BY_ID_SQL = "SELECT * FROM Tenants WHERE CitizenId=?";
     
     @Override
     public Tenant create(Tenant entity) {

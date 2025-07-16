@@ -4,6 +4,7 @@
  */
 package ui.manager;
 
+import ui.controller.TenantController;
 import dao.TenantDAO;
 import dao.TenantDetailDAO;
 import impl.TenantDAOImpl;
@@ -309,7 +310,7 @@ public class TenantsManagerJDialog extends javax.swing.JDialog implements Tenant
                         .addComponent(btnDelete)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnClear)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
                         .addComponent(btnMoveFirst, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnMovePrevious, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -318,8 +319,8 @@ public class TenantsManagerJDialog extends javax.swing.JDialog implements Tenant
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnMoveLast, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -355,7 +356,7 @@ public class TenantsManagerJDialog extends javax.swing.JDialog implements Tenant
                                 .addComponent(txtDateOfBirth)
                                 .addComponent(txtEmail)
                                 .addComponent(txtFullName, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(29, 29, 29))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -447,7 +448,7 @@ public class TenantsManagerJDialog extends javax.swing.JDialog implements Tenant
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tabs, javax.swing.GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE)
+                .addComponent(tabs)
                 .addContainerGap())
         );
 
@@ -724,7 +725,7 @@ public class TenantsManagerJDialog extends javax.swing.JDialog implements Tenant
         detail.setCitizenId(txtCitizen_id.getText());
         detail.setPerCardFrontImage(txtPerCard_FrontImage.getText());
         detail.setPerCardBackImage(txtPerCard_BackImage.getText());
-        detail.setResidencyStatus(cobResidencyStatus.getSelectedIndex() == 1); 
+        detail.setResidencyStatus(cobResidencyStatus.getSelectedIndex());
         detail.setOccupation(txtOccupation.getText());
         detail.setHometown(txtHometown.getText());
         return detail;
@@ -734,13 +735,13 @@ public class TenantsManagerJDialog extends javax.swing.JDialog implements Tenant
         if (detail != null) {
             txtPerCard_FrontImage.setText(detail.getPerCardFrontImage());
             txtPerCard_BackImage.setText(detail.getPerCardBackImage());
-            cobResidencyStatus.setSelectedIndex(detail.isResidencyStatus() ? 1 : 0); 
+            cobResidencyStatus.setSelectedIndex(detail.getResidencyStatus());
             txtOccupation.setText(detail.getOccupation());
             txtHometown.setText(detail.getHometown());
         } else {
             txtPerCard_FrontImage.setText("");
             txtPerCard_BackImage.setText("");
-            cobResidencyStatus.setSelectedIndex(-1); 
+            cobResidencyStatus.setSelectedIndex(0); 
             txtOccupation.setText("");
             txtHometown.setText("");
         }

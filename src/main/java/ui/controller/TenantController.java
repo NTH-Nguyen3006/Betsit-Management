@@ -2,15 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package ui;
+package ui.controller;
 
-import entity.ServiceUsages;
-import ui.manager.CrudController;
+import ui.controller.CrudController;
+import entity.Tenant;
 
 /**
  *
  * @author ADMIN
  */
-public interface ServiceUsagesController extends CrudController<ServiceUsages>{
+public interface TenantController extends CrudController<Tenant> {
     
 }

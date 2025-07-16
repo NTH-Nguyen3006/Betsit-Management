@@ -15,11 +15,11 @@ import utils.XQuery;
  * @author ADMIN
  */
 public class TenantDetailDAOImpl implements TenantDetailDAO {
-    private final String INSERT_SQL = "INSERT INTO Tenant_Details (Citizen_id, PerCard_FrontImage, PerCard_BackImage, ResidencyStatus, Occupation, Hometown) VALUES (?, ?, ?, ?, ?, ?)";
-    private final String UPDATE_SQL = "UPDATE Tenant_Details SET PerCard_FrontImage=?, PerCard_BackImage=?, ResidencyStatus=?, Occupation=?, Hometown=? WHERE Citizen_id=?";
-    private final String DELETE_SQL = "DELETE FROM Tenant_Details WHERE Citizen_id=?";
+    private final String INSERT_SQL = "INSERT INTO Tenant_Details (CitizenId, PerCard_FrontImage, PerCard_BackImage, ResidencyStatus, Occupation, Hometown) VALUES (?, ?, ?, ?, ?, ?)";
+    private final String UPDATE_SQL = "UPDATE Tenant_Details SET PerCard_FrontImage=?, PerCard_BackImage=?, ResidencyStatus=?, Occupation=?, Hometown=? WHERE CitizenId=?";
+    private final String DELETE_SQL = "DELETE FROM Tenant_Details WHERE CitizenId=?";
     private final String SELECT_ALL_SQL = "SELECT * FROM Tenant_Details";
-    private final String SELECT_BY_ID_SQL = SELECT_ALL_SQL + "WHERE Citizen_id = ?";
+    private final String SELECT_BY_ID_SQL = SELECT_ALL_SQL + " WHERE CitizenId = ?";
 
     @Override
     public TenantDetail create(TenantDetail entity) {
@@ -27,7 +27,7 @@ public class TenantDetailDAOImpl implements TenantDetailDAO {
             entity.getCitizenId(),
             entity.getPerCardFrontImage(),
             entity.getPerCardBackImage(),
-            entity.isResidencyStatus(),
+            entity.getResidencyStatus(),
             entity.getOccupation(),
             entity.getHometown()
         };
@@ -40,7 +40,7 @@ public class TenantDetailDAOImpl implements TenantDetailDAO {
         Object[] args = {
             entity.getPerCardFrontImage(),
             entity.getPerCardBackImage(),
-            entity.isResidencyStatus(),
+            entity.getResidencyStatus(),
             entity.getOccupation(),
             entity.getHometown(),
             entity.getCitizenId()

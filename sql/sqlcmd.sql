@@ -65,7 +65,7 @@ CREATE TABLE ServiceUsages (
     ServiceId INT NOT NULL,
     ContractId INT NOT NULL,
     StartDate DATETIME NOT NULL,
-    EndDate DATETIME
+    EndDate DATETIME,
     
     FOREIGN KEY(ServiceId) REFERENCES [Services](Id) 
         ON DELETE CASCADE,
@@ -459,7 +459,7 @@ INSERT INTO Services (ServiceName, Unit, Price, Description) VALUES
 (N'Vệ Sinh Sân Thượng', N'tháng', 40000.00, N'Phí vệ sinh khu vực sân thượng chung'),
 (N'Phí Truyền Hình Cáp', N'tháng', 80000.00, N'Phí sử dụng dịch vụ truyền hình cáp');
 
--- Dữ liệu cho bảng ServicesUsages
+-- Dữ liệu cho bảng ServiceUsages
 INSERT INTO ServiceUsages (ServiceId, ContractId, StartDate, EndDate) VALUES
 (1, 1, '2025-01-05 08:00:00', '2025-01-31 18:00:00'),
 (2, 1, '2025-01-10 09:15:00', '2025-01-25 17:00:00'),

@@ -15,10 +15,10 @@ import lombok.NoArgsConstructor;
 @Builder
 
 public class TenantDetail {
-    String citizenId;
-    String perCardFrontImage;
-    String perCardBackImage;
-    boolean residencyStatus;
-    String occupation;
-    String hometown;
+    private String citizenId;
+    private String perCardFrontImage;
+    private String perCardBackImage;
+    private int residencyStatus;
+    private String occupation;
+    private String hometown;
 }

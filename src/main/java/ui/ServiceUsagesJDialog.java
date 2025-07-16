@@ -4,6 +4,7 @@
  */
 package ui;
 
+import ui.controller.ServiceUsagesController;
 import dao.ServiceUsagesDAO;
 import impl.ServiceUsagesDAOImpl;
 import entity.ServiceUsages;
@@ -66,6 +67,11 @@ public class ServiceUsagesJDialog extends javax.swing.JDialog implements Service
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 formMouseClicked(evt);
+            }
+        });
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
             }
         });
 
@@ -287,16 +293,17 @@ public class ServiceUsagesJDialog extends javax.swing.JDialog implements Service
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCreate)
-                    .addComponent(btnUpdate)
-                    .addComponent(btnDelete)
-                    .addComponent(btnClear)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnMoveNext)
                         .addComponent(btnMovePrevious)
                         .addComponent(btnMoveFirst)
-                        .addComponent(btnMoveLast)))
+                        .addComponent(btnMoveLast))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnCreate)
+                        .addComponent(btnUpdate)
+                        .addComponent(btnDelete)
+                        .addComponent(btnClear)))
                 .addContainerGap())
         );
 
@@ -384,7 +391,7 @@ public class ServiceUsagesJDialog extends javax.swing.JDialog implements Service
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         // TODO add your handling code here:
-        this.open();
+
     }//GEN-LAST:event_formMouseClicked
 
     private void tblServiceUsagesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblServiceUsagesMouseClicked
@@ -393,6 +400,11 @@ public class ServiceUsagesJDialog extends javax.swing.JDialog implements Service
             this.edit();
         }
     }//GEN-LAST:event_tblServiceUsagesMouseClicked
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        this.open();
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
