@@ -16,4 +16,5 @@ public interface CrudDAO<T, ID> {
     void deleteById(ID id); 
     List<T> findAll(); 
     T findById(ID id); 
+    T findByUsername(String username);
 }

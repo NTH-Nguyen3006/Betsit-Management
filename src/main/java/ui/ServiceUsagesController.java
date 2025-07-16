@@ -2,14 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package dao;
+package ui;
 
-import entity.Service;
+import entity.ServiceUsages;
+import ui.manager.CrudController;
 
 /**
  *
- * @author nhukhue
+ * @author ADMIN
  */
-public interface ServiceDAO extends CrudDAO<Service, Integer>{
+public interface ServiceUsagesController extends CrudController<ServiceUsages>{
     
 }

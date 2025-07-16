@@ -25,8 +25,8 @@ CREATE TABLE Tenants (
 
 CREATE TABLE Tenant_Details (
     Citizen_id VARCHAR(12) PRIMARY KEY,
-    PerCard_FrontImage VARCHAR(20), -- Lưu đường dẫn tới ảnh mặt trước
-    PerCard_BackImage VARCHAR(20), -- Lưu đường dẫn tới ảnh mặt sau
+    PerCard_FrontImage VARCHAR(100), -- Lưu đường dẫn tới ảnh mặt trước
+    PerCard_BackImage VARCHAR(100), -- Lưu đường dẫn tới ảnh mặt sau
     ResidencyStatus BIT DEFAULT 0, -- Thông tin cư trú
     Occupation NVARCHAR(100), -- Nghề nghiệp
     Hometown NVARCHAR(255), -- Quê quán
@@ -458,6 +458,39 @@ INSERT INTO Services (ServiceName, Unit, Price, Description) VALUES
 (N'Vệ Sinh Sân Thượng', N'tháng', 40000.00, N'Phí vệ sinh khu vực sân thượng chung'),
 (N'Phí Truyền Hình Cáp', N'tháng', 80000.00, N'Phí sử dụng dịch vụ truyền hình cáp');
 
+-- Dữ liệu cho bảng ServicesUsages
+INSERT INTO ServiceUsages (ServiceId, ContractId, StartDate, EndDate) VALUES
+(1, 1, '2025-01-05 08:00:00', '2025-01-31 18:00:00'),
+(2, 1, '2025-01-10 09:15:00', '2025-01-25 17:00:00'),
+(3, 2, '2025-02-01 07:45:00', NULL),
+(4, 2, '2025-02-15 14:00:00', '2025-02-20 19:30:00'),
+(5, 3, '2025-03-03 12:00:00', NULL),
+(6, 3, '2025-03-12 10:30:00', '2025-03-27 18:00:00'),
+(7, 4, '2025-04-05 09:00:00', NULL),
+(8, 4, '2025-04-18 16:20:00', '2025-05-01 11:00:00'),
+(9, 5, '2025-05-02 08:45:00', '2025-05-15 17:30:00'),
+(10, 5, '2025-05-10 14:00:00', NULL),
+(11, 6, '2025-06-01 07:00:00', '2025-06-30 22:00:00'),
+(12, 6, '2025-06-15 13:00:00', NULL),
+(13, 7, '2025-07-04 15:30:00', '2025-07-20 20:00:00'),
+(14, 7, '2025-07-10 10:00:00', NULL),
+(15, 8, '2025-08-01 08:00:00', '2025-08-31 18:30:00'),
+(16, 8, '2025-08-05 09:20:00', NULL),
+(17, 9, '2025-09-09 12:00:00', '2025-09-15 13:30:00'),
+(18, 9, '2025-09-18 11:00:00', NULL),
+(19, 10, '2025-10-01 14:00:00', '2025-10-20 16:45:00'),
+(20, 10, '2025-10-10 10:30:00', NULL),
+(21, 1, '2025-01-20 15:00:00', NULL),
+(22, 2, '2025-02-22 07:30:00', '2025-03-01 18:00:00'),
+(23, 3, '2025-03-28 08:30:00', '2025-04-10 09:00:00'),
+(24, 4, '2025-04-30 16:00:00', NULL),
+(25, 5, '2025-05-20 10:00:00', '2025-05-25 14:00:00'),
+(26, 6, '2025-06-25 11:30:00', NULL),
+(27, 7, '2025-07-22 09:45:00', '2025-07-29 17:00:00'),
+(28, 8, '2025-08-28 08:00:00', NULL),
+(29, 9, '2025-09-05 14:30:00', NULL),
+(30, 10, '2025-10-25 15:45:00', NULL);
+
 -- Dữ liệu cho bảng Users (ít nhất 30 người dùng)
 -- Giả sử Role_id 1 là Admin, 2 là Manager, 3 là Staff, 4 là Tenant, 5 là Accountant, 6 là Maintenance, v.v.
 INSERT INTO Users (Username, Password, Fullname, Email, Phone_number, Role_id, Status, Created_at) VALUES
@@ -665,27 +698,27 @@ INSERT INTO Tenant_Details (Citizen_id, PerCard_FrontImage, PerCard_BackImage, R
 ('017678901234', NULL, NULL, 0, N'Dược sĩ', N'An Giang'),
 ('017789012345', NULL, NULL, 1, N'Kỹ thuật viên', N'Kiên Giang'),
 ('017890123456', NULL, NULL, 0, N'Nhân viên ngân hàng', N'Long An'),
-('017901234567', NULL, NULL, 1, N'Vận động viên', N'Bà Rịa - Vũng Tàu'),
+('017901234567', NULL, NULL, 2, N'Vận động viên', N'Bà Rịa - Vũng Tàu'),
 ('017012345678', NULL, NULL, 0, N'Nghệ sĩ', N'Kon Tum'),
 ('018123456789', NULL, NULL, 1, N'Quản lý dự án', N'Gia Lai'),
 ('018234567890', NULL, NULL, 0, N'Y tá', N'Đăk Lăk'),
 ('018345678901', NULL, NULL, 1, N'Luật sư', N'Khánh Hòa'),
 ('018456789012', NULL, NULL, 0, N'Nhà báo', N'Bình Thuận'),
 ('018567890123', NULL, NULL, 1, N'Cảnh sát', N'Quảng Nam'),
-('018678901234', NULL, NULL, 0, N'Bộ đội', N'Quảng Ngãi'),
+('018678901234', NULL, NULL, 3, N'Bộ đội', N'Quảng Ngãi'),
 ('018789012345', NULL, NULL, 1, N'Phóng viên', N'Bình Định'),
 ('018890123456', NULL, NULL, 0, N'Công nhân', N'Phú Yên'),
 ('018901234567', NULL, NULL, 1, N'Chủ doanh nghiệp', N'Gia Lai'),
 ('018012345678', NULL, NULL, 0, N'Nội trợ', N'Đắk Nông'),
 ('019123456789', NULL, NULL, 1, N'Kỹ sư phần mềm', N'Hà Nội'),
-('019234567890', NULL, NULL, 0, N'Giáo viên', N'Đà Nẵng'),
+('019234567890', NULL, NULL, 2, N'Giáo viên', N'Đà Nẵng'),
 ('019345678901', NULL, NULL, 1, N'Freelancer', N'TP. Hồ Chí Minh'),
 ('019456789012', NULL, NULL, 0, N'Sinh viên', N'Huế'),
 ('019567890123', NULL, NULL, 1, N'Nhân viên văn phòng', N'Hải Phòng'),
-('019678901234', NULL, NULL, 0, N'Bác sĩ', N'Cần Thơ'),
+('019678901234', NULL, NULL, 3, N'Bác sĩ', N'Cần Thơ'),
 ('019789012345', NULL, NULL, 1, N'Lập trình viên', N'Nha Trang'),
 ('019890123456', NULL, NULL, 0, N'Kinh doanh tự do', N'Vũng Tàu'),
-('019901234567', NULL, NULL, 1, N'Họa sĩ', N'Đà Lạt'),
+('019901234567', NULL, NULL, 2, N'Họa sĩ', N'Đà Lạt'),
 ('019012345678', NULL, NULL, 0, N'Thợ điện', N'Biên Hòa');
 
 -- Dữ liệu cho bảng Contracts (ít nhất 30 hợp đồng)
