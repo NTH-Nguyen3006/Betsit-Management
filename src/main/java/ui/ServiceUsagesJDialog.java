@@ -5,7 +5,7 @@
 package ui;
 
 import dao.ServiceUsagesDAO;
-import dao.impl.ServiceUsagesDAOImpl;
+import impl.ServiceUsagesDAOImpl;
 import entity.ServiceUsages;
 import java.time.LocalDateTime;
 import java.util.List;

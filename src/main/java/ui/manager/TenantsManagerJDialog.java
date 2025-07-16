@@ -6,8 +6,8 @@ package ui.manager;
 
 import dao.TenantDAO;
 import dao.TenantDetailDAO;
-import dao.impl.TenantDAOImpl;
-import dao.impl.TenantDetailDAOImpl;
+import impl.TenantDAOImpl;
+import impl.TenantDetailDAOImpl;
 import entity.Tenant;
 import entity.TenantDetail;
 import java.io.File;
