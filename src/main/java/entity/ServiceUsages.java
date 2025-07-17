@@ -1,6 +1,6 @@
 package entity;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,9 +11,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 
-public class ServiceUsages {
+public class ServiceUsages {    
     private int serviceId;
     private int contractId;
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
+    
+    @Builder.Default
+    private Date startDate = new Date();
+    private Date endDate;
 }

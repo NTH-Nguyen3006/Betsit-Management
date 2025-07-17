@@ -27,9 +27,9 @@ CREATE TABLE Tenants (
 
 CREATE TABLE Tenant_Details (
     CitizenId VARCHAR(12) PRIMARY KEY,
-    PerCard_FrontImage VARCHAR(100), -- Lưu đường dẫn tới ảnh mặt trước
-    PerCard_BackImage VARCHAR(100), -- Lưu đường dẫn tới ảnh mặt sau
-    ResidencyStatus BIT DEFAULT 0, -- Thông tin cư trú
+    PerCardFrontImage VARCHAR(100), -- Lưu đường dẫn tới ảnh mặt trước
+    PerCardBackImage VARCHAR(100), -- Lưu đường dẫn tới ảnh mặt sau
+    ResidencyStatus INT DEFAULT 0, -- Thông tin cư trú
     Occupation NVARCHAR(100), -- Nghề nghiệp
     Hometown NVARCHAR(255), -- Quê quán
 
@@ -530,7 +530,7 @@ INSERT INTO Users (Username, Password, Fullname, Email, PhoneNumber, RoleId, Sta
 
 -- Dữ liệu cho bảng Tenant_Details (ít nhất 30 chi tiết người thuê)
 -- Sử dụng CitizenId đã tạo ở bước trước
-INSERT INTO Tenant_Details (CitizenId, PerCard_FrontImage, PerCard_BackImage, ResidencyStatus, Occupation, Hometown) VALUES
+INSERT INTO Tenant_Details (CitizenId, PerCardFrontImage, PerCardBackImage, ResidencyStatus, Occupation, Hometown) VALUES
 ('001123456789', NULL, NULL, 1, N'Kỹ sư phần mềm', N'Hà Nội'),
 ('001234567890', NULL, NULL, 0, N'Giáo viên', N'Đà Nẵng'),
 ('001345678901', NULL, NULL, 1, N'Freelancer', N'TP. Hồ Chí Minh'),
@@ -540,8 +540,8 @@ INSERT INTO Tenant_Details (CitizenId, PerCard_FrontImage, PerCard_BackImage, Re
 ('001789012345', NULL, NULL, 1, N'Lập trình viên', N'Nha Trang'),
 ('001890123456', NULL, NULL, 0, N'Kinh doanh tự do', N'Vũng Tàu'),
 ('001901234567', NULL, NULL, 1, N'Họa sĩ', N'Đà Lạt'),
-('001012345678', NULL, NULL, 0, N'Thợ điện', N'Biên Hòa'),
-('002123456789', NULL, NULL, 1, N'Nhân viên bán hàng', N'Thanh Hóa'),
+('001012345678', NULL, NULL, 2, N'Thợ điện', N'Biên Hòa'),
+('002123456789', NULL, NULL, 2, N'Nhân viên bán hàng', N'Thanh Hóa'),
 ('002234567890', NULL, NULL, 0, N'Kế toán', N'Nghệ An'),
 ('002345678901', NULL, NULL, 1, N'Marketing', N'Quảng Ninh'),
 ('002456789012', NULL, NULL, 0, N'Chuyên gia tài chính', N'Bình Dương'),
@@ -549,9 +549,9 @@ INSERT INTO Tenant_Details (CitizenId, PerCard_FrontImage, PerCard_BackImage, Re
 ('002678901234', NULL, NULL, 0, N'Dược sĩ', N'An Giang'),
 ('002789012345', NULL, NULL, 1, N'Kỹ thuật viên', 'Kiên Giang'),
 ('002890123456', NULL, NULL, 0, N'Nhân viên ngân hàng', N'Long An'),
-('002901234567', NULL, NULL, 1, N'Vận động viên', N'Bà Rịa - Vũng Tàu'),
+('002901234567', NULL, NULL, 2, N'Vận động viên', N'Bà Rịa - Vũng Tàu'),
 ('002012345678', NULL, NULL, 0, N'Nghệ sĩ', N'Kon Tum'),
-('003123456789', NULL, NULL, 1, N'Quản lý dự án', N'Gia Lai'),
+('003123456789', NULL, NULL, 2, N'Quản lý dự án', N'Gia Lai'),
 ('003234567890', NULL, NULL, 0, N'Y tá', N'Đăk Lăk'),
 ('003345678901', NULL, NULL, 1, N'Luật sư', N'Khánh Hòa'),
 ('003456789012', NULL, NULL, 0, N'Nhà báo', N'Bình Thuận'),
@@ -562,7 +562,7 @@ INSERT INTO Tenant_Details (CitizenId, PerCard_FrontImage, PerCard_BackImage, Re
 ('003901234567', NULL, NULL, 1, N'Chủ doanh nghiệp', N'Gia Lai'),
 ('003012345678', NULL, NULL, 0, N'Nội trợ', N'Đắk Nông'),
 ('004123456789', NULL, NULL, 1, N'Kỹ sư phần mềm', N'Hà Nội'),
-('004234567890', NULL, NULL, 0, N'Giáo viên', N'Đà Nẵng'),
+('004234567890', NULL, NULL, 2, N'Giáo viên', N'Đà Nẵng'),
 ('004345678901', NULL, NULL, 1, N'Freelancer', N'TP. Hồ Chí Minh'),
 ('004456789012', NULL, NULL, 0, N'Sinh viên', N'Huế'),
 ('004567890123', NULL, NULL, 1, N'Nhân viên văn phòng', N'Hải Phòng'),
@@ -570,8 +570,8 @@ INSERT INTO Tenant_Details (CitizenId, PerCard_FrontImage, PerCard_BackImage, Re
 ('004789012345', NULL, NULL, 1, N'Lập trình viên', N'Nha Trang'),
 ('004890123456', NULL, NULL, 0, N'Kinh doanh tự do', N'Vũng Tàu'),
 ('004901234567', NULL, NULL, 1, N'Họa sĩ', N'Đà Lạt'),
-('004012345678', NULL, NULL, 0, N'Thợ điện', N'Biên Hòa'),
-('005123456789', NULL, NULL, 1, N'Nhân viên bán hàng', N'Thanh Hóa'),
+('004012345678', NULL, NULL, 2, N'Thợ điện', N'Biên Hòa'),
+('005123456789', NULL, NULL, 2, N'Nhân viên bán hàng', N'Thanh Hóa'),
 ('005234567890', NULL, NULL, 0, N'Kế toán', N'Nghệ An'),
 ('005345678901', NULL, NULL, 1, N'Marketing', N'Quảng Ninh'),
 ('005456789012', NULL, NULL, 0, N'Chuyên gia tài chính', N'Bình Dương'),
@@ -579,14 +579,14 @@ INSERT INTO Tenant_Details (CitizenId, PerCard_FrontImage, PerCard_BackImage, Re
 ('005678901234', NULL, NULL, 0, N'Dược sĩ', N'An Giang'),
 ('005789012345', NULL, NULL, 1, N'Kỹ thuật viên', N'Kiên Giang'),
 ('005890123456', NULL, NULL, 0, N'Nhân viên ngân hàng', N'Long An'),
-('005901234567', NULL, NULL, 1, N'Vận động viên', N'Bà Rịa - Vũng Tàu'),
+('005901234567', NULL, NULL, 3, N'Vận động viên', N'Bà Rịa - Vũng Tàu'),
 ('005012345678', NULL, NULL, 0, N'Nghệ sĩ', N'Kon Tum'),
 ('006123456789', NULL, NULL, 1, N'Quản lý dự án', N'Gia Lai'),
-('006234567890', NULL, NULL, 0, N'Y tá', N'Đăk Lăk'),
+('006234567890', NULL, NULL, 2, N'Y tá', N'Đăk Lăk'),
 ('006345678901', NULL, NULL, 1, N'Luật sư', N'Khánh Hòa'),
-('006456789012', NULL, NULL, 0, N'Nhà báo', N'Bình Thuận'),
-('006567890123', NULL, NULL, 1, N'Cảnh sát', N'Quảng Nam'),
-('006678901234', NULL, NULL, 0, N'Bộ đội', N'Quảng Ngãi'),
+('006456789012', NULL, NULL, 2, N'Nhà báo', N'Bình Thuận'),
+('006567890123', NULL, NULL, 2, N'Cảnh sát', N'Quảng Nam'),
+('006678901234', NULL, NULL, 2, N'Bộ đội', N'Quảng Ngãi'),
 ('006789012345', NULL, NULL, 1, N'Phóng viên', N'Bình Định'),
 ('006890123456', NULL, NULL, 0, N'Công nhân', N'Phú Yên'),
 ('006901234567', NULL, NULL, 1, N'Chủ doanh nghiệp', N'Gia Lai'),
@@ -594,7 +594,7 @@ INSERT INTO Tenant_Details (CitizenId, PerCard_FrontImage, PerCard_BackImage, Re
 ('007123456789', NULL, NULL, 1, N'Kỹ sư phần mềm', N'Hà Nội'),
 ('007234567890', NULL, NULL, 0, N'Giáo viên', N'Đà Nẵng'),
 ('007345678901', NULL, NULL, 1, N'Freelancer', N'TP. Hồ Chí Minh'),
-('007456789012', NULL, NULL, 0, N'Sinh viên', N'Huế'),
+('007456789012', NULL, NULL, 3, N'Sinh viên', N'Huế'),
 ('007567890123', NULL, NULL, 1, N'Nhân viên văn phòng', N'Hải Phòng'),
 ('007678901234', NULL, NULL, 0, N'Bác sĩ', N'Cần Thơ'),
 ('007789012345', NULL, NULL, 1, N'Lập trình viên', N'Nha Trang'),
@@ -650,9 +650,9 @@ INSERT INTO Tenant_Details (CitizenId, PerCard_FrontImage, PerCard_BackImage, Re
 ('012789012345', NULL, NULL, 1, N'Phóng viên', N'Bình Định'),
 ('012890123456', NULL, NULL, 0, N'Công nhân', N'Phú Yên'),
 ('012901234567', NULL, NULL, 1, N'Chủ doanh nghiệp', N'Gia Lai'),
-('012012345678', NULL, NULL, 0, N'Nội trợ', N'Đắk Nông'),
+('012012345678', NULL, NULL, 1, N'Nội trợ', N'Đắk Nông'),
 ('013123456789', NULL, NULL, 1, N'Kỹ sư phần mềm', N'Hà Nội'),
-('013234567890', NULL, NULL, 0, N'Giáo viên', N'Đà Nẵng'),
+('013234567890', NULL, NULL, 1, N'Giáo viên', N'Đà Nẵng'),
 ('013345678901', NULL, NULL, 1, N'Freelancer', N'TP. Hồ Chí Minh'),
 ('013456789012', NULL, NULL, 0, N'Sinh viên', N'Huế'),
 ('013567890123', NULL, NULL, 1, N'Nhân viên văn phòng', N'Hải Phòng'),
@@ -684,8 +684,8 @@ INSERT INTO Tenant_Details (CitizenId, PerCard_FrontImage, PerCard_BackImage, Re
 ('016123456789', NULL, NULL, 1, N'Kỹ sư phần mềm', N'Hà Nội'),
 ('016234567890', NULL, NULL, 0, N'Giáo viên', N'Đà Nẵng'),
 ('016345678901', NULL, NULL, 1, N'Freelancer', N'TP. Hồ Chí Minh'),
-('016456789012', NULL, NULL, 0, N'Sinh viên', N'Huế'),
-('016567890123', NULL, NULL, 1, N'Nhân viên văn phòng', N'Hải Phòng'),
+('016456789012', NULL, NULL, 2, N'Sinh viên', N'Huế'),
+('016567890123', NULL, NULL, 2, N'Nhân viên văn phòng', N'Hải Phòng'),
 ('016678901234', NULL, NULL, 0, N'Bác sĩ', N'Cần Thơ'),
 ('016789012345', NULL, NULL, 1, N'Lập trình viên', N'Nha Trang'),
 ('016890123456', NULL, NULL, 0, N'Kinh doanh tự do', N'Vũng Tàu'),

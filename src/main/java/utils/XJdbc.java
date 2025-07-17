@@ -74,7 +74,6 @@ public class XJdbc {
      * @throws RuntimeException không thực thi được câu lệnh SQL
      */
     public static int executeUpdate(String sql, Object... values) {
-        sql = sql.replace("SOF2042_", "");
         try {
             var stmt = XJdbc.getStmt(sql, values);
             return stmt.executeUpdate();

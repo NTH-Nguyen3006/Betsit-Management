@@ -23,26 +23,26 @@ public class ServiceUsagesDAOImpl implements ServiceUsagesDAO{
     private final String SELECT_BY_ID_SQL = "SELECT * FROM ServiceUsages WHERE ServiceId = ? AND ContractId = ? ";
 
     @Override
-    public ServiceUsages create(ServiceUsages su) {
-        XJdbc.executeUpdate(
-            INSERT_SQL,
-            su.getServiceId(),
-            su.getContractId(),
-            Timestamp.valueOf(su.getStartDate()),
-            su.getEndDate() != null ? Timestamp.valueOf(su.getEndDate()) : null
-        );
-        return su;
+    public ServiceUsages create(ServiceUsages entity) {
+        Object[] values = {
+            entity.getServiceId(),
+            entity.getContractId(),
+            entity.getStartDate(),
+            entity.getEndDate()
+        };
+        XJdbc.executeUpdate(INSERT_SQL, values);
+        return entity;
     }
     
     @Override
-    public void update(ServiceUsages su) {
-        XJdbc.executeUpdate(
-            UPDATE_SQL,
-            Timestamp.valueOf(su.getStartDate()),
-            su.getEndDate() != null ? Timestamp.valueOf(su.getEndDate()) : null,
-            su.getServiceId(),
-            su.getContractId()
-        );
+    public void update(ServiceUsages entity) {
+        Object[] values = {
+            entity.getStartDate(),
+            entity.getEndDate(),
+            entity.getServiceId(),
+            entity.getContractId()
+        };
+        XJdbc.executeUpdate(UPDATE_SQL, values);
     }
 
     @Override

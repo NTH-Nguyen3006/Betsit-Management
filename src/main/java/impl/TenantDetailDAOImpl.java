@@ -15,8 +15,8 @@ import utils.XQuery;
  * @author ADMIN
  */
 public class TenantDetailDAOImpl implements TenantDetailDAO {
-    private final String INSERT_SQL = "INSERT INTO Tenant_Details (CitizenId, PerCard_FrontImage, PerCard_BackImage, ResidencyStatus, Occupation, Hometown) VALUES (?, ?, ?, ?, ?, ?)";
-    private final String UPDATE_SQL = "UPDATE Tenant_Details SET PerCard_FrontImage=?, PerCard_BackImage=?, ResidencyStatus=?, Occupation=?, Hometown=? WHERE CitizenId=?";
+    private final String INSERT_SQL = "INSERT INTO Tenant_Details (CitizenId, PerCardFrontImage, PerCardBackImage, ResidencyStatus, Occupation, Hometown) VALUES (?, ?, ?, ?, ?, ?)";
+    private final String UPDATE_SQL = "UPDATE Tenant_Details SET PerCardFrontImage=?, PerCardBackImage=?, ResidencyStatus=?, Occupation=?, Hometown=? WHERE CitizenId=?";
     private final String DELETE_SQL = "DELETE FROM Tenant_Details WHERE CitizenId=?";
     private final String SELECT_ALL_SQL = "SELECT * FROM Tenant_Details";
     private final String SELECT_BY_ID_SQL = SELECT_ALL_SQL + " WHERE CitizenId = ?";

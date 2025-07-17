@@ -621,14 +621,10 @@ public class ServiceManagerJDialog extends javax.swing.JDialog implements Servic
 
     @Override
     public void setForm(Service s) {
-        txtId.setText(s.getId() == 0 ? "" : String.valueOf(s.getId()));
+        txtId.setText(String.valueOf(s.getId()));
         txtServiceName.setText(s.getServiceName());
         txtUnit.setText(s.getUnit());
-        txtPrice.setText(
-            (s.getPrice() == null || s.getPrice().compareTo(BigDecimal.ZERO) == 0)
-                ? ""
-                : s.getPrice().toString()
-        );
+        txtPrice.setText(s.getPrice().toString());
         txtDescription.setText(s.getDescription());
     }
 
@@ -673,7 +669,11 @@ public class ServiceManagerJDialog extends javax.swing.JDialog implements Servic
 
     @Override
     public void clear() {
-        this.setForm(new Service());
+        txtId.setText("");
+        txtServiceName.setText("");
+        txtUnit.setText("");
+        txtPrice.setText("");
+        txtDescription.setText("");
         this.setEditable(false);
     }
 
@@ -685,10 +685,10 @@ public class ServiceManagerJDialog extends javax.swing.JDialog implements Servic
         btnDelete.setEnabled(editable);
 
         int rowCount = tblServices.getRowCount();
-        btnMoveFirst.setEnabled(rowCount > 0);
-        btnMovePrevious.setEnabled(rowCount > 0);
-        btnMoveNext.setEnabled(rowCount > 0);
-        btnMoveLast.setEnabled(rowCount > 0);
+        btnMoveFirst.setEnabled(editable && rowCount > 0);
+        btnMovePrevious.setEnabled(editable && rowCount > 0);
+        btnMoveNext.setEnabled(editable && rowCount > 0);
+        btnMoveLast.setEnabled(editable && rowCount > 0);
     }
 
     @Override

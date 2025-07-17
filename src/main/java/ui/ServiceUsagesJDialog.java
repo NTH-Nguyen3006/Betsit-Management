@@ -9,8 +9,10 @@ import dao.ServiceUsagesDAO;
 import impl.ServiceUsagesDAOImpl;
 import entity.ServiceUsages;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import utils.XDate;
 import utils.XDialog;
 
 /**
@@ -540,7 +542,7 @@ public class ServiceUsagesJDialog extends javax.swing.JDialog implements Service
                     dao.deleteById(serviceId, contractId);
                 }
             }
-            fillToTable();
+            this.fillToTable();
         }
     }
 
@@ -554,28 +556,35 @@ public class ServiceUsagesJDialog extends javax.swing.JDialog implements Service
 
     @Override
     public ServiceUsages getForm() {
+        int serviceId = Integer.parseInt(txtServiceId.getText());
+        int contractId = Integer.parseInt(txtContractId.getText());
+
+        Date startDate = XDate.parse(txtStartDate.getText(), "MM/dd/yyyy HH:mm");
+        Date endDate = txtEndDate.getText().isBlank() ? null : XDate.parse(txtEndDate.getText(), "MM/dd/yyyy HH:mm");
+
         return ServiceUsages.builder()
-            .serviceId(Integer.parseInt(txtServiceId.getText()))
-            .contractId(Integer.parseInt(txtContractId.getText()))
-            .startDate(LocalDateTime.parse(txtStartDate.getText()))
-            .endDate(txtEndDate.getText().isBlank() ? null : LocalDateTime.parse(txtEndDate.getText()))
+            .serviceId(serviceId)
+            .contractId(contractId)
+            .startDate(startDate)
+            .endDate(endDate)
             .build();
     }
+
 
     @Override
     public void create() {
         ServiceUsages su = getForm();
         dao.create(su);
-        fillToTable();
-        clear();
+        this.fillToTable();
+        this.clear();
     }
 
     @Override
     public void update() {
         ServiceUsages su = getForm();
         dao.update(su);
-        fillToTable();
-        clear();
+        this.fillToTable();
+        this.clear();
     }
 
     @Override
@@ -584,15 +593,18 @@ public class ServiceUsagesJDialog extends javax.swing.JDialog implements Service
             int serviceId = Integer.parseInt(txtServiceId.getText());
             int contractId = Integer.parseInt(txtContractId.getText());
             dao.deleteById(serviceId, contractId);
-            fillToTable();
-            clear();
+            this.fillToTable();
+            this.clear();
         }
     }
 
     @Override
     public void clear() {
-        setForm(new ServiceUsages());
-        setEditable(false);
+        txtServiceId.setText("");
+        txtContractId.setText("");
+        txtStartDate.setText("");
+        txtEndDate.setText("");
+        this.setEditable(false);
     }
 
     @Override
@@ -602,11 +614,12 @@ public class ServiceUsagesJDialog extends javax.swing.JDialog implements Service
         btnCreate.setEnabled(!editable);
         btnUpdate.setEnabled(editable);
         btnDelete.setEnabled(editable);
+        
         int rowCount = tblServiceUsages.getRowCount();
-        btnMoveFirst.setEnabled(rowCount > 0);
-        btnMovePrevious.setEnabled(rowCount > 0);
-        btnMoveNext.setEnabled(rowCount > 0);
-        btnMoveLast.setEnabled(rowCount > 0);
+        btnMoveFirst.setEnabled(editable && rowCount > 0);
+        btnMovePrevious.setEnabled(editable && rowCount > 0);
+        btnMoveNext.setEnabled(editable && rowCount > 0);
+        btnMoveLast.setEnabled(editable && rowCount > 0);
     }
     
     @Override

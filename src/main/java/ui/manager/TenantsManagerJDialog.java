@@ -17,6 +17,7 @@ import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+import utils.XDate;
 import utils.XDialog;
 
 /**
@@ -623,7 +624,7 @@ public class TenantsManagerJDialog extends javax.swing.JDialog implements Tenant
     // End of variables declaration//GEN-END:variables
 
    TenantDAO dao = new TenantDAOImpl();
-   TenantDetailDAO tenantDetailDAO = new TenantDetailDAOImpl();
+   TenantDetailDAO detailDAO = new TenantDetailDAOImpl();
    List<Tenant> items = List.of();
    
    @Override
@@ -659,16 +660,15 @@ public class TenantsManagerJDialog extends javax.swing.JDialog implements Tenant
             Tenant entity = items.get(row);
             this.setForm(entity);
 
-            TenantDetail detail = tenantDetailDAO.findById(entity.getCitizenId());
+            TenantDetail detail = detailDAO.findById(entity.getCitizenId());
             this.setDetailForm(detail);
 
             this.setEditable(true);        
             tabs.setSelectedIndex(1);      
         }
     }
-
-    
-        @Override
+   
+    @Override
     public void checkAll() {
         this.setCheckedAll(true);
     }
@@ -695,30 +695,28 @@ public class TenantsManagerJDialog extends javax.swing.JDialog implements Tenant
             this.fillToTable();
         }
     }
-    
-    @Override
-    public void setForm(Tenant entity) {
-        txtCitizen_id.setText(entity.getCitizenId());
-        txtFullName.setText(entity.getFullName());
-        txtDateOfBirth.setText(
-            entity.getDateOfBirth() != null ? entity.getDateOfBirth().toString() : ""
-        );
-        txtPhoneNumber.setText(entity.getPhoneNumber());
-        txtEmail.setText(entity.getEmail());
-        txtVehiclePlate.setText(entity.getVehiclePlate());
-    }
-    
+        
     @Override
     public Tenant getForm() {
         Tenant entity = new Tenant();
         entity.setCitizenId(txtCitizen_id.getText());
         entity.setFullName(txtFullName.getText());
-        entity.setDateOfBirth(Date.valueOf(txtDateOfBirth.getText()));
+        entity.setDateOfBirth(XDate.parse(txtDateOfBirth.getText()));
         entity.setPhoneNumber(txtPhoneNumber.getText());
         entity.setEmail(txtEmail.getText());
         entity.setVehiclePlate(txtVehiclePlate.getText());
         return entity;
     }
+    
+    @Override
+    public void setForm(Tenant tenant) {
+        txtCitizen_id.setText(tenant.getCitizenId());
+        txtFullName.setText(tenant.getFullName());
+        txtDateOfBirth.setText(XDate.format(tenant.getDateOfBirth()));
+        txtPhoneNumber.setText(tenant.getPhoneNumber());
+        txtEmail.setText(tenant.getEmail());
+        txtVehiclePlate.setText(tenant.getVehiclePlate());
+    }   
     
     private TenantDetail getDetailForm() {
         TenantDetail detail = new TenantDetail();
@@ -732,19 +730,11 @@ public class TenantsManagerJDialog extends javax.swing.JDialog implements Tenant
     }
     
     private void setDetailForm(TenantDetail detail) {
-        if (detail != null) {
             txtPerCard_FrontImage.setText(detail.getPerCardFrontImage());
             txtPerCard_BackImage.setText(detail.getPerCardBackImage());
             cobResidencyStatus.setSelectedIndex(detail.getResidencyStatus());
             txtOccupation.setText(detail.getOccupation());
             txtHometown.setText(detail.getHometown());
-        } else {
-            txtPerCard_FrontImage.setText("");
-            txtPerCard_BackImage.setText("");
-            cobResidencyStatus.setSelectedIndex(0); 
-            txtOccupation.setText("");
-            txtHometown.setText("");
-        }
     }
     
     @Override
@@ -753,10 +743,10 @@ public class TenantsManagerJDialog extends javax.swing.JDialog implements Tenant
         TenantDetail detail = getDetailForm();
 
         dao.create(tenant);
-        tenantDetailDAO.create(detail);
+        detailDAO.create(detail);
 
-        fillToTable();
-        clear();
+        this.fillToTable();
+        this.clear();
     }
 
     @Override
@@ -765,9 +755,9 @@ public class TenantsManagerJDialog extends javax.swing.JDialog implements Tenant
         TenantDetail detail = getDetailForm();
 
         dao.update(tenant);
-        tenantDetailDAO.update(detail);
+        detailDAO.update(detail);
 
-        fillToTable();
+        this.fillToTable();
     }
 
     @Override
@@ -782,10 +772,20 @@ public class TenantsManagerJDialog extends javax.swing.JDialog implements Tenant
 
     @Override
     public void clear() {
-        this.setForm(new Tenant());
-        this.setDetailForm(null);
+        txtCitizen_id.setText("");
+        txtFullName.setText("");
+        txtDateOfBirth.setText("");
+        txtPhoneNumber.setText("");
+        txtEmail.setText("");
+        txtVehiclePlate.setText("");
+        txtPerCard_FrontImage.setText("");
+        txtPerCard_BackImage.setText("");
+        cobResidencyStatus.setSelectedIndex(0);  
+        txtOccupation.setText("");
+        txtHometown.setText("");
         this.setEditable(false);
     }
+
     
     @Override
     public void setEditable(boolean editable) {
@@ -793,11 +793,12 @@ public class TenantsManagerJDialog extends javax.swing.JDialog implements Tenant
         btnCreate.setEnabled(!editable);
         btnUpdate.setEnabled(editable);
         btnDelete.setEnabled(editable);
+        
         int rowCount = tblTenants.getRowCount();
-        btnMoveFirst.setEnabled(rowCount > 0);
-        btnMovePrevious.setEnabled(rowCount > 0);
-        btnMoveNext.setEnabled(rowCount > 0);
-        btnMoveLast.setEnabled(rowCount > 0);
+        btnMoveFirst.setEnabled(editable && rowCount > 0);
+        btnMovePrevious.setEnabled(editable && rowCount > 0);
+        btnMoveNext.setEnabled(editable && rowCount > 0);
+        btnMoveLast.setEnabled(editable && rowCount > 0);
     }
     
     @Override
