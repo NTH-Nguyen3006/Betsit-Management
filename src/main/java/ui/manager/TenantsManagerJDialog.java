@@ -12,7 +12,6 @@ import impl.TenantDetailDAOImpl;
 import entity.Tenant;
 import entity.TenantDetail;
 import java.io.File;
-import java.sql.Date;
 import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;

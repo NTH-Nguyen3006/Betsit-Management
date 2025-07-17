@@ -8,7 +8,6 @@ import ui.controller.ServiceUsagesController;
 import dao.ServiceUsagesDAO;
 import impl.ServiceUsagesDAOImpl;
 import entity.ServiceUsages;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -584,7 +583,6 @@ public class ServiceUsagesJDialog extends javax.swing.JDialog implements Service
         ServiceUsages su = getForm();
         dao.update(su);
         this.fillToTable();
-        this.clear();
     }
 
     @Override

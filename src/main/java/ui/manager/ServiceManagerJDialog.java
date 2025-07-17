@@ -27,6 +27,7 @@ public class ServiceManagerJDialog extends javax.swing.JDialog implements Servic
     public ServiceManagerJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        txtId.setEnabled(false);
     }
 
     /**
@@ -630,8 +631,12 @@ public class ServiceManagerJDialog extends javax.swing.JDialog implements Servic
 
     @Override
     public Service getForm() {
+        return getForm(false); 
+    }
+
+    public Service getForm(boolean isCreate) {
         Service s = new Service();
-        if (!txtId.getText().isEmpty()) {
+        if (!isCreate && !txtId.getText().isEmpty()) {
             s.setId(Integer.parseInt(txtId.getText()));
         }
         s.setServiceName(txtServiceName.getText());
@@ -643,7 +648,7 @@ public class ServiceManagerJDialog extends javax.swing.JDialog implements Servic
 
     @Override
     public void create() {
-        Service s = getForm();
+        Service s = getForm(true);
         dao.create(s);
         this.fillToTable();
         this.clear();
@@ -651,10 +656,9 @@ public class ServiceManagerJDialog extends javax.swing.JDialog implements Servic
 
     @Override
     public void update() {
-        Service s = getForm();
+        Service s = getForm(false);
         dao.update(s);
         this.fillToTable();
-        this.clear();
     }
 
     @Override
@@ -678,8 +682,7 @@ public class ServiceManagerJDialog extends javax.swing.JDialog implements Servic
     }
 
     @Override
-    public void setEditable(boolean editable) {
-        txtId.setEnabled(!editable); 
+    public void setEditable(boolean editable) {         
         btnCreate.setEnabled(!editable);
         btnUpdate.setEnabled(editable);
         btnDelete.setEnabled(editable);
