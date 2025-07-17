@@ -12,12 +12,12 @@ import utils.XQuery;
 public class ContractDAOImpl implements ContractDAO {
 
     private final String createSql = "INSERT INTO Contracts "
-            + "(Id, RoomId, Tenant, StartDate, EndDate, depositAmount, payment_cycle_months, file_scan_url, Notes) "
+            + "(Id, RoomId, Tenant, StartDate, EndDate, depositAmount,payment_cycle_months, File_scan_url, Notes) "
             + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     private final String updateSql = "UPDATE Contracts SET "
             + "RoomId = ?, Tenant = ?, StartDate = ?, EndDate = ?, depositAmount = ?, "
-            + "payment_cycle_months = ?, file_scan_url = ?, Notes = ? "
+            + "payment_cycle_months = ?, File_scan_url = ?, Notes = ? "
             + "WHERE Id = ?";
 
     private final String deleteByIdSql = "DELETE FROM Contracts WHERE Id = ?";

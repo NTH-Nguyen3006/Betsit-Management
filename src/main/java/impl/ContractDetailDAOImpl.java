@@ -12,6 +12,7 @@ import entity.ContractDetail;
  * @author GAMING
  */
 public class ContractDetailDAOImpl implements ContractDetailDAO {
+    
      @Override
     public void create(ContractDetail detail) {
         // Thực hiện lưu detail vào DB
