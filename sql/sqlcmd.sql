@@ -58,7 +58,7 @@ CREATE TABLE Services (
     ServiceName NVARCHAR(100) NOT NULL,
     Unit nvarchar(20) NOT NULL,
     Price DECIMAL(10, 2) NOT NULL,
-    [Description] TEXT
+    [Description] NVARCHAR(100)
 );
 
 CREATE TABLE ServiceUsages (
