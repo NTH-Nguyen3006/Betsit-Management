@@ -6,6 +6,7 @@ package impl;
 
 import dao.RoomDAO;
 import entity.Room;
+import java.util.ArrayList;
 import java.util.List;
 import utils.XJdbc;
 import utils.XQuery;
@@ -17,20 +18,21 @@ import utils.XQuery;
 public class RoomDAOImpl implements RoomDAO {
 
     private final String createSql = "INSERT INTO Rooms"
-            + "(Roomid, Area, RentPrice, Status, Roomtypes, Notes) "
-            + "VALUES(?, ?, ?, ?, ?, ?)";
+            + "(Area, RentPrice, Status, Roomtype, Notes) "
+            + "VALUES(?, ?, ?, ?, ?)";
     private final String updateSql = "UPDATE Rooms SET "
-            + "Roomid=?, Area=?, RentPrice=?, Status=?, Roomtypes=?, Notes=?"
+            + "Area=?, RentPrice=?, Status=?, Roomtype=?, Notes=?"
             + "WHERE Roomid=?";
     private final String deleteByIdSql = "DELETE FROM Rooms WHERE Roomid=?";
 
     private final String findAllSql = "SELECT * FROM Rooms";
     private final String findByIdSql = findAllSql + " WHERE Roomid=?";
-
+    private final String findAllRoomTypesSql = "SELECT DISTINCT RoomType FROM Rooms WHERE RoomType IS NOT NULL AND RoomType <> '' ORDER BY RoomType"; // (dựa trên cột RoomType)
+    
     @Override
     public Room create(Room entity) {
         Object[] values = {
-                entity.getRoomId(),
+                
                 entity.getArea(),
                 entity.getRentPrice(),
                 entity.getStatus(),
@@ -49,7 +51,8 @@ public class RoomDAOImpl implements RoomDAO {
                 entity.getRentPrice(),
                 entity.getStatus(),
                 entity.getRoomType(),
-                entity.getNotes()
+                entity.getNotes(),
+                entity.getRoomId()
         };
         XJdbc.executeUpdate(updateSql, values);
     }
@@ -67,6 +70,12 @@ public class RoomDAOImpl implements RoomDAO {
     @Override
     public Room findById(String id) {
         return XQuery.getSingleBean(Room.class, findByIdSql, id);
+    }
+
+    @Override
+    public List<String> findAllRoomType() {
+        return XQuery.getList(String.class, findAllRoomTypesSql); // Sử dụng phương thức getList mới của XQuery
+      
     }
 
 }

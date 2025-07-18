@@ -1,13 +1,20 @@
 package utils;
 
+import entity.User;
+
+import java.sql.Date;
+
 
 public class XAuth {
-//    public static User user = User.builder()
-//            .username("user1@gmail.com")
-//            .password("123")
-//            .enabled(true)
-//            .manager(true)
-//            .fullname("Nguyễn Văn Tèo")
-//            .photo("trump.png")
-//            .build();
+    public static User user = User.builder()
+            .username("admin01")
+            .password("123456")
+            .fullname("Nguyễn Tấn Hoàng Nguyên")
+            .email("nguyenth@gmail.com")
+            .phone_number("0912345601")
+            .role_id(1)
+            .status(true)
+            .created_at(Date.valueOf("2025-07-02"))
+            .build();
+
 }

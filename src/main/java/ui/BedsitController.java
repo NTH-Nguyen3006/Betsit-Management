@@ -34,7 +34,7 @@ public interface BedsitController {
         this.showJDialog(new WelcomeJDialog(frame, true)); 
     } 
     default void showLoginJDialog(JFrame frame){ 
-//        this.showJDialog(new LoginJDialog(frame, true)); 
+        this.showJDialog(new LoginJDialog(frame, true)); 
     } 
     default void showUserManagerJDialog(JFrame frame){ 
 //        this.showJDialog(new UserManagerJDialog(frame, true)); 
@@ -59,5 +59,9 @@ public interface BedsitController {
     default void showReportManagerJDialog(JFrame frame){ 
 //        this.showJDialog(new ReportManagerJDialog(frame, true)); 
     } 
+    
+    default void showChangePasswordJDialog(JFrame frame){
+        this.showJDialog(new ChangePasswordJDialog(frame, true)); 
+    }
     
 }

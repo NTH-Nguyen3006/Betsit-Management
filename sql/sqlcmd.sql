@@ -465,6 +465,8 @@ INSERT INTO Users (Username, Password, Fullname, Email, Phone_number, Role_id, S
 ('manager01', '123456', N'Phạm Thùy Trinh', 'Trinhpt@gmail.com', '0912345602', 2, 1, GETDATE()),
 ('staff01', '123456', N'Như Lê Hoàng Minh', 'Minhnlh@gmail.com', '0912345603', 3, 1, GETDATE()),
 ('staff02', '123456', N'Nguyễn Đài Vĩnh Khánh', 'Khanhndvts02245@gmail.com', '0931489629', 3, 1, GETDATE());
+select * from Users
+
 /*
 ('staff02', '123456', N'Nguyễn Thanh Tùng', 'nguyenthanhtung@gmail.com', '0912345604', 3, 1, GETDATE()),
 ('accountant01', '123456', N'Võ Thị Thu Hà', 'vothithuha@gmail.com', '0912345605', 5, 1, GETDATE()),

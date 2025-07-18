@@ -1,11 +1,8 @@
 package dao;
 
 import entity.Room;
+import java.util.List;
 
-/**
- *
- * @author nhukhue
- */
 public interface RoomDAO extends CrudDAO<Room, String> {
-
+    List<String> findAllRoomType();
 }

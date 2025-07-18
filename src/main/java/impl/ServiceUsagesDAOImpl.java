@@ -1,9 +1,7 @@
 package impl;
 
-import dao.ServiceUsagesDAO;
-import entity.ServiceUsages;
 import java.util.List;
-import utils.XJdbc;
+import dao.ServiceUsagesDAO;
 
 //ai đó đọc được thì làm cái lol này giùm khánh nha
 public class ServiceUsagesDAOImpl implements ServiceUsagesDAO {
