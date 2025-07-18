@@ -24,8 +24,8 @@ public class Room {
     int status;
     String roomType;
     String notes;
-}
 
-enum eStatus {
-    Rented, Available, Repair;
+    public enum eStatus {
+        Rented, Available, Repair;
+    }
 }

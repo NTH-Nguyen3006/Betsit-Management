@@ -3,7 +3,7 @@ package utils;
 import javax.swing.text.JTextComponent;
 
 public class XOther {
-    public static boolean hasTextFiled(JTextComponent ... fields) {
+    public static boolean hasTextFieldEmpty(JTextComponent... fields) {
         for (JTextComponent field : fields) {
             if (field.getText().isEmpty())
                 return true;
@@ -11,7 +11,7 @@ public class XOther {
         return false;
     }
 
-    public static void setEmptyField (JTextComponent ... fields) {
+    public static void setEmptyField(JTextComponent... fields) {
         for (JTextComponent field : fields)
             field.setText("");
     }
