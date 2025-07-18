@@ -34,6 +34,7 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         tabs = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -64,7 +65,10 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
         jLabel3 = new javax.swing.JLabel();
         txtRentPrice = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        txtStatus = new javax.swing.JTextField();
+        jPanel9 = new javax.swing.JPanel();
+        rdoAvailable = new javax.swing.JRadioButton();
+        rdoRented = new javax.swing.JRadioButton();
+        rdoRepair = new javax.swing.JRadioButton();
         jLabel4 = new javax.swing.JLabel();
         cboRoomType = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
@@ -238,7 +242,39 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
 
         jLabel6.setText("Trạng thái");
         jPanel6.add(jLabel6);
-        jPanel6.add(txtStatus);
+
+        buttonGroup1.add(rdoAvailable);
+        rdoAvailable.setText("Chưa Thuê");
+
+        buttonGroup1.add(rdoRented);
+        rdoRented.setText("Đã Thuê");
+
+        buttonGroup1.add(rdoRepair);
+        rdoRepair.setText("Đang Sửa Chửa");
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addComponent(rdoAvailable)
+                .addGap(68, 68, 68)
+                .addComponent(rdoRented)
+                .addGap(75, 75, 75)
+                .addComponent(rdoRepair)
+                .addGap(0, 452, Short.MAX_VALUE))
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rdoAvailable)
+                    .addComponent(rdoRented)
+                    .addComponent(rdoRepair)))
+        );
+
+        jPanel6.add(jPanel9);
 
         jLabel4.setText("Kiểu Phòng");
         jPanel6.add(jLabel4);
@@ -253,6 +289,12 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
 
         jLabel5.setText("Ghi Chú");
         jPanel6.add(jLabel5);
+
+        txtNotes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNotesActionPerformed(evt);
+            }
+        });
         jPanel6.add(txtNotes);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -261,7 +303,7 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, 854, Short.MAX_VALUE)
+                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -281,7 +323,7 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tabs, javax.swing.GroupLayout.DEFAULT_SIZE, 883, Short.MAX_VALUE)
+                .addComponent(tabs)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -369,6 +411,10 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
         // TODO add your handling code here:
     }//GEN-LAST:event_cboRoomTypeActionPerformed
 
+    private void txtNotesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNotesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNotesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -423,6 +469,7 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
     private javax.swing.JButton btnMovePrevious;
     private javax.swing.JButton btnUncheckAll;
     private javax.swing.JButton btnUpdate;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cboRoomType;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -438,15 +485,18 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JRadioButton rdoAvailable;
+    private javax.swing.JRadioButton rdoRented;
+    private javax.swing.JRadioButton rdoRepair;
     private javax.swing.JTabbedPane tabs;
     private javax.swing.JTable tblRooms;
     private javax.swing.JTextField txtArea;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNotes;
     private javax.swing.JTextField txtRentPrice;
-    private javax.swing.JTextField txtStatus;
     // End of variables declaration//GEN-END:variables
     RoomDAO dao = new RoomDAOImpl();
     List<Room> items = List.of();
@@ -471,7 +521,8 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
     public void setForm(Room entity) {
         txtArea.setText(String.valueOf(entity.getArea()));
         txtRentPrice.setText(String.valueOf(entity.getRentPrice()));
-        txtStatus.setText(String.valueOf(entity.getStatus()));
+//        txtStatus.setText(String.valueOf(entity.getStatus()));
+        
         cboRoomType.setSelectedItem(entity.getRoomType());
         txtNotes.setText(entity.getNotes());
         
@@ -521,7 +572,6 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
         if (listRooms != null) {
             for (Room room : listRooms) {
                 tblModel.addRow(new Object[]{
-//                    false,
                     room.getRoomId(),
                     room.getRoomType(),
                     room.getArea(), 
