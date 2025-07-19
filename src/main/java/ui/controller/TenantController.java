@@ -4,13 +4,7 @@
  */
 package ui.controller;
 
-import ui.controller.CrudController;
 import entity.Tenant;
 
-/**
- *
- * @author ADMIN
- */
 public interface TenantController extends CrudController<Tenant> {
-    
 }
