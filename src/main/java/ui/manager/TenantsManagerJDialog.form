@@ -600,9 +600,6 @@
                   <Font name="Liberation Sans" size="15" style="2"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="/home/hoangnguyen/sau.png"/>
-                </Property>
                 <Property name="text" type="java.lang.String" value="Ch&#x1ecd;n t&#x1ec7;p"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
