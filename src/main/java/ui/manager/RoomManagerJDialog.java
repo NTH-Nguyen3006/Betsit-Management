@@ -301,20 +301,12 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
-<<<<<<< HEAD
-                jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, 854, Short.MAX_VALUE)
-                                .addContainerGap()));
-=======
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
->>>>>>> 36927d4d872830c711b24837467cc8139885fc6c
         jPanel5Layout.setVerticalGroup(
                 jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
@@ -329,20 +321,12 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-<<<<<<< HEAD
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(tabs, javax.swing.GroupLayout.DEFAULT_SIZE, 883, Short.MAX_VALUE)
-                                .addContainerGap()));
-=======
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(tabs)
                 .addContainerGap())
         );
->>>>>>> 36927d4d872830c711b24837467cc8139885fc6c
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
@@ -559,8 +543,9 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
         // Kiểm tra dữ liệu đầu vào cơ bản
 
         boolean hasEmpty = XOther.hasTextFieldEmpty(txtArea, txtRentPrice, txtNotes);
-        if (hasEmpty)
-            XDialog.alert("Vui lòng điền đủ thông tin");
+        boolean btnHasEmty = XOther.hasJRadioButtonEmty(rdoAvailable,rdoRented,rdoRepair);
+        if (hasEmpty&&btnHasEmty)
+            XDialog.alert("Vui lòng điền && chọn đủ thông tin");
 
         // if (txtArea.getText().isEmpty()) {
         // XDialog.alert("Diện tích không được để trống!");
@@ -574,14 +559,17 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
         try {
 
             Room.builder().area(Float.parseFloat(txtArea.getText()))
-                    .rentPrice(new BigDecimal(txtRentPrice.getText()));
+                    .rentPrice(new BigDecimal(txtRentPrice.getText()))
+                    .roomType((String) cboRoomType.getSelectedItem())
+                    .notes(txtNotes.getText());
+                    
             // .status();
-
-            room.setArea(Float.parseFloat(txtArea.getText()));
-            room.setRentPrice(new BigDecimal(txtRentPrice.getText()));
-            room.setStatus(Integer.parseInt(txtStatus.getText()));
-            room.setRoomType((String) cboRoomType.getSelectedItem());
-            room.setNotes(txtNotes.getText());
+//
+//            room.setArea(Float.parseFloat(txtArea.getText()));
+//            room.setRentPrice(new BigDecimal(txtRentPrice.getText()));
+//            room.setStatus(Integer.parseInt(txtStatus.getText()));
+//            room.setRoomType((String) cboRoomType.getSelectedItem());
+//            room.setNotes(txtNotes.getText());
         } catch (NumberFormatException e) {
             XDialog.alert("Dữ liệu diện tích hoặc giá thuê không hợp lệ!");
             return null;
@@ -683,7 +671,7 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
 
         txtArea.setText("");
         txtRentPrice.setText("");
-        txtStatus.setText(""); // Đặt lại lựa chọn đầu tiên
+//        txtStatus.setText(""); // Đặt lại lựa chọn đầu tiên
         cboRoomType.setSelectedIndex(0); // Đặt lại lựa chọn đầu tiên
         txtNotes.setText("");
         this.index = -1;
@@ -696,7 +684,7 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
 
         txtArea.setEditable(true);
         txtRentPrice.setEditable(true);
-        txtStatus.setEditable(true);
+//        txtStatus.setEditable(true);
         cboRoomType.setEnabled(true);
         txtNotes.setEditable(true);
         // txtId.setEnabled(!editable);
