@@ -401,13 +401,13 @@ public class TenantsManagerJDialog extends javax.swing.JDialog implements Tenant
                             .addComponent(lblPerCard_FrontImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lblPerCard_BackImage, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel4))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel9))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnChoose_FrontImage)
-                            .addComponent(btnChoose_BackImage)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnChoose_BackImage)
+                            .addComponent(btnChoose_FrontImage)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel16)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -501,7 +501,7 @@ public class TenantsManagerJDialog extends javax.swing.JDialog implements Tenant
     }//GEN-LAST:event_btnChoose_FrontImageActionPerformed
 
     private void btnChoose_BackImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChoose_BackImageActionPerformed
-        // TODO add your handling code here:
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          // TODO add your handling code here:
         this.chooseBackImage();
     }//GEN-LAST:event_btnChoose_BackImageActionPerformed
 
