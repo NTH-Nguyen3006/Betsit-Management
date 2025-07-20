@@ -4,12 +4,15 @@
  */
 package ui.manager;
 
-import entity.Contract;
-
 /**
  *
  * @author GAMING
  */
-public interface InvoicesManagerController {
-    
+public interface ContractTenantManagerController {
+    void moveFirst();
+    void movePrevious();
+    void moveNext();
+    void moveLast();
+    void moveTo(int index);
 }
+

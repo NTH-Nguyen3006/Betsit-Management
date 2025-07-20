@@ -12,12 +12,12 @@ import utils.XQuery;
 public class ContractDAOImpl implements ContractDAO {
 
     private final String createSql = "INSERT INTO Contracts "
-            + "(Id, RoomId, Tenant, StartDate, EndDate, depositAmount,payment_cycle_months, File_scan_url, Notes) "
+            + "(Id, RoomId, Tenant, StartDate, EndDate, depositAmount,PaymentCycleMonths, File_scan_url, Notes) "
             + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     private final String updateSql = "UPDATE Contracts SET "
             + "RoomId = ?, Tenant = ?, StartDate = ?, EndDate = ?, depositAmount = ?, "
-            + "payment_cycle_months = ?, File_scan_url = ?, Notes = ? "
+            + "PaymentCycleMonths = ?, File_scan_url = ?, Notes = ? "
             + "WHERE Id = ?";
 
     private final String deleteByIdSql = "DELETE FROM Contracts WHERE Id = ?";
@@ -36,7 +36,7 @@ public class ContractDAOImpl implements ContractDAO {
                 entity.getStartDate(),
                 entity.getEndDate(),
                 entity.getDepositAmount(),
-                entity.getPayment_cycle_months(),
+                entity.getPaymentCycleMonths(),
                 entity.getFile_scan_url(),
                 entity.getNotes()
         };
@@ -52,7 +52,7 @@ public class ContractDAOImpl implements ContractDAO {
                 entity.getStartDate(),
                 entity.getEndDate(),
                 entity.getDepositAmount(),
-                entity.getPayment_cycle_months(),
+                entity.getPaymentCycleMonths(),
                 entity.getFile_scan_url(),
                 entity.getNotes(),
                 entity.getId()

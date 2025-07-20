@@ -4,12 +4,10 @@
  */
 package ui.manager;
 
-import entity.Contract;
-
 /**
  *
  * @author GAMING
  */
-public interface InvoicesManagerController {
+public interface InvoiceDetailsManagerController  {
     
 }

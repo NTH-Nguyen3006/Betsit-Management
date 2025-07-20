@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
-package ui.manager;
+package ui.manager; 
 
 import dao.ContractDAO;
 import entity.Contract;
@@ -65,7 +65,6 @@ public class ContractManagerJDialog extends javax.swing.JDialog implements Contr
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         Note = new javax.swing.JTextField();
-        chooseFrontImage = new javax.swing.JButton();
         txtPaymentCycleMonth = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         txtDeposit_Amount = new javax.swing.JTextField();
@@ -105,7 +104,7 @@ public class ContractManagerJDialog extends javax.swing.JDialog implements Contr
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 707, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 778, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,13 +139,6 @@ public class ContractManagerJDialog extends javax.swing.JDialog implements Contr
         Note.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 NoteActionPerformed(evt);
-            }
-        });
-
-        chooseFrontImage.setText("Chọn ảnh");
-        chooseFrontImage.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chooseFrontImageActionPerformed(evt);
             }
         });
 
@@ -190,7 +182,13 @@ public class ContractManagerJDialog extends javax.swing.JDialog implements Contr
             }
         });
 
-        ContractScanUrl.setText("ảnh");
+        ContractScanUrl.setText("Upload");
+        ContractScanUrl.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 51)));
+        ContractScanUrl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ContractScanUrlMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -207,22 +205,12 @@ public class ContractManagerJDialog extends javax.swing.JDialog implements Contr
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel12)
-                                .addGap(244, 244, 244)
-                                .addComponent(jLabel13))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtPaymentCycleMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel7)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addGap(6, 6, 6)
-                                        .addComponent(ContractScanUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(90, 90, 90)
-                                        .addComponent(chooseFrontImage)))
-                                .addGap(99, 99, 99)
+                                        .addComponent(ContractScanUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(18, 18, 18)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(Note)
                                     .addComponent(jLabel8)))
@@ -230,7 +218,7 @@ public class ContractManagerJDialog extends javax.swing.JDialog implements Contr
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addComponent(jLabel11)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGap(251, 322, Short.MAX_VALUE))
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(txtIdContractManager)
@@ -243,7 +231,18 @@ public class ContractManagerJDialog extends javax.swing.JDialog implements Contr
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(StartDate, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(EndDate)))
+                                .addComponent(EndDate))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jLabel12)
+                                        .addGap(315, 315, 315)
+                                        .addComponent(jLabel13))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jLabel10)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtPaymentCycleMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(120, 120, 120))))
         );
         jPanel2Layout.setVerticalGroup(
@@ -283,15 +282,13 @@ public class ContractManagerJDialog extends javax.swing.JDialog implements Contr
                     .addComponent(jLabel8))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(ContractScanUrl))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(chooseFrontImage))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Note, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(153, 153, 153))
+                        .addComponent(Note, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(ContractScanUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15))))
         );
 
         tabs.addTab("Thông tin thêm", jPanel2);
@@ -357,7 +354,9 @@ public class ContractManagerJDialog extends javax.swing.JDialog implements Contr
                 .addComponent(btnMoveNext, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnMoveLast, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(tabs)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 778, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -406,11 +405,6 @@ public class ContractManagerJDialog extends javax.swing.JDialog implements Contr
 
     }//GEN-LAST:event_btnMoveNextActionPerformed
 
-    private void chooseFrontImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseFrontImageActionPerformed
-        // TODO add your handling code here:
-        this.chooseFrontImage();
-    }//GEN-LAST:event_chooseFrontImageActionPerformed
-
     private void StartDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartDateActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_StartDateActionPerformed
@@ -426,6 +420,11 @@ public class ContractManagerJDialog extends javax.swing.JDialog implements Contr
     private void NoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NoteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_NoteActionPerformed
+
+    private void ContractScanUrlMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ContractScanUrlMouseClicked
+        // TODO add your handling code here:
+        this.chooseFrontImage();
+    }//GEN-LAST:event_ContractScanUrlMouseClicked
         /**
      * @param args the command line arguments
      */
@@ -481,7 +480,6 @@ public class ContractManagerJDialog extends javax.swing.JDialog implements Contr
     private javax.swing.JButton btnMoveLast;
     private javax.swing.JButton btnMoveNext;
     private javax.swing.JButton btnMovePrevious;
-    private javax.swing.JButton chooseFrontImage;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -543,6 +541,8 @@ public void fillToTable() {
     try {
         items = dao.findAll();
         for (Contract item : items) {
+             System.out.println(item.getId());
+            System.out.println(item.getPaymentCycleMonths());
             Object[] rowData = {
                 item.getId(),                    
                 item.getRoomId(),              
@@ -550,7 +550,7 @@ public void fillToTable() {
                 item.getStartDate(),           
                 item.getEndDate(),              
                 item.getDepositAmount(),        
-                item.getPayment_cycle_months(), 
+                item.getPaymentCycleMonths(), 
                 item.getFile_scan_url(),
                 item.getNotes()
             };
@@ -622,7 +622,8 @@ public void deleteCheckedItems() {
         EndDate.setText(entity.getEndDate() == null ? "" : sdf.format(entity.getEndDate()));
         ContractScanUrl.setText(entity.getFile_scan_url() == null ? "" : entity.getFile_scan_url());
         Note.setText(entity.getNotes() == null ? "" : entity.getNotes());
-        txtPaymentCycleMonth.setText(entity.getPayment_cycle_months() == null ? "1" : entity.getPayment_cycle_months().toString());
+        txtPaymentCycleMonth.setText(String.valueOf(entity.getPaymentCycleMonths()));
+
     }
 
 
@@ -665,9 +666,9 @@ public Contract getForm() {
     entity.setNotes(Note.getText());
 
     try {
-        entity.setPayment_cycle_months(Integer.parseInt(txtPaymentCycleMonth.getText()));
+//        entity.setPaymentCycleMonths(Byte.valueOf(txtPaymentCycleMonth.getText()));
     } catch (NumberFormatException e) {
-        entity.setPayment_cycle_months(1);
+//        entity.setPaymentCycleMonths((byte) 1);
     }
 
     return entity;
@@ -807,7 +808,7 @@ private void chooseFrontImage() {
     chooser.setFileFilter(new FileNameExtensionFilter("Image files", "jpg", "jpeg", "png"));
     int result = chooser.showOpenDialog(this);
     if (result == JFileChooser.APPROVE_OPTION) {
-        File file = chooser.getSelectedFile();
+        File file = chooser.getSelectedFile();  
         ContractScanUrl.setText(file.getAbsolutePath());
     }
 }

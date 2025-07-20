@@ -10,32 +10,32 @@ public class ContractTenantDAOImpl implements ContractTenantDAO {
 
     private final String createSql = """
         INSERT INTO Contract_Tenants
-            (Contract_Id, Personal_id, Role) 
+            (ContractId, CitizenId, Role) 
         VALUES (?, ?, ?)
     """;
 
     private final String updateSql = """
         UPDATE Contract_Tenants SET 
-            Personal_id = ?, Role = ?
-        WHERE Contract_Id = ?
+            CitizenId = ?, Role = ?
+        WHERE ContractId = ?
     """;
 
     private final String deleteByIdSql = """
         DELETE FROM Contract_Tenants 
-        WHERE Contract_Id = ?
+        WHERE ContractId = ?
     """;
 
     private final String findAllSql = """
         SELECT * FROM Contract_Tenants
     """;
 
-    private final String findByIdSql = findAllSql + " WHERE Contract_Id = ?";
+    private final String findByIdSql = findAllSql + " WHERE ContractId = ?";
 
     @Override
     public ContractTenant create(ContractTenant entity) {
         Object[] values = {
-            entity.getContract_id(),
-            entity.getPersonal_id(),
+            entity.getContractId(),
+            entity.getCitizenId(),
             entity.getRole()
         };
         XJdbc.executeUpdate(createSql, values);
@@ -45,9 +45,9 @@ public class ContractTenantDAOImpl implements ContractTenantDAO {
     @Override
     public void update(ContractTenant entity) {
         Object[] values = {
-            entity.getPersonal_id(),      // sửa thứ tự đúng theo SQL
+            entity.getCitizenId(),
             entity.getRole(),
-            entity.getContract_id()       // WHERE Contract_Id = ?
+            entity.getContractId()
         };
         XJdbc.executeUpdate(updateSql, values);
     }

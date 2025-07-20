@@ -5,6 +5,7 @@
 package ui.manager;
 
 import dao.InvoiceDAO;
+import entity.Contract;
 import impl.InvoiceDAOImpl;
 import entity.Invoice;
 import java.util.List;
@@ -680,10 +681,11 @@ private void setFormInvoice(Invoice i) {
 public void moveLast() {
     moveTo(TblInvoices.getRowCount() - 1);
 }
+
 public void edit() {
     int row = TblInvoices.getSelectedRow();
     if (row >= 0) {
-        // ví dụ: lấy giá trị từ bảng rồi đổ vào các txtField
+        
         String id = TblInvoices.getValueAt(row, 0).toString();
         Invoice invoice = invoiceDAO.findById(id);
         if (invoice != null) {
@@ -703,7 +705,7 @@ private Invoice getFormInvoice() {
     try {
         invoice.setContract_id(Integer.parseInt(txtIdContract.getText()));
     } catch (NumberFormatException e) {
-        invoice.setContract_id(0); // hoặc xử lý báo lỗi nếu cần
+        invoice.setContract_id(0); 
     }
 
     try {
@@ -752,4 +754,5 @@ private Invoice getFormInvoice() {
 
     return invoice;
 }
+
 }

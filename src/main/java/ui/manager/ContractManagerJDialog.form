@@ -40,7 +40,10 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="btnMoveLast" min="-2" pref="44" max="-2" attributes="0"/>
           </Group>
-          <Component id="tabs" alignment="0" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="tabs" min="-2" pref="778" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -83,7 +86,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" alignment="1" pref="707" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" alignment="1" pref="778" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -200,27 +203,15 @@
                           </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="244" max="-2" attributes="0"/>
-                                      <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="txtPaymentCycleMonth" min="-2" pref="374" max="-2" attributes="0"/>
-                                  </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                                          <Group type="102" attributes="0">
                                               <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                                              <Component id="ContractScanUrl" min="-2" pref="43" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
-                                              <Component id="chooseFrontImage" min="-2" max="-2" attributes="0"/>
+                                              <Component id="ContractScanUrl" min="-2" pref="302" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="Note" max="32767" attributes="0"/>
                                           <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
@@ -230,7 +221,7 @@
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
                                               <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace min="251" max="32767" attributes="0"/>
+                                              <EmptySpace min="251" pref="322" max="32767" attributes="0"/>
                                           </Group>
                                           <Group type="102" attributes="0">
                                               <Group type="103" groupAlignment="0" attributes="0">
@@ -250,6 +241,21 @@
                                       <Component id="StartDate" min="-2" pref="300" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="EndDate" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="315" max="-2" attributes="0"/>
+                                              <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Component id="txtPaymentCycleMonth" min="-2" pref="374" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace min="120" pref="120" max="-2" attributes="0"/>
@@ -302,20 +308,17 @@
                           <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="ContractScanUrl" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
-                              <Component id="chooseFrontImage" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="Note" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="ContractScanUrl" min="-2" pref="154" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="153" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -354,14 +357,6 @@
             <Component class="javax.swing.JTextField" name="Note">
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="NoteActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JButton" name="chooseFrontImage">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Ch&#x1ecd;n &#x1ea3;nh"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chooseFrontImageActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="txtPaymentCycleMonth">
@@ -416,8 +411,18 @@
             </Component>
             <Component class="javax.swing.JLabel" name="ContractScanUrl">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&#x1ea3;nh"/>
+                <Property name="text" type="java.lang.String" value="Upload"/>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                    <LineBorder>
+                      <Color PropertyName="color" blue="33" green="0" red="ff" type="rgb"/>
+                    </LineBorder>
+                  </Border>
+                </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ContractScanUrlMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

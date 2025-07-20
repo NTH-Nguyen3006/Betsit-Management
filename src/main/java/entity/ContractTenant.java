@@ -9,11 +9,7 @@ import lombok.experimental.FieldDefaults;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ContractTenant {
-    int Contract_id ;
-    int Personal_id;
-    int Role;
-}
-
-enum eRoles {
-    Holder, Housemate;
+    int contractId;
+    String citizenId;
+    int role;
 }
