@@ -63,4 +63,11 @@ public class UserDAOImpl implements UserDAO {
         return XQuery.getSingleBean(User.class, findByIdSql, id);
     }
 
+    // @Override
+    // public User findByUsername(String username) {
+    // // TODO Auto-generated method stub
+    // throw new UnsupportedOperationException("Unimplemented method
+    // 'findByUsername'");
+    // }
+
 }
