@@ -119,7 +119,7 @@ CREATE TABLE Payments ( --ĐƠn thanh toán
 CREATE TABLE Roles (
   Id int PRIMARY KEY IDENTITY(1, 1),
   RoleName varchar(50) UNIQUE NOT NULL,
-  [Description] text
+  [Description] NVARCHAR(100)
 );
 
 CREATE TABLE Users (
@@ -135,9 +135,6 @@ CREATE TABLE Users (
 
   FOREIGN KEY (RoleId) REFERENCES Roles(Id) ON DELETE SET NULL
 );
-GO
-
-DROP DATABASE BEDSIT
 
 CREATE TABLE Contract_Tenants (
     ContractId INT PRIMARY KEY,
@@ -497,7 +494,8 @@ INSERT INTO ServiceUsages (ServiceId, ContractId, StartDate, EndDate) VALUES
 INSERT INTO Users (Username, Password, Fullname, Email, PhoneNumber, RoleId, Status, Created_at) VALUES
 ('admin01', '123456', N'Nguyễn Tấn Hoàng Nguyên', 'nguyenth@gmail.com', '0912345601', 1, 1, GETDATE()),
 ('manager01', '123456', N'Phạm Thùy Trinh', 'Trinhpt@gmail.com', '0912345602', 2, 1, GETDATE()),
-('staff01', '123456', N'Như Lê Hoàng Minh', 'Minhnlh@gmail.com', '0912345603', 3, 1, GETDATE());
+('staff01', '123456', N'Như Lê Hoàng Minh', 'Minhnlh@gmail.com', '0912345603', 3, 1, GETDATE()),
+('staff02', '123456', N'Nguyễn Đài Vĩnh Khánh', 'Khanhndv@gmail.com', '0912345605', 3, 1, GETDATE());
 /*
 ('staff02', '123456', N'Nguyễn Thanh Tùng', 'nguyenthanhtung@gmail.com', '0912345604', 3, 1, GETDATE()),
 ('accountant01', '123456', N'Võ Thị Thu Hà', 'vothithuha@gmail.com', '0912345605', 5, 1, GETDATE()),
