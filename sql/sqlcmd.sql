@@ -3,6 +3,8 @@ GO
 USE BEDSIT
 GO
 
+-- DROP DATABASE BEDSIT
+
 CREATE TABLE Rooms (
     RoomId INT IDENTITY(1,1) PRIMARY KEY,
     --RoomName NVARCHAR(100) NOT NULL,
@@ -15,7 +17,7 @@ CREATE TABLE Rooms (
 
 
 CREATE TABLE Tenants (
-    Citizen_id VARCHAR(12) PRIMARY KEY, -- Số Căn cước công dân
+    CitizenId VARCHAR(12) PRIMARY KEY, -- Số Căn cước công dân
     FullName NVARCHAR(100) NOT NULL,
     DateOfBirth DATE,
     PhoneNumber VARCHAR(10) NOT NULL UNIQUE,
@@ -24,14 +26,14 @@ CREATE TABLE Tenants (
 );
 
 CREATE TABLE Tenant_Details (
-    Citizen_id VARCHAR(12) PRIMARY KEY,
-    PerCard_FrontImage VARCHAR(20), -- Lưu đường dẫn tới ảnh mặt trước
-    PerCard_BackImage VARCHAR(20), -- Lưu đường dẫn tới ảnh mặt sau
-    ResidencyStatus BIT DEFAULT 0, -- Thông tin cư trú
+    CitizenId VARCHAR(12) PRIMARY KEY,
+    PerCardFrontImage VARCHAR(100), -- Lưu đường dẫn tới ảnh mặt trước
+    PerCardBackImage VARCHAR(100), -- Lưu đường dẫn tới ảnh mặt sau
+    ResidencyStatus INT DEFAULT 0, -- Thông tin cư trú
     Occupation NVARCHAR(100), -- Nghề nghiệp
     Hometown NVARCHAR(255), -- Quê quán
 
-    FOREIGN KEY(Citizen_id) REFERENCES Tenants(Citizen_id) 
+    FOREIGN KEY(CitizenId) REFERENCES Tenants(CitizenId) 
         ON DELETE CASCADE
 );
 
@@ -47,7 +49,7 @@ CREATE TABLE Contracts (
     Notes NVARCHAR(MAX),
 
     FOREIGN KEY(RoomId) REFERENCES Rooms(RoomId) ON DELETE SET NULL,
-    FOREIGN KEY(Tenant) REFERENCES Tenants(Citizen_id) ON DELETE CASCADE 
+    FOREIGN KEY(Tenant) REFERENCES Tenants(CitizenId) ON DELETE CASCADE 
 );
 
 
@@ -56,14 +58,14 @@ CREATE TABLE Services (
     ServiceName NVARCHAR(100) NOT NULL,
     Unit nvarchar(20) NOT NULL,
     Price DECIMAL(10, 2) NOT NULL,
-    [Description] TEXT
+    [Description] NVARCHAR(100)
 );
 
 CREATE TABLE ServiceUsages (
     ServiceId INT NOT NULL,
     ContractId INT NOT NULL,
     StartDate DATETIME NOT NULL,
-    EndDate DATETIME
+    EndDate DATETIME,
     
     FOREIGN KEY(ServiceId) REFERENCES [Services](Id) 
         ON DELETE CASCADE,
@@ -73,51 +75,51 @@ CREATE TABLE ServiceUsages (
 
 CREATE TABLE Invoice (
     Id int PRIMARY KEY IDENTITY(1, 1),
-    Contract_id int,
+    ContractId int,
     Billing_period_month int NOT NULL, -- HÓa đơn tháng 
     Billing_period_year int NOT NULL, -- hóa đơn năm
     Previous_debt decimal(10,2) DEFAULT (0), --NỢ cũ
     Discount decimal(10,2) DEFAULT (0), -- giảm trừ
-    Total_amount decimal(12,2) NOT NULL,
+    TotalAmount decimal(12,2) NOT NULL,
     [Status] BIT NOT NULL DEFAULT (0),
     Due_date date,
     Created_at Datetime DEFAULT GETDATE()
 
-    FOREIGN KEY(Contract_id) REFERENCES Contracts(Id)
+    FOREIGN KEY(ContractId) REFERENCES Contracts(Id)
         ON DELETE SET NULL
 );
 
 CREATE TABLE Invoice_Details (
-  Invoice_id int PRIMARY KEY,
-  Service_id int NOT NULL,
+  InvoiceId int PRIMARY KEY,
+  ServiceId int NOT NULL,
   Quantity INT NOT NULL,
-  Unit_price decimal(10,2) NOT NULL,
+  UnitPrice decimal(10,2) NOT NULL,
   Subtotal decimal(12,2) NOT NULL
 
-  FOREIGN KEY(Invoice_id) REFERENCES Invoice(Id)
+  FOREIGN KEY(InvoiceId) REFERENCES Invoice(Id)
     ON DELETE CASCADE
 );
 
 CREATE TABLE Payments ( --ĐƠn thanh toán
     Id int PRIMARY KEY IDENTITY(1, 1),
-    Invoice_id int NOT NULL,
+    InvoiceId int NOT NULL,
     Tenant varchar(12),
     Amount decimal(12,2) NOT NULL,
-    Payment_date datetime NOT NULL,
-    Payment_method nvarchar(50) NOT NULL,
-    Transaction_code varchar(100),
+    PaymentDate datetime NOT NULL,
+    PaymentMethod nvarchar(50) NOT NULL,
+    TransactionCode varchar(100),
     Note text
 
-    FOREIGN KEY(Invoice_id) REFERENCES Invoice(Id)
+    FOREIGN KEY(InvoiceId) REFERENCES Invoice(Id)
         ON DELETE CASCADE,
-    FOREIGN KEY(Tenant) REFERENCES Tenants(Citizen_id)
+    FOREIGN KEY(Tenant) REFERENCES Tenants(CitizenId)
         ON DELETE CASCADE
 );
 
 CREATE TABLE Roles (
   Id int PRIMARY KEY IDENTITY(1, 1),
-  Role_name varchar(50) UNIQUE NOT NULL,
-  [Description] text
+  RoleName varchar(50) UNIQUE NOT NULL,
+  [Description] NVARCHAR(100)
 );
 
 CREATE TABLE Users (
@@ -126,24 +128,20 @@ CREATE TABLE Users (
   [Password] varchar(100) NOT NULL,
   Fullname nvarchar(100),
   Email varchar(255) UNIQUE NOT NULL,
-  Phone_number varchar(10),
-  Role_id int,
+  PhoneNumber varchar(10),
+  RoleId int,
   [Status] BIT NOT NULL DEFAULT 1,
   Created_at DATETIME DEFAULT GETDATE()
 
-  FOREIGN KEY (Role_id) REFERENCES Roles(Id) ON DELETE SET NULL
+  FOREIGN KEY (RoleId) REFERENCES Roles(Id) ON DELETE SET NULL
 );
-GO
 
---DROP DATABASE BEDSIT
-
--- CREATE TABLE Contract_Tenants (
---     Contract_id INT PRIMARY KEY,
---     Personal_id INT,
---     [Role] TINYINT -- Enum
---     FOREIGN KEY(Contract_id) REFERENCES Contracts(Id) ON DELETE CASCADE,
--- );
--- );
+CREATE TABLE Contract_Tenants (
+    ContractId INT PRIMARY KEY,
+    PersonalId INT,
+    [Role] TINYINT -- Enum
+    FOREIGN KEY(ContractId) REFERENCES Contracts(Id) ON DELETE CASCADE,
+);
 
 -- Dữ liệu cho bảng Rooms (ít nhất 30 phòng)
 INSERT INTO Rooms (Area, RentPrice, Status, RoomType, Notes) VALUES
@@ -188,7 +186,7 @@ INSERT INTO Rooms (Area, RentPrice, Status, RoomType, Notes) VALUES
 (38.0, 5800000.00, 0, N'Phòng Gia Đình', N'Phòng rộng, thích hợp cho 3-4 người'),
 (20.0, 2800000.00, 1, N'Phòng Đơn', N'Đang có người thuê, hợp đồng đến 07/2025');
 
-INSERT INTO Tenants (Citizen_id, FullName, DateOfBirth, PhoneNumber, Email, VehiclePlate) VALUES
+INSERT INTO Tenants (CitizenId, FullName, DateOfBirth, PhoneNumber, Email, VehiclePlate) VALUES
 ('001123456789', N'Nguyễn Hoàng Anh', '1990-01-15', '0901234567', 'hoanganh.nguyen@gmail.com', '51A-123.45'),
 ('001234567890', N'Trần Thị Mai', '1992-03-22', '0902345678', 'maithu.tran@gmail.com', '59F1-678.90'),
 ('001345678901', N'Lê Minh Khôi', '1988-07-01', '0903456789', 'minhkhoi.le@gmail.com', '60G1-012.34'),
@@ -381,7 +379,7 @@ INSERT INTO Tenants (Citizen_id, FullName, DateOfBirth, PhoneNumber, Email, Vehi
 ('019012345678', N'Bùi Thanh Trúc', '1996-06-22', '0900123456', 'thanhtruc.bui2@gmail.com', '29R8-901.23');
 
 -- Dữ liệu cho bảng Roles (ít nhất 30 vai trò)
-INSERT INTO Roles (Role_name, Description) VALUES
+INSERT INTO Roles (RoleName, Description) VALUES
 (N'Admin', N'Người quản trị hệ thống toàn diện'),
 (N'Manager', N'Quản lý chung các hoạt động kinh doanh'),
 (N'Staff', N'Nhân viên điều hành hàng ngày');
@@ -458,13 +456,50 @@ INSERT INTO Services (ServiceName, Unit, Price, Description) VALUES
 (N'Vệ Sinh Sân Thượng', N'tháng', 40000.00, N'Phí vệ sinh khu vực sân thượng chung'),
 (N'Phí Truyền Hình Cáp', N'tháng', 80000.00, N'Phí sử dụng dịch vụ truyền hình cáp');
 
+-- Dữ liệu cho bảng ServiceUsages
+INSERT INTO ServiceUsages (ServiceId, ContractId, StartDate, EndDate) VALUES
+(1, 1, '2025-01-05 08:00:00', '2025-01-31 18:00:00'),
+(2, 1, '2025-01-10 09:15:00', '2025-01-25 17:00:00'),
+(3, 2, '2025-02-01 07:45:00', NULL),
+(4, 2, '2025-02-15 14:00:00', '2025-02-20 19:30:00'),
+(5, 3, '2025-03-03 12:00:00', NULL),
+(6, 3, '2025-03-12 10:30:00', '2025-03-27 18:00:00'),
+(7, 4, '2025-04-05 09:00:00', NULL),
+(8, 4, '2025-04-18 16:20:00', '2025-05-01 11:00:00'),
+(9, 5, '2025-05-02 08:45:00', '2025-05-15 17:30:00'),
+(10, 5, '2025-05-10 14:00:00', NULL),
+(11, 6, '2025-06-01 07:00:00', '2025-06-30 22:00:00'),
+(12, 6, '2025-06-15 13:00:00', NULL),
+(13, 7, '2025-07-04 15:30:00', '2025-07-20 20:00:00'),
+(14, 7, '2025-07-10 10:00:00', NULL),
+(15, 8, '2025-08-01 08:00:00', '2025-08-31 18:30:00'),
+(16, 8, '2025-08-05 09:20:00', NULL),
+(17, 9, '2025-09-09 12:00:00', '2025-09-15 13:30:00'),
+(18, 9, '2025-09-18 11:00:00', NULL),
+(19, 10, '2025-10-01 14:00:00', '2025-10-20 16:45:00'),
+(20, 10, '2025-10-10 10:30:00', NULL),
+(21, 1, '2025-01-20 15:00:00', NULL),
+(22, 2, '2025-02-22 07:30:00', '2025-03-01 18:00:00'),
+(23, 3, '2025-03-28 08:30:00', '2025-04-10 09:00:00'),
+(24, 4, '2025-04-30 16:00:00', NULL),
+(25, 5, '2025-05-20 10:00:00', '2025-05-25 14:00:00'),
+(26, 6, '2025-06-25 11:30:00', NULL),
+(27, 7, '2025-07-22 09:45:00', '2025-07-29 17:00:00'),
+(28, 8, '2025-08-28 08:00:00', NULL),
+(29, 9, '2025-09-05 14:30:00', NULL),
+(30, 10, '2025-10-25 15:45:00', NULL);
+
 -- Dữ liệu cho bảng Users (ít nhất 30 người dùng)
--- Giả sử Role_id 1 là Admin, 2 là Manager, 3 là Staff, 4 là Tenant, 5 là Accountant, 6 là Maintenance, v.v.
-INSERT INTO Users (Username, Password, Fullname, Email, Phone_number, Role_id, Status, Created_at) VALUES
+-- Giả sử RoleId 1 là Admin, 2 là Manager, 3 là Staff, 4 là Tenant, 5 là Accountant, 6 là Maintenance, v.v.
+INSERT INTO Users (Username, Password, Fullname, Email, PhoneNumber, RoleId, Status, Created_at) VALUES
 ('admin01', '123456', N'Nguyễn Tấn Hoàng Nguyên', 'nguyenth@gmail.com', '0912345601', 1, 1, GETDATE()),
 ('manager01', '123456', N'Phạm Thùy Trinh', 'Trinhpt@gmail.com', '0912345602', 2, 1, GETDATE()),
 ('staff01', '123456', N'Như Lê Hoàng Minh', 'Minhnlh@gmail.com', '0912345603', 3, 1, GETDATE()),
+<<<<<<< HEAD
 ('staff02', '123456', N'Nguyễn Đài Vĩnh Khánh', 'Khanhndvts02245@gmail.com', '0931489629', 3, 1, GETDATE());
+=======
+('staff02', '123456', N'Nguyễn Đài Vĩnh Khánh', 'Khanhndv@gmail.com', '0912345605', 3, 1, GETDATE());
+>>>>>>> Trinh
 /*
 ('staff02', '123456', N'Nguyễn Thanh Tùng', 'nguyenthanhtung@gmail.com', '0912345604', 3, 1, GETDATE()),
 ('accountant01', '123456', N'Võ Thị Thu Hà', 'vothithuha@gmail.com', '0912345605', 5, 1, GETDATE()),
@@ -496,8 +531,8 @@ INSERT INTO Users (Username, Password, Fullname, Email, Phone_number, Role_id, S
 */
 
 -- Dữ liệu cho bảng Tenant_Details (ít nhất 30 chi tiết người thuê)
--- Sử dụng Citizen_id đã tạo ở bước trước
-INSERT INTO Tenant_Details (Citizen_id, PerCard_FrontImage, PerCard_BackImage, ResidencyStatus, Occupation, Hometown) VALUES
+-- Sử dụng CitizenId đã tạo ở bước trước
+INSERT INTO Tenant_Details (CitizenId, PerCardFrontImage, PerCardBackImage, ResidencyStatus, Occupation, Hometown) VALUES
 ('001123456789', NULL, NULL, 1, N'Kỹ sư phần mềm', N'Hà Nội'),
 ('001234567890', NULL, NULL, 0, N'Giáo viên', N'Đà Nẵng'),
 ('001345678901', NULL, NULL, 1, N'Freelancer', N'TP. Hồ Chí Minh'),
@@ -507,8 +542,8 @@ INSERT INTO Tenant_Details (Citizen_id, PerCard_FrontImage, PerCard_BackImage, R
 ('001789012345', NULL, NULL, 1, N'Lập trình viên', N'Nha Trang'),
 ('001890123456', NULL, NULL, 0, N'Kinh doanh tự do', N'Vũng Tàu'),
 ('001901234567', NULL, NULL, 1, N'Họa sĩ', N'Đà Lạt'),
-('001012345678', NULL, NULL, 0, N'Thợ điện', N'Biên Hòa'),
-('002123456789', NULL, NULL, 1, N'Nhân viên bán hàng', N'Thanh Hóa'),
+('001012345678', NULL, NULL, 2, N'Thợ điện', N'Biên Hòa'),
+('002123456789', NULL, NULL, 2, N'Nhân viên bán hàng', N'Thanh Hóa'),
 ('002234567890', NULL, NULL, 0, N'Kế toán', N'Nghệ An'),
 ('002345678901', NULL, NULL, 1, N'Marketing', N'Quảng Ninh'),
 ('002456789012', NULL, NULL, 0, N'Chuyên gia tài chính', N'Bình Dương'),
@@ -516,9 +551,9 @@ INSERT INTO Tenant_Details (Citizen_id, PerCard_FrontImage, PerCard_BackImage, R
 ('002678901234', NULL, NULL, 0, N'Dược sĩ', N'An Giang'),
 ('002789012345', NULL, NULL, 1, N'Kỹ thuật viên', 'Kiên Giang'),
 ('002890123456', NULL, NULL, 0, N'Nhân viên ngân hàng', N'Long An'),
-('002901234567', NULL, NULL, 1, N'Vận động viên', N'Bà Rịa - Vũng Tàu'),
+('002901234567', NULL, NULL, 2, N'Vận động viên', N'Bà Rịa - Vũng Tàu'),
 ('002012345678', NULL, NULL, 0, N'Nghệ sĩ', N'Kon Tum'),
-('003123456789', NULL, NULL, 1, N'Quản lý dự án', N'Gia Lai'),
+('003123456789', NULL, NULL, 2, N'Quản lý dự án', N'Gia Lai'),
 ('003234567890', NULL, NULL, 0, N'Y tá', N'Đăk Lăk'),
 ('003345678901', NULL, NULL, 1, N'Luật sư', N'Khánh Hòa'),
 ('003456789012', NULL, NULL, 0, N'Nhà báo', N'Bình Thuận'),
@@ -529,7 +564,7 @@ INSERT INTO Tenant_Details (Citizen_id, PerCard_FrontImage, PerCard_BackImage, R
 ('003901234567', NULL, NULL, 1, N'Chủ doanh nghiệp', N'Gia Lai'),
 ('003012345678', NULL, NULL, 0, N'Nội trợ', N'Đắk Nông'),
 ('004123456789', NULL, NULL, 1, N'Kỹ sư phần mềm', N'Hà Nội'),
-('004234567890', NULL, NULL, 0, N'Giáo viên', N'Đà Nẵng'),
+('004234567890', NULL, NULL, 2, N'Giáo viên', N'Đà Nẵng'),
 ('004345678901', NULL, NULL, 1, N'Freelancer', N'TP. Hồ Chí Minh'),
 ('004456789012', NULL, NULL, 0, N'Sinh viên', N'Huế'),
 ('004567890123', NULL, NULL, 1, N'Nhân viên văn phòng', N'Hải Phòng'),
@@ -537,8 +572,8 @@ INSERT INTO Tenant_Details (Citizen_id, PerCard_FrontImage, PerCard_BackImage, R
 ('004789012345', NULL, NULL, 1, N'Lập trình viên', N'Nha Trang'),
 ('004890123456', NULL, NULL, 0, N'Kinh doanh tự do', N'Vũng Tàu'),
 ('004901234567', NULL, NULL, 1, N'Họa sĩ', N'Đà Lạt'),
-('004012345678', NULL, NULL, 0, N'Thợ điện', N'Biên Hòa'),
-('005123456789', NULL, NULL, 1, N'Nhân viên bán hàng', N'Thanh Hóa'),
+('004012345678', NULL, NULL, 2, N'Thợ điện', N'Biên Hòa'),
+('005123456789', NULL, NULL, 2, N'Nhân viên bán hàng', N'Thanh Hóa'),
 ('005234567890', NULL, NULL, 0, N'Kế toán', N'Nghệ An'),
 ('005345678901', NULL, NULL, 1, N'Marketing', N'Quảng Ninh'),
 ('005456789012', NULL, NULL, 0, N'Chuyên gia tài chính', N'Bình Dương'),
@@ -546,14 +581,14 @@ INSERT INTO Tenant_Details (Citizen_id, PerCard_FrontImage, PerCard_BackImage, R
 ('005678901234', NULL, NULL, 0, N'Dược sĩ', N'An Giang'),
 ('005789012345', NULL, NULL, 1, N'Kỹ thuật viên', N'Kiên Giang'),
 ('005890123456', NULL, NULL, 0, N'Nhân viên ngân hàng', N'Long An'),
-('005901234567', NULL, NULL, 1, N'Vận động viên', N'Bà Rịa - Vũng Tàu'),
+('005901234567', NULL, NULL, 3, N'Vận động viên', N'Bà Rịa - Vũng Tàu'),
 ('005012345678', NULL, NULL, 0, N'Nghệ sĩ', N'Kon Tum'),
 ('006123456789', NULL, NULL, 1, N'Quản lý dự án', N'Gia Lai'),
-('006234567890', NULL, NULL, 0, N'Y tá', N'Đăk Lăk'),
+('006234567890', NULL, NULL, 2, N'Y tá', N'Đăk Lăk'),
 ('006345678901', NULL, NULL, 1, N'Luật sư', N'Khánh Hòa'),
-('006456789012', NULL, NULL, 0, N'Nhà báo', N'Bình Thuận'),
-('006567890123', NULL, NULL, 1, N'Cảnh sát', N'Quảng Nam'),
-('006678901234', NULL, NULL, 0, N'Bộ đội', N'Quảng Ngãi'),
+('006456789012', NULL, NULL, 2, N'Nhà báo', N'Bình Thuận'),
+('006567890123', NULL, NULL, 2, N'Cảnh sát', N'Quảng Nam'),
+('006678901234', NULL, NULL, 2, N'Bộ đội', N'Quảng Ngãi'),
 ('006789012345', NULL, NULL, 1, N'Phóng viên', N'Bình Định'),
 ('006890123456', NULL, NULL, 0, N'Công nhân', N'Phú Yên'),
 ('006901234567', NULL, NULL, 1, N'Chủ doanh nghiệp', N'Gia Lai'),
@@ -561,7 +596,7 @@ INSERT INTO Tenant_Details (Citizen_id, PerCard_FrontImage, PerCard_BackImage, R
 ('007123456789', NULL, NULL, 1, N'Kỹ sư phần mềm', N'Hà Nội'),
 ('007234567890', NULL, NULL, 0, N'Giáo viên', N'Đà Nẵng'),
 ('007345678901', NULL, NULL, 1, N'Freelancer', N'TP. Hồ Chí Minh'),
-('007456789012', NULL, NULL, 0, N'Sinh viên', N'Huế'),
+('007456789012', NULL, NULL, 3, N'Sinh viên', N'Huế'),
 ('007567890123', NULL, NULL, 1, N'Nhân viên văn phòng', N'Hải Phòng'),
 ('007678901234', NULL, NULL, 0, N'Bác sĩ', N'Cần Thơ'),
 ('007789012345', NULL, NULL, 1, N'Lập trình viên', N'Nha Trang'),
@@ -617,9 +652,9 @@ INSERT INTO Tenant_Details (Citizen_id, PerCard_FrontImage, PerCard_BackImage, R
 ('012789012345', NULL, NULL, 1, N'Phóng viên', N'Bình Định'),
 ('012890123456', NULL, NULL, 0, N'Công nhân', N'Phú Yên'),
 ('012901234567', NULL, NULL, 1, N'Chủ doanh nghiệp', N'Gia Lai'),
-('012012345678', NULL, NULL, 0, N'Nội trợ', N'Đắk Nông'),
+('012012345678', NULL, NULL, 1, N'Nội trợ', N'Đắk Nông'),
 ('013123456789', NULL, NULL, 1, N'Kỹ sư phần mềm', N'Hà Nội'),
-('013234567890', NULL, NULL, 0, N'Giáo viên', N'Đà Nẵng'),
+('013234567890', NULL, NULL, 1, N'Giáo viên', N'Đà Nẵng'),
 ('013345678901', NULL, NULL, 1, N'Freelancer', N'TP. Hồ Chí Minh'),
 ('013456789012', NULL, NULL, 0, N'Sinh viên', N'Huế'),
 ('013567890123', NULL, NULL, 1, N'Nhân viên văn phòng', N'Hải Phòng'),
@@ -651,8 +686,8 @@ INSERT INTO Tenant_Details (Citizen_id, PerCard_FrontImage, PerCard_BackImage, R
 ('016123456789', NULL, NULL, 1, N'Kỹ sư phần mềm', N'Hà Nội'),
 ('016234567890', NULL, NULL, 0, N'Giáo viên', N'Đà Nẵng'),
 ('016345678901', NULL, NULL, 1, N'Freelancer', N'TP. Hồ Chí Minh'),
-('016456789012', NULL, NULL, 0, N'Sinh viên', N'Huế'),
-('016567890123', NULL, NULL, 1, N'Nhân viên văn phòng', N'Hải Phòng'),
+('016456789012', NULL, NULL, 2, N'Sinh viên', N'Huế'),
+('016567890123', NULL, NULL, 2, N'Nhân viên văn phòng', N'Hải Phòng'),
 ('016678901234', NULL, NULL, 0, N'Bác sĩ', N'Cần Thơ'),
 ('016789012345', NULL, NULL, 1, N'Lập trình viên', N'Nha Trang'),
 ('016890123456', NULL, NULL, 0, N'Kinh doanh tự do', N'Vũng Tàu'),
@@ -666,33 +701,33 @@ INSERT INTO Tenant_Details (Citizen_id, PerCard_FrontImage, PerCard_BackImage, R
 ('017678901234', NULL, NULL, 0, N'Dược sĩ', N'An Giang'),
 ('017789012345', NULL, NULL, 1, N'Kỹ thuật viên', N'Kiên Giang'),
 ('017890123456', NULL, NULL, 0, N'Nhân viên ngân hàng', N'Long An'),
-('017901234567', NULL, NULL, 1, N'Vận động viên', N'Bà Rịa - Vũng Tàu'),
+('017901234567', NULL, NULL, 2, N'Vận động viên', N'Bà Rịa - Vũng Tàu'),
 ('017012345678', NULL, NULL, 0, N'Nghệ sĩ', N'Kon Tum'),
 ('018123456789', NULL, NULL, 1, N'Quản lý dự án', N'Gia Lai'),
 ('018234567890', NULL, NULL, 0, N'Y tá', N'Đăk Lăk'),
 ('018345678901', NULL, NULL, 1, N'Luật sư', N'Khánh Hòa'),
 ('018456789012', NULL, NULL, 0, N'Nhà báo', N'Bình Thuận'),
 ('018567890123', NULL, NULL, 1, N'Cảnh sát', N'Quảng Nam'),
-('018678901234', NULL, NULL, 0, N'Bộ đội', N'Quảng Ngãi'),
+('018678901234', NULL, NULL, 3, N'Bộ đội', N'Quảng Ngãi'),
 ('018789012345', NULL, NULL, 1, N'Phóng viên', N'Bình Định'),
 ('018890123456', NULL, NULL, 0, N'Công nhân', N'Phú Yên'),
 ('018901234567', NULL, NULL, 1, N'Chủ doanh nghiệp', N'Gia Lai'),
 ('018012345678', NULL, NULL, 0, N'Nội trợ', N'Đắk Nông'),
 ('019123456789', NULL, NULL, 1, N'Kỹ sư phần mềm', N'Hà Nội'),
-('019234567890', NULL, NULL, 0, N'Giáo viên', N'Đà Nẵng'),
+('019234567890', NULL, NULL, 2, N'Giáo viên', N'Đà Nẵng'),
 ('019345678901', NULL, NULL, 1, N'Freelancer', N'TP. Hồ Chí Minh'),
 ('019456789012', NULL, NULL, 0, N'Sinh viên', N'Huế'),
 ('019567890123', NULL, NULL, 1, N'Nhân viên văn phòng', N'Hải Phòng'),
-('019678901234', NULL, NULL, 0, N'Bác sĩ', N'Cần Thơ'),
+('019678901234', NULL, NULL, 3, N'Bác sĩ', N'Cần Thơ'),
 ('019789012345', NULL, NULL, 1, N'Lập trình viên', N'Nha Trang'),
 ('019890123456', NULL, NULL, 0, N'Kinh doanh tự do', N'Vũng Tàu'),
-('019901234567', NULL, NULL, 1, N'Họa sĩ', N'Đà Lạt'),
+('019901234567', NULL, NULL, 2, N'Họa sĩ', N'Đà Lạt'),
 ('019012345678', NULL, NULL, 0, N'Thợ điện', N'Biên Hòa');
 
 -- Dữ liệu cho bảng Contracts (ít nhất 30 hợp đồng)
--- Sử dụng RoomId và Citizen_id đã tạo ở bước trước
+-- Sử dụng RoomId và CitizenId đã tạo ở bước trước
 -- RoomId sẽ được lấy ngẫu nhiên từ 1 đến 40 (số lượng phòng đã tạo)
--- Tenant sẽ được lấy ngẫu nhiên từ các Citizen_id đã tạo (100 người)
+-- Tenant sẽ được lấy ngẫu nhiên từ các CitizenId đã tạo (100 người)
 INSERT INTO Contracts (RoomId, Tenant, StartDate, EndDate, DepositAmount, Payment_cycle_months, File_scan_url, Notes) VALUES
 (1, '001123456789', '2024-01-01', '2025-12-31', 7000000.00, 6, NULL, N'Hợp đồng 2 năm, thanh toán 6 tháng/lần'),
 (2, '001234567890', '2024-02-15', '2025-08-14', 8400000.00, 3, NULL, N'Hợp đồng 18 tháng, có điều khoản gia hạn'),
