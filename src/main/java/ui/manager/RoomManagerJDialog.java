@@ -32,10 +32,11 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated
     // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
+        statusBtnGroup = new javax.swing.ButtonGroup();
         tabs = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -243,36 +244,34 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
         jLabel6.setText("Trạng thái");
         jPanel6.add(jLabel6);
 
-        buttonGroup1.add(rdoAvailable);
+        statusBtnGroup.add(rdoAvailable);
         rdoAvailable.setText("Chưa Thuê");
 
-        buttonGroup1.add(rdoRented);
+        statusBtnGroup.add(rdoRented);
         rdoRented.setText("Đã Thuê");
 
-        buttonGroup1.add(rdoRepair);
+        statusBtnGroup.add(rdoRepair);
         rdoRepair.setText("Đang Sửa Chửa");
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
-                .addComponent(rdoAvailable)
-                .addGap(68, 68, 68)
-                .addComponent(rdoRented)
-                .addGap(75, 75, 75)
-                .addComponent(rdoRepair)
-                .addGap(0, 452, Short.MAX_VALUE))
-        );
+                jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel9Layout.createSequentialGroup()
+                                .addComponent(rdoAvailable)
+                                .addGap(68, 68, 68)
+                                .addComponent(rdoRented)
+                                .addGap(75, 75, 75)
+                                .addComponent(rdoRepair)
+                                .addGap(0, 452, Short.MAX_VALUE)));
         jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rdoAvailable)
-                    .addComponent(rdoRented)
-                    .addComponent(rdoRepair)))
-        );
+                jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(rdoAvailable)
+                                        .addComponent(rdoRented)
+                                        .addComponent(rdoRepair))));
 
         jPanel6.add(jPanel9);
 
@@ -301,20 +300,12 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
-<<<<<<< HEAD
                 jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, 854, Short.MAX_VALUE)
+                                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addContainerGap()));
-=======
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
->>>>>>> 36927d4d872830c711b24837467cc8139885fc6c
         jPanel5Layout.setVerticalGroup(
                 jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
@@ -329,20 +320,11 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-<<<<<<< HEAD
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(tabs, javax.swing.GroupLayout.DEFAULT_SIZE, 883, Short.MAX_VALUE)
+                                .addComponent(tabs)
                                 .addContainerGap()));
-=======
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(tabs)
-                .addContainerGap())
-        );
->>>>>>> 36927d4d872830c711b24837467cc8139885fc6c
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
@@ -494,7 +476,6 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
     private javax.swing.JButton btnMovePrevious;
     private javax.swing.JButton btnUncheckAll;
     private javax.swing.JButton btnUpdate;
-    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cboRoomType;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -516,6 +497,7 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
     private javax.swing.JRadioButton rdoAvailable;
     private javax.swing.JRadioButton rdoRented;
     private javax.swing.JRadioButton rdoRepair;
+    private javax.swing.ButtonGroup statusBtnGroup;
     private javax.swing.JTabbedPane tabs;
     private javax.swing.JTable tblRooms;
     private javax.swing.JTextField txtArea;
@@ -572,25 +554,27 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
         // }
 
         try {
+            int _status = 0; // Avaliable
+            if (rdoRented.isSelected())
+                _status = Room.eStatus.Rented.ordinal();
+            else
+                _status = Room.eStatus.Repair.ordinal();
 
             Room.builder().area(Float.parseFloat(txtArea.getText()))
-                    .rentPrice(new BigDecimal(txtRentPrice.getText()));
-            // .status();
+                    .rentPrice(new BigDecimal(txtRentPrice.getText()))
+                    .status(_status).roomType((String) cboRoomType.getSelectedItem())
+                    .notes(txtNotes.getText());
 
-            room.setArea(Float.parseFloat(txtArea.getText()));
-            room.setRentPrice(new BigDecimal(txtRentPrice.getText()));
-            room.setStatus(Integer.parseInt(txtStatus.getText()));
-            room.setRoomType((String) cboRoomType.getSelectedItem());
-            room.setNotes(txtNotes.getText());
+            // room.setArea(Float.parseFloat(txtArea.getText()));
+            // room.setRentPrice(new BigDecimal(txtRentPrice.getText()));
+            // room.setStatus(Integer.parseInt(txtStatus.getText()));
+            // room.setRoomType((String) cboRoomType.getSelectedItem());
+            // room.setNotes(txtNotes.getText());
         } catch (NumberFormatException e) {
             XDialog.alert("Dữ liệu diện tích hoặc giá thuê không hợp lệ!");
             return null;
-        } catch (Exception e) {
-            XDialog.alert("Có lỗi khi lấy dữ liệu từ form: " + e.getMessage());
-            return null;
         }
         return room;
-
     }
 
     @Override
@@ -683,7 +667,7 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
 
         txtArea.setText("");
         txtRentPrice.setText("");
-        txtStatus.setText(""); // Đặt lại lựa chọn đầu tiên
+        // txtStatus.setText(""); // Đặt lại lựa chọn đầu tiên
         cboRoomType.setSelectedIndex(0); // Đặt lại lựa chọn đầu tiên
         txtNotes.setText("");
         this.index = -1;
@@ -696,7 +680,7 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
 
         txtArea.setEditable(true);
         txtRentPrice.setEditable(true);
-        txtStatus.setEditable(true);
+        // txtStatus.setEditable(true);
         cboRoomType.setEnabled(true);
         txtNotes.setEditable(true);
         // txtId.setEnabled(!editable);
