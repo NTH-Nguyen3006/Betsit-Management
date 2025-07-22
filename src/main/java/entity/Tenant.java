@@ -4,22 +4,24 @@
  */
 package entity;
 
-import java.util.Date;
+import java.sql.Date;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Tenant {
-    private String citizenId;
-    private String fullName;
-    private Date dateOfBirth;
-    private String phoneNumber;
-    private String email;
-    private String vehiclePlate;
+    String citizen_id;
+    String FullName;
+    Date DateOfBirth;
+    String PhoneNumber;
+    String Email;
+    String VehiclePlate;
 }

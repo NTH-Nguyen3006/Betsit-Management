@@ -1,19 +1,15 @@
 package entity;
 
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Role {
-    private int id;
-    private String roleName;
-    private String description;
-    
-    @Override
-    public String toString() {
-        return this.roleName;
-    }
+    int id;
+    String role_name;
+    String description;
 }

@@ -1,7 +1,6 @@
 
 package ui;
 
-import ui.controller.WelcomeController;
 import utils.XDialog;
 import utils.XJdbc;
 

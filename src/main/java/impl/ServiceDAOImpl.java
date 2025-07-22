@@ -1,4 +1,3 @@
-
 package impl;
 
 import dao.ServiceDAO;
@@ -8,49 +7,56 @@ import utils.XJdbc;
 import utils.XQuery;
 
 public class ServiceDAOImpl implements ServiceDAO {
-    private final String INSERT_SQL = "INSERT INTO Services (ServiceName, Unit, Price, Description) VALUES (?, ?, ?, ?)";
-    private final String UPDATE_SQL = "UPDATE Services SET ServiceName=?, Unit=?, Price=?, Description=? WHERE Id=?";
-    private final String DELETE_SQL = "DELETE FROM Services WHERE Id=?";
-    private final String SELECT_ALL_SQL = "SELECT * FROM Services";
-    private final String SELECT_BY_ID_SQL = "SELECT * FROM Services WHERE Id=?";
+
+    private final String createSql = "INSERT INTO Services"
+            + "(Id, ServiceName, Unit, Price, Description) "
+            + "VALUES(?, ?, ?, ?, ?)";
+    private final String updateSql = "UPDATE Services SET "
+            + "ServiceName=?, Unit=?, Price=?, Description=?"
+            + "WHERE Id=?";
+    private final String deleteByIdSql = "DELETE FROM Services WHERE Id=?";
+
+    private final String findAllSql = "SELECT * FROM Services";
+    private final String findByIdSql = findAllSql + " WHERE Id=?";
 
     @Override
     public Service create(Service entity) {
-        XJdbc.executeUpdate(INSERT_SQL,
+        Object[] values = {
+                entity.getId(),
                 entity.getServiceName(),
                 entity.getUnit(),
                 entity.getPrice(),
-                entity.getDescription());
+                entity.getDescription()
+        };
+        XJdbc.executeUpdate(createSql, values);
         return entity;
     }
 
     @Override
     public void update(Service entity) {
-        XJdbc.executeUpdate(UPDATE_SQL,
+        Object[] values = {
+                entity.getId(),
                 entity.getServiceName(),
                 entity.getUnit(),
                 entity.getPrice(),
-                entity.getDescription(),
-                entity.getId());
+                entity.getDescription()
+        };
+        XJdbc.executeUpdate(updateSql, values);
     }
 
     @Override
-    public void deleteById(Integer id) {
-        XJdbc.executeUpdate(DELETE_SQL, id);
+    public void deleteById(String id) {
+        XJdbc.executeUpdate(deleteByIdSql, id);
     }
 
     @Override
     public List<Service> findAll() {
-        return XQuery.getBeanList(Service.class, SELECT_ALL_SQL);
+        return XQuery.getBeanList(Service.class, findAllSql);
     }
 
     @Override
-    public Service findById(Integer id) {
-        return XQuery.getSingleBean(Service.class, SELECT_BY_ID_SQL, id);
+    public Service findById(String id) {
+        return XQuery.getSingleBean(Service.class, findByIdSql, id);
     }
 
-    // @Override
-    // public Service findByUsername(String username) {
-    // return null;
-    // }
 }

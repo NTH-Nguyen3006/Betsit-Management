@@ -1,20 +1,18 @@
 package entity;
 
+import lombok.*;
+//import lombok.experimental.FieldDefaults;
+
 import java.util.Date;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+//@FieldDefaults(level = AccessLevel.PRIVATE)
 public class ServiceUsages {
-    private int serviceId;
-    private int contractId;
-
-    @Builder.Default
-    private Date startDate = new Date();
-    private Date endDate;
+    int serviceId;
+    int contractId;
+    Date startDate;
+    Date endDate;
 }

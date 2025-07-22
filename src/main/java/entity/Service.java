@@ -1,20 +1,19 @@
 package entity;
 
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+
 import java.math.BigDecimal;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Service {
-    private int id;
-    private String serviceName;
-    private String unit;
-    private BigDecimal price;
-    private String description;
+    int id;
+    String serviceName;
+    String unit;
+    BigDecimal price;
+    String description;
 }

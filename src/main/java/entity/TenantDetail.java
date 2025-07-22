@@ -4,21 +4,23 @@
  */
 package entity;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class TenantDetail {
-    private String citizenId;
-    private String perCardFrontImage;
-    private String perCardBackImage;
-    private int residencyStatus;
-    private String occupation;
-    private String hometown;
+    String citizen_id;
+    String perCard_FrontImage;
+    String perCard_BackImage;
+    boolean ResidencyStatus;
+    String Occupation;
+    String Hometown;
 }

@@ -1,7 +1,6 @@
 package utils;
 
-import entity.Tenant;
-
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -75,7 +74,7 @@ public class XQuery {
                 try {
                     Object value = resultSet.getObject(name.substring(3));
                     method.invoke(bean, value);
-                } catch (IllegalAccessException | IllegalArgumentException | SQLException e) {
+                } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | SQLException e) {
                     System.out.printf("+ Column '%s' not found!\r\n", name.substring(3));
                 }
             }
@@ -83,9 +82,10 @@ public class XQuery {
         return bean;
     }
     
-    public static void main(String[] args) {
-        Tenant t = new Tenant();
-    }
+//    public static void main(String[] args) {
+//        demo1();
+//        demo2();
+//    }
 
 //    private static void demo1() {
 //        String sql = "SELECT * FROM Users WHERE Username=? AND Password=?";
