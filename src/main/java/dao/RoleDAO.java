@@ -2,6 +2,10 @@ package dao;
 
 import entity.Role;
 
-public interface RoleDAO extends CrudDAO<Role, String> {
+/**
+ *
+ * @author nhukhue
+ */
+public interface RoleDAO extends CrudDAO<Role, Integer>{
 
 }
