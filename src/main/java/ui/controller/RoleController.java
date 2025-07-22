@@ -2,14 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package dao;
+package ui.controller;
 
 import entity.Role;
 
 /**
  *
- * @author nhukhue
+ * @author ADMIN
  */
-public interface RoleDAO extends CrudDAO<Role, Integer>{
+public interface RoleController extends CrudController<Role>{
     
 }

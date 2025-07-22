@@ -549,8 +549,8 @@ public class ServiceUsagesJDialog extends javax.swing.JDialog implements Service
     public void setForm(ServiceUsages su) {
         txtServiceId.setText(String.valueOf(su.getServiceId()));
         txtContractId.setText(String.valueOf(su.getContractId()));
-        txtStartDate.setText(su.getStartDate().toString());
-        txtEndDate.setText(su.getEndDate() != null ? su.getEndDate().toString() : "");
+        txtStartDate.setText(XDate.format(su.getStartDate(), "yyyy-MM-dd HH:mm"));
+        txtEndDate.setText(su.getEndDate() != null ? XDate.format(su.getEndDate(), "yyyy-MM-dd HH:mm") : "");
     }
 
     @Override
@@ -558,8 +558,8 @@ public class ServiceUsagesJDialog extends javax.swing.JDialog implements Service
         int serviceId = Integer.parseInt(txtServiceId.getText());
         int contractId = Integer.parseInt(txtContractId.getText());
 
-        Date startDate = XDate.parse(txtStartDate.getText(), "MM/dd/yyyy HH:mm");
-        Date endDate = txtEndDate.getText().isBlank() ? null : XDate.parse(txtEndDate.getText(), "MM/dd/yyyy HH:mm");
+        Date startDate = XDate.parse(txtStartDate.getText(), "yyyy-MM-dd HH:mm");
+        Date endDate = txtEndDate.getText().isBlank() ? null : XDate.parse(txtEndDate.getText(), "yyyy-MM-dd HH:mm");
 
         return ServiceUsages.builder()
             .serviceId(serviceId)

@@ -797,7 +797,8 @@ public class TenantsManagerJDialog extends javax.swing.JDialog implements Tenant
                 .fullName(txtFullName.getText()).email(txtEmail.getText())
                 .dateOfBirth(XDate.parse(txtDateOfBirth.getText()))
                 .phoneNumber(txtPhoneNumber.getText())
-                .vehiclePlate(txtVehiclePlate.getText()).build();
+                .vehiclePlate(txtVehiclePlate.getText())
+                .build();
 
         // Tenant entity = new Tenant();
         // entity.setCitizenId(txtCitizen_id.getText());
@@ -848,11 +849,37 @@ public class TenantsManagerJDialog extends javax.swing.JDialog implements Tenant
     }
 
     void setDetailForm(TenantDetail detail) {
-        lblPerCard_FrontImage.setText(detail.getPerCardFrontImage());
-        lblPerCard_BackImage.setText(detail.getPerCardBackImage());
         cobResidencyStatus.setSelectedIndex(detail.getResidencyStatus());
         txtOccupation.setText(detail.getOccupation());
         txtHometown.setText(detail.getHometown());
+        
+        String frontImagePath = detail.getPerCardFrontImage();
+        if (frontImagePath != null && !frontImagePath.isEmpty()) {
+            File frontImageFile = new File("src/main/java/upload/images/cititzenCards",frontImagePath);
+            if (frontImageFile.exists()) {
+                loadImageToLblIcon(frontImageFile, lblPerCard_FrontImage);
+            } else {
+                lblPerCard_FrontImage.setIcon(null);
+                lblPerCard_FrontImage.setText("Không tìm thấy ảnh");
+            }
+        } else {
+            lblPerCard_FrontImage.setIcon(null);
+            lblPerCard_FrontImage.setText("");
+        }
+        
+        String backImagePath = detail.getPerCardBackImage();
+        if (backImagePath != null && !backImagePath.isEmpty()) {
+            File backImageFile = new File("src/main/java/upload/images/cititzenCards", backImagePath);
+            if (backImageFile.exists()) {
+                loadImageToLblIcon(backImageFile, lblPerCard_BackImage);
+            } else {
+                lblPerCard_BackImage.setIcon(null);
+                lblPerCard_BackImage.setText("Không tìm thấy ảnh");
+            }
+        } else {
+            lblPerCard_BackImage.setIcon(null);
+            lblPerCard_BackImage.setText("");
+        }
     }
 
     @Override
@@ -880,6 +907,10 @@ public class TenantsManagerJDialog extends javax.swing.JDialog implements Tenant
     public void update() {
         Tenant tenant = getForm();
         TenantDetail detail = getDetailForm();
+        
+        saveCitizenCardImage(lblPerCard_FrontImage.getIcon(), detail.getPerCardFrontImage());
+        saveCitizenCardImage(lblPerCard_BackImage.getIcon(), detail.getPerCardBackImage());
+        
         dao.update(tenant);
         detailDAO.update(detail);
 

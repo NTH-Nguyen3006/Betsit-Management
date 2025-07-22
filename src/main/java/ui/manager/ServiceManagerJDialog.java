@@ -574,7 +574,6 @@ public class ServiceManagerJDialog extends javax.swing.JDialog implements Servic
         dialog.setVisible(true);
     }
 
-
     @Override
     public void edit() {
         int row = tblServices.getSelectedRow();
@@ -628,7 +627,6 @@ public class ServiceManagerJDialog extends javax.swing.JDialog implements Servic
     public Service getForm() {
         return getForm(false); 
     }
-
     public Service getForm(boolean isCreate) {
         Service s = new Service();
         if (!isCreate && !txtId.getText().isEmpty()) {
