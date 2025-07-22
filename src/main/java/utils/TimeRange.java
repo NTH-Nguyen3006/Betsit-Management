@@ -13,7 +13,7 @@ public class TimeRange {
     private Date end = new Date();
     
     private TimeRange(LocalDate begin, LocalDate end) {
-        this(java.sql.Date.valueOf(begin), java.sql.Date.valueOf(end));
+//        this(java.sql.Date.valueOf(begin), java.sql.Date.valueOf(end));
     }
     
     public static TimeRange today() {

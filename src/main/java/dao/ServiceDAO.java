@@ -2,6 +2,6 @@ package dao;
 
 import entity.Service;
 
-public interface ServiceDAO extends CrudDAO<Service, String> {
+public interface ServiceDAO extends CrudDAO<Service, Integer> {
 
 }

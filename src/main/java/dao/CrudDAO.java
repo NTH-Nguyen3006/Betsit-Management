@@ -13,4 +13,6 @@ public interface CrudDAO<T, ID> {
     List<T> findAll();
 
     T findById(ID id);
+
+    // T findByUsername(String username);
 }

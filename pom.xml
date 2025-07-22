@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.mycompany</groupId>
     <artifactId>Bedsit-Sofware</artifactId>
@@ -7,18 +8,18 @@
     <packaging>jar</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.release>23</maven.compiler.release>
+        <!--        <maven.compiler.release>23</maven.compiler.release>-->
         <exec.mainClass>com.mycompany.bedsit.sofware.BedsitSofware</exec.mainClass>
     </properties>
-    
-    
+
+
     <dependencies>
         <dependency>
             <groupId>com.microsoft.sqlserver</groupId>
             <artifactId>mssql-jdbc</artifactId>
             <version>12.8.1.jre8</version>
         </dependency>
-        
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -26,13 +27,24 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
-    
+
     <build>
         <resources>
             <resource>
                 <directory>src/main/java</directory>
             </resource>
         </resources>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>                <!-- hoặc 3.8.1 nếu muốn -->
+                <configuration>
+                    <source>17</source>                    <!-- hoặc 19 nếu bạn dùng JDK 19 -->
+                    <target>17</target>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
-    
 </project>

@@ -25,7 +25,9 @@ public class XJdbc {
         var driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
         var dburl = "jdbc:sqlserver://localhost:1433;database=BEDSIT;encrypt=true;trustServerCertificate=true;";
         var username = "sa";
-        var password = "123";
+        var password = "123456";
+//        var password = "Password123"; // by Nguyen
+
         try {
             if (!XJdbc.isReady()) {
                 Class.forName(driver);
@@ -72,7 +74,6 @@ public class XJdbc {
      * @throws RuntimeException không thực thi được câu lệnh SQL
      */
     public static int executeUpdate(String sql, Object... values) {
-        sql = sql.replace("SOF2042_", "");
         try {
             var stmt = XJdbc.getStmt(sql, values);
             return stmt.executeUpdate();
@@ -90,7 +91,6 @@ public class XJdbc {
      * @throws RuntimeException không thực thi được câu lệnh SQL
      */
     public static ResultSet executeQuery(String sql, Object... values) {
-        sql = sql.replace("SOF2042_", "");
         try {
             var stmt = XJdbc.getStmt(sql, values);
             return stmt.executeQuery();
