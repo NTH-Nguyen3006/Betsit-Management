@@ -74,7 +74,7 @@ public class RoomDAOImpl implements RoomDAO {
 
     @Override
     public List<String> findAllRoomType() {
-        return XQuery.getList(String.class, findAllRoomTypesSql); // Sử dụng phương thức getList mới của XQuery
+        return XQuery.getBeanList(String.class, findAllRoomTypesSql); // Sử dụng phương thức getList mới của XQuery
       
     }
 
