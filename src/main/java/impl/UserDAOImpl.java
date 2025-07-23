@@ -8,16 +8,16 @@ import utils.XQuery;
 
 public class UserDAOImpl implements UserDAO {
 
-    private final String createSql = "INSERT INTO Contracts"
-            + "(Id, RoomId, Tenant, StartDate, EndDate, depositAmount, payment_cycle_months, file_scan_url, Notes) "
-            + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    private final String updateSql = "UPDATE Contracts SET "
-            + "RoomId=?, Tenant=?, StartDate=?, EndDate=?, depositAmount=?, payment_cycle_months=?, file_scan_url=?, Notes=? "
-            + "WHERE Id=?";
-    private final String deleteByIdSql = "DELETE FROM Contracts WHERE Id=?";
+    private final String createSql = "INSERT INTO Users"
+            + "(Username, Password, Fullname, Email, PhoneNumber, RoleId, Status, Created_at) "
+            + "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+    private final String updateSql = "UPDATE Users SET "
+            + "Password=?, Fullname=?, Email=?, PhoneNumber=?, RoleId=?, Status=?, Created_at=?"
+            + "WHERE Username=?";
+    private final String deleteByIdSql = "DELETE FROM Users WHERE Username=?";
 
-    private final String findAllSql = "SELECT * FROM Contracts";
-    private final String findByIdSql = findAllSql + " WHERE Id=?";
+    private final String findAllSql = "SELECT * FROM Users";
+    private final String findByIdSql = findAllSql + " WHERE Username=?";
     private final String findByUsername = "SELECT * FROM Users WHERE Username = ?";
 
     @Override

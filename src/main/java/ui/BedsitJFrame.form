@@ -124,7 +124,7 @@
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/icons/Thi&#x1ebf;t k&#x1ebf; ch&#x1b0;a c&#xf3; t&#xea;n.jpg"/>
+                      <Image iconType="3" name="/icons/logo1.png"/>
                     </Property>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
@@ -132,6 +132,9 @@
                           <Color PropertyName="color" blue="33" green="33" red="ff" type="rgb"/>
                         </LineBorder>
                       </Border>
+                    </Property>
+                    <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                      <Color id="Default Cursor"/>
                     </Property>
                   </Properties>
                 </Component>
@@ -144,7 +147,7 @@
                       <Color blue="0" green="33" red="ff" type="rgb"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="H&#x1ed3;ng T&#x1ef7;"/>
+                    <Property name="text" type="java.lang.String" value="AHiHi123"/>
                   </Properties>
                 </Component>
                 <Container class="javax.swing.JPanel" name="pnlLeftBottom">
@@ -344,7 +347,7 @@
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/icons/bgBedsitJFrame.jpg"/>
+                  <Image iconType="3" name="/icons/bgBedsitJFrame2.jpg"/>
                 </Property>
               </Properties>
             </Component>

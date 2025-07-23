@@ -14,7 +14,6 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-
 public class User {
     String username;
     String password;
@@ -24,5 +23,4 @@ public class User {
     int roleId;
     boolean status;
     Date created_at;
-    private boolean enabled;
 }

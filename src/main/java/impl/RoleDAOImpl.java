@@ -51,7 +51,7 @@ public class RoleDAOImpl implements RoleDAO{
 
     @Override
     public Role findById(Integer id) {
-        return XQuery.getSingleBean(Role.class, SELECT_BY_ID_SQL, id);
+        return XQuery.getSingleBean(Role.class, SELECT_BY_ID_SQL, (int) id);
     }
 }
 //     @Override
