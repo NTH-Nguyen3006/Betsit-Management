@@ -1,9 +1,8 @@
 package utils;
 
-import javax.swing.JComponent;
-import javax.swing.text.JTextComponent;
-import javax.swing.JRadioButton;
 import javax.swing.JToggleButton;
+import javax.swing.text.JTextComponent;
+
 public class XOther {
     public static boolean hasTextFieldEmpty(JTextComponent... fields) {
         for (JTextComponent field : fields) {
@@ -12,7 +11,8 @@ public class XOther {
         }
         return false;
     }
-    public static boolean hasJRadioButtonEmty(JToggleButton ... buttons){
+
+    public static boolean hasJRadioButtonEmty(JToggleButton... buttons) {
         for (JToggleButton btn : buttons) {
             if (btn.isSelected()) {
                 return true;
@@ -20,6 +20,7 @@ public class XOther {
         }
         return false;
     }
+
     public static void setEmptyField(JTextComponent... fields) {
         for (JTextComponent field : fields)
             field.setText("");
