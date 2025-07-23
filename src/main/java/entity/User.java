@@ -1,12 +1,19 @@
 package entity;
 
-import lombok.*;
 import java.util.Date;
+
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@FieldDefaults(level = AccessLevel.PRIVATE)
 
 public class User {
     String username;
@@ -17,4 +24,5 @@ public class User {
     int roleId;
     boolean status;
     Date created_at;
+    private boolean enabled;
 }
