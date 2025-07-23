@@ -21,7 +21,7 @@ public class Room {
     String roomType;
     String notes;
 
-    enum eStatus {
+    public enum eStatus {
         Rented, Available, Repair;
     }
 }

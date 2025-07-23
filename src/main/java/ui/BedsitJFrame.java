@@ -1,25 +1,16 @@
-                                                                                                                                                                           /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package ui;
 
+import ui.controller.BedsitController;
 import utils.XAuth;
 import utils.XIcon;
 
-/**
- *
- * @author DELL
- */
-public final class BedsitJFrame extends javax.swing.JFrame implements BedsitController{
+public final class BedsitJFrame extends javax.swing.JFrame implements BedsitController {
 
-/**
- * Creates new form AppJFrame
- */
-public BedsitJFrame() {
-    initComponents();
-    this.init();
-}
+    public BedsitJFrame() {
+        initComponents();
+         this.init();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -265,7 +256,7 @@ public BedsitJFrame() {
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
 //        this.showBillManagerJDialog(this);
-    this.exit();
+        this.exit();
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnInvoicesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInvoicesActionPerformed
@@ -359,7 +350,7 @@ public BedsitJFrame() {
         this.showWelcomeJDialog(this);
         this.showLoginJDialog(this);
         lblFullname.setText(XAuth.user.getFullname());
-        int role = XAuth.user.getRole_id();
+        int role = XAuth.user.getRoleId();
         if(!(role == 1 || role ==2)){
             pnlCenter.remove(pnlManager);
             btnExit1.setVisible(true);

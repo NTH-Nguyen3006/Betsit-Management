@@ -11,8 +11,8 @@ public class XAuth {
             .password("123456")
             .fullname("Nguyễn Tấn Hoàng Nguyên")
             .email("nguyenth@gmail.com")
-            .phone_number("0912345601")
-            .role_id(1)
+            .phoneNumber("0912345601")
+            .roleId(1)
             .status(true)
             .created_at(Date.valueOf("2025-07-02"))
             .build();
