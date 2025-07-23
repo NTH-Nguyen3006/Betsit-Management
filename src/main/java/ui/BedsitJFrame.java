@@ -8,7 +8,8 @@ import dao.RoleDAO;
 import impl.RoleDAOImpl;
 import ui.controller.BedsitController;
 import utils.XAuth;
-public final class BedsitJFrame extends javax.swing.JFrame implements BedsitController{
+
+public final class BedsitJFrame extends javax.swing.JFrame implements BedsitController {
 
     public BedsitJFrame() {
         initComponents();
@@ -31,7 +32,7 @@ public final class BedsitJFrame extends javax.swing.JFrame implements BedsitCont
         lblFullname = new javax.swing.JLabel();
         pnlLeftBottom = new javax.swing.JPanel();
         btnTenants = new javax.swing.JButton();
-        btnInvoice = new javax.swing.JButton();
+        btnContracts = new javax.swing.JButton();
         btnPayment = new javax.swing.JButton();
         btnServices = new javax.swing.JButton();
         btnExit1 = new javax.swing.JButton();
@@ -40,9 +41,9 @@ public final class BedsitJFrame extends javax.swing.JFrame implements BedsitCont
         pnlManager = new javax.swing.JPanel();
         pnlCenterBottom = new javax.swing.JPanel();
         btnUser = new javax.swing.JButton();
-        btnReport01 = new javax.swing.JButton();
         btnInvoices = new javax.swing.JButton();
-        btnExit = new javax.swing.JButton();
+        btnRoom = new javax.swing.JButton();
+        btnRole = new javax.swing.JButton();
         pnlBackground = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -83,14 +84,14 @@ public final class BedsitJFrame extends javax.swing.JFrame implements BedsitCont
         });
         pnlLeftBottom.add(btnTenants);
 
-        btnInvoice.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
-        btnInvoice.setText("QUẢN LÍ HỢP ĐỒNG");
-        btnInvoice.addActionListener(new java.awt.event.ActionListener() {
+        btnContracts.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
+        btnContracts.setText("QUẢN LÍ HỢP ĐỒNG");
+        btnContracts.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnInvoiceActionPerformed(evt);
+                btnContractsActionPerformed(evt);
             }
         });
-        pnlLeftBottom.add(btnInvoice);
+        pnlLeftBottom.add(btnContracts);
 
         btnPayment.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
         btnPayment.setText("THANH TOÁN");
@@ -156,9 +157,9 @@ public final class BedsitJFrame extends javax.swing.JFrame implements BedsitCont
                 .addComponent(lblPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblFullname)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addComponent(btnExit1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addComponent(btnChangePassword)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlLeftBottom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -178,7 +179,7 @@ public final class BedsitJFrame extends javax.swing.JFrame implements BedsitCont
         pnlCenterBottom.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         pnlCenterBottom.setOpaque(false);
         pnlCenterBottom.setPreferredSize(new java.awt.Dimension(693, 150));
-        pnlCenterBottom.setLayout(new java.awt.GridLayout(0, 2, 5, 5));
+        pnlCenterBottom.setLayout(new java.awt.GridLayout(0, 2, 4, 4));
 
         btnUser.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
         btnUser.setText("QUẢN LÍ NGƯỜI DÙNG");
@@ -191,16 +192,6 @@ public final class BedsitJFrame extends javax.swing.JFrame implements BedsitCont
         });
         pnlCenterBottom.add(btnUser);
 
-        btnReport01.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
-        btnReport01.setText("BÁO CÁO - THỐNG KÊ");
-        btnReport01.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnReport01.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnReport01ActionPerformed(evt);
-            }
-        });
-        pnlCenterBottom.add(btnReport01);
-
         btnInvoices.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
         btnInvoices.setText("QUẢN LÍ HÓA ĐƠN");
         btnInvoices.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -211,15 +202,25 @@ public final class BedsitJFrame extends javax.swing.JFrame implements BedsitCont
         });
         pnlCenterBottom.add(btnInvoices);
 
-        btnExit.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
-        btnExit.setText("KẾT THÚC");
-        btnExit.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnExit.addActionListener(new java.awt.event.ActionListener() {
+        btnRoom.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
+        btnRoom.setText("QUẢN LÍ PHÒNG THUÊ");
+        btnRoom.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnRoom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExitActionPerformed(evt);
+                btnRoomActionPerformed(evt);
             }
         });
-        pnlCenterBottom.add(btnExit);
+        pnlCenterBottom.add(btnRoom);
+
+        btnRole.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
+        btnRole.setText("QUẢN LÍ VAI TRÒ");
+        btnRole.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnRole.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRoleActionPerformed(evt);
+            }
+        });
+        pnlCenterBottom.add(btnRole);
 
         pnlManager.add(pnlCenterBottom, java.awt.BorderLayout.PAGE_END);
 
@@ -237,39 +238,33 @@ public final class BedsitJFrame extends javax.swing.JFrame implements BedsitCont
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInvoiceActionPerformed
-        
+    private void btnContractsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContractsActionPerformed
+
 //        this.showReportJDialog(this);
-    }//GEN-LAST:event_btnInvoiceActionPerformed
+    }//GEN-LAST:event_btnContractsActionPerformed
 
     private void btnPaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPaymentActionPerformed
-//        this.showInvoiceManagerJDialog(this);
+        this.showPaymentsManagerJDialog(this);
     }//GEN-LAST:event_btnPaymentActionPerformed
 
     private void btnTenantsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTenantsActionPerformed
-//        this.showUserManagerJDialog(this);
+        this.showTenantsManagerJDialog(this);
+
     }//GEN-LAST:event_btnTenantsActionPerformed
 
     private void btnUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserActionPerformed
-//        this.showTenantManagerJDialog(this);
+        this.showUserManagerJDialog(this);
     }//GEN-LAST:event_btnUserActionPerformed
 
-    private void btnReport01ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReport01ActionPerformed
-//        this.showCategoryManagerJDialog(this);
-    }//GEN-LAST:event_btnReport01ActionPerformed
-
-    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-//        this.showBillManagerJDialog(this);
-    this.exit();
-    }//GEN-LAST:event_btnExitActionPerformed
-
     private void btnInvoicesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInvoicesActionPerformed
-//        this.showUserManagerJDialog(this);
+//        this.showUserManagerJDialog(this);    
+        this.showInvoicesManagerJDialog(this);
     }//GEN-LAST:event_btnInvoicesActionPerformed
 
     private void btnServicesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnServicesActionPerformed
         // TODO add your handling code here:
-        
+        this.showServicesManagerJDialog(this);
+
     }//GEN-LAST:event_btnServicesActionPerformed
 
     private void btnExit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExit1ActionPerformed
@@ -281,6 +276,16 @@ public final class BedsitJFrame extends javax.swing.JFrame implements BedsitCont
         // TODO add your handling code here:
         this.showChangePasswordJDialog(this);
     }//GEN-LAST:event_btnChangePasswordActionPerformed
+
+    private void btnRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRoomActionPerformed
+        // TODO add your handling code here:
+        this.showRoomManagerJDialog(this);
+    }//GEN-LAST:event_btnRoomActionPerformed
+
+    private void btnRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRoleActionPerformed
+        // TODO add your handling code here:
+        this.showRoleJDialog(this);
+    }//GEN-LAST:event_btnRoleActionPerformed
 
     /**
      * @param args the command line arguments
@@ -326,12 +331,12 @@ public final class BedsitJFrame extends javax.swing.JFrame implements BedsitCont
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnChangePassword;
-    private javax.swing.JButton btnExit;
+    private javax.swing.JButton btnContracts;
     private javax.swing.JButton btnExit1;
-    private javax.swing.JButton btnInvoice;
     private javax.swing.JButton btnInvoices;
     private javax.swing.JButton btnPayment;
-    private javax.swing.JButton btnReport01;
+    private javax.swing.JButton btnRole;
+    private javax.swing.JButton btnRoom;
     private javax.swing.JButton btnServices;
     private javax.swing.JButton btnTenants;
     private javax.swing.JButton btnUser;
@@ -356,14 +361,9 @@ public final class BedsitJFrame extends javax.swing.JFrame implements BedsitCont
         lblFullname.setText(XAuth.user.getFullname());
         int roleid = XAuth.user.getRoleId();
         entity.Role role = new RoleDAOImpl().findById(roleid);
-        boolean isManager = role.getRoleName().equalsIgnoreCase("admin") || 
-                role.getRoleName().equalsIgnoreCase("manager");
-        if(!isManager){
+        boolean isManager = role.getRoleName().equalsIgnoreCase("admin")
+                || role.getRoleName().equalsIgnoreCase("manager");
+        if (!isManager) 
             pnlCenter.remove(pnlManager);
-            btnExit1.setVisible(true);
-        }else{
-            btnExit1.setVisible(false);
-        }
-
     }
 }
