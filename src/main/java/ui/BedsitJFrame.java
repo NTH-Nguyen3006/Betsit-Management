@@ -240,7 +240,6 @@ public final class BedsitJFrame extends javax.swing.JFrame implements BedsitCont
 
     private void btnContractsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContractsActionPerformed
 
-//        this.showReportJDialog(this);
     }//GEN-LAST:event_btnContractsActionPerformed
 
     private void btnPaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPaymentActionPerformed
