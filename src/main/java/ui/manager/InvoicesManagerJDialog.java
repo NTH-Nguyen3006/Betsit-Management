@@ -470,7 +470,7 @@ public class InvoicesManagerJDialog extends javax.swing.JDialog implements Invoi
 
     private void UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateActionPerformed
         // TODO add your handling code here:
-         Invoice invoice = getFormInvoice();
+        Invoice invoice = getFormInvoice();
         invoiceDAO.update(invoice);
         loadInvoicesToTable();
     }//GEN-LAST:event_UpdateActionPerformed

@@ -111,7 +111,7 @@ public class ContractManagerJDialog extends javax.swing.JDialog implements Contr
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addContainerGap(7, Short.MAX_VALUE))
         );
 
         tabs.addTab("Thông tin cơ bản", jPanel1);
@@ -294,6 +294,11 @@ public class ContractManagerJDialog extends javax.swing.JDialog implements Contr
         tabs.addTab("Thông tin thêm", jPanel2);
 
         Create.setText("Tạo mới");
+        Create.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CreateActionPerformed(evt);
+            }
+        });
 
         Update.setText("Cập nhật");
         Update.addActionListener(new java.awt.event.ActionListener() {
@@ -425,6 +430,10 @@ public class ContractManagerJDialog extends javax.swing.JDialog implements Contr
         // TODO add your handling code here:
         this.chooseFrontImage();
     }//GEN-LAST:event_ContractScanUrlMouseClicked
+
+    private void CreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CreateActionPerformed
         /**
      * @param args the command line arguments
      */
@@ -501,7 +510,7 @@ public class ContractManagerJDialog extends javax.swing.JDialog implements Contr
     private javax.swing.JTextField txtTenant;
     // End of variables declaration//GEN-END:variables
 
-ContractDAO dao = new ContractDAOImpl();
+    ContractDAO dao = new ContractDAOImpl();
     ContractDetailDAO contractDetailDAO = new ContractDetailDAOImpl();
     List<Contract> items = List.of();
     private ContractDetail currentDetail = null;
