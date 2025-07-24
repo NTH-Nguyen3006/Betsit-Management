@@ -4,11 +4,24 @@
  */
 package ui.manager;
 
+import dao.RoleDAO;
+import dao.UserDAO;
+import entity.Role;
+import entity.User;
+import impl.RoleDAOImpl;
+import impl.UserDAOImpl;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.table.DefaultTableModel;
+import ui.controller.UserController;
+import utils.XDate;
+import utils.XDialog;
+
 /**
  *
  * @author ADMIN
  */
-public class UserManagerJDailog extends javax.swing.JDialog {
+public class UserManagerJDailog extends javax.swing.JDialog implements UserController{
 
     /**
      * Creates new form UserJDailog
@@ -34,9 +47,9 @@ public class UserManagerJDailog extends javax.swing.JDialog {
         tblRoles = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblUsers = new javax.swing.JTable();
-        btnCheckAll2 = new javax.swing.JButton();
-        btnUncheckAll2 = new javax.swing.JButton();
-        btnDeleteCheckedItems2 = new javax.swing.JButton();
+        btnCheckAll = new javax.swing.JButton();
+        btnUncheckAll = new javax.swing.JButton();
+        btnDeleteCheckedItems = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         btnCreate = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
@@ -56,10 +69,10 @@ public class UserManagerJDailog extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         txtFullname = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        cobRoleId = new javax.swing.JComboBox<>();
+        cboRoles = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        rdoOn = new javax.swing.JRadioButton();
+        rdoOff = new javax.swing.JRadioButton();
         jLabel7 = new javax.swing.JLabel();
         txtCreated_at = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
@@ -127,24 +140,24 @@ public class UserManagerJDailog extends javax.swing.JDialog {
         });
         jScrollPane2.setViewportView(tblUsers);
 
-        btnCheckAll2.setText("Chọn tất cả");
-        btnCheckAll2.addActionListener(new java.awt.event.ActionListener() {
+        btnCheckAll.setText("Chọn tất cả");
+        btnCheckAll.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCheckAll2ActionPerformed(evt);
+                btnCheckAllActionPerformed(evt);
             }
         });
 
-        btnUncheckAll2.setText("Bỏ chọn tất cả");
-        btnUncheckAll2.addActionListener(new java.awt.event.ActionListener() {
+        btnUncheckAll.setText("Bỏ chọn tất cả");
+        btnUncheckAll.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUncheckAll2ActionPerformed(evt);
+                btnUncheckAllActionPerformed(evt);
             }
         });
 
-        btnDeleteCheckedItems2.setText("Xóa các mục chọn");
-        btnDeleteCheckedItems2.addActionListener(new java.awt.event.ActionListener() {
+        btnDeleteCheckedItems.setText("Xóa các mục chọn");
+        btnDeleteCheckedItems.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeleteCheckedItems2ActionPerformed(evt);
+                btnDeleteCheckedItemsActionPerformed(evt);
             }
         });
 
@@ -156,11 +169,11 @@ public class UserManagerJDailog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnCheckAll2)
+                        .addComponent(btnCheckAll)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnUncheckAll2)
+                        .addComponent(btnUncheckAll)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnDeleteCheckedItems2))
+                        .addComponent(btnDeleteCheckedItems))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -176,9 +189,9 @@ public class UserManagerJDailog extends javax.swing.JDialog {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnDeleteCheckedItems2)
-                    .addComponent(btnUncheckAll2)
-                    .addComponent(btnCheckAll2))
+                    .addComponent(btnDeleteCheckedItems)
+                    .addComponent(btnUncheckAll)
+                    .addComponent(btnCheckAll))
                 .addGap(17, 17, 17))
         );
 
@@ -252,11 +265,11 @@ public class UserManagerJDailog extends javax.swing.JDialog {
 
         jLabel6.setText("Trạng thái:");
 
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setText("Hoạt động");
+        buttonGroup1.add(rdoOn);
+        rdoOn.setText("Hoạt động");
 
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setText("Tạm ngừng");
+        buttonGroup1.add(rdoOff);
+        rdoOff.setText("Tạm ngừng");
 
         jLabel7.setText("Ngày tạo:");
 
@@ -303,13 +316,13 @@ public class UserManagerJDailog extends javax.swing.JDialog {
                     .addComponent(jLabel1)
                     .addComponent(jLabel7)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jRadioButton1)
+                        .addComponent(rdoOn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jRadioButton2))
+                        .addComponent(rdoOff))
                     .addComponent(jLabel5)
                     .addComponent(jLabel6)
                     .addComponent(txtPhoneNumber)
-                    .addComponent(cobRoleId, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cboRoles, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtCreated_at, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(89, 89, 89))
         );
@@ -325,13 +338,13 @@ public class UserManagerJDailog extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cobRoleId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cboRoles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel6)
                         .addGap(12, 12, 12)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jRadioButton1)
-                            .addComponent(jRadioButton2))
+                            .addComponent(rdoOn)
+                            .addComponent(rdoOff))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -389,56 +402,71 @@ public class UserManagerJDailog extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCheckAll2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckAll2ActionPerformed
+    private void btnCheckAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckAllActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnCheckAll2ActionPerformed
+        this.checkAll();
+    }//GEN-LAST:event_btnCheckAllActionPerformed
 
-    private void btnUncheckAll2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUncheckAll2ActionPerformed
+    private void btnUncheckAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUncheckAllActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnUncheckAll2ActionPerformed
+        this.uncheckAll();
+    }//GEN-LAST:event_btnUncheckAllActionPerformed
 
-    private void btnDeleteCheckedItems2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteCheckedItems2ActionPerformed
+    private void btnDeleteCheckedItemsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteCheckedItemsActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnDeleteCheckedItems2ActionPerformed
+        this.deleteCheckedItems();
+    }//GEN-LAST:event_btnDeleteCheckedItemsActionPerformed
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         // TODO add your handling code here:
+        this.create();
     }//GEN-LAST:event_btnCreateActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
+        this.update();
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
+        this.delete();
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
         // TODO add your handling code here:
+        this.clear();
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void btnMoveFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveFirstActionPerformed
         // TODO add your handling code here:
+        this.moveFirst();
     }//GEN-LAST:event_btnMoveFirstActionPerformed
 
     private void btnMovePreviousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMovePreviousActionPerformed
         // TODO add your handling code here:
+        this.movePrevious();
     }//GEN-LAST:event_btnMovePreviousActionPerformed
 
     private void btnMoveNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveNextActionPerformed
         // TODO add your handling code here:
+        this.moveNext();
     }//GEN-LAST:event_btnMoveNextActionPerformed
 
     private void btnMoveLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveLastActionPerformed
         // TODO add your handling code here:
+        this.moveLast();
     }//GEN-LAST:event_btnMoveLastActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
+        this.open();
     }//GEN-LAST:event_formWindowOpened
 
     private void tblUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUsersMouseClicked
         // TODO add your handling code here:
+        if (evt.getClickCount() == 2) {
+            this.edit();
+        }
     }//GEN-LAST:event_tblUsersMouseClicked
 
     /**
@@ -485,19 +513,19 @@ public class UserManagerJDailog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCheckAll2;
+    private javax.swing.JButton btnCheckAll;
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnCreate;
     private javax.swing.JButton btnDelete;
-    private javax.swing.JButton btnDeleteCheckedItems2;
+    private javax.swing.JButton btnDeleteCheckedItems;
     private javax.swing.JButton btnMoveFirst;
     private javax.swing.JButton btnMoveLast;
     private javax.swing.JButton btnMoveNext;
     private javax.swing.JButton btnMovePrevious;
-    private javax.swing.JButton btnUncheckAll2;
+    private javax.swing.JButton btnUncheckAll;
     private javax.swing.JButton btnUpdate;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JComboBox<String> cobRoleId;
+    private javax.swing.JComboBox<String> cboRoles;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -508,12 +536,12 @@ public class UserManagerJDailog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JRadioButton rdoOff;
+    private javax.swing.JRadioButton rdoOn;
     private javax.swing.JTable tblRoles;
     private javax.swing.JTable tblUsers;
     private javax.swing.JTextField txtCreated_at;
@@ -524,4 +552,226 @@ public class UserManagerJDailog extends javax.swing.JDialog {
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 
+    UserDAO dao = new UserDAOImpl();
+    RoleDAO cdao = new RoleDAOImpl();
+
+    List<Role> roles = List.of();
+    List<User> items = List.of();
+    
+    @Override
+    public void open() {
+        this.setLocationRelativeTo(null);
+        this.fillRoles();  
+        
+        tblRoles.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) {
+                fillToTable();
+            }
+        });
+        cboRoles.addActionListener(e -> fillToTable());
+    
+        this.fillToTable();      
+        this.clear();          
+    }
+    
+    @Override
+    public void create() {
+        dao.create(getForm());
+        fillToTable();
+        clear();
+    }
+
+        @Override
+    public void update() {
+        User d = getForm();
+        dao.update(d);
+        this.fillToTable();
+    }
+
+    @Override
+    public void delete() {
+        if (XDialog.confirm("Bạn thực sự muốn xóa?")) {
+            dao.deleteById(txtUsername.getText().trim());
+            fillToTable();
+            clear();
+        }
+    }
+
+    @Override
+    public void clear() {                
+        setForm(new User());
+        rdoOn.setSelected(true);
+        setEditable(false);
+    }
+    
+    @Override
+    public void setEditable(boolean editable) {
+        btnCreate.setEnabled(!editable);
+        btnUpdate.setEnabled(editable);
+        btnDelete.setEnabled(editable);
+
+        boolean hasRow = tblUsers.getRowCount() > 0;
+        btnMoveFirst.setEnabled(editable && hasRow);
+        btnMovePrevious.setEnabled(editable && hasRow);
+        btnMoveNext.setEnabled(editable && hasRow);
+        btnMoveLast.setEnabled(editable && hasRow);
+    }
+    
+    private void setCheckedAll(boolean checked) {
+        for (int i = 0; i < tblUsers.getRowCount(); i++) {
+            tblUsers.setValueAt(checked, i, 5); 
+        }
+    }
+    @Override public void checkAll(){ 
+        this.setCheckedAll(true);  
+    }
+
+    @Override public void uncheckAll(){ 
+        this.setCheckedAll(false); 
+    }   
+
+    @Override
+    public void deleteCheckedItems() {
+        if (XDialog.confirm("Bạn thực sự muốn xóa các mục chọn?")) {
+            for (int i = 0; i < tblUsers.getRowCount(); i++) {
+                if (Boolean.TRUE.equals(tblUsers.getValueAt(i, 5))) {
+                    dao.deleteById(items.get(i).getUsername());
+                }
+            }
+            fillToTable();
+        }
+    }
+    
+    @Override
+    public void moveFirst() {
+       this.moveTo(0);
+    }
+
+    @Override
+    public void movePrevious() {
+        this.moveTo(tblUsers.getSelectedRow() - 1);
+    
+    }
+
+    @Override
+    public void moveNext() {
+      this.moveTo(tblUsers.getSelectedRow() + 1);
+    }
+
+    @Override
+    public void moveLast() {
+        this.moveTo(tblUsers.getRowCount() - 1);
+    }
+
+    @Override
+    public void moveTo(int index) {
+        if (index < 0) {
+            this.moveLast();
+        } else if (index >= tblUsers.getRowCount()) {
+            this.moveFirst();
+        } else {
+            tblUsers.clearSelection();
+            tblUsers.setRowSelectionInterval(index, index);
+            this.edit();
+        }
+    }
+    
+    @Override
+    public void edit() {
+        int row = tblUsers.getSelectedRow();
+        if (row >= 0) {
+            setForm(items.get(row));
+            setEditable(true);
+            jTabbedPane1.setSelectedIndex(1);
+        }
+    }
+    
+    @Override
+    public User getForm() {
+        User u = new User();
+        u.setUsername(txtUsername.getText().trim());
+        u.setPassword(txtPassword.getText().trim());
+        u.setFullname(txtFullname.getText().trim());
+        u.setEmail(txtEmail.getText().trim());
+        u.setPhoneNumber(txtPhoneNumber.getText().trim());
+        u.setCreated_at(XDate.parse(txtCreated_at.getText().trim(), "yyyy-MM-dd HH:mm"));
+        
+        Role r = (Role) cboRoles.getSelectedItem();
+        u.setRoleId(r.getId());
+        u.setStatus(rdoOn.isSelected());
+        return u;
+    }
+    
+    @Override
+    public void setForm(User u) {
+        txtUsername.setText(u.getUsername());
+        txtPassword.setText(u.getPassword());
+        txtFullname.setText(u.getFullname());
+        txtEmail.setText(u.getEmail());
+        txtPhoneNumber.setText(u.getPhoneNumber());
+        txtCreated_at.setText(XDate.format(u.getCreated_at(), "yyyy-MM-dd HH:mm"));
+        for (int i = 0; i < cboRoles.getItemCount(); i++) {
+            Object obj = cboRoles.getItemAt(i);
+            if (obj instanceof Role) {
+                Role r = (Role) obj;
+                if (r.getId() == (u.getRoleId())) {
+                    cboRoles.setSelectedIndex(i);
+                    break;
+                }
+            }
+        }
+        if (u.isStatus()) {
+            rdoOn.setSelected(true);
+        } else {
+            rdoOff.setSelected(true);
+        }
+    }
+
+    @Override
+    public void fillRoles() {
+        DefaultComboBoxModel cboModel = (DefaultComboBoxModel) cboRoles.getModel();
+        cboModel.removeAllElements();
+        DefaultTableModel tblModel = (DefaultTableModel) tblRoles.getModel();
+        tblModel.setRowCount(0);
+        RoleDAO cdao = new RoleDAOImpl();
+        roles = cdao.findAll();
+        roles.forEach(role -> {
+        cboModel.addElement(role);
+        tblModel.addRow(new Object[]{role.getRoleName()});
+        });
+        tblRoles.setRowSelectionInterval(0, 0);
+    }
+    
+    @Override
+    public void fillToTable() {
+        DefaultTableModel model = (DefaultTableModel) tblUsers.getModel();
+        model.setRowCount(0);                
+
+        Integer roleId = null;
+
+        int catRow = tblRoles.getSelectedRow();
+        if (catRow >= 0 && catRow < roles.size()) {
+            roleId = roles.get(catRow).getId();
+        } else {
+            Object obj = cboRoles.getSelectedItem();
+            if (obj instanceof Role) {
+                roleId = ((Role) obj).getId();
+            }
+        }
+
+        if (roleId == null) return;
+
+        items = dao.findByRoleId(roleId);
+        for (User u : items) {
+            model.addRow(new Object[]{
+                u.getUsername(),
+                u.getPassword(),
+                u.getFullname(),
+                u.getPhoneNumber(),
+                u.isStatus()? "Hoạt động" : "Tạm ngừng",
+                false
+            });
+        }
+        setEditable(false);
+    }
 }

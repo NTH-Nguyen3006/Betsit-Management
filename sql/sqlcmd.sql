@@ -468,7 +468,7 @@ INSERT INTO Users (Username, Password, Fullname, Email, PhoneNumber, RoleId, Sta
 ('maintenance02', '123456', N'Hồ Tấn Đạt', 'hotandat@gmail.com', '0912345617', 4, 1, GETDATE()),
 ('maintenance03', '123456', N'Lê Minh Khôi', 'leminhkhoi@gmail.com', '0912345627', 4, 1, GETDATE()),
 ('security01', '123456', N'Phan Đình Kiên', 'phandinhkien@gmail.com', '0912345609', 5, 1, GETDATE()),
-('security02', '123456', N'Cao Văn Lộc', 'caovanloc@gmail.com', '0912345619', 5, 1, GETDATE()),
+('security02', '123456', N'Cao Văn Lộc', 'caovanloc@gmail.com', '0912345619', 5, 0, GETDATE()),
 ('security03', '123456', N'Huỳnh Trọng Hải', 'huynhtronghai@gmail.com', '0912345629', 5, 1, GETDATE()),
 ('cleaner01', '123456', N'Đỗ Thị Mai', 'dothimai@gmail.com', '0912345610', 6, 1, GETDATE()),
 ('cleaner02', '123456', N'Lâm Thị Huyền', 'lamthihuyen@gmail.com', '0912345620', 6, 1, GETDATE()),
