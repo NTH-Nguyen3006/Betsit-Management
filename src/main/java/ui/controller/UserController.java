@@ -4,9 +4,12 @@
  */
 package ui.controller;
 
+import entity.User;
+
 /**
  *
  * @author ADMIN
  */
-public interface UserController {
+public interface UserController extends CrudController<User> {
+    void fillRoles();   
 }

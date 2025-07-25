@@ -495,7 +495,6 @@ select * from Users
 ('security03', '123456', N'Huỳnh Trọng Hải', 'huynhtronghai@gmail.com', '0912345629', 7, 1, GETDATE()),
 ('cleaner03', '123456', N'Đặng Thị Kim', 'dangthikim@gmail.com', '0912345630', 8, 1, GETDATE());
 */
-=======
 ('staff02', '123456', N'Nguyễn Đài Vĩnh Khánh', 'Khanhndv@gmail.com', '0912345605', 3, 1, GETDATE()),
 ('maintenance01', '123456', N'Hoàng Văn Đạt', 'hoangvandat@gmail.com', '0912345606', 4, 1, GETDATE()),
 ('maintenance02', '123456', N'Hồ Tấn Đạt', 'hotandat@gmail.com', '0912345617', 4, 1, GETDATE()),
@@ -506,7 +505,6 @@ select * from Users
 ('cleaner01', '123456', N'Đỗ Thị Mai', 'dothimai@gmail.com', '0912345610', 6, 1, GETDATE()),
 ('cleaner02', '123456', N'Lâm Thị Huyền', 'lamthihuyen@gmail.com', '0912345620', 6, 1, GETDATE()),
 ('cleaner03', '123456', N'Đặng Thị Kim', 'dangthikim@gmail.com', '0912345630', 6, 1, GETDATE());
->>>>>>> Trinh
 
 -- Dữ liệu cho bảng Tenant_Details 
 INSERT INTO Tenant_Details (CitizenId, PerCardFrontImage, PerCardBackImage, ResidencyStatus, Occupation, Hometown) VALUES
