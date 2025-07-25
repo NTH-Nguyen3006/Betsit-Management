@@ -26,7 +26,7 @@ public class XJdbc {
         var dburl = "jdbc:sqlserver://localhost:1433;database=BEDSIT;encrypt=true;trustServerCertificate=true;";
         var username = "sa";
 //         var password = "123456";
-         var password = "123";
+        var password = "123";
 //       var password = "Password123"; // by Nguyen
 
         try {
@@ -137,7 +137,13 @@ public class XJdbc {
         }
         return stmt;
     }
-
+ /**
+     * Trả về kết nối hiện tại (hoặc mở mới nếu chưa có)
+     * @return kết nối CSDL đang mở
+     */
+    public static Connection getConnection() {
+        return openConnection();
+    }
 //    public static void main(String[] args) {
 //        demo1();
 //        demo2();

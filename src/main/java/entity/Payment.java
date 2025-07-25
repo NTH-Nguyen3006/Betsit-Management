@@ -2,7 +2,6 @@ package entity;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -12,13 +11,12 @@ import java.util.Date;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Payment {
-    int Id ;
-    int Invoice_id;
+    int Id;
+    int InvoiceId; // ✅ sửa cho khớp cột SQL
     String Tenant;
     BigDecimal Amount;
-    Date Payment_date;
-    String Payment_method;
-    String Transaction_code;
+    Date PaymentDate; // ✅
+    String PaymentMethod; // ✅
+    String TransactionCode; // ✅
     String Note;
-
 }

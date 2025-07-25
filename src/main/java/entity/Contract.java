@@ -1,11 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package entity;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+
+import java.math.BigDecimal;
+import java.util.Date;
 
 @Data
 @AllArgsConstructor
@@ -13,13 +12,13 @@ import lombok.experimental.FieldDefaults;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Contract {
-    String id;
-    String roomId;
-    String tenant;
-    String startDate;
-    String endDate;
-    String depositAmount;
-    String payment_cycle_months;
-    String file_scan_url;
-    String Notes;
+    Integer Id;                     // INT → Integer
+    Integer RoomId;                 // INT → Integer
+    String Tenant;                  // VARCHAR(12)
+    Date StartDate;                 // DATETIME
+    Date EndDate;                   // DATETIME
+    BigDecimal DepositAmount;      // DECIMAL(10,2)
+    short PaymentCycleMonths;  // TINYINT → Integer
+    String File_scan_url;          // VARCHAR(20)
+    String Notes;                  // NVARCHAR(MAX)
 }
