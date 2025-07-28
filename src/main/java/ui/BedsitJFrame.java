@@ -50,6 +50,11 @@ public final class BedsitJFrame extends javax.swing.JFrame implements BedsitCont
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Poly Cafe");
         setBackground(new java.awt.Color(255, 51, 51));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         pnlLeft.setBackground(new java.awt.Color(255, 153, 102));
         pnlLeft.setLayout(new java.awt.BorderLayout(1, 1));
@@ -157,9 +162,9 @@ public final class BedsitJFrame extends javax.swing.JFrame implements BedsitCont
                 .addComponent(lblPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblFullname)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addComponent(btnExit1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addComponent(btnChangePassword)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlLeftBottom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -286,6 +291,10 @@ public final class BedsitJFrame extends javax.swing.JFrame implements BedsitCont
         this.showRoleJDialog(this);
     }//GEN-LAST:event_btnRoleActionPerformed
 
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        System.exit(0);
+    }//GEN-LAST:event_formWindowClosed
+
     /**
      * @param args the command line arguments
      */
@@ -356,7 +365,11 @@ public final class BedsitJFrame extends javax.swing.JFrame implements BedsitCont
     public void init() {
         this.setLocationRelativeTo(null);
         this.showWelcomeJDialog(this);
+        //Hiển thị giao diện login
         this.showLoginJDialog(this);
+        //giả sử xauth.user trả về null nếu 0 đăng nhập thành công
+        if(XAuth.user == null)
+            System.exit(0);
         lblFullname.setText(XAuth.user.getFullname());
         int roleid = XAuth.user.getRoleId();
         entity.Role role = new RoleDAOImpl().findById(roleid);

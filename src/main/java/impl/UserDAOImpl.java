@@ -21,6 +21,7 @@ public class UserDAOImpl implements UserDAO {
     String findAllSql = "SELECT * FROM Users";
     String findByIdSql = "SELECT * FROM Users WHERE Username = ?";
     String findByRoleIdSql = "SELECT * FROM Users WHERE RoleId=?";
+    String findByUsername = "SELECT * FROM Users WHERE Username = ?";
     
     @Override
     public User create(User entity) {
@@ -75,6 +76,6 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public User findByUsername(String username) {
-        return null;
+        return XQuery.getSingleBean(User.class, findByUsername, username);
     }
 }

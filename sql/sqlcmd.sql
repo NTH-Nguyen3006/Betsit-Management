@@ -2,8 +2,8 @@ CREATE DATABASE BEDSIT;
 GO
 USE BEDSIT
 GO
-
--- DROP DATABASE BEDSIT
+use asm22
+DROP DATABASE BEDSIT
 
 CREATE TABLE Rooms (
     RoomId INT IDENTITY(1,1) PRIMARY KEY,
@@ -13,6 +13,18 @@ CREATE TABLE Rooms (
     [Status] TINYINT NOT NULL CHECK ([Status] IN (0, 1, 2)) DEFAULT 0,
     RoomType NVARCHAR(100),
     Notes NVARCHAR(MAX),
+);
+
+CREATE TABLE Assets (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    RoomId INT NOT NULL,
+    AssetName NVARCHAR(255) NOT NULL,
+    Quantity INT NOT NULL,
+    Condition NVARCHAR(255),
+    created_at DATETIME DEFAULT GETDATE(), 
+
+    FOREIGN KEY (RoomId) REFERENCES Rooms(RoomID)
+	ON DELETE CASCADE
 );
 
 
@@ -105,18 +117,6 @@ INSERT INTO Invoice (ContractId, Billing_period_month, Billing_period_year, Prev
 (32, 10, 2025, 0.00, 0.00, 4200000.00, 0, '2025-11-05', GETDATE()), -- Invoice ID sẽ là 14 (ContractId 32)
 (33, 11, 2025, 0.00, 0.00, 3900000.00, 0, '2025-12-01', GETDATE()); -- Invoice ID sẽ là 15 (ContractId 33)
 
-<<<<<<< HEAD
-CREATE TABLE Invoice_Details (
-  InvoiceId int PRIMARY KEY,
-  ServiceId int NOT NULL,
-  Quantity INT NOT NULL,
-  UnitPrice decimal(10,2) NOT NULL,
-  Subtotal decimal(12,2) NOT NULL
-
-  FOREIGN KEY(InvoiceId) REFERENCES Invoice(Id)
-    ON DELETE CASCADE
-);
-=======
 	CREATE TABLE Invoice_Details (
 	  Id INT IDENTITY(1,1) PRIMARY KEY,
 	  InvoiceId int NOT NULL,
@@ -192,7 +192,6 @@ CREATE TABLE Invoice_Details (
 	(15, 1, 65, 3500.00, 227500.00), -- Tiền Điện
 	(15, 6, 1, 50000.00, 50000.00); -- Phí Vệ Sinh
 
->>>>>>> Minh
 
 CREATE TABLE Payments ( --ĐƠn thanh toán
     Id int PRIMARY KEY IDENTITY(1, 1),
@@ -232,11 +231,7 @@ INSERT INTO Payments (InvoiceId, Tenant, Amount, PaymentDate, PaymentMethod, Tra
 CREATE TABLE Roles (
   Id int PRIMARY KEY IDENTITY(1, 1),
   RoleName varchar(50) UNIQUE NOT NULL,
-<<<<<<< HEAD
-  [Description] NVARCHAR(100)
-=======
   [Description] text
->>>>>>> Minh
 );
 
 CREATE TABLE Users (
@@ -251,17 +246,6 @@ CREATE TABLE Users (
 
   FOREIGN KEY (RoleId) REFERENCES Roles(Id) ON DELETE SET NULL
 );
-<<<<<<< HEAD
-
-CREATE TABLE Contract_Tenants (
-    ContractId INT PRIMARY KEY,
-    PersonalId INT,
-    [Role] TINYINT -- Enum
-    FOREIGN KEY(ContractId) REFERENCES Contracts(Id) ON DELETE CASCADE,
-);
-
--- Dữ liệu cho bảng Rooms 
-=======
 GO
 DROP TABLE IF EXISTS Contract_Tenants;
 
@@ -325,7 +309,6 @@ INSERT INTO Contract_Tenants (ContractId, CitizenId, Role) VALUES
 (33, '004345678901', 0);
 
 -- Dữ liệu cho bảng Rooms (ít nhất 30 phòng)
->>>>>>> Minh
 INSERT INTO Rooms (Area, RentPrice, Status, RoomType, Notes) VALUES
 (25.0, 3500000.00, 0, N'Phòng Đơn', N'Phòng có ban công hướng Đông, thoáng mát'),
 (30.0, 4200000.00, 1, N'Phòng Đôi', N'Đang có người thuê, hợp đồng đến 12/2025'),
@@ -368,10 +351,8 @@ INSERT INTO Rooms (Area, RentPrice, Status, RoomType, Notes) VALUES
 (38.0, 5800000.00, 0, N'Phòng Gia Đình', N'Phòng rộng, thích hợp cho 3-4 người'),
 (20.0, 2800000.00, 1, N'Phòng Đơn', N'Đang có người thuê, hợp đồng đến 07/2025');
 
-<<<<<<< HEAD
+
 -- Dữ liệu cho bảng Tenants 
-=======
->>>>>>> Minh
 INSERT INTO Tenants (CitizenId, FullName, DateOfBirth, PhoneNumber, Email, VehiclePlate) VALUES
 ('001123456789', N'Nguyễn Hoàng Anh', '1990-01-15', '0901234567', 'hoanganh.nguyen@gmail.com', '51A-123.45'),
 ('001234567890', N'Trần Thị Mai', '1992-03-22', '0902345678', 'maithu.tran@gmail.com', '59F1-678.90'),
@@ -571,11 +552,6 @@ INSERT INTO Roles (RoleName, Description) VALUES
 (N'Staff', N'Nhân viên điều hành hàng ngày'),
 (N'Maintenance', N'Nhân viên bảo trì cơ sở vật chất'),
 (N'Security', N'Nhân viên bảo vệ'),
-<<<<<<< HEAD
-(N'Cleaner', N'Nhân viên vệ sinh');
-
--- Dữ liệu cho bảng Services 
-=======
 (N'Cleaner', N'Nhân viên vệ sinh'),
 (N'Marketing', N'Nhân viên Marketing và quảng bá'),
 (N'CustomerService', N'Nhân viên chăm sóc khách hàng'),
@@ -607,7 +583,6 @@ INSERT INTO Roles (RoleName, Description) VALUES
 */
 
 -- Dữ liệu cho bảng Services (ít nhất 30 dịch vụ)
->>>>>>> Minh
 INSERT INTO Services (ServiceName, Unit, Price, Description) VALUES
 (N'Tiền Điện', N'kWh', 3500.00, N'Giá điện tính theo kWh sử dụng hàng tháng'),
 (N'Tiền Nước', N'm3', 18000.00, N'Giá nước tính theo m3 sử dụng hàng tháng'),
@@ -678,23 +653,17 @@ INSERT INTO ServiceUsages (ServiceId, ContractId, StartDate, EndDate) VALUES
 (29, 9, '2025-09-05 14:30:00', NULL),
 (30, 10, '2025-10-25 15:45:00', NULL);
 
-<<<<<<< HEAD
 -- Dữ liệu cho bảng Users
 INSERT INTO Users (Username, Password, Fullname, Email, PhoneNumber, RoleId, Status, Created_at) VALUES
 ('admin01', '123456', N'Nguyễn Tấn Hoàng Nguyên', 'nguyenth@gmail.com', '0912345601', 1, 1, GETDATE()),
 ('manager01', '123456', N'Phạm Thùy Trinh', 'Trinhpt@gmail.com', '0912345602', 2, 1, GETDATE()),
 ('staff01', '123456', N'Như Lê Hoàng Minh', 'Minhnlh@gmail.com', '0912345603', 3, 1, GETDATE()),
 ('staff02', '123456', N'Nguyễn Đài Vĩnh Khánh', 'Khanhndvts02245@gmail.com', '0931489629', 3, 1, GETDATE());
-select * from Users
 
-=======
--- Dữ liệu cho bảng Users (ít nhất 30 người dùng)
--- Giả sử RoleId 1 là Admin, 2 là Manager, 3 là Staff, 4 là Tenant, 5 là Accountant, 6 là Maintenance, v.v.
-INSERT INTO Users (Username, Password, Fullname, Email, PhoneNumber, RoleId, Status, Created_at) VALUES
-('admin01', '123456', N'Nguyễn Tấn Hoàng Nguyên', 'nguyenth@gmail.com', '0912345601', 1, 1, GETDATE()),
-('manager01', '123456', N'Phạm Thùy Trinh', 'Trinhpt@gmail.com', '0912345602', 2, 1, GETDATE()),
-('staff01', '123456', N'Như Lê Hoàng Minh', 'Minhnlh@gmail.com', '0912345603', 3, 1, GETDATE());
->>>>>>> Minh
+
+
+select * from Rooms
+
 /*
 ('staff02', '123456', N'Nguyễn Thanh Tùng', 'nguyenthanhtung@gmail.com', '0912345604', 3, 1, GETDATE()),
 ('accountant01', '123456', N'Võ Thị Thu Hà', 'vothithuha@gmail.com', '0912345605', 5, 1, GETDATE()),
@@ -735,12 +704,8 @@ INSERT INTO Users (Username, Password, Fullname, Email, PhoneNumber, RoleId, Sta
 ('cleaner02', '123456', N'Lâm Thị Huyền', 'lamthihuyen@gmail.com', '0912345620', 6, 1, GETDATE()),
 ('cleaner03', '123456', N'Đặng Thị Kim', 'dangthikim@gmail.com', '0912345630', 6, 1, GETDATE());
 
-<<<<<<< HEAD
--- Dữ liệu cho bảng Tenant_Details 
-=======
 -- Dữ liệu cho bảng Tenant_Details (ít nhất 30 chi tiết người thuê)
 -- Sử dụng CitizenId đã tạo ở bước trước
->>>>>>> Minh
 INSERT INTO Tenant_Details (CitizenId, PerCardFrontImage, PerCardBackImage, ResidencyStatus, Occupation, Hometown) VALUES
 ('001123456789', NULL, NULL, 1, N'Kỹ sư phần mềm', N'Hà Nội'),
 ('001234567890', NULL, NULL, 0, N'Giáo viên', N'Đà Nẵng'),
@@ -933,16 +898,11 @@ INSERT INTO Tenant_Details (CitizenId, PerCardFrontImage, PerCardBackImage, Resi
 ('019901234567', NULL, NULL, 2, N'Họa sĩ', N'Đà Lạt'),
 ('019012345678', NULL, NULL, 0, N'Thợ điện', N'Biên Hòa');
 
-<<<<<<< HEAD
--- Dữ liệu cho bảng Contracts 
-INSERT INTO Contracts (RoomId, Tenant, StartDate, EndDate, DepositAmount, Payment_cycle_months, File_scan_url, Notes) VALUES
-=======
 -- Dữ liệu cho bảng Contracts (ít nhất 30 hợp đồng)
 -- Sử dụng RoomId và CitizenId đã tạo ở bước trước
 -- RoomId sẽ được lấy ngẫu nhiên từ 1 đến 40 (số lượng phòng đã tạo)
 -- Tenant sẽ được lấy ngẫu nhiên từ các CitizenId đã tạo (100 người)
 INSERT INTO Contracts (RoomId, Tenant, StartDate, EndDate, DepositAmount,PaymentCycleMonths, File_scan_url, Notes) VALUES
->>>>>>> Minh
 (1, '001123456789', '2024-01-01', '2025-12-31', 7000000.00, 6, NULL, N'Hợp đồng 2 năm, thanh toán 6 tháng/lần'),
 (2, '001234567890', '2024-02-15', '2025-08-14', 8400000.00, 3, NULL, N'Hợp đồng 18 tháng, có điều khoản gia hạn'),
 (3, '001345678901', '2024-03-01', '2025-02-28', 5600000.00, 1, NULL, N'Hợp đồng 1 năm, thanh toán hàng tháng'),
@@ -977,3 +937,214 @@ INSERT INTO Contracts (RoomId, Tenant, StartDate, EndDate, DepositAmount,Payment
 (32, '004234567890', '2024-08-10', '2025-08-09', 8400000.00, 3, NULL, N'Hợp đồng 1 năm, có điều khoản gia hạn'),
 (33, '004345678901', '2024-09-05', '2025-09-04', 5600000.00, 1, NULL, N'Hợp đồng 1 năm, thanh toán hàng tháng');
 --DROP DATABASE BEDSIT
+select * from Assets
+--Dữ liệu bảng Assets
+INSERT INTO Assets (RoomId, AssetName, Quantity, Condition) VALUES
+-- RoomId 1-10
+(1, N'Bàn làm việc', 3, N'Mới'),
+(1, N'Ghế xoay', 5, N'Tốt'),
+(1, N'Máy tính', 4, N'Hoạt động tốt'),
+(1, N'Tủ hồ sơ', 2, N'Mới'),
+(1, N'Quạt điện', 1, N'Hoạt động'),
+(2, N'Máy chiếu', 1, N'Cũ nhưng dùng tốt'),
+(2, N'Bảng trắng', 1, N'Tốt'),
+(2, N'Loa âm trần', 4, N'Mới'),
+(2, N'Micro không dây', 2, N'Tốt'),
+(2, N'Bục phát biểu', 1, N'Mới'),
+(3, N'Điều hòa', 1, N'Mới lắp'),
+(3, N'Bình chữa cháy', 1, N'Còn hạn'),
+(3, N'Đèn LED', 5, N'Tốt'),
+(3, N'Camera an ninh', 1, N'Hoạt động'),
+(3, N'Cảm biến khói', 2, N'Tốt'),
+(4, N'Tủ tài liệu', 3, N'Hơi xước'),
+(4, N'Rèm cửa', 5, N'Mới'),
+(4, N'Máy in', 1, N'Hoạt động'),
+(4, N'Máy hủy giấy', 1, N'Mới'),
+(4, N'Két sắt', 1, N'Tốt'),
+(5, N'Bàn làm việc', 4, N'Tốt'),
+(5, N'Ghế nhựa', 5, N'Tốt'),
+(5, N'Điện thoại bàn', 3, N'Cũ'),
+(5, N'Tủ quần áo', 1, N'Mới'),
+(5, N'Gương treo tường', 1, N'Tốt'),
+(6, N'Máy chiếu mini', 1, N'Mới'),
+(6, N'Màn chiếu', 1, N'Tốt'),
+(6, N'Hệ thống âm thanh', 1, N'Mới'),
+(6, N'Bộ điều khiển từ xa', 1, N'Tốt'),
+(6, N'Bảng điều khiển', 1, N'Mới'),
+(7, N'Bếp điện', 1, N'Mới'),
+(7, N'Tủ lạnh mini', 1, N'Tốt'),
+(7, N'Lò vi sóng', 1, N'Hoạt động'),
+(7, N'Ấm siêu tốc', 1, N'Mới'),
+(7, N'Nồi cơm điện', 1, N'Tốt'),
+(8, N'Giường đơn', 2, N'Mới'),
+(8, N'Tủ quần áo', 2, N'Tốt'),
+(8, N'Đèn ngủ', 2, N'Hoạt động'),
+(8, N'Bàn trang điểm', 1, N'Mới'),
+(8, N'Ghế đẩu', 2, N'Tốt'),
+(9, N'Ghế sofa', 1, N'Mới'),
+(9, N'Bàn trà', 1, N'Mới'),
+(9, N'Kệ sách', 1, N'Tốt'),
+(9, N'Thảm trải sàn', 1, N'Mới'),
+(9, N'Tranh trang trí', 2, N'Tốt'),
+(10, N'Tivi', 1, N'Mới'),
+(10, N'Đầu đĩa DVD', 1, N'Tốt'),
+(10, N'Bộ loa', 2, N'Mới'),
+(10, N'Điều khiển Tivi', 1, N'Tốt'),
+(10, N'Kệ Tivi', 1, N'Mới');
+/*
+-- RoomId 11-20
+(11, N'Bàn làm việc', 3, N'Mới'),
+(11, N'Ghế xoay', 5, N'Tốt'),
+(11, N'Máy tính', 4, N'Hoạt động tốt'),
+(11, N'Tủ hồ sơ', 2, N'Mới'),
+(11, N'Quạt điện', 1, N'Hoạt động'),
+(12, N'Máy chiếu', 1, N'Cũ nhưng dùng tốt'),
+(12, N'Bảng trắng', 1, N'Tốt'),
+(12, N'Loa âm trần', 4, N'Mới'),
+(12, N'Micro không dây', 2, N'Tốt'),
+(12, N'Bục phát biểu', 1, N'Mới'),
+(13, N'Điều hòa', 1, N'Mới lắp'),
+(13, N'Bình chữa cháy', 1, N'Còn hạn'),
+(13, N'Đèn LED', 5, N'Tốt'),
+(13, N'Camera an ninh', 1, N'Hoạt động'),
+(13, N'Cảm biến khói', 2, N'Tốt'),
+(14, N'Tủ tài liệu', 3, N'Hơi xước'),
+(14, N'Rèm cửa', 5, N'Mới'),
+(14, N'Máy in', 1, N'Hoạt động'),
+(14, N'Máy hủy giấy', 1, N'Mới'),
+(14, N'Két sắt', 1, N'Tốt'),
+(15, N'Bàn làm việc', 4, N'Tốt'),
+(15, N'Ghế nhựa', 5, N'Tốt'),
+(15, N'Điện thoại bàn', 3, N'Cũ'),
+(15, N'Tủ quần áo', 1, N'Mới'),
+(15, N'Gương treo tường', 1, N'Tốt'),
+(16, N'Máy chiếu mini', 1, N'Mới'),
+(16, N'Màn chiếu', 1, N'Tốt'),
+(16, N'Hệ thống âm thanh', 1, N'Mới'),
+(16, N'Bộ điều khiển từ xa', 1, N'Tốt'),
+(16, N'Bảng điều khiển', 1, N'Mới'),
+(17, N'Bếp điện', 1, N'Mới'),
+(17, N'Tủ lạnh mini', 1, N'Tốt'),
+(17, N'Lò vi sóng', 1, N'Hoạt động'),
+(17, N'Ấm siêu tốc', 1, N'Mới'),
+(17, N'Nồi cơm điện', 1, N'Tốt'),
+(18, N'Giường đơn', 2, N'Mới'),
+(18, N'Tủ quần áo', 2, N'Tốt'),
+(18, N'Đèn ngủ', 2, N'Hoạt động'),
+(18, N'Bàn trang điểm', 1, N'Mới'),
+(18, N'Ghế đẩu', 2, N'Tốt'),
+(19, N'Ghế sofa', 1, N'Mới'),
+(19, N'Bàn trà', 1, N'Mới'),
+(19, N'Kệ sách', 1, N'Tốt'),
+(19, N'Thảm trải sàn', 1, N'Mới'),
+(19, N'Tranh trang trí', 2, N'Tốt'),
+(20, N'Tivi', 1, N'Mới'),
+(20, N'Đầu đĩa DVD', 1, N'Tốt'),
+(20, N'Bộ loa', 2, N'Mới'),
+(20, N'Điều khiển Tivi', 1, N'Tốt'),
+(20, N'Kệ Tivi', 1, N'Mới'),
+
+-- RoomId 21-30
+(21, N'Bàn làm việc', 3, N'Mới'),
+(21, N'Ghế xoay', 5, N'Tốt'),
+(21, N'Máy tính', 4, N'Hoạt động tốt'),
+(21, N'Tủ hồ sơ', 2, N'Mới'),
+(21, N'Quạt điện', 1, N'Hoạt động'),
+(22, N'Máy chiếu', 1, N'Cũ nhưng dùng tốt'),
+(22, N'Bảng trắng', 1, N'Tốt'),
+(22, N'Loa âm trần', 4, N'Mới'),
+(22, N'Micro không dây', 2, N'Tốt'),
+(22, N'Bục phát biểu', 1, N'Mới'),
+(23, N'Điều hòa', 1, N'Mới lắp'),
+(23, N'Bình chữa cháy', 1, N'Còn hạn'),
+(23, N'Đèn LED', 5, N'Tốt'),
+(23, N'Camera an ninh', 1, N'Hoạt động'),
+(23, N'Cảm biến khói', 2, N'Tốt'),
+(24, N'Tủ tài liệu', 3, N'Hơi xước'),
+(24, N'Rèm cửa', 5, N'Mới'),
+(24, N'Máy in', 1, N'Hoạt động'),
+(24, N'Máy hủy giấy', 1, N'Mới'),
+(24, N'Két sắt', 1, N'Tốt'),
+(25, N'Bàn làm việc', 4, N'Tốt'),
+(25, N'Ghế nhựa', 5, N'Tốt'),
+(25, N'Điện thoại bàn', 3, N'Cũ'),
+(25, N'Tủ quần áo', 1, N'Mới'),
+(25, N'Gương treo tường', 1, N'Tốt'),
+(26, N'Máy chiếu mini', 1, N'Mới'),
+(26, N'Màn chiếu', 1, N'Tốt'),
+(26, N'Hệ thống âm thanh', 1, N'Mới'),
+(26, N'Bộ điều khiển từ xa', 1, N'Tốt'),
+(26, N'Bảng điều khiển', 1, N'Mới'),
+(27, N'Bếp điện', 1, N'Mới'),
+(27, N'Tủ lạnh mini', 1, N'Tốt'),
+(27, N'Lò vi sóng', 1, N'Hoạt động'),
+(27, N'Ấm siêu tốc', 1, N'Mới'),
+(27, N'Nồi cơm điện', 1, N'Tốt'),
+(28, N'Giường đơn', 2, N'Mới'),
+(28, N'Tủ quần áo', 2, N'Tốt'),
+(28, N'Đèn ngủ', 2, N'Hoạt động'),
+(28, N'Bàn trang điểm', 1, N'Mới'),
+(28, N'Ghế đẩu', 2, N'Tốt'),
+(29, N'Ghế sofa', 1, N'Mới'),
+(29, N'Bàn trà', 1, N'Mới'),
+(29, N'Kệ sách', 1, N'Tốt'),
+(29, N'Thảm trải sàn', 1, N'Mới'),
+(29, N'Tranh trang trí', 2, N'Tốt'),
+(30, N'Tivi', 1, N'Mới'),
+(30, N'Đầu đĩa DVD', 1, N'Tốt'),
+(30, N'Bộ loa', 2, N'Mới'),
+(30, N'Điều khiển Tivi', 1, N'Tốt'),
+(30, N'Kệ Tivi', 1, N'Mới'),
+
+-- RoomId 31-40
+(31, N'Bàn làm việc', 3, N'Mới'),
+(31, N'Ghế xoay', 5, N'Tốt'),
+(31, N'Máy tính', 4, N'Hoạt động tốt'),
+(31, N'Tủ hồ sơ', 2, N'Mới'),
+(31, N'Quạt điện', 1, N'Hoạt động'),
+(32, N'Máy chiếu', 1, N'Cũ nhưng dùng tốt'),
+(32, N'Bảng trắng', 1, N'Tốt'),
+(32, N'Loa âm trần', 4, N'Mới'),
+(32, N'Micro không dây', 2, N'Tốt'),
+(32, N'Bục phát biểu', 1, N'Mới'),
+(33, N'Điều hòa', 1, N'Mới lắp'),
+(33, N'Bình chữa cháy', 1, N'Còn hạn'),
+(33, N'Đèn LED', 5, N'Tốt'),
+(33, N'Camera an ninh', 1, N'Hoạt động'),
+(33, N'Cảm biến khói', 2, N'Tốt'),
+(34, N'Tủ tài liệu', 3, N'Hơi xước'),
+(34, N'Rèm cửa', 5, N'Mới'),
+(34, N'Máy in', 1, N'Hoạt động'),
+(34, N'Máy hủy giấy', 1, N'Mới'),
+(34, N'Két sắt', 1, N'Tốt'),
+(35, N'Bàn làm việc', 4, N'Tốt'),
+(35, N'Ghế nhựa', 5, N'Tốt'),
+(35, N'Điện thoại bàn', 3, N'Cũ'),
+(35, N'Tủ quần áo', 1, N'Mới'),
+(35, N'Gương treo tường', 1, N'Tốt'),
+(36, N'Máy chiếu mini', 1, N'Mới'),
+(36, N'Màn chiếu', 1, N'Tốt'),
+(36, N'Hệ thống âm thanh', 1, N'Mới'),
+(36, N'Bộ điều khiển từ xa', 1, N'Tốt'),
+(36, N'Bảng điều khiển', 1, N'Mới'),
+(37, N'Bếp điện', 1, N'Mới'),
+(37, N'Tủ lạnh mini', 1, N'Tốt'),
+(37, N'Lò vi sóng', 1, N'Hoạt động'),
+(37, N'Ấm siêu tốc', 1, N'Mới'),
+(37, N'Nồi cơm điện', 1, N'Tốt'),
+(38, N'Giường đơn', 2, N'Mới'),
+(38, N'Tủ quần áo', 2, N'Tốt'),
+(38, N'Đèn ngủ', 2, N'Hoạt động'),
+(38, N'Bàn trang điểm', 1, N'Mới'),
+(38, N'Ghế đẩu', 2, N'Tốt'),
+(39, N'Ghế sofa', 1, N'Mới'),
+(39, N'Bàn trà', 1, N'Mới'),
+(39, N'Kệ sách', 1, N'Tốt'),
+(39, N'Thảm trải sàn', 1, N'Mới'),
+(39, N'Tranh trang trí', 2, N'Tốt'),
+(40, N'Tivi', 1, N'Mới'),
+(40, N'Đầu đĩa DVD', 1, N'Tốt'),
+(40, N'Bộ loa', 2, N'Mới'),
+(40, N'Điều khiển Tivi', 1, N'Tốt'),
+(40, N'Kệ Tivi', 1, N'Mới');
+*/ 
