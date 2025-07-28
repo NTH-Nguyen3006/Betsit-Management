@@ -4,12 +4,12 @@
  */
 package ui.controller;
 
-import entity.User;
+import entity.Assets;
 
 /**
  *
- * @author ADMIN
+ * @author nhukhue
  */
-public interface UserController extends CrudController<User> {
-    void fillRoles();   
+public interface AssetsController extends CrudController<Assets>{
+    
 }

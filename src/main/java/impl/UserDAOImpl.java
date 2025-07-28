@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package impl;
 
 import dao.UserDAO;
@@ -6,29 +10,29 @@ import java.util.List;
 import utils.XJdbc;
 import utils.XQuery;
 
+/**
+ *
+ * @author ADMIN
+ */
 public class UserDAOImpl implements UserDAO {
-    
-    private final String createSql = "INSERT INTO Contracts"
-            + "(Id, RoomId, Tenant, StartDate, EndDate, depositAmount, payment_cycle_months, file_scan_url, Notes) "
-            + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    private final String updateSql = "UPDATE Contracts SET "
-            + "RoomId=?, Tenant=?, StartDate=?, EndDate=?, depositAmount=?, payment_cycle_months=?, file_scan_url=?, Notes=? "
-            + "WHERE Id=?";
-    private final String deleteByIdSql = "DELETE FROM Contracts WHERE Id=?";
-
-    private final String findAllSql = "SELECT * FROM Contracts";
-    private final String findByIdSql = findAllSql + " WHERE Id=?";
-    private final String findByUsername = "SELECT * FROM Users WHERE Username = ?";
+    String createSql = "INSERT INTO Users (Username, Password, Fullname, Email, PhoneNumber, RoleId, Status, Created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    String updateSql = "UPDATE Users SET Password = ?, Fullname = ?, Email = ?, PhoneNumber = ?, RoleId = ?, Status = ?, Created_at = ?  WHERE Username = ?";
+    String deleteSql = "DELETE FROM Users WHERE Username = ?";
+    String findAllSql = "SELECT * FROM Users";
+    String findByIdSql = "SELECT * FROM Users WHERE Username = ?";
+    String findByRoleIdSql = "SELECT * FROM Users WHERE RoleId=?";
+    String findByUsername = "SELECT * FROM Users WHERE Username = ?";
 
     @Override
     public User create(User entity) {
         Object[] values = {
-                // entity.(),
                 entity.getUsername(),
+                entity.getPassword(),
                 entity.getFullname(),
                 entity.getEmail(),
                 entity.getPhoneNumber(),
                 entity.getRoleId(),
+                entity.isStatus(),
                 entity.getCreated_at()
         };
         XJdbc.executeUpdate(createSql, values);
@@ -38,20 +42,21 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public void update(User entity) {
         Object[] values = {
-                // entity.getId(),
-                entity.getUsername(),
+                entity.getPassword(),
                 entity.getFullname(),
                 entity.getEmail(),
                 entity.getPhoneNumber(),
                 entity.getRoleId(),
-                entity.getCreated_at()
+                entity.isStatus(),
+                entity.getCreated_at(),
+                entity.getUsername()
         };
         XJdbc.executeUpdate(updateSql, values);
     }
 
     @Override
     public void deleteById(String id) {
-        XJdbc.executeUpdate(deleteByIdSql, id);
+        XJdbc.executeUpdate(deleteSql, id);
     }
 
     @Override
@@ -65,8 +70,12 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
+    public List<User> findByRoleId(Integer roleId) {
+        return XQuery.getBeanList(User.class, findByRoleIdSql, roleId);
+    }
+
+    @Override
     public User findByUsername(String username) {
         return XQuery.getSingleBean(User.class, findByUsername, username);
     }
-
 }

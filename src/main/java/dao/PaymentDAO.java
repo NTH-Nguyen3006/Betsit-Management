@@ -1,7 +1,7 @@
-package dao;
+    package dao;
 
-import entity.Payment;
+    import entity.Payment;
 
-public interface PaymentDAO extends CrudDAO<Payment, String> {
+    public interface PaymentDAO extends CrudDAO<Payment, String> {
 
-}
+    }

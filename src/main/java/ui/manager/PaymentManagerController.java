@@ -2,14 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package ui.controller;
+package ui.manager;
 
-import entity.User;
+import entity.Contract;
+import entity.Payment;
 
 /**
  *
- * @author ADMIN
+ * @author GAMING
  */
-public interface UserController extends CrudController<User> {
-    void fillRoles();   
+public interface PaymentManagerController extends CrubController<Payment>{
+    
 }

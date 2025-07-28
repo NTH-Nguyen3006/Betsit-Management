@@ -11,9 +11,10 @@ import java.math.BigDecimal;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class InvoiceDetail {
-    int Invoice_id;
-    int Service_id;
+    int Id;
+    int InvoiceId;
+    int ServiceId;
     int Quantity;
-    BigDecimal Unit_price;
+    BigDecimal UnitPrice;
     BigDecimal Subtotal;
 }
