@@ -7,7 +7,7 @@ import utils.XJdbc;
 import utils.XQuery;
 
 public class UserDAOImpl implements UserDAO {
-
+    
     private final String createSql = "INSERT INTO Contracts"
             + "(Id, RoomId, Tenant, StartDate, EndDate, depositAmount, payment_cycle_months, file_scan_url, Notes) "
             + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";

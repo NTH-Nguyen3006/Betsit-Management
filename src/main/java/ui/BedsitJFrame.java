@@ -1,17 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package ui;
 
 import ui.controller.BedsitController;
 import utils.XAuth;
-import utils.XIcon;
 
-/**
- *
- * @author DELL
- */
 public final class BedsitJFrame extends javax.swing.JFrame implements BedsitController {
 
     public BedsitJFrame() {
