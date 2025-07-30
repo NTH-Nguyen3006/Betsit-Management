@@ -4,6 +4,7 @@
  */
 package ui.manager;
 
+import ui.controller.PaymentManagerController;
 import dao.PaymentDAO;
 import entity.Payment;
 import impl.PaymentDAOImpl;

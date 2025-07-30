@@ -4,7 +4,7 @@
  */
 package ui.manager;
 
-import dao.InvoiceDAO;
+import ui.controller.InvoicesManagerController;
 import entity.Contract;
 import impl.InvoiceDAOImpl;
 import entity.Invoice;
@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import utils.XDialog;
+import dao.InvoiceDAO;
 
 /**
  *

@@ -187,7 +187,7 @@ public final class BedsitJFrame extends javax.swing.JFrame implements BedsitCont
         pnlCenterBottom.setLayout(new java.awt.GridLayout(0, 2, 4, 4));
 
         btnUser.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
-        btnUser.setText("QUẢN LÍ NGƯỜI DÙNG");
+        btnUser.setText("QUẢN LÍ TÀI KHOẢN");
         btnUser.setPreferredSize(new java.awt.Dimension(200, 60));
         btnUser.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnUser.addActionListener(new java.awt.event.ActionListener() {

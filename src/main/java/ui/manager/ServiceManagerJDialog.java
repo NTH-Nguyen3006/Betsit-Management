@@ -604,13 +604,18 @@ public class ServiceManagerJDialog extends javax.swing.JDialog implements Servic
     @Override
     public void deleteCheckedItems() {
         if (XDialog.confirm("Bạn thực sự muốn xóa các mục chọn?")) {
-            for (int i = 0; i < tblServices.getRowCount(); i++) {
-                if ((Boolean) tblServices.getValueAt(i, 5)) {
-                    dao.deleteById(items.get(i).getId());
+            try {
+                for (int i = 0; i < tblServices.getRowCount(); i++) {
+                    if ((Boolean) tblServices.getValueAt(i, 5)) {
+                        dao.deleteById(items.get(i).getId());
+                    }
                 }
+                this.fillToTable();
+                this.clear();
+                XDialog.alert("Đã xóa thành công các mục chọn.");
+            } catch (Exception e) {
+                XDialog.alert("Lỗi khi xóa.");
             }
-            this.fillToTable();
-            this.clear();
         }
     }
 
@@ -641,26 +646,45 @@ public class ServiceManagerJDialog extends javax.swing.JDialog implements Servic
 
     @Override
     public void create() {
-        Service s = getForm(true);
-        dao.create(s);
-        this.fillToTable();
-        this.clear();
+        if (!checkForm()) return;
+        
+        try {
+            Service s = getForm(true);
+            dao.create(s);
+            this.fillToTable();
+            this.clear();
+            XDialog.alert("Thêm mới thành công.");
+        } catch (Exception e) {
+            XDialog.alert("Lỗi khi thêm mới.");
+        }
     }
 
     @Override
     public void update() {
-        Service s = getForm(false);
-        dao.update(s);
-        this.fillToTable();
+        if (!checkForm()) return;
+        
+        try {
+            Service s = getForm(false);
+            dao.update(s);
+            this.fillToTable();
+            XDialog.alert("Cập nhật thành công.");
+        } catch (Exception e) {
+            XDialog.alert("Lỗi khi cập nhật.");
+        }
     }
 
     @Override
     public void delete() {
         if (XDialog.confirm("Bạn thực sự muốn xóa?")) {
-            int id = Integer.parseInt(txtId.getText());
-            dao.deleteById(id);
-            this.fillToTable();
-            this.clear();
+            try {
+                int id = Integer.parseInt(txtId.getText());
+                dao.deleteById(id);
+                this.fillToTable();
+                this.clear();
+                XDialog.alert("Xóa thành công.");
+            } catch (Exception e) {
+                XDialog.alert("Lỗi khi xóa.");
+            }
         }
     }
 
@@ -718,5 +742,31 @@ public class ServiceManagerJDialog extends javax.swing.JDialog implements Servic
             tblServices.setRowSelectionInterval(index, index);
             this.edit();
         }
+    }
+    
+    private boolean checkForm() {
+        String serviceName = txtServiceName.getText().trim();
+        String unit = txtUnit.getText().trim();
+        String price = txtPrice.getText().trim();
+
+        if (serviceName.isEmpty()) {
+            XDialog.alert("Vui lòng nhập tên dịch vụ.");
+            txtServiceName.requestFocus();
+            return false;
+        }
+
+        if (unit.isEmpty()) {
+            XDialog.alert("Vui lòng nhập đơn vị tính của dịch vụ.");
+            txtUnit.requestFocus();
+            return false;
+        }
+
+        if (!price.matches("^\\d+$")) {
+            XDialog.alert("Giá tiền không hợp lệ.");
+            txtPrice.requestFocus();
+            return false;
+        }
+
+        return true;
     }
 }
