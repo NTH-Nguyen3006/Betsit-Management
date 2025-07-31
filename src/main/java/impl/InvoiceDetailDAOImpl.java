@@ -9,9 +9,9 @@
     import java.util.List;
     import utils.XJdbc;
     import utils.XQuery;
-    import dao.InvoiceDetailDAO;
+    import dao.InvoiceDetailDao;
 
-    public class InvoiceDetailDAOImpl implements InvoiceDetailDAO {
+    public class InvoiceDetailDAOImpl implements InvoiceDetailDao {
 
         private final String createSql = "INSERT INTO Invoice_Details"
                 + "(InvoiceId, ServiceId, Quantity, UnitPrice, Subtotal) "

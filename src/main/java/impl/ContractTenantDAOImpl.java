@@ -4,9 +4,9 @@ import java.util.List;
 import entity.ContractTenant;
 import utils.XJdbc;
 import utils.XQuery;
-import dao.ContractTenantDAO;
+import dao.ContractTenantDao;
 
-public class ContractTenantDAOImpl implements ContractTenantDAO {
+public class ContractTenantDAOImpl implements ContractTenantDao {
 
     private final String createSql = """
         INSERT INTO Contract_Tenants

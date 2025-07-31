@@ -4,7 +4,8 @@
  */
 package ui.manager;
 
-import dao.InvoiceDetailDAO;
+
+import dao.InvoiceDetailDao;
 import entity.InvoiceDetail;
 import impl.InvoiceDetailDAOImpl;
 
@@ -21,7 +22,7 @@ import java.util.List;
  */
 public class InvoiceDetailsManagerJDialog extends javax.swing.JDialog implements InvoiceDetailsManagerController{
     
-    private InvoiceDetailDAO dao = new InvoiceDetailDAOImpl();
+    private InvoiceDetailDao dao = new InvoiceDetailDAOImpl();
     private int row = -1;
     
     /**

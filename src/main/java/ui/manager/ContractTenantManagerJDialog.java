@@ -4,7 +4,7 @@
  */
 package ui.manager;
 
-import dao.ContractTenantDAO;
+import dao.ContractTenantDao;
 import dao.TenantDAO;
 import entity.ContractTenant;
 import entity.Tenant;
@@ -19,10 +19,10 @@ import javax.swing.table.DefaultTableModel;
  * @author GAMING
  */
 public class ContractTenantManagerJDialog extends javax.swing.JDialog implements ContractTenantManagerController {
-        ContractTenantDAO dao = new ContractTenantDAOImpl();
+        ContractTenantDao dao = new ContractTenantDAOImpl();
         int currentIndex = -1;
         
-        private ContractTenantDAO contractTenantDAO = new ContractTenantDAOImpl();
+        private ContractTenantDao contractTenantDAO = new ContractTenantDAOImpl();
         private TenantDAO tenantDAO = new TenantDAOImpl();
     
     public ContractTenantManagerJDialog(java.awt.Frame parent, boolean modal) {
