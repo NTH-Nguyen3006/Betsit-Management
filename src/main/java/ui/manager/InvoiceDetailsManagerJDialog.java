@@ -4,25 +4,26 @@
  */
 package ui.manager;
 
-import dao.InvoiceDetailDao;
+import dao.InvoiceDetailDAO;
 import entity.InvoiceDetail;
 import impl.InvoiceDetailDAOImpl;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.math.BigDecimal;
-import java.util.List;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.*;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author GAMING
  */
 public class InvoiceDetailsManagerJDialog extends javax.swing.JDialog implements InvoiceDetailsManagerController{
-    private InvoiceDetailDao dao = new InvoiceDetailDAOImpl();
-    private int currentIndex = -1;
-    private InvoiceDetailsManagerController controller;
     
-
+    private InvoiceDetailDAO dao = new InvoiceDetailDAOImpl();
+    private int row = -1;
+    
     /**
      * Creates new form InvoiceDetailsManagerJDialog
      */
@@ -30,20 +31,20 @@ public class InvoiceDetailsManagerJDialog extends javax.swing.JDialog implements
         super(parent, modal);
         initComponents();
         fillToTable();
-        tblInvoiceDetails.getSelectionModel().addListSelectionListener(e -> {
-    if (!e.getValueIsAdjusting()) {
-        currentIndex = tblInvoiceDetails.getSelectedRow();
-        setForm(getSelectedInvoiceDetail());
+        tblInvoiceDetails.addMouseListener(new java.awt.event.MouseAdapter() {
+    public void mouseClicked(java.awt.event.MouseEvent evt) {
+        int row = tblInvoiceDetails.getSelectedRow();
+        if (row >= 0) {
+            String id = tblInvoiceDetails.getValueAt(row, 1).toString();
+            InvoiceDetail detail = dao.findById(id);
+            if (detail != null) {
+                setForm(detail);
+                tabs.setSelectedIndex(1);
+                open();
+            }   
+        }
     }
 });
-        
-        tblInvoiceDetails.setModel(new DefaultTableModel(
-    new Object[][] {},
-    new String[] {
-        "ID", "InvoiceId", "ServiceId", "Quantity", "UnitPrice", "Subtotal"
-    }
-));
-        
     }
 
     /**
@@ -57,10 +58,13 @@ public class InvoiceDetailsManagerJDialog extends javax.swing.JDialog implements
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        tabs = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblInvoiceDetails = new javax.swing.JTable();
+        btnCheckAll = new javax.swing.JButton();
+        btnUnCheckAll = new javax.swing.JButton();
+        btnDeleteCheckedItems = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         txtIdInvoice = new javax.swing.JTextField();
@@ -74,14 +78,14 @@ public class InvoiceDetailsManagerJDialog extends javax.swing.JDialog implements
         txtTotal = new javax.swing.JTextField();
         txtUnitprice = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        Create = new javax.swing.JButton();
-        Update = new javax.swing.JButton();
-        Delete = new javax.swing.JButton();
-        Reset = new javax.swing.JButton();
-        btnMoveFirst = new javax.swing.JButton();
-        btnMovePrevious = new javax.swing.JButton();
         btnMoveNext = new javax.swing.JButton();
         btnMoveLast = new javax.swing.JButton();
+        btnMovePrevious = new javax.swing.JButton();
+        btnMoveFirst = new javax.swing.JButton();
+        Reset = new javax.swing.JButton();
+        Delete = new javax.swing.JButton();
+        Update = new javax.swing.JButton();
+        Create = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -97,6 +101,11 @@ public class InvoiceDetailsManagerJDialog extends javax.swing.JDialog implements
         jScrollPane1.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         tblInvoiceDetails.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -111,6 +120,27 @@ public class InvoiceDetailsManagerJDialog extends javax.swing.JDialog implements
         ));
         jScrollPane2.setViewportView(tblInvoiceDetails);
 
+        btnCheckAll.setText("Chọn tất cả");
+        btnCheckAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCheckAllActionPerformed(evt);
+            }
+        });
+
+        btnUnCheckAll.setText("Hủy chọn tất cả");
+        btnUnCheckAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUnCheckAllActionPerformed(evt);
+            }
+        });
+
+        btnDeleteCheckedItems.setText("Xóa các mục đã chọn");
+        btnDeleteCheckedItems.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteCheckedItemsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -118,16 +148,28 @@ public class InvoiceDetailsManagerJDialog extends javax.swing.JDialog implements
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 676, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnCheckAll)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnUnCheckAll)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnDeleteCheckedItems)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCheckAll)
+                    .addComponent(btnUnCheckAll)
+                    .addComponent(btnDeleteCheckedItems))
+                .addGap(0, 7, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Danh Sách", jPanel1);
+        tabs.addTab("Danh Sách", jPanel1);
 
         jLabel12.setText("Mã hóa đơn chi tiết");
 
@@ -177,6 +219,52 @@ public class InvoiceDetailsManagerJDialog extends javax.swing.JDialog implements
 
         jLabel5.setText("Giá tiền");
 
+        btnMoveNext.setText(">>");
+        btnMoveNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMoveNextActionPerformed(evt);
+            }
+        });
+
+        btnMoveLast.setText(">|");
+
+        btnMovePrevious.setText("<<");
+        btnMovePrevious.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMovePreviousActionPerformed(evt);
+            }
+        });
+
+        btnMoveFirst.setText("|<");
+
+        Reset.setText("Nhập mới");
+        Reset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ResetActionPerformed(evt);
+            }
+        });
+
+        Delete.setText("Xóa");
+        Delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteActionPerformed(evt);
+            }
+        });
+
+        Update.setText("Cập nhật");
+        Update.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateActionPerformed(evt);
+            }
+        });
+
+        Create.setText("Tạo mới");
+        Create.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CreateActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -206,7 +294,23 @@ public class InvoiceDetailsManagerJDialog extends javax.swing.JDialog implements
                             .addComponent(txtInvoiceId, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6))
-                        .addGap(0, 71, Short.MAX_VALUE))))
+                        .addGap(0, 71, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(Create)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(Update)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Delete)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Reset)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnMoveFirst, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnMovePrevious, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnMoveNext, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnMoveLast, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -235,95 +339,32 @@ public class InvoiceDetailsManagerJDialog extends javax.swing.JDialog implements
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtUnitprice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(117, Short.MAX_VALUE))
-        );
-
-        jTabbedPane1.addTab("Biểu Mẫu", jPanel2);
-
-        Create.setText("Tạo mới");
-        Create.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CreateActionPerformed(evt);
-            }
-        });
-
-        Update.setText("Cập nhật");
-        Update.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UpdateActionPerformed(evt);
-            }
-        });
-
-        Delete.setText("Xóa");
-        Delete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DeleteActionPerformed(evt);
-            }
-        });
-
-        Reset.setText("Nhập mới");
-        Reset.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ResetActionPerformed(evt);
-            }
-        });
-
-        btnMoveFirst.setText("|<");
-
-        btnMovePrevious.setText("<<");
-        btnMovePrevious.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMovePreviousActionPerformed(evt);
-            }
-        });
-
-        btnMoveNext.setText(">>");
-        btnMoveNext.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMoveNextActionPerformed(evt);
-            }
-        });
-
-        btnMoveLast.setText(">|");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(Create)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Update)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Delete)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Reset)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnMoveFirst, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnMovePrevious, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnMoveNext, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnMoveLast, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(jTabbedPane1)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(Delete)
                         .addComponent(Reset)
                         .addComponent(btnMoveFirst)
                         .addComponent(btnMovePrevious)
                         .addComponent(btnMoveNext)
                         .addComponent(btnMoveLast))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(Create)
-                        .addComponent(Update))))
+                        .addComponent(Update)))
+                .addGap(19, 19, 19))
+        );
+
+        tabs.addTab("Biểu Mẫu", jPanel2);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(tabs)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(tabs)
         );
 
         pack();
@@ -380,7 +421,28 @@ public class InvoiceDetailsManagerJDialog extends javax.swing.JDialog implements
 
     private void CreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateActionPerformed
         // TODO add your handling code here:
+        this.create();
     }//GEN-LAST:event_CreateActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_formWindowOpened
+
+    private void btnCheckAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckAllActionPerformed
+        // TODO add your handling code here:
+        this.checkAll();
+    }//GEN-LAST:event_btnCheckAllActionPerformed
+
+    private void btnUnCheckAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUnCheckAllActionPerformed
+        // TODO add your handling code here:
+        this.uncheckAll();
+    }//GEN-LAST:event_btnUnCheckAllActionPerformed
+
+    private void btnDeleteCheckedItemsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteCheckedItemsActionPerformed
+        // TODO add your handling code here:
+        this.delete();
+    }//GEN-LAST:event_btnDeleteCheckedItemsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -429,10 +491,13 @@ public class InvoiceDetailsManagerJDialog extends javax.swing.JDialog implements
     private javax.swing.JButton Delete;
     private javax.swing.JButton Reset;
     private javax.swing.JButton Update;
+    private javax.swing.JButton btnCheckAll;
+    private javax.swing.JButton btnDeleteCheckedItems;
     private javax.swing.JButton btnMoveFirst;
     private javax.swing.JButton btnMoveLast;
     private javax.swing.JButton btnMoveNext;
     private javax.swing.JButton btnMovePrevious;
+    private javax.swing.JButton btnUnCheckAll;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -443,8 +508,8 @@ public class InvoiceDetailsManagerJDialog extends javax.swing.JDialog implements
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTabbedPane tabs;
     private javax.swing.JTable tblInvoiceDetails;
     private javax.swing.JTextField txtIdInvoice;
     private javax.swing.JTextField txtInvoiceId;
@@ -454,111 +519,215 @@ public class InvoiceDetailsManagerJDialog extends javax.swing.JDialog implements
     private javax.swing.JTextField txtUnitprice;
     // End of variables declaration//GEN-END:variables
 
+    @Override
+    public void open() {
+        int selectedRow = tblInvoiceDetails.getSelectedRow();
+    if (selectedRow == -1) {
+        JOptionPane.showMessageDialog(this, "Vui lòng chọn một dòng.");
+        return;
+    }
 
-    private void fillToTable() {
+    String id = tblInvoiceDetails.getValueAt(selectedRow, 1).toString();
+    InvoiceDetail detail = dao.findById(id); 
+
+    if (detail != null) {
+        setForm(detail);
+    } else {
+        JOptionPane.showMessageDialog(this, "Không tìm thấy chi tiết hóa đơn.");
+    }
+    }
+
+    @Override
+    public void setForm(InvoiceDetail entity) {
+    txtIdInvoice.setText(String.valueOf(entity.getId()));
+    txtInvoiceId.setText(String.valueOf(entity.getInvoiceId()));
+    txtSeviceId.setText(String.valueOf(entity.getServiceId())); 
+    txtQuantity.setText(String.valueOf(entity.getQuantity()));
+    txtUnitprice.setText(entity.getUnitPrice().toString());
+    txtTotal.setText(entity.getSubtotal().toString());
+    txtIdInvoice.setEditable(false);
+    }
+
+    @Override
+    public InvoiceDetail getForm() {
+        InvoiceDetail entity = new InvoiceDetail();
+    try {
+        entity.setInvoiceId(Integer.parseInt(txtIdInvoice.getText().trim()));
+        entity.setServiceId(Integer.parseInt(txtInvoiceId.getText().trim()));
+        entity.setQuantity(Integer.parseInt(txtQuantity.getText().trim()));
+        entity.setUnitPrice(new BigDecimal(txtUnitprice.getText().trim()));
+        entity.setSubtotal(new BigDecimal(txtTotal.getText().trim()));
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Dữ liệu không hợp lệ: " + e.getMessage());
+        return null;
+    }
+    return entity;
+    }
+
+    @Override
+    public void fillToTable() {
         DefaultTableModel model = (DefaultTableModel) tblInvoiceDetails.getModel();
         model.setRowCount(0);
         try {
             List<InvoiceDetail> list = dao.findAll();
-            for (InvoiceDetail d : list) {
+            for (InvoiceDetail detail : list) {
                 model.addRow(new Object[]{
-                        d.getId(),
-                        d.getInvoiceId(),
-                        d.getServiceId(),
-                        d.getQuantity(),
-                        d.getUnitPrice(),
-                        d.getSubtotal()
+                        detail.getId(),
+                        detail.getInvoiceId(),
+                        detail.getServiceId(),
+                        detail.getQuantity(),
+                        detail.getUnitPrice(),
+                        detail.getSubtotal()
                 });
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Lỗi truy vấn dữ liệu!");
-            e.printStackTrace();
         }
     }
 
-    private InvoiceDetail getForm() {
-        InvoiceDetail d = new InvoiceDetail();
-        d.setId(Integer.parseInt(txtIdInvoice.getText().trim()));
-        d.setInvoiceId(Integer.parseInt(txtInvoiceId.getText().trim()));
-        d.setServiceId(Integer.parseInt(txtSeviceId.getText().trim()));
-        d.setQuantity(Integer.parseInt(txtQuantity.getText().trim()));
-        d.setUnitPrice(new BigDecimal(txtUnitprice.getText()));
-        d.setSubtotal(new BigDecimal(txtTotal.getText()));
-        return d;
+    @Override
+    public void edit() {
+        
     }
 
-    public void setForm(InvoiceDetail entity) {
-    if (entity == null) return;
-    
-    txtQuantity.setText(String.valueOf(entity.getQuantity()));
-    txtSeviceId.setText(String.valueOf(entity.getServiceId()));
-    txtInvoiceId.setText(String.valueOf(entity.getInvoiceId()));
-    txtUnitprice.setText(entity.getUnitPrice()!= null ? entity.getUnitPrice().toString() : "");
-    txtTotal.setText(entity.getSubtotal() != null ? entity.getSubtotal().toString() : "");
-}
-
-    private InvoiceDetail getSelectedInvoiceDetail() {
-        String invoiceId = (String) tblInvoiceDetails.getValueAt(currentIndex, 0);
-        return dao.findById(invoiceId);
-    }
-
-    private void update() {
-    if (currentIndex < 0) {
-        JOptionPane.showMessageDialog(this, "Vui lòng chọn bản ghi để cập nhật");
-        return;
-    }
-
-    try {
-        InvoiceDetail d = getForm();
-        dao.update(d);
-        fillToTable();
-        JOptionPane.showMessageDialog(this, "Cập nhật thành công!");
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Cập nhật thất bại!");
-        e.printStackTrace();
-    }
-}
-
-    private void delete() {
+    @Override
+    public void create() {
         try {
-            String invoiceId = txtInvoiceId.getText().trim();
-            dao.deleteById(invoiceId);
+            InvoiceDetail detail = getForm();
+            dao.create(detail);
             fillToTable();
             clear();
-            JOptionPane.showMessageDialog(this, "Xoá thành công!");
+            JOptionPane.showMessageDialog(this, "Thêm mới thành công!");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Xoá thất bại!");
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Thêm mới thất bại!");
         }
     }
 
-    private void clear() {
+    @Override
+    public void update() {
+        try {
+            InvoiceDetail detail = getForm();
+            dao.update(detail);
+            fillToTable();
+            JOptionPane.showMessageDialog(this, "Cập nhật thành công!");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Cập nhật thất bại!");
+        }
+    }
+
+    @Override
+    public void delete() {
+        String id = txtIdInvoice.getText().trim(); 
+
+    if (JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn xóa?") == JOptionPane.YES_OPTION) {
+        try {
+            dao.deleteById(id);
+            fillToTable();
+            clear();
+            JOptionPane.showMessageDialog(this, "Xóa thành công!");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Xóa thất bại!");
+        }
+    }
+    }
+
+    @Override
+    public void clear() {
+        txtIdInvoice.setText("");
         txtInvoiceId.setText("");
         txtSeviceId.setText("");
         txtQuantity.setText("");
         txtUnitprice.setText("");
         txtTotal.setText("");
-        tblInvoiceDetails.clearSelection();
-        currentIndex = -1;
+        row = -1;
     }
 
-    private void movePrevious() {
-        if (currentIndex > 0) {
-            currentIndex--;
-            tblInvoiceDetails.setRowSelectionInterval(currentIndex, currentIndex);
-            setForm(getSelectedInvoiceDetail());
+    @Override
+    public void setEditable(boolean editable) {
+    int row = tblInvoiceDetails.getSelectedRow();
+    if (row >= 0) {
+        String id = tblInvoiceDetails.getValueAt(row, 1).toString();
+        InvoiceDetail detail = dao.findById(id); 
+        if (detail != null) {
+            setForm(detail);
+        }
+    }
+    }
+
+    @Override
+    public void checkAll() {
+        for (int i = 0; i < tblInvoiceDetails.getRowCount(); i++) {
+        tblInvoiceDetails.setValueAt(true, i, 0);
+    }
+    }
+
+    @Override
+    public void uncheckAll() {
+        for (int i = 0; i < tblInvoiceDetails.getRowCount(); i++) {
+        tblInvoiceDetails.setValueAt(false, i, 0);
+    }
+    }
+
+    @Override
+    public void deleteCheckedItems() {
+    DefaultTableModel model = (DefaultTableModel) tblInvoiceDetails.getModel();
+    int rowCount = model.getRowCount();
+    List<String> idsToDelete = new ArrayList<>();
+
+    for (int i = rowCount - 1; i >= 0; i--) {
+        Boolean isChecked = (Boolean) model.getValueAt(i, 0);
+        if (isChecked != null && isChecked) {
+            String id = model.getValueAt(i, 1).toString();
+            idsToDelete.add(id);
+            model.removeRow(i);
         }
     }
 
-    private void moveNext() {
-        int rowCount = tblInvoiceDetails.getRowCount();
-        if (currentIndex < rowCount - 1) {
-            currentIndex++;
-            tblInvoiceDetails.setRowSelectionInterval(currentIndex, currentIndex);
-            setForm(getSelectedInvoiceDetail());
+    for (String id : idsToDelete) {
+        dao.deleteById(id);
+    }
+
+    JOptionPane.showMessageDialog(this, "Đã xóa các dòng được chọn.");
+    fillToTable();
+    }
+
+    @Override
+    public void moveFirst() {
+        row = 0;
+        tblInvoiceDetails.setRowSelectionInterval(row, row);
+        edit();
+    }
+
+    @Override
+    public void movePrevious() {
+        if (row > 0) {
+            row--;
+            tblInvoiceDetails.setRowSelectionInterval(row, row);
+            edit();
         }
     }
 
+    @Override
+    public void moveNext() {
+         if (row < tblInvoiceDetails.getRowCount() - 1) {
+            row++;
+            tblInvoiceDetails.setRowSelectionInterval(row, row);
+            edit();
+        }
+    }
+
+    @Override
+    public void moveLast() {
+        row = tblInvoiceDetails.getRowCount() - 1;
+        tblInvoiceDetails.setRowSelectionInterval(row, row);
+        edit();
+    }
+
+    @Override
+    public void moveTo(int rowIndex) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
    
 
 }

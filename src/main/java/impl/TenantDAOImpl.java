@@ -2,6 +2,9 @@ package impl;
 
 import dao.TenantDAO;
 import entity.Tenant;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.List;
 import utils.XJdbc;
 import utils.XQuery;
@@ -47,9 +50,26 @@ public class TenantDAOImpl implements TenantDAO {
         }
 
         @Override
-        public Tenant findById(String id) {
-                return XQuery.getSingleBean(Tenant.class, SELECT_BY_ID_SQL, id);
+public Tenant findById(String citizenId) {
+    try (Connection con = XJdbc.getConnection();
+         PreparedStatement ps = con.prepareStatement(SELECT_BY_ID_SQL)) {
+        ps.setString(1, citizenId);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            return new Tenant(
+                rs.getString("CitizenId"),
+                rs.getString("FullName"),
+                rs.getDate("DateOfBirth"),
+                rs.getString("PhoneNumber"),
+                rs.getString("Email"),
+                rs.getString("VehiclePlate")
+            );
         }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return null;
+}
 
         // @Override
         // public Tenant findByUsername(String username) {

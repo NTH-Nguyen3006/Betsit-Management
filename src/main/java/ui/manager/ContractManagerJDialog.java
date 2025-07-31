@@ -16,11 +16,15 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import utils.XDialog;
 import dao.ContractDetailDAO;
+import dao.TenantDAO;
+import impl.TenantDAOImpl;
+import java.awt.Frame;
 import java.awt.Image;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -42,6 +46,9 @@ public class ContractManagerJDialog extends javax.swing.JDialog implements Contr
         initComponents();
         open(); // phải gọi sau initComponents
         pack();
+        txtIdContractManager.setEnabled(false);
+        StartDate.setEnabled(false);
+        
     }
 
     /**
@@ -57,6 +64,9 @@ public class ContractManagerJDialog extends javax.swing.JDialog implements Contr
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblContractManager = new javax.swing.JTable();
+        btnCheckAll = new javax.swing.JButton();
+        btnUnCheckAll = new javax.swing.JButton();
+        btnDeleteCheckedItems = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         StartDate = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -76,10 +86,10 @@ public class ContractManagerJDialog extends javax.swing.JDialog implements Contr
         jLabel14 = new javax.swing.JLabel();
         txtTenant = new javax.swing.JTextField();
         ContractScanUrl = new javax.swing.JLabel();
-        Create = new javax.swing.JButton();
-        Update = new javax.swing.JButton();
-        Delete = new javax.swing.JButton();
         Reset = new javax.swing.JButton();
+        Delete = new javax.swing.JButton();
+        Update = new javax.swing.JButton();
+        Create = new javax.swing.JButton();
         btnMoveFirst = new javax.swing.JButton();
         btnMovePrevious = new javax.swing.JButton();
         btnMoveNext = new javax.swing.JButton();
@@ -97,21 +107,67 @@ public class ContractManagerJDialog extends javax.swing.JDialog implements Contr
             new String [] {
                 "Mã hợp đồng", "Mã phòng", "Mã người thuê", "Ngày bắt đầu", "Ngày kết thúc", "Tiền đặt cọc", "Tiền tháng", "Ảnh", "Ghi chú"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblContractManager.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblContractManagerMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblContractManager);
+
+        btnCheckAll.setText("Chọn tất cả");
+        btnCheckAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCheckAllActionPerformed(evt);
+            }
+        });
+
+        btnUnCheckAll.setText("Hủy chọn tất cả");
+        btnUnCheckAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUnCheckAllActionPerformed(evt);
+            }
+        });
+
+        btnDeleteCheckedItems.setText("Xóa các mục đã chọn");
+        btnDeleteCheckedItems.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteCheckedItemsActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 778, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 778, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnCheckAll)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnUnCheckAll)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnDeleteCheckedItems))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCheckAll)
+                    .addComponent(btnUnCheckAll)
+                    .addComponent(btnDeleteCheckedItems))
+                .addContainerGap())
         );
 
         tabs.addTab("Thông tin cơ bản", jPanel1);
@@ -190,6 +246,52 @@ public class ContractManagerJDialog extends javax.swing.JDialog implements Contr
             }
         });
 
+        Reset.setText("Nhập mới");
+        Reset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ResetActionPerformed(evt);
+            }
+        });
+
+        Delete.setText("Xóa");
+        Delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteActionPerformed(evt);
+            }
+        });
+
+        Update.setText("Cập nhật");
+        Update.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateActionPerformed(evt);
+            }
+        });
+
+        Create.setText("Tạo mới");
+        Create.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CreateActionPerformed(evt);
+            }
+        });
+
+        btnMoveFirst.setText("|<");
+
+        btnMovePrevious.setText("<<");
+        btnMovePrevious.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMovePreviousActionPerformed(evt);
+            }
+        });
+
+        btnMoveNext.setText(">>");
+        btnMoveNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMoveNextActionPerformed(evt);
+            }
+        });
+
+        btnMoveLast.setText(">|");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -213,7 +315,9 @@ public class ContractManagerJDialog extends javax.swing.JDialog implements Contr
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(Note)
-                                    .addComponent(jLabel8)))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jLabel8)
+                                        .addGap(0, 287, Short.MAX_VALUE))))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -243,7 +347,24 @@ public class ContractManagerJDialog extends javax.swing.JDialog implements Contr
                                         .addGap(18, 18, 18)
                                         .addComponent(txtPaymentCycleMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(120, 120, 120))))
+                        .addGap(120, 120, 120))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(Create)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(Update)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Delete)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Reset)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnMoveFirst, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnMovePrevious, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnMoveNext, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnMoveLast, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -280,105 +401,37 @@ public class ContractManagerJDialog extends javax.swing.JDialog implements Contr
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Note, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(ContractScanUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(15, 15, 15))))
-        );
-
-        tabs.addTab("Thông tin thêm", jPanel2);
-
-        Create.setText("Tạo mới");
-        Create.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CreateActionPerformed(evt);
-            }
-        });
-
-        Update.setText("Cập nhật");
-        Update.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UpdateActionPerformed(evt);
-            }
-        });
-
-        Delete.setText("Xóa");
-        Delete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DeleteActionPerformed(evt);
-            }
-        });
-
-        Reset.setText("Nhập mới");
-        Reset.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ResetActionPerformed(evt);
-            }
-        });
-
-        btnMoveFirst.setText("|<");
-
-        btnMovePrevious.setText("<<");
-        btnMovePrevious.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMovePreviousActionPerformed(evt);
-            }
-        });
-
-        btnMoveNext.setText(">>");
-        btnMoveNext.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMoveNextActionPerformed(evt);
-            }
-        });
-
-        btnMoveLast.setText(">|");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(Create)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Update)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Delete)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Reset)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnMoveFirst, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnMovePrevious, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnMoveNext, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnMoveLast, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 778, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Note, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ContractScanUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(Delete)
                         .addComponent(Reset)
                         .addComponent(btnMoveFirst)
                         .addComponent(btnMovePrevious)
                         .addComponent(btnMoveNext)
                         .addComponent(btnMoveLast))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(Create)
                         .addComponent(Update))))
+        );
+
+        tabs.addTab("Thông tin thêm", jPanel2);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 778, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(tabs)
         );
 
         pack();
@@ -433,7 +486,30 @@ public class ContractManagerJDialog extends javax.swing.JDialog implements Contr
 
     private void CreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateActionPerformed
         // TODO add your handling code here:
+        this.create();
     }//GEN-LAST:event_CreateActionPerformed
+
+    private void btnCheckAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckAllActionPerformed
+        // TODO add your handling code here:
+        this.checkAll();
+    }//GEN-LAST:event_btnCheckAllActionPerformed
+
+    private void btnUnCheckAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUnCheckAllActionPerformed
+        // TODO add your handling code here:
+        this.uncheckAll();
+    }//GEN-LAST:event_btnUnCheckAllActionPerformed
+
+    private void btnDeleteCheckedItemsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteCheckedItemsActionPerformed
+        // TODO add your handling code here:
+        this.delete();
+    }//GEN-LAST:event_btnDeleteCheckedItemsActionPerformed
+
+    private void tblContractManagerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblContractManagerMouseClicked
+        // TODO add your handling code here:
+        if (evt.getClickCount() == 2) {
+            this.edit();
+        }
+    }//GEN-LAST:event_tblContractManagerMouseClicked
         /**
      * @param args the command line arguments
      */
@@ -485,10 +561,13 @@ public class ContractManagerJDialog extends javax.swing.JDialog implements Contr
     private javax.swing.JButton Reset;
     private javax.swing.JTextField StartDate;
     private javax.swing.JButton Update;
+    private javax.swing.JButton btnCheckAll;
+    private javax.swing.JButton btnDeleteCheckedItems;
     private javax.swing.JButton btnMoveFirst;
     private javax.swing.JButton btnMoveLast;
     private javax.swing.JButton btnMoveNext;
     private javax.swing.JButton btnMovePrevious;
+    private javax.swing.JButton btnUnCheckAll;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -514,6 +593,8 @@ public class ContractManagerJDialog extends javax.swing.JDialog implements Contr
     ContractDetailDAO contractDetailDAO = new ContractDetailDAOImpl();
     List<Contract> items = List.of();
     private ContractDetail currentDetail = null;
+    TenantDAO tenantDAO = new TenantDAOImpl();
+
 
 
  @Override
@@ -540,7 +621,11 @@ public class ContractManagerJDialog extends javax.swing.JDialog implements Contr
     edit();
 }
     }
-
+private void showContractTenantManager() {
+        ContractTenantManagerJDialog dialog = new ContractTenantManagerJDialog((Frame) this.getOwner(), true); 
+        dialog.setLocationRelativeTo(this);
+        dialog.setVisible(true);
+    }
     
 @Override
 public void fillToTable() {
@@ -550,7 +635,7 @@ public void fillToTable() {
     try {
         items = dao.findAll();
         for (Contract item : items) {
-             System.out.println(item.getId());
+            System.out.println(item.getId());
             System.out.println(item.getPaymentCycleMonths());
             Object[] rowData = {
                 item.getId(),                    
@@ -580,8 +665,9 @@ public void fillToTable() {
             ContractDetail detail = contractDetailDAO.findById(entity.getId().toString());
             setDetailForm(detail);
             setEditable(true);
-            tabs.setSelectedIndex(0);
+            tabs.setSelectedIndex(1);
         }
+       
     }
 
 @Override
@@ -635,10 +721,16 @@ public void deleteCheckedItems() {
 
     }
 
-
 @Override
-public Contract getForm() {
+    public Contract getForm() {
+        return getForm(false); 
+    }    
+
+public Contract getForm(boolean isCreate) {
     Contract entity = new Contract();
+        if (!isCreate && !txtIdContractManager.getText().isEmpty()) {
+            entity.setId(Integer.parseInt(txtIdContractManager.getText()));
+        } 
     try {
         entity.setId(Integer.parseInt(txtIdContractManager.getText()));
     } catch (NumberFormatException e) {
@@ -718,14 +810,55 @@ private void setDetailForm(ContractDetail detail) {
 
 @Override
 public void create() {
-    Contract tenant = getForm();
-    ContractDetail detail = getDetailForm();
+    try {
+        int roomId = Integer.parseInt(txtIdRoom.getText());
+        if (roomId < 1 || roomId > 40) {
+            JOptionPane.showMessageDialog(this, "Mã phòng chỉ từ 1 đến 40.");
+            return;
+        }
 
-    dao.create(tenant);
-    contractDetailDAO.create(detail);
+        String tenantId = txtTenant.getText().trim();
 
-    fillToTable();
-    clear();
+        if (!tenantId.matches("\\d+")) {
+            JOptionPane.showMessageDialog(this, "CCCD không được chứa chữ cái. Vui lòng nhập số.");
+            return;
+        }
+
+        if (tenantDAO.findById(tenantId) == null) {
+            JOptionPane.showMessageDialog(this, "Mã CCCD người thuê không tồn tại!");
+            return;
+        }
+
+        Date startDate = new Date();
+
+        String endDateText = EndDate.getText().trim();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        sdf.setLenient(false);
+        Date endDate;
+        try {
+            endDate = sdf.parse(endDateText);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Ngày kết thúc không đúng định dạng yyyy-MM-dd.");
+            return;
+        }
+
+        Contract tenant = getForm();
+        tenant.setStartDate(startDate); 
+        tenant.setEndDate(endDate);     
+
+        ContractDetail detail = getDetailForm();
+
+        dao.create(tenant);
+        contractDetailDAO.create(detail);
+
+        fillToTable();
+        clear();
+
+        JOptionPane.showMessageDialog(this, "Thêm hợp đồng thành công!");
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Lỗi khi tạo hợp đồng: " + e.getMessage());
+        e.printStackTrace();
+    }
 }
 
 @Override
@@ -737,6 +870,7 @@ public void update() {
     contractDetailDAO.update(detail);
 
     fillToTable();
+    this.clear();
 }
 
 @Override
@@ -758,6 +892,7 @@ public void clear() {
 
  @Override
     public void setEditable(boolean editable) {
+        
         txtIdContractManager.setEditable(!editable);
         txtIdRoom.setEditable(!editable);
         txtTenant.setEditable(true);

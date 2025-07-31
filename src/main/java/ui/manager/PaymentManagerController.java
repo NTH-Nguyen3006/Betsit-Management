@@ -11,6 +11,6 @@ import entity.Payment;
  *
  * @author GAMING
  */
-public interface PaymentManagerController extends CrubController<Payment>{
+public interface PaymentManagerController extends CrudController<Payment>{
     
 }

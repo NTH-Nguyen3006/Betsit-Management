@@ -7,6 +7,9 @@ import javax.swing.JFrame;
 import ui.ChangePasswordJDialog;
 import ui.LoginJDialog;
 import ui.WelcomeJDialog;
+import ui.manager.ContractManagerJDialog;
+import ui.manager.InvoicesManagerJDialog;
+import ui.manager.PaymentManagerJDialog;
 import ui.manager.RolesManagerJDialog;
 import ui.manager.RoomManagerJDialog;
 import ui.manager.ServiceManagerJDialog;
@@ -45,16 +48,16 @@ public interface BedsitController {
     }
 
     default void showContractsManagerJDialog(JFrame frame) {
-//         this.showJDialog(new ContractsManagerJDialog(frame, true));
+         this.showJDialog(new ContractManagerJDialog(frame, true));
     }
 
     default void showInvoicesManagerJDialog(JFrame frame) {
-//         this.showJDialog(new InvoicesManagerJDialog(frame, true));
+         this.showJDialog(new InvoicesManagerJDialog(frame, true));
 
     }
 
     default void showPaymentsManagerJDialog(JFrame frame) {
-//         this.showJDialog(new PaymentManagerJDialog(frame, true));
+         this.showJDialog(new PaymentManagerJDialog(frame, true));
     }
 
     default void showServicesManagerJDialog(JFrame frame) {

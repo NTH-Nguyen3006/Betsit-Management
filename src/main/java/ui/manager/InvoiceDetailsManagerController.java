@@ -4,10 +4,12 @@
  */
 package ui.manager;
 
+import entity.InvoiceDetail;
+
 /**
  *
  * @author GAMING
  */
-public interface InvoiceDetailsManagerController  {
+public interface InvoiceDetailsManagerController extends CrubController<InvoiceDetail> {
     
 }

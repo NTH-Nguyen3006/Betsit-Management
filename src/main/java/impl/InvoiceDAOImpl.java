@@ -9,9 +9,8 @@ import dao.InvoiceDAO;
 public class InvoiceDAOImpl implements InvoiceDAO {
 
     private final String createSql = "INSERT INTO Invoice "
-            + "(Id, Contract_id, billing_period_month, billing_period_year, previous_debt, discount, total_amount, status, due_date, created_at) "
-            + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
+    + "(ContractId, billing_period_month, billing_period_year, previous_debt, discount, totalamount, status, due_date, created_at) "
+    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private final String updateSql = "UPDATE Invoice SET "
             + "Contract_id = ?, billing_period_month = ?, billing_period_year = ?, previous_debt = ?, "
             + "discount = ?, total_amount = ?, status = ?, due_date = ?, created_at = ? "
@@ -24,13 +23,12 @@ public class InvoiceDAOImpl implements InvoiceDAO {
     @Override
     public Invoice create(Invoice entity) {
         Object[] values = {
-            entity.getId(),
-            entity.getContract_id(),
+            entity.getContractid(),
             entity.getBilling_period_month(),
             entity.getBilling_period_year(),
             entity.getPrevious_debt(),
             entity.getDiscount(),
-            entity.getTotal_amount(),
+            entity.getTotalamount(),
             entity.getStatus(),
             entity.getDue_date(),
             entity.getCreated_at()
@@ -42,12 +40,12 @@ public class InvoiceDAOImpl implements InvoiceDAO {
     @Override
     public void update(Invoice entity) {
         Object[] values = {
-            entity.getContract_id(),
+            entity.getContractid(),
             entity.getBilling_period_month(),
             entity.getBilling_period_year(),
             entity.getPrevious_debt(),
             entity.getDiscount(),
-            entity.getTotal_amount(),
+            entity.getTotalamount(),
             entity.getStatus(),
             entity.getDue_date(),
             entity.getCreated_at(),

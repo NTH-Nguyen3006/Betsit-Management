@@ -74,6 +74,11 @@ public class PaymentManagerJDialog extends javax.swing.JDialog implements Paymen
         btnMoveLast = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         tblPayment.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -443,6 +448,11 @@ public class PaymentManagerJDialog extends javax.swing.JDialog implements Paymen
         // TODO add your handling code here:
         
     }//GEN-LAST:event_btnDeleteCheckedItemsActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        this.open();
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
