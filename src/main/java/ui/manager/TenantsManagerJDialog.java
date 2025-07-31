@@ -781,7 +781,7 @@ public class TenantsManagerJDialog extends javax.swing.JDialog implements Tenant
             Object[] rowData = {
                     item.getCitizenId(),
                     item.getFullName(),
-                    item.getDateOfBirth(),
+                    XDate.format(item.getDateOfBirth()),
                     item.getPhoneNumber(),
                     item.getEmail(),
                     item.getVehiclePlate(),
@@ -1196,6 +1196,17 @@ public class TenantsManagerJDialog extends javax.swing.JDialog implements Tenant
             txtFullName.requestFocus();
             return false;
         }
+        
+        if (dateOfBirth.isEmpty()) {
+            XDialog.alert("Vui lòng nhập ngày sinh.");
+            txtDateOfBirth.requestFocus();
+            return false;
+        }
+        if (XDate.parse(dateOfBirth) == null) {
+            XDialog.alert("Ngày sinh không đúng định dạng dd/MM/yyyy.");
+            txtDateOfBirth.requestFocus();
+            return false;
+        }
 
         if (phoneNumber.isEmpty()) {
             XDialog.alert("Vui lòng nhập số điện thoại.");
@@ -1214,7 +1225,7 @@ public class TenantsManagerJDialog extends javax.swing.JDialog implements Tenant
             return false;
         }
 
-        if (!vehiclePlate.isEmpty() && !vehiclePlate.matches("^[0-9]{2}[A-Z]-\\d{4,5}$")) {
+        if (!vehiclePlate.isEmpty() && !vehiclePlate.matches("^[0-9]{2}[A-Z]\\d-\\d{3}\\.\\d{2}$")) {
             XDialog.alert("Biển số xe không đúng định dạng.");
             txtVehiclePlate.requestFocus();
             return false;
