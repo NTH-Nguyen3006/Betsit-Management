@@ -5,4 +5,5 @@ import java.util.List;
 
 public interface RoomDAO extends CrudDAO<Room, String> {
     List<String> findAllRoomType();
+    List<Room> findAllRoomIds();
 }

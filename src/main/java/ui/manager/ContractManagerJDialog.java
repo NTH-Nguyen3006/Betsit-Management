@@ -4,6 +4,7 @@
  */
 package ui.manager; 
 
+import ui.controller.ContractManagerController;
 import dao.ContractDAO;
 import entity.Contract;
 import entity.ContractDetail;

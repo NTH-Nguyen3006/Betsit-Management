@@ -2,17 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package ui.manager;
+package ui.controller;
+
+import entity.Assets;
 
 /**
  *
- * @author GAMING
+ * @author nhukhue
  */
-public interface ContractTenantManagerController {
-    void moveFirst();
-    void movePrevious();
-    void moveNext();
-    void moveLast();
-    void moveTo(int index);
+public interface AssetsController extends CrudController<Assets>{
+    void fillroom();
 }
-

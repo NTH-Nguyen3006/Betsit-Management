@@ -3,9 +3,7 @@ package ui.manager;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.List;
-import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 
@@ -14,7 +12,6 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
@@ -56,7 +53,7 @@ public class TenantsManagerJDialog extends javax.swing.JDialog implements Tenant
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -69,6 +66,9 @@ public class TenantsManagerJDialog extends javax.swing.JDialog implements Tenant
         btnCheckAll = new javax.swing.JButton();
         btnUncheckAll = new javax.swing.JButton();
         btnDeleteCheckedItems = new javax.swing.JButton();
+        txtSearchCitizenId = new javax.swing.JTextField();
+        btnSearch = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -106,15 +106,16 @@ public class TenantsManagerJDialog extends javax.swing.JDialog implements Tenant
         view_cititzen_backBtn = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][] {
-                        { null, null, null, null },
-                        { null, null, null, null },
-                        { null, null, null, null },
-                        { null, null, null, null }
-                },
-                new String[] {
-                        "Title 1", "Title 2", "Title 3", "Title 4"
-                }));
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
         jScrollPane1.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -126,29 +127,29 @@ public class TenantsManagerJDialog extends javax.swing.JDialog implements Tenant
         });
 
         tblTenants.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][] {
-                        { null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null }
-                },
-                new String[] {
-                        "Số CCCD", "Họ tên", "Ngày sinh", "Số điện thoại", "Email", "Biển số xe", ""
-                }) {
-            Class[] types = new Class[] {
-                    java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
-                    java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Số CCCD", "Họ tên", "Ngày sinh", "Số điện thoại", "Email", "Biển số xe", ""
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
             };
-            boolean[] canEdit = new boolean[] {
-                    false, false, false, false, false, false, true
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
-                return types[columnIndex];
+                return types [columnIndex];
             }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit[columnIndex];
+                return canEdit [columnIndex];
             }
         });
         tblTenants.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -179,20 +180,43 @@ public class TenantsManagerJDialog extends javax.swing.JDialog implements Tenant
             }
         });
 
+        txtSearchCitizenId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSearchCitizenIdActionPerformed(evt);
+            }
+        });
+
+        btnSearch.setText("Tìm");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Số CCCD:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(jLabel2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(242, 242, 242)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtSearchCitizenId, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnSearch)
+                .addContainerGap(272, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(300, 300, 300)
+                        .addComponent(jLabel2))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 480, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnCheckAll)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnUncheckAll)
@@ -203,16 +227,21 @@ public class TenantsManagerJDialog extends javax.swing.JDialog implements Tenant
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtSearchCitizenId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearch)
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDeleteCheckedItems)
                     .addComponent(btnUncheckAll)
                     .addComponent(btnCheckAll))
-                .addGap(14, 14, 14))
+                .addGap(25, 25, 25)
+                .addComponent(jLabel2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         tabs.addTab("DANH SÁCH", jPanel1);
@@ -229,8 +258,7 @@ public class TenantsManagerJDialog extends javax.swing.JDialog implements Tenant
 
         jLabel12.setText("Thông tin cư trú:");
 
-        cobResidencyStatus.setModel(new javax.swing.DefaultComboBoxModel<>(
-                new String[] { "Lưu trú", "Tạm trú", "Chưa đăng ký tạm trú", "Khác" }));
+        cobResidencyStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Thường trú", "Tạm trú", "Chưa đăng ký tạm trú", "Khác" }));
 
         jLabel13.setText("Số CCCD/ CMND:");
 
@@ -400,6 +428,7 @@ public class TenantsManagerJDialog extends javax.swing.JDialog implements Tenant
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 816, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(btnCreate)
                                 .addGap(6, 6, 6)
@@ -415,14 +444,13 @@ public class TenantsManagerJDialog extends javax.swing.JDialog implements Tenant
                                 .addGap(6, 6, 6)
                                 .addComponent(btnMoveNext, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(6, 6, 6)
-                                .addComponent(btnMoveLast, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 816, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(15, Short.MAX_VALUE))
+                                .addComponent(btnMoveLast, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
+                .addGap(26, 26, 26)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(jLabel16))
@@ -488,14 +516,14 @@ public class TenantsManagerJDialog extends javax.swing.JDialog implements Tenant
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnCreate)
+                    .addComponent(btnMoveLast)
                     .addComponent(btnUpdate)
                     .addComponent(btnDelete)
                     .addComponent(btnClear)
                     .addComponent(btnMoveFirst)
                     .addComponent(btnMovePrevious)
-                    .addComponent(btnMoveNext)
-                    .addComponent(btnMoveLast))
-                .addContainerGap())
+                    .addComponent(btnMoveNext))
+                .addContainerGap(8, Short.MAX_VALUE))
         );
 
         tabs.addTab("BIỂU MẪU", jPanel2);
@@ -503,20 +531,32 @@ public class TenantsManagerJDialog extends javax.swing.JDialog implements Tenant
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(tabs)));
-        layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(tabs))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 534, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        // TODO add your handling code here:
+        this.searchByCitizenId();
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void txtSearchCitizenIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchCitizenIdActionPerformed
+        // TODO add your handling code here:
+        searchByCitizenId(); 
+    }//GEN-LAST:event_txtSearchCitizenIdActionPerformed
 
     private void previewImageDetail(Icon icon) {
         if (icon == null) {
@@ -678,9 +718,11 @@ public class TenantsManagerJDialog extends javax.swing.JDialog implements Tenant
     private javax.swing.JButton btnMoveLast;
     private javax.swing.JButton btnMoveNext;
     private javax.swing.JButton btnMovePrevious;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnUncheckAll;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JComboBox<String> cobResidencyStatus;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -711,6 +753,7 @@ public class TenantsManagerJDialog extends javax.swing.JDialog implements Tenant
     private javax.swing.JTextField txtHometown;
     private javax.swing.JTextField txtOccupation;
     private javax.swing.JTextField txtPhoneNumber;
+    private javax.swing.JTextField txtSearchCitizenId;
     private javax.swing.JTextField txtVehiclePlate;
     private javax.swing.JButton view_cititzen_backBtn;
     private javax.swing.JButton view_cititzen_frontBtn;
@@ -782,12 +825,17 @@ public class TenantsManagerJDialog extends javax.swing.JDialog implements Tenant
     @Override
     public void deleteCheckedItems() {
         if (XDialog.confirm("Bạn thực sự muốn xóa các mục chọn?")) {
-            for (int i = 0; i < tblTenants.getRowCount(); i++) {
-                if ((Boolean) tblTenants.getValueAt(i, 6)) {
-                    dao.deleteById(items.get(i).getCitizenId());
+            try {
+                for (int i = 0; i < tblTenants.getRowCount(); i++) {
+                    if ((Boolean) tblTenants.getValueAt(i, 6)) {
+                        dao.deleteById(items.get(i).getCitizenId());
+                    }
                 }
+                this.fillToTable();
+                XDialog.alert("Đã xóa thành công các mục chọn.");
+            } catch (Exception e) {
+                XDialog.alert("Lỗi khi xóa.");
             }
-            this.fillToTable();
         }
     }
 
@@ -819,7 +867,7 @@ public class TenantsManagerJDialog extends javax.swing.JDialog implements Tenant
         txtEmail.setText(tenant.getEmail());
         txtVehiclePlate.setText(tenant.getVehiclePlate());
     }
-
+    
     private TenantDetail getDetailForm() {
         StringBuilder sbuilder = new StringBuilder()
                 .append(XDate.now_timestamp()).append("-")
@@ -884,45 +932,69 @@ public class TenantsManagerJDialog extends javax.swing.JDialog implements Tenant
 
     @Override
     public void create() {
-        Tenant tenant = getForm();
-        TenantDetail detail = getDetailForm();
+        if (!checkForm()) return;
+        
+        try {
+            Tenant tenant = getForm();
+            TenantDetail detail = getDetailForm();
 
-        if (frontCardImage == null)
-            detail.setPerCardFrontImage(null);
-        if (backCardImage == null)
-            detail.setPerCardBackImage(null);
-        saveCitizenCardImage(lblPerCard_FrontImage.getIcon(), detail.getPerCardFrontImage());
-        saveCitizenCardImage(lblPerCard_BackImage.getIcon(), detail.getPerCardBackImage());
+            if (frontCardImage == null)
+                detail.setPerCardFrontImage(null);
+            if (backCardImage == null)
+                detail.setPerCardBackImage(null);
+            saveCitizenCardImage(lblPerCard_FrontImage.getIcon(), detail.getPerCardFrontImage());
+            saveCitizenCardImage(lblPerCard_BackImage.getIcon(), detail.getPerCardBackImage());
 
-        dao.create(tenant);
-        detailDAO.create(detail);
+            dao.create(tenant);
+            detailDAO.create(detail);
+            XDialog.alert("Thêm cư dân thành công.");
 
-        this.fillToTable();
+            this.fillToTable();
+            
+        } catch (Exception e) {
+            XDialog.alert("Thêm cư dân thất bại.");
+        }
+        
         this.clear();
+    
         frontCardImage = null;
         backCardImage = null;
     }
 
     @Override
     public void update() {
-        Tenant tenant = getForm();
-        TenantDetail detail = getDetailForm();
+        if (!checkForm()) return;
         
-        saveCitizenCardImage(lblPerCard_FrontImage.getIcon(), detail.getPerCardFrontImage());
-        saveCitizenCardImage(lblPerCard_BackImage.getIcon(), detail.getPerCardBackImage());
-        
-        dao.update(tenant);
-        detailDAO.update(detail);
+        try {
+            Tenant tenant = getForm();
+            TenantDetail detail = getDetailForm();
 
-        this.fillToTable();
+            saveCitizenCardImage(lblPerCard_FrontImage.getIcon(), detail.getPerCardFrontImage());
+            saveCitizenCardImage(lblPerCard_BackImage.getIcon(), detail.getPerCardBackImage());
+
+            dao.update(tenant);
+            detailDAO.update(detail);
+            XDialog.alert("Cập nhật cư dân thành công.");
+
+            this.fillToTable();
+        } catch (Exception e) {
+            XDialog.alert("Cập nhật cư dân thất bại.");
+        }
+        this.clear();
     }
 
     @Override
     public void delete() {
         if (XDialog.confirm("Bạn thực sự muốn xóa?")) {
             String id = txtCitizen_id.getText();
-            dao.deleteById(id);
-            this.fillToTable();
+            
+            try {
+                dao.deleteById(id);
+                XDialog.alert("Xóa cư dân thành công.");
+                this.fillToTable();
+            } catch (Exception e) {
+                XDialog.alert("Xóa cư dân thất bại.");
+            }
             this.clear();
         }
     }
@@ -1070,5 +1142,96 @@ public class TenantsManagerJDialog extends javax.swing.JDialog implements Tenant
                 }
             }
         }
+    }
+    
+    private void searchByCitizenId() {
+        String citizenId = txtSearchCitizenId.getText().trim();
+        if (citizenId.isEmpty()) {
+            XDialog.alert("Vui lòng nhập số CCCD để tìm kiếm.");
+            return;
+        }
+
+        Tenant tenant = dao.findById(citizenId);
+        if (tenant == null) {
+            XDialog.alert("Không tìm thấy cư dân với số CCCD: " + citizenId);
+            return;
+        }
+        
+        this.setForm(tenant);
+
+        TenantDetail detail = detailDAO.findById(citizenId);
+        if (detail != null) {
+            this.setDetailForm(detail);
+        } else {
+            XDialog.alert("Không tìm thấy thông tin chi tiết cho cư dân này.");
+        }
+
+        this.setEditable(true);
+        tabs.setSelectedIndex(1);
+    }
+    
+    private boolean checkForm() {
+        String citizenId = txtCitizen_id.getText().trim();
+        String fullName = txtFullName.getText().trim();
+        String dateOfBirth = txtDateOfBirth.getText().trim();
+        String phoneNumber = txtPhoneNumber.getText().trim();
+        String email = txtEmail.getText().trim();
+        String vehiclePlate = txtVehiclePlate.getText().trim();
+        String hometown = txtHometown.getText().trim();
+        String occupation = txtOccupation.getText().trim();
+
+        if (citizenId.isEmpty()) {
+            XDialog.alert("Vui lòng nhập số CCCD.");
+            txtCitizen_id.requestFocus();
+            return false;
+        }
+        if (!citizenId.matches("\\d{12}")) {
+            XDialog.alert("Số CCCD phải gồm 12 chữ số.");
+            txtCitizen_id.requestFocus();
+            return false;
+        }
+
+        if (fullName.isEmpty()) {
+            XDialog.alert("Vui lòng nhập họ tên.");
+            txtFullName.requestFocus();
+            return false;
+        }
+
+        if (phoneNumber.isEmpty()) {
+            XDialog.alert("Vui lòng nhập số điện thoại.");
+            txtPhoneNumber.requestFocus();
+            return false;
+        }
+        if (!phoneNumber.matches("\\d{10}")) {
+            XDialog.alert("Số điện thoại phải gồm 10 số.");
+            txtPhoneNumber.requestFocus();
+            return false;
+        }
+
+        if (!email.isEmpty() && !email.matches("^\\w+@\\w+(\\.\\w+){1,2}$")) {
+            XDialog.alert("Email không hợp lệ.");
+            txtEmail.requestFocus();
+            return false;
+        }
+
+        if (!vehiclePlate.isEmpty() && !vehiclePlate.matches("^[0-9]{2}[A-Z]-\\d{4,5}$")) {
+            XDialog.alert("Biển số xe không đúng định dạng.");
+            txtVehiclePlate.requestFocus();
+            return false;
+        }
+        
+        if (hometown.isEmpty()) {
+            XDialog.alert("Vui lòng nhập quê quán.");
+            txtHometown.requestFocus();
+            return false;
+        }
+        
+        if (occupation.isEmpty()) {
+            XDialog.alert("Vui lòng nhập nghề nghiệp.");
+            txtOccupation.requestFocus();
+            return false;
+        }
+
+        return true;
     }
 }

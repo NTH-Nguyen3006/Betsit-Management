@@ -4,6 +4,7 @@
  */
 package ui.manager;
 
+import ui.controller.InvoiceDetailsManagerController;
 import dao.InvoiceDetailDao;
 import entity.InvoiceDetail;
 import impl.InvoiceDetailDAOImpl;

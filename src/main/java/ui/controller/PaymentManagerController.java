@@ -4,12 +4,12 @@
  */
 package ui.controller;
 
-import entity.ServiceUsages;
+import entity.Payment;
 
 /**
  *
- * @author ADMIN
+ * @author GAMING
  */
-public interface ServiceUsagesController extends CrudController<ServiceUsages>{
+public interface PaymentManagerController extends CrudController<Payment>{
     
 }

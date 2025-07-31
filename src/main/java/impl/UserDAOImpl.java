@@ -21,18 +21,19 @@ public class UserDAOImpl implements UserDAO {
     String findAllSql = "SELECT * FROM Users";
     String findByIdSql = "SELECT * FROM Users WHERE Username = ?";
     String findByRoleIdSql = "SELECT * FROM Users WHERE RoleId=?";
-    
+    String findByUsername = "SELECT * FROM Users WHERE Username = ?";
+
     @Override
     public User create(User entity) {
         Object[] values = {
-            entity.getUsername(),
-            entity.getPassword(),
-            entity.getFullname(),
-            entity.getEmail(),
-            entity.getPhoneNumber(),
-            entity.getRoleId(),
-            entity.isStatus(),
-            entity.getCreated_at()
+                entity.getUsername(),
+                entity.getPassword(),
+                entity.getFullname(),
+                entity.getEmail(),
+                entity.getPhoneNumber(),
+                entity.getRoleId(),
+                entity.isStatus(),
+                entity.getCreated_at()
         };
         XJdbc.executeUpdate(createSql, values);
         return entity;
@@ -41,14 +42,14 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public void update(User entity) {
         Object[] values = {
-            entity.getPassword(),
-            entity.getFullname(),
-            entity.getEmail(),
-            entity.getPhoneNumber(),
-            entity.getRoleId(),
-            entity.isStatus(),
-            entity.getCreated_at(),
-            entity.getUsername()
+                entity.getPassword(),
+                entity.getFullname(),
+                entity.getEmail(),
+                entity.getPhoneNumber(),
+                entity.getRoleId(),
+                entity.isStatus(),
+                entity.getCreated_at(),
+                entity.getUsername()
         };
         XJdbc.executeUpdate(updateSql, values);
     }
@@ -75,6 +76,6 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public User findByUsername(String username) {
-        return null;
+        return XQuery.getSingleBean(User.class, findByUsername, username);
     }
 }
