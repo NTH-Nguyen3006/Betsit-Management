@@ -1219,7 +1219,7 @@ public class TenantsManagerJDialog extends javax.swing.JDialog implements Tenant
             return false;
         }
 
-        if (!email.isEmpty() && !email.matches("^\\w+@\\w+(\\.\\w+){1,2}$")) {
+        if (!email.isEmpty() && !email.matches("^[\\w._%+-]+@[\\w.-]+\\.[a-zA-Z]{2,}$")) {
             XDialog.alert("Email không hợp lệ.");
             txtEmail.requestFocus();
             return false;
