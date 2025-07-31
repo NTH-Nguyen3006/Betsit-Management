@@ -10,8 +10,10 @@ import entity.Role;
 import entity.User;
 import impl.RoleDAOImpl;
 import impl.UserDAOImpl;
+import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 import ui.controller.UserController;
 import utils.XDate;
@@ -29,6 +31,7 @@ public class UserManagerJDailog extends javax.swing.JDialog implements UserContr
     public UserManagerJDailog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        txtCreated_at.setEnabled(false);
     }
 
     /**
@@ -263,6 +266,12 @@ public class UserManagerJDailog extends javax.swing.JDialog implements UserContr
 
         jLabel5.setText("Vai trò:");
 
+        cboRoles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboRolesActionPerformed(evt);
+            }
+        });
+
         jLabel6.setText("Trạng thái:");
 
         buttonGroup1.add(rdoOn);
@@ -469,6 +478,10 @@ public class UserManagerJDailog extends javax.swing.JDialog implements UserContr
         }
     }//GEN-LAST:event_tblUsersMouseClicked
 
+    private void cboRolesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboRolesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboRolesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -557,6 +570,8 @@ public class UserManagerJDailog extends javax.swing.JDialog implements UserContr
 
     List<Role> roles = List.of();
     List<User> items = List.of();
+
+    private Timer createdAtTimer;
     
     @Override
     public void open() {
@@ -571,37 +586,66 @@ public class UserManagerJDailog extends javax.swing.JDialog implements UserContr
         cboRoles.addActionListener(e -> fillToTable());
     
         this.fillToTable();      
-        this.clear();          
+        this.clear();            
     }
     
     @Override
     public void create() {
-        dao.create(getForm());
-        fillToTable();
-        clear();
+        if (!checkForm()) return;
+        
+        try {
+            dao.create(getForm());
+            fillToTable();
+            clear();
+            XDialog.alert("Thêm mới người dùng thành công.");
+        } catch (Exception e) {
+            XDialog.alert("Lỗi khi thêm người dùng mới.");
+        }
     }
 
         @Override
     public void update() {
-        User d = getForm();
-        dao.update(d);
-        this.fillToTable();
+        if (!checkForm()) return;
+        
+        try {
+            User d = getForm();
+            dao.update(d);
+            this.fillToTable();
+            clear();
+            XDialog.alert("Cập nhật thông tin người dùng thành công.");
+        } catch (Exception e) {
+            XDialog.alert("Lỗi khi cập nhật.");
+        }
     }
 
     @Override
     public void delete() {
         if (XDialog.confirm("Bạn thực sự muốn xóa?")) {
-            dao.deleteById(txtUsername.getText().trim());
-            fillToTable();
-            clear();
+            try {
+                dao.deleteById(txtUsername.getText().trim());
+                fillToTable();
+                clear();
+                XDialog.alert("Xóa người dùng thành công.");
+            } catch (Exception e) {
+                XDialog.alert("Lỗi khi xóa người dùng.");
+            }
         }
     }
 
     @Override
     public void clear() {                
         setForm(new User());
+        cboRoles.setSelectedIndex(0);
         rdoOn.setSelected(true);
         setEditable(false);
+        
+        if (createdAtTimer == null) {
+            createdAtTimer = new Timer(1000, e -> {
+                txtCreated_at.setText(XDate.format(new Date(), "yyyy-MM-dd HH:mm"));
+            });
+        }
+
+        createdAtTimer.start();
     }
     
     @Override
@@ -633,12 +677,17 @@ public class UserManagerJDailog extends javax.swing.JDialog implements UserContr
     @Override
     public void deleteCheckedItems() {
         if (XDialog.confirm("Bạn thực sự muốn xóa các mục chọn?")) {
-            for (int i = 0; i < tblUsers.getRowCount(); i++) {
-                if (Boolean.TRUE.equals(tblUsers.getValueAt(i, 5))) {
-                    dao.deleteById(items.get(i).getUsername());
+            try {
+                for (int i = 0; i < tblUsers.getRowCount(); i++) {
+                    if (Boolean.TRUE.equals(tblUsers.getValueAt(i, 5))) {
+                        dao.deleteById(items.get(i).getUsername());
+                    }
                 }
+                fillToTable();
+                XDialog.alert("Đã xóa thành công các mục chọn.");
+            } catch (Exception e) {
+                XDialog.alert("Lỗi khi xóa.");
             }
-            fillToTable();
         }
     }
     
@@ -689,11 +738,11 @@ public class UserManagerJDailog extends javax.swing.JDialog implements UserContr
     @Override
     public User getForm() {
         User u = new User();
-        u.setUsername(txtUsername.getText().trim());
-        u.setPassword(txtPassword.getText().trim());
-        u.setFullname(txtFullname.getText().trim());
-        u.setEmail(txtEmail.getText().trim());
-        u.setPhoneNumber(txtPhoneNumber.getText().trim());
+        u.setUsername(txtUsername.getText());
+        u.setPassword(txtPassword.getText());
+        u.setFullname(txtFullname.getText());
+        u.setEmail(txtEmail.getText());
+        u.setPhoneNumber(txtPhoneNumber.getText());
         u.setCreated_at(XDate.parse(txtCreated_at.getText().trim(), "yyyy-MM-dd HH:mm"));
         
         Role r = (Role) cboRoles.getSelectedItem();
@@ -704,6 +753,10 @@ public class UserManagerJDailog extends javax.swing.JDialog implements UserContr
     
     @Override
     public void setForm(User u) {
+        if (createdAtTimer != null && createdAtTimer.isRunning()) {
+            createdAtTimer.stop();
+        }
+        
         txtUsername.setText(u.getUsername());
         txtPassword.setText(u.getPassword());
         txtFullname.setText(u.getFullname());
@@ -773,5 +826,55 @@ public class UserManagerJDailog extends javax.swing.JDialog implements UserContr
             });
         }
         setEditable(false);
+    }
+    
+    private boolean checkForm() {
+        String username = txtUsername.getText().trim();
+        String password = txtPassword.getText().trim();
+        String fullname = txtFullname.getText().trim();
+        String email = txtEmail.getText().trim();
+        String phone = txtPhoneNumber.getText().trim();
+
+        if (username.isEmpty()) {
+            XDialog.alert("Vui lòng nhập tên đăng nhập.");
+            txtUsername.requestFocus();
+            return false;
+        }
+
+        if (password.isEmpty()) {
+            XDialog.alert("Vui lòng nhập mật khẩu.");
+            txtPassword.requestFocus();
+            return false;
+        }
+
+        if (fullname.isEmpty()) {
+            XDialog.alert("Vui lòng nhập họ tên.");
+            txtFullname.requestFocus();
+            return false;
+        }
+
+        if (email.isEmpty()) {
+            XDialog.alert("Vui lòng nhập email.");
+            txtEmail.requestFocus();
+            return false;
+        }
+        if (!email.matches("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$")) {
+            XDialog.alert("Email không hợp lệ.");
+            txtEmail.requestFocus();
+            return false;
+        }
+
+        if (phone.isEmpty()) {
+            XDialog.alert("Vui lòng nhập số điện thoại.");
+            txtPhoneNumber.requestFocus();
+            return false;
+        }
+        if (!phone.matches("^\\d{10}$")) {
+            XDialog.alert("Số điện thoại phải gồm 10 số.");
+            txtPhoneNumber.requestFocus();
+            return false;
+        }
+
+        return true;
     }
 }

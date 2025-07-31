@@ -290,7 +290,7 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Times New Roman" size="16" style="1"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="QU&#x1ea2;N L&#xcd; NG&#x1af;&#x1edc;I D&#xd9;NG"/>
+                    <Property name="text" type="java.lang.String" value="QU&#x1ea2;N L&#xcd; T&#xc0;I KHO&#x1ea2;N"/>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[200, 60]"/>
                     </Property>

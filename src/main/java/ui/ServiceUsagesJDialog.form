@@ -77,20 +77,40 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="111" max="-2" attributes="0"/>
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="txtBegin" min="-2" pref="100" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="txtEnd" min="-2" pref="100" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="btnFiler" min="-2" pref="55" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace pref="12" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtBegin" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtEnd" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnFiler" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" pref="242" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="227" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnDeleteCheckedItems" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnUncheckAll" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnCheckAll" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="9" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -177,6 +197,28 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDeleteCheckedItemsActionPerformed"/>
               </Events>
             </Component>
+            <Component class="javax.swing.JLabel" name="jLabel1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="T&#x1eeb; ng&#xe0;y:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txtBegin">
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel2">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&#x110;&#x1ebf;n ng&#xe0;y:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txtEnd">
+            </Component>
+            <Component class="javax.swing.JButton" name="btnFiler">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="L&#x1ecd;c"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFilerActionPerformed"/>
+              </Events>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanel2">
@@ -220,8 +262,8 @@
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtServiceId" alignment="0" pref="249" max="32767" attributes="0"/>
-                          <Component id="txtContractId" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtContractId" alignment="0" pref="249" max="32767" attributes="0"/>
+                          <Component id="txtServiceId" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -244,7 +286,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtServiceId" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtContractId" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtStartDate" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -255,9 +297,9 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="txtEndDate" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtContractId" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtServiceId" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="101" max="32767" attributes="0"/>
+                      <EmptySpace pref="110" max="32767" attributes="0"/>
                       <Component id="jSeparator2" min="-2" pref="10" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -285,7 +327,7 @@
                 <Property name="text" type="java.lang.String" value="M&#xe3; H&#x1ee3;p &#x111;&#x1ed3;ng:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtServiceId">
+            <Component class="javax.swing.JTextField" name="txtContractId">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
               <Properties>
@@ -311,7 +353,7 @@
             </Component>
             <Component class="javax.swing.JSeparator" name="jSeparator2">
             </Component>
-            <Component class="javax.swing.JTextField" name="txtContractId">
+            <Component class="javax.swing.JTextField" name="txtServiceId">
             </Component>
             <Component class="javax.swing.JButton" name="btnCreate">
               <Properties>

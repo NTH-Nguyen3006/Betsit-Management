@@ -4,10 +4,12 @@
  */
 package ui.controller;
 
-import entity.Contract;
 import entity.Payment;
-import ui.controller.CrudController;
 
+/**
+ *
+ * @author GAMING
+ */
 public interface PaymentManagerController extends CrudController<Payment>{
     
 }
