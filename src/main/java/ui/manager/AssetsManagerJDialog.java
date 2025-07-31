@@ -23,7 +23,7 @@ import utils.XIcon;
 
 /**
  *
- * @code by VinhKhanh
+ * code by VinhKhanh
  */
 public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsController{
 
