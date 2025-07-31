@@ -722,6 +722,7 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
         }
     }
     private void chooseFile() {
+        
         String[] fileTypeAllow = {"png", "jpg", "jpeg"};
         fileChooser.setFileFilter(new FileNameExtensionFilter("Chọn ảnh image/*", fileTypeAllow));
         if(fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION){
