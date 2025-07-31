@@ -1,10 +1,7 @@
 package ui.controller;
 
 import entity.Room;
-import ui.manager.CrudController;
-import ui.manager.CrudController;
-import ui.manager.CrudController;
-import ui.manager.CrudController;
+import ui.controller.CrudController;
 
 
 public interface RoomController extends CrudController<Room>{

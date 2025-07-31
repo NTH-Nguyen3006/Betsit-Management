@@ -15,7 +15,7 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Room {
     int roomId;
-    Float area;
+    double area;
     BigDecimal rentPrice;
     int status;
     String roomType;

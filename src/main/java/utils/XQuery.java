@@ -41,6 +41,7 @@ public class XQuery {
                     Object value = resultSet.getObject(name.substring(3));
                     method.invoke(bean, value);
                 } catch (IllegalAccessException | IllegalArgumentException | SQLException e) {
+                    System.out.println(e.getMessage());
                     System.out.printf("+ Column '%s' not found!\r\n", name.substring(3));
                 }
             }

@@ -26,7 +26,8 @@ CREATE TABLE Assets (
     FOREIGN KEY (RoomId) REFERENCES Rooms(RoomID)
 	ON DELETE CASCADE
 );
-
+select * from Assets
+delete Assets where Id = 1;
 
 CREATE TABLE Tenants (
     CitizenId VARCHAR(12) PRIMARY KEY, -- Số Căn cước công dân

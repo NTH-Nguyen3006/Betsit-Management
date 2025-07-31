@@ -4,6 +4,7 @@
  */
 package ui.manager;
 
+import ui.controller.ContractTenantManagerController;
 import dao.ContractTenantDAO;
 import entity.ContractTenant;
 import impl.ContractTenantDAOImpl;
