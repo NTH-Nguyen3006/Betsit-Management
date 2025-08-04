@@ -18,7 +18,7 @@ public class Contract {
     Date StartDate;                 // DATETIME
     Date EndDate;                   // DATETIME
     BigDecimal DepositAmount;      // DECIMAL(10,2)
-    short PaymentCycleMonths;  //  Integer
+    Integer PaymentCycleMonths;  //  Integer
     String File_scan_url;          // VARCHAR(20)
     String Notes;                  // NVARCHAR(MAX)
 }

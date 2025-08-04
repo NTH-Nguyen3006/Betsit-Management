@@ -861,7 +861,6 @@ public void create() {
     try {
         Invoice invoice = new Invoice();
 
-        // Lấy và kiểm tra Contract ID
         String contractIdStr = txtIdContract.getText().trim();
         if (contractIdStr.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập Mã hợp đồng!", "Thông báo", JOptionPane.WARNING_MESSAGE);

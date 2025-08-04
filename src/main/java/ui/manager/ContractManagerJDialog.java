@@ -50,6 +50,7 @@ public class ContractManagerJDialog extends javax.swing.JDialog implements Contr
         txtIdContractManager.setEnabled(false);
         StartDate.setEnabled(false);
         
+        
     }
 
     /**
@@ -604,23 +605,6 @@ public class ContractManagerJDialog extends javax.swing.JDialog implements Contr
         this.fillToTable();
         this.clear();
 
-        tblContractManager.getSelectionModel().addListSelectionListener(e -> {
-            if (!e.getValueIsAdjusting()) {
-                this.edit();
-            }
-        });
-
-        tblContractManager.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
-                if (e.getClickCount() == 1) {
-                    edit();
-                }
-            }
-        });
-        if (!items.isEmpty()) {
-    tblContractManager.setRowSelectionInterval(0, 0);
-    edit();
-}
     }
 private void showContractTenantManager() {
         ContractTenantManagerJDialog dialog = new ContractTenantManagerJDialog((Frame) this.getOwner(), true); 
@@ -768,9 +752,9 @@ public Contract getForm(boolean isCreate) {
     entity.setNotes(Note.getText());
 
     try {
-//        entity.setPaymentCycleMonths(Byte.valueOf(txtPaymentCycleMonth.getText()));
+        entity.setPaymentCycleMonths(Integer.valueOf(txtPaymentCycleMonth.getText()));
     } catch (NumberFormatException e) {
-//        entity.setPaymentCycleMonths((byte) 1);
+        entity.setPaymentCycleMonths((Integer) 1);
     }
 
     return entity;
@@ -889,6 +873,7 @@ public void clear() {
     this.setForm(new Contract());
     this.setDetailForm(null);
     this.setEditable(false);
+    txtPaymentCycleMonth.setText("");
 }
 
  @Override
