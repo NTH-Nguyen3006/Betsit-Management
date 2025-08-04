@@ -21,10 +21,7 @@ import ui.controller.AssetsController;
 import utils.XDialog;
 import utils.XIcon;
 
-/**
- *
- * @author nhukhue
- */
+
 public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsController{
 
     /**
