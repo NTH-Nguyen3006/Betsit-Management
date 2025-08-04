@@ -27,7 +27,7 @@ public class XJdbc {
         var username = "sa";
         var password = "123456";
         // var password = "123";
-        password = "Password123"; // by Nguyen
+        // password = "Password123"; // by Nguyen
 
         try {
             if (!XJdbc.isReady()) {
