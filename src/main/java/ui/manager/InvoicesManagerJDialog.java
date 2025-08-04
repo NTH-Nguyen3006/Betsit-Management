@@ -5,6 +5,7 @@
 package ui.manager;
 
 import dao.ContractDAO;
+import ui.controller.InvoicesManagerController;
 import dao.InvoiceDAO;
 import entity.Contract;
 import impl.InvoiceDAOImpl;
@@ -21,6 +22,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.html.parser.Entity;
 import utils.XDialog;
+import dao.InvoiceDAO;
 
 /**
  *

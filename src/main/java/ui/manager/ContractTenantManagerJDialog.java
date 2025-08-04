@@ -4,6 +4,7 @@
  */
 package ui.manager;
 
+import ui.controller.ContractTenantManagerController;
 import dao.ContractTenantDAO;
 import dao.TenantDAO;
 import entity.ContractTenant;
@@ -13,6 +14,7 @@ import impl.TenantDAOImpl;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import dao.ContractTenantDAO;
 
 /**
  *

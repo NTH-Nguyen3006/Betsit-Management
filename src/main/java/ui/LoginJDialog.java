@@ -7,6 +7,7 @@ package ui;
 import dao.UserDAO;
 import entity.User;
 import impl.UserDAOImpl;
+import ui.controller.LoginController;
 import utils.XAuth;
 import utils.XDialog;
 

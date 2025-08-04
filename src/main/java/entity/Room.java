@@ -1,12 +1,9 @@
 package entity;
 
 import java.math.BigDecimal;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
+
 
 @Data
 @AllArgsConstructor
@@ -15,7 +12,7 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Room {
     int roomId;
-    Float area;
+    double area;
     BigDecimal rentPrice;
     int status;
     String roomType;

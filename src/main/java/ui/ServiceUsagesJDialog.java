@@ -10,6 +10,7 @@ import impl.ServiceUsagesDAOImpl;
 import entity.ServiceUsages;
 import java.util.Date;
 import java.util.List;
+import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 import utils.XDate;
 import utils.XDialog;
@@ -26,6 +27,7 @@ public class ServiceUsagesJDialog extends javax.swing.JDialog implements Service
     public ServiceUsagesJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        txtStartDate.setEnabled(false);
     }
 
     /**
@@ -44,16 +46,21 @@ public class ServiceUsagesJDialog extends javax.swing.JDialog implements Service
         btnCheckAll = new javax.swing.JButton();
         btnUncheckAll = new javax.swing.JButton();
         btnDeleteCheckedItems = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        txtBegin = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        txtEnd = new javax.swing.JTextField();
+        btnFiler = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        txtServiceId = new javax.swing.JTextField();
+        txtContractId = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         txtStartDate = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtEndDate = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
-        txtContractId = new javax.swing.JTextField();
+        txtServiceId = new javax.swing.JTextField();
         btnCreate = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
@@ -130,6 +137,17 @@ public class ServiceUsagesJDialog extends javax.swing.JDialog implements Service
             }
         });
 
+        jLabel1.setText("Từ ngày:");
+
+        jLabel2.setText("Đến ngày:");
+
+        btnFiler.setText("Lọc");
+        btnFiler.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFilerActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -146,18 +164,36 @@ public class ServiceUsagesJDialog extends javax.swing.JDialog implements Service
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnDeleteCheckedItems)))
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(111, 111, 111)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtBegin, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnFiler, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addContainerGap(12, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtBegin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtEnd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnFiler))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDeleteCheckedItems)
                     .addComponent(btnUncheckAll)
-                    .addComponent(btnCheckAll))
-                .addContainerGap(9, Short.MAX_VALUE))
+                    .addComponent(btnCheckAll)))
         );
 
         tabs.addTab("DANH SÁCH", jPanel1);
@@ -262,8 +298,8 @@ public class ServiceUsagesJDialog extends javax.swing.JDialog implements Service
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
-                    .addComponent(txtServiceId, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
-                    .addComponent(txtContractId))
+                    .addComponent(txtContractId, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
+                    .addComponent(txtServiceId))
                 .addGap(35, 35, 35)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel6)
@@ -281,7 +317,7 @@ public class ServiceUsagesJDialog extends javax.swing.JDialog implements Service
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtServiceId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtContractId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -290,8 +326,8 @@ public class ServiceUsagesJDialog extends javax.swing.JDialog implements Service
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtEndDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtContractId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
+                    .addComponent(txtServiceId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -407,6 +443,11 @@ public class ServiceUsagesJDialog extends javax.swing.JDialog implements Service
         this.open();
     }//GEN-LAST:event_formWindowOpened
 
+    private void btnFilerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilerActionPerformed
+        // TODO add your handling code here:
+        this.fillToTable();
+    }//GEN-LAST:event_btnFilerActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -455,12 +496,15 @@ public class ServiceUsagesJDialog extends javax.swing.JDialog implements Service
     private javax.swing.JButton btnCreate;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnDeleteCheckedItems;
+    private javax.swing.JButton btnFiler;
     private javax.swing.JButton btnMoveFirst;
     private javax.swing.JButton btnMoveLast;
     private javax.swing.JButton btnMoveNext;
     private javax.swing.JButton btnMovePrevious;
     private javax.swing.JButton btnUncheckAll;
     private javax.swing.JButton btnUpdate;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -471,7 +515,9 @@ public class ServiceUsagesJDialog extends javax.swing.JDialog implements Service
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTabbedPane tabs;
     private javax.swing.JTable tblServiceUsages;
+    private javax.swing.JTextField txtBegin;
     private javax.swing.JTextField txtContractId;
+    private javax.swing.JTextField txtEnd;
     private javax.swing.JTextField txtEndDate;
     private javax.swing.JTextField txtServiceId;
     private javax.swing.JTextField txtStartDate;
@@ -479,30 +525,42 @@ public class ServiceUsagesJDialog extends javax.swing.JDialog implements Service
 
     ServiceUsagesDAO dao = new ServiceUsagesDAOImpl();
     List<ServiceUsages> items = dao.findAll();
+    
+    private Timer createdAtTimer;
 
     @Override
     public void open() {
-        this.setLocationRelativeTo(null);     
-        this.clear();       
+        this.setLocationRelativeTo(null);   
+        this.clear();
         this.fillToTable();
     }
 
     @Override
     public void fillToTable() {
+        String beginText = txtBegin.getText().trim();
+        String endText = txtEnd.getText().trim();
+        List<ServiceUsages> list;
+
+        if (!beginText.isEmpty() && !endText.isEmpty()) {
+            Date begin = XDate.parse(beginText, "dd/MM/yyyy");
+            Date end = XDate.parse(endText, "dd/MM/yyyy");
+            list = dao.findByTimeRange(begin, end);
+        } else {
+            list = dao.findAll(); 
+        }
+
         DefaultTableModel model = (DefaultTableModel) tblServiceUsages.getModel();
         model.setRowCount(0);
-        items = dao.findAll();
-        for (ServiceUsages su : items) {
-            Object[] row = {
-                su.getServiceId(),
-                su.getContractId(),
-                su.getStartDate(),
-                su.getEndDate(),
-                false
-            };
-            model.addRow(row);
+        for (ServiceUsages s : list) {
+            model.addRow(new Object[]{
+                s.getServiceId(), 
+                s.getContractId(),
+                XDate.format(s.getStartDate(), "dd/MM/yyyy"),
+                s.getEndDate() != null ? XDate.format(s.getEndDate(), "dd/MM/yyyy") : ""
+            });
         }
     }
+
 
     @Override
     public void edit() {
@@ -527,36 +585,45 @@ public class ServiceUsagesJDialog extends javax.swing.JDialog implements Service
 
     private void setCheckedAll(boolean checked) {
         for (int i = 0; i < tblServiceUsages.getRowCount(); i++) {
-            tblServiceUsages.setValueAt(checked, i, 4); // cột checkbox
+            tblServiceUsages.setValueAt(checked, i, 4); 
         }
     }
 
     @Override
     public void deleteCheckedItems() {
         if (XDialog.confirm("Bạn thực sự muốn xóa các mục chọn?")) {
-            for (int i = 0; i < tblServiceUsages.getRowCount(); i++) {
-                if ((Boolean) tblServiceUsages.getValueAt(i, 4)) {
-                    int serviceId = (Integer) tblServiceUsages.getValueAt(i, 0);
-                    int contractId = (Integer) tblServiceUsages.getValueAt(i, 1);
-                    dao.deleteById(serviceId, contractId);
+            try {
+                for (int i = 0; i < tblServiceUsages.getRowCount(); i++) {
+                    if ((Boolean) tblServiceUsages.getValueAt(i, 4)) {
+                        int serviceId = (Integer) tblServiceUsages.getValueAt(i, 0);
+                        int contractId = (Integer) tblServiceUsages.getValueAt(i, 1);
+                        dao.deleteById(serviceId, contractId);
+                    }
                 }
+                this.fillToTable();
+                XDialog.alert("Đã xóa thành công các mục chọn.");
+            } catch (Exception e) {
+                XDialog.alert("Lỗi khi xóa.");
             }
-            this.fillToTable();
         }
     }
 
     @Override
     public void setForm(ServiceUsages su) {
-        txtServiceId.setText(String.valueOf(su.getServiceId()));
-        txtContractId.setText(String.valueOf(su.getContractId()));
+        if (createdAtTimer != null && createdAtTimer.isRunning()) {
+            createdAtTimer.stop();
+        }
+        
+        txtContractId.setText(String.valueOf(su.getServiceId()));
+        txtServiceId.setText(String.valueOf(su.getContractId()));
         txtStartDate.setText(XDate.format(su.getStartDate(), "yyyy-MM-dd HH:mm"));
         txtEndDate.setText(su.getEndDate() != null ? XDate.format(su.getEndDate(), "yyyy-MM-dd HH:mm") : "");
     }
 
     @Override
     public ServiceUsages getForm() {
-        int serviceId = Integer.parseInt(txtServiceId.getText());
-        int contractId = Integer.parseInt(txtContractId.getText());
+        int serviceId = Integer.parseInt(txtContractId.getText());
+        int contractId = Integer.parseInt(txtServiceId.getText());
 
         Date startDate = XDate.parse(txtStartDate.getText(), "yyyy-MM-dd HH:mm");
         Date endDate = txtEndDate.getText().isBlank() ? null : XDate.parse(txtEndDate.getText(), "yyyy-MM-dd HH:mm");
@@ -572,43 +639,69 @@ public class ServiceUsagesJDialog extends javax.swing.JDialog implements Service
 
     @Override
     public void create() {
+        if (!checkForm()) return;
+        
+        try {
         ServiceUsages su = getForm();
         dao.create(su);
         this.fillToTable();
         this.clear();
+        XDialog.alert("Thêm mới thành công.");
+        } catch (Exception e) {
+            XDialog.alert("Lỗi khi thêm mới.");
+        }
     }
 
     @Override
     public void update() {
+        if (!checkForm()) return;
+        
+        try {
         ServiceUsages su = getForm();
         dao.update(su);
         this.fillToTable();
+        XDialog.alert("Cập nhật thành công.");
+        } catch (Exception e) {
+            XDialog.alert("Lỗi khi cập nhật.");
+        }
     }
 
     @Override
     public void delete() {
         if (XDialog.confirm("Bạn thực sự muốn xóa?")) {
-            int serviceId = Integer.parseInt(txtServiceId.getText());
-            int contractId = Integer.parseInt(txtContractId.getText());
-            dao.deleteById(serviceId, contractId);
-            this.fillToTable();
-            this.clear();
+            try {
+                int serviceId = Integer.parseInt(txtContractId.getText());
+                int contractId = Integer.parseInt(txtServiceId.getText());
+                dao.deleteById(serviceId, contractId);
+                this.fillToTable();
+                this.clear();
+                XDialog.alert("Xóa thành công.");
+            } catch (Exception e) {
+                XDialog.alert("Lỗi khi xóa.");
+            }       
         }
     }
 
     @Override
     public void clear() {
-        txtServiceId.setText("");
         txtContractId.setText("");
-        txtStartDate.setText("");
+        txtServiceId.setText("");
         txtEndDate.setText("");
         this.setEditable(false);
+        
+        if (createdAtTimer == null) {
+            createdAtTimer = new Timer(1000, e -> {
+                txtStartDate.setText(XDate.format(new Date(), "yyyy-MM-dd HH:mm"));
+            });
+        }
+
+        createdAtTimer.start();
     }
 
     @Override
     public void setEditable(boolean editable) {
-        txtServiceId.setEnabled(!editable);
         txtContractId.setEnabled(!editable);
+        txtServiceId.setEnabled(!editable);
         btnCreate.setEnabled(!editable);
         btnUpdate.setEnabled(editable);
         btnDelete.setEnabled(editable);
@@ -651,5 +744,24 @@ public class ServiceUsagesJDialog extends javax.swing.JDialog implements Service
             tblServiceUsages.setRowSelectionInterval(index, index);
             this.edit();
         }
+    }
+    
+    private boolean checkForm() {
+        String contractId = txtContractId.getText().trim();
+        String serviceId = txtServiceId.getText().trim();
+
+        if (contractId.isEmpty()) {
+            XDialog.alert("Vui lòng nhập mã hợp đồng.");
+            txtContractId.requestFocus();
+            return false;
+        }
+
+        if (serviceId.isEmpty()) {
+            XDialog.alert("Vui lòng nhập mã dịch vụ.");
+            txtServiceId.requestFocus();
+            return false;
+        }
+        
+        return true;
     }
 }

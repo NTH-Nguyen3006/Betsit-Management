@@ -5,11 +5,13 @@
 package dao;
 
 import entity.Assets;
+import java.util.List;
 
 /**
  *
  * @author nhukhue
  */
 public interface AssetsDAO extends CrudDAO<Assets, String>{
-    
+     List<String> findAllCondition();
+     List<Assets> findByRoomId(String RoomId);
 }

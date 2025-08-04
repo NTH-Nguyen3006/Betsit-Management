@@ -6,6 +6,7 @@ package impl;
 
 import dao.ServiceUsagesDAO;
 import entity.ServiceUsages;
+import java.util.Date;
 import java.util.List;
 import utils.XJdbc;
 import utils.XQuery;
@@ -20,6 +21,7 @@ public class ServiceUsagesDAOImpl implements ServiceUsagesDAO {
     private final String DELETE_SQL = "DELETE FROM ServiceUsages WHERE ServiceId=? AND ContractId=?";
     private final String SELECT_ALL_SQL = "SELECT * FROM ServiceUsages";
     private final String SELECT_BY_ID_SQL = "SELECT * FROM ServiceUsages WHERE ServiceId = ? AND ContractId = ? ";
+    private final String FIND_BY_TINERANGE_SQL = "SELECT * FROM ServiceUsages WHERE StartDate BETWEEN ? AND ?";
 
     @Override
     public ServiceUsages create(ServiceUsages entity) {
@@ -57,5 +59,10 @@ public class ServiceUsagesDAOImpl implements ServiceUsagesDAO {
     @Override
     public ServiceUsages findById(int serviceId, int contractId) {
         return XQuery.getSingleBean(ServiceUsages.class, SELECT_BY_ID_SQL, serviceId, contractId);
+    }
+    
+    @Override
+    public List<ServiceUsages> findByTimeRange(Date begin, Date end) {
+        return XQuery.getBeanList(ServiceUsages.class, FIND_BY_TINERANGE_SQL, new java.sql.Timestamp(begin.getTime()), new java.sql.Timestamp(end.getTime()));
     }
 }

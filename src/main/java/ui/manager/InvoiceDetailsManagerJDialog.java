@@ -4,6 +4,7 @@
  */
 package ui.manager;
 
+import ui.controller.InvoiceDetailsManagerController;
 import dao.InvoiceDetailDAO;
 import entity.InvoiceDetail;
 import impl.InvoiceDetailDAOImpl;
@@ -166,7 +167,7 @@ public class InvoiceDetailsManagerJDialog extends javax.swing.JDialog implements
                     .addComponent(btnCheckAll)
                     .addComponent(btnUnCheckAll)
                     .addComponent(btnDeleteCheckedItems))
-                .addGap(0, 7, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         tabs.addTab("Danh Sách", jPanel1);
@@ -364,7 +365,7 @@ public class InvoiceDetailsManagerJDialog extends javax.swing.JDialog implements
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabs)
+            .addComponent(tabs, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
         );
 
         pack();
@@ -426,7 +427,7 @@ public class InvoiceDetailsManagerJDialog extends javax.swing.JDialog implements
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-        
+        this.open();
     }//GEN-LAST:event_formWindowOpened
 
     private void btnCheckAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckAllActionPerformed

@@ -19,10 +19,10 @@ import lombok.experimental.FieldDefaults;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Assets {
-    int assetId;
-    int roomId;
+    int Id;
+    int RoomId;
     String assetName;
-    String Quantity;
+    int quantity;
     String Condition;
-    Date create_at;
+    Date created_at;
 }
