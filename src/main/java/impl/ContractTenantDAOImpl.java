@@ -4,9 +4,9 @@ import java.util.List;
 import entity.ContractTenant;
 import utils.XJdbc;
 import utils.XQuery;
-import dao.ContractTenantDAO;
+import dao.ContractTenantDao;
 
-public class ContractTenantDAOImpl implements ContractTenantDAO {
+public class ContractTenantDAOImpl implements ContractTenantDao {
 
     private final String createSql = """
         INSERT INTO Contract_Tenants
@@ -66,4 +66,10 @@ public class ContractTenantDAOImpl implements ContractTenantDAO {
     public ContractTenant findById(String id) {
         return XQuery.getSingleBean(ContractTenant.class, findByIdSql, id);
     }
+    private final String findByCitizenIdSql = findAllSql + " WHERE CitizenId = ?";
+
+@Override
+public ContractTenant findByCitizenId(String citizenId) {
+    return XQuery.getSingleBean(ContractTenant.class, findByCitizenIdSql, citizenId);
+}
 }

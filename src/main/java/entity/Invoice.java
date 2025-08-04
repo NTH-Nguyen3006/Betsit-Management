@@ -13,12 +13,12 @@ import java.util.Date;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Invoice {
     int id;
-    int contract_id;
+    int contractid;
     int billing_period_month;
     int billing_period_year;
     BigDecimal previous_debt;
     BigDecimal discount;
-    BigDecimal total_amount;
+    BigDecimal totalamount;
     Boolean status;
     Date due_date;
     Date created_at;
