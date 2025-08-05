@@ -580,9 +580,8 @@ public class RolesManagerJDialog extends javax.swing.JDialog implements RoleCont
 
     @Override
     public void clear() {
+        setForm(new Role());
         txtId.setText("");
-        txtRoleName.setText("");
-        txtDescription.setText("");
         this.setEditable(false);
     }
 
