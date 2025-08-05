@@ -6,7 +6,7 @@ package ui.manager;
 
 import dao.ContractDAO;
 import ui.controller.InvoicesManagerController;
-import dao.InvoiceDAO;
+import dao.InvoiceDao;
 import entity.Contract;
 import impl.InvoiceDAOImpl;
 import entity.Invoice;
@@ -22,7 +22,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.html.parser.Entity;
 import utils.XDialog;
-import dao.InvoiceDAO;
+import dao.InvoiceDao;
 
 /**
  *
@@ -668,9 +668,9 @@ public class InvoicesManagerJDialog extends javax.swing.JDialog implements Invoi
     private javax.swing.JTextField txtStatus;
     private javax.swing.JTextField txtTotalamount;
     // End of variables declaration//GEN-END:variables
-    InvoiceDAO dao = new InvoiceDAOImpl();
+    InvoiceDao dao = new InvoiceDAOImpl();
     ContractDAO contractDAO = new ContractDAOImpl();
-    private InvoiceDAO invoiceDAO = new InvoiceDAOImpl();
+    private InvoiceDao invoiceDAO = new InvoiceDAOImpl();
     private List<Invoice> listInvoices = new ArrayList<>();
     private int currentIndex = -1;
     

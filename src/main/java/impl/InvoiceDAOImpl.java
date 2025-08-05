@@ -4,9 +4,9 @@ import entity.Invoice;
 import java.util.List;
 import utils.XJdbc;
 import utils.XQuery;
-import dao.InvoiceDAO;
+import dao.InvoiceDao;
 
-public class InvoiceDAOImpl implements InvoiceDAO {
+public class InvoiceDAOImpl implements InvoiceDao {
 
     private final String createSql = "INSERT INTO Invoice "
     + "(ContractId, billing_period_month, billing_period_year, previous_debt, discount, totalamount, status, due_date, created_at) "

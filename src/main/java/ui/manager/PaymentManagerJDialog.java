@@ -8,7 +8,7 @@ import ui.controller.PaymentManagerController;
 import dao.PaymentDAO;
 import impl.PaymentDAOImpl;
 import entity.Invoice;
-import dao.InvoiceDAO;
+import dao.InvoiceDao;
 import entity.Payment;
 import impl.InvoiceDAOImpl;
 import impl.PaymentDAOImpl;
@@ -561,7 +561,7 @@ public class PaymentManagerJDialog extends javax.swing.JDialog implements Paymen
     private javax.swing.JTextField txtTransactionCode;
     // End of variables declaration//GEN-END:variables
     PaymentDAO dao = new PaymentDAOImpl();
-    InvoiceDAO invoiceDAO = new InvoiceDAOImpl();
+    InvoiceDao invoiceDAO = new InvoiceDAOImpl();
     
     List<Payment> items = List.of();
     private int currentRow = -1;
