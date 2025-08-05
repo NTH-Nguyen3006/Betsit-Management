@@ -603,24 +603,6 @@ public class ContractManagerJDialog extends javax.swing.JDialog implements Contr
         this.setLocationRelativeTo(null);
         this.fillToTable();
         this.clear();
-
-        tblContractManager.getSelectionModel().addListSelectionListener(e -> {
-            if (!e.getValueIsAdjusting()) {
-                this.edit();
-            }
-        });
-
-        tblContractManager.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
-                if (e.getClickCount() == 1) {
-                    edit();
-                }
-            }
-        });
-        if (!items.isEmpty()) {
-    tblContractManager.setRowSelectionInterval(0, 0);
-    edit();
-}
     }
     
 @Override
@@ -884,6 +866,7 @@ public void clear() {
     this.setForm(new Contract());
     this.setDetailForm(null);
     this.setEditable(false);
+    txtPaymentCycleMonth.setText("");
 }
 
  @Override
