@@ -11,6 +11,6 @@ import java.util.List;
  *
  * @author GAMING
  */
-public interface InvoiceDetailDAO extends CrudDAO<InvoiceDetail,String>{
+public interface InvoiceDetailDao extends CrudDAO<InvoiceDetail, String> {
     List<InvoiceDetail> selectByInvoiceId(String invoiceId);
 }
