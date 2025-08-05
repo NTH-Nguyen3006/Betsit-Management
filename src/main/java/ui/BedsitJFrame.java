@@ -41,6 +41,7 @@ public final class BedsitJFrame extends javax.swing.JFrame implements BedsitCont
         btnInvoices = new javax.swing.JButton();
         btnRoom = new javax.swing.JButton();
         btnRole = new javax.swing.JButton();
+        btnAssets = new javax.swing.JButton();
         pnlBackground = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -181,7 +182,7 @@ public final class BedsitJFrame extends javax.swing.JFrame implements BedsitCont
         pnlCenterBottom.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         pnlCenterBottom.setOpaque(false);
         pnlCenterBottom.setPreferredSize(new java.awt.Dimension(693, 150));
-        pnlCenterBottom.setLayout(new java.awt.GridLayout(0, 2, 4, 4));
+        pnlCenterBottom.setLayout(new java.awt.GridLayout(0, 3, 4, 4));
 
         btnUser.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
         btnUser.setText("QUẢN LÍ TÀI KHOẢN");
@@ -223,6 +224,16 @@ public final class BedsitJFrame extends javax.swing.JFrame implements BedsitCont
             }
         });
         pnlCenterBottom.add(btnRole);
+
+        btnAssets.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
+        btnAssets.setText("QUẢN LÍ TÀI SẢN");
+        btnAssets.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnAssets.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAssetsActionPerformed(evt);
+            }
+        });
+        pnlCenterBottom.add(btnAssets);
 
         pnlManager.add(pnlCenterBottom, java.awt.BorderLayout.PAGE_END);
 
@@ -292,6 +303,11 @@ public final class BedsitJFrame extends javax.swing.JFrame implements BedsitCont
         System.exit(0);
     }//GEN-LAST:event_formWindowClosed
 
+    private void btnAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssetsActionPerformed
+        // TODO add your handling code here:
+        this.showAssetJDialog(this);
+    }//GEN-LAST:event_btnAssetsActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -335,6 +351,7 @@ public final class BedsitJFrame extends javax.swing.JFrame implements BedsitCont
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAssets;
     private javax.swing.JButton btnChangePassword;
     private javax.swing.JButton btnContracts;
     private javax.swing.JButton btnExit1;

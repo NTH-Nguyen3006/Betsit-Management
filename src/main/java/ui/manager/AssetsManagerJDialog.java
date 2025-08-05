@@ -13,10 +13,13 @@ import impl.RoomDAOImpl;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.function.Consumer;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+import lombok.Getter;
+import lombok.Setter;
 import ui.controller.AssetsController;
 import utils.XDialog;
 import utils.XIcon;
@@ -66,7 +69,9 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
         btnMovePrevious = new javax.swing.JButton();
         btnMoveNext = new javax.swing.JButton();
         btnMoveLast = new javax.swing.JButton();
-        imageJPanel = new ui.component.ImageJPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        lblPicture = new javax.swing.JLabel();
 
         lblImage.setText("jLabel6");
 
@@ -155,17 +160,17 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(350, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 579, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnCheckAll)
                 .addGap(31, 31, 31)
                 .addComponent(btnUncheckAll)
                 .addGap(27, 27, 27)
                 .addComponent(btnDeleteCheckedItems)
                 .addGap(20, 20, 20))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 579, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,7 +178,7 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(30, 30, 30)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnCheckAll)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -186,6 +191,8 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("Mã tài sản");
+
+        txtId.setEditable(false);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Tên tài sản");
@@ -257,6 +264,42 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
             }
         });
 
+        jPanel4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 102, 102), 1, true));
+        jPanel4.setLayout(new java.awt.BorderLayout());
+
+        lblPicture.setFont(new java.awt.Font("Impact", 1, 18)); // NOI18N
+        lblPicture.setForeground(new java.awt.Color(255, 102, 102));
+        lblPicture.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblPicture.setText("Image");
+        lblPicture.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblPicture.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblPictureMouseClicked(evt);
+            }
+        });
+        jPanel4.add(lblPicture, java.awt.BorderLayout.PAGE_START);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 143, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 162, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -265,30 +308,30 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(imageJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
+                        .addGap(46, 46, 46)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(51, 51, 51)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel1)
-                                .addComponent(txtAssetName)
-                                .addComponent(txtId, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
-                                .addComponent(jLabel2)
-                                .addComponent(txtCondition))
-                            .addComponent(jLabel5))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
                             .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(txtCondition, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtAssetName, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtId, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGap(1, 1, 1)
-                                        .addComponent(txtRoomId, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(43, 43, 43))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(txtQuantity)
-                                .addContainerGap())))
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel3)
+                                            .addComponent(jLabel4))
+                                        .addGap(225, 225, 225))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtQuantity, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
+                                            .addComponent(txtRoomId, javax.swing.GroupLayout.Alignment.TRAILING))
+                                        .addContainerGap())))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jSeparator1)
                         .addContainerGap())))
@@ -315,31 +358,33 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(34, 34, 34)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(0, 0, 0)
-                                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(29, 29, 29)
-                                .addComponent(jLabel2)
-                                .addGap(0, 0, 0)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txtAssetName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(0, 0, 0)
-                                .addComponent(txtRoomId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(29, 29, 29)
-                                .addComponent(jLabel4)
-                                .addGap(51, 51, 51)
-                                .addComponent(jLabel5)))
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, 0)
+                        .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addComponent(jLabel2)
+                        .addGap(0, 0, 0)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtAssetName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30)
+                        .addComponent(jLabel5)
                         .addGap(1, 1, 1)
                         .addComponent(txtCondition, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(imageJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(47, 47, 47)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(0, 0, 0)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(txtRoomId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(29, 29, 29)
+                                .addComponent(jLabel4))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(29, 29, 29)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -352,7 +397,7 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
                     .addComponent(btnMovePrevious)
                     .addComponent(btnMoveNext)
                     .addComponent(btnMoveLast))
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         tabs.addTab("Biểu Mẫu", jPanel2);
@@ -365,9 +410,7 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(tabs)
-                .addContainerGap())
+            .addComponent(tabs, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
         );
 
         pack();
@@ -441,6 +484,17 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
         this.moveLast();
     }//GEN-LAST:event_btnMoveLastActionPerformed
 
+    private void lblPictureMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPictureMouseClicked
+        // TODO add your handling code here:
+        if(fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION){
+            File file = XIcon.copyTo(fileChooser.getSelectedFile(), this.folder);
+            this.setIcon(file.getName());
+            if(this.fileChanged != null){
+                this.fileChanged.accept(file);
+            }
+        }
+    }//GEN-LAST:event_lblPictureMouseClicked
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -493,7 +547,6 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
     private javax.swing.JButton btnUncheckAll;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JFileChooser fileChooser;
-    private ui.component.ImageJPanel imageJPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -501,10 +554,13 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblImage;
+    private javax.swing.JLabel lblPicture;
     private javax.swing.JTabbedPane tabs;
     private javax.swing.JTable tblAssets;
     private javax.swing.JTable tblRooms;
@@ -539,8 +595,8 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
         RoomDAO rdao = new RoomDAOImpl();
         rooms = rdao.findAll();
 
-        rooms.forEach(category -> {
-            tblModel.addRow(new Object[]{category.getRoomId()});
+        rooms.forEach(room -> {
+            tblModel.addRow(new Object[]{room.getRoomId()});
         });
 
         tblRooms.setRowSelectionInterval(0, 0);
@@ -559,16 +615,16 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
                 item.getAssetName(),
                 item.getQuantity(),
                 item.getCondition(),
-//                item.getCreate_at(),
+                item.getCreated_at(),
                 
-                false
+//                false
             };
             model.addRow(rowData);
         });
         this.clear();
     }
    
-        @Override
+    @Override
     public void edit() {
         Assets entity = items.get(tblAssets.getSelectedRow());
         this.setForm(entity);
@@ -583,26 +639,16 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
 
     @Override
     public void uncheckAll() {
-        setCheckedAll(false);
+        tblAssets.clearSelection();
+        this.setEditable(false);
+        
     }
     
     private void setCheckedAll(boolean checked) {
-        for (int i = 0; i < tblAssets.getRowCount(); i++) {
-            tblAssets.setValueAt(checked, i, 5);
-        }
+        tblAssets.selectAll();
+        
     }
     
-        @Override
-    public void deleteCheckedItems() {
-        if (XDialog.confirm("Bạn thực sự muốn xóa các mục chọn?")) {
-            for (int i = 0; i < tblAssets.getRowCount(); i++) {
-                if ((Boolean) tblAssets.getValueAt(i, 5)) {
-                    dao.deleteById(String.valueOf(items.get(i).getId()));
-                }
-            }
-            this.fillToTable();
-        }
-    }
     @Override
     public void setForm(Assets entity) {
         txtId.setText(String.valueOf(entity.getId()));
@@ -615,7 +661,7 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
     @Override
     public Assets getForm() {
         Assets asset = new Assets();
-        asset.setId(Integer.parseInt(txtId.getText()));
+//        asset.setId(Integer.parseInt(txtId.getText()));
         asset.setAssetName(txtAssetName.getText());
         asset.setQuantity(Integer.parseInt(txtQuantity.getText()));
         asset.setCondition(txtCondition.getText());
@@ -623,20 +669,21 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
        
         return asset;    
     }
-
-
     
     @Override
     public void create() {
-        try {
-            Assets entity = this.getForm();
-            dao.create(entity);
-            this.fillToTable();
-            this.clear();
-        } catch (Exception e) {
-            XDialog.alert("Thêm mới thất bại! " + e.getMessage());
-       
-        }    
+        Assets asset = getForm();
+        if (asset != null) {
+            try {
+                dao.create(asset);
+                XDialog.alert("Thêm mới phòng thành công!");
+                this.fillToTable();
+                this.clear(); // Xóa trắng form sau khi thêm mới
+            } catch (Exception e) {
+                XDialog.alert("Thêm mới phòng thất bại");
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     @Override
@@ -644,9 +691,12 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
         try {
             Assets entity = this.getForm();
             dao.update(entity);
-            this.fillToTable();           
+            XDialog.alert("Cập nhật thành công");
+            fillToTable();     
+            clear();
         } catch (Exception e) {
-            XDialog.alert("Cập nhật thất bại! " + e.getMessage());
+            XDialog.alert("Cập nhật thất bại! ");
+            System.out.println(e.getMessage());
         }    
     }
 
@@ -659,6 +709,7 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
                 XDialog.alert("Xóa thành công!");
                 this.fillToTable();// Sau khi xóa, tải lại bảng tài sản cho phòng hiện tại
                 this.clear(); 
+                this.setEditable(false);
             } catch (Exception e) {
                 XDialog.alert("Xóa thất bại! " + e.getMessage());               
             }
@@ -667,13 +718,16 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
 
     @Override
     public void clear() {
-        this.setForm(new Assets());
+        txtAssetName.setText("");
+        txtCondition.setText("");
+        txtId.setText(""); // Đặt lại lựa chọn đầu tiên
+        txtQuantity.setText("");
+        txtRoomId.setText("");
         this.setEditable(false);
     }
 
     @Override
     public void setEditable(boolean editable) {
-        txtId.setEnabled(!editable);
         btnCreate.setEnabled(!editable);
         btnUpdate.setEnabled(editable);
         btnDelete.setEnabled(editable);
@@ -686,7 +740,7 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
     }
 
 
-     @Override
+    @Override
     public void moveFirst() {
         this.moveTo(0);
     }
@@ -708,15 +762,23 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
 
     @Override
     public void moveTo(int index) {
+        int rowCount = tblAssets.getRowCount();
+
+        if (rowCount == 0) {
+            // Không có dữ liệu, không di chuyển gì cả
+            return;
+        }
+
         if (index < 0) {
-            this.moveLast();
-        } else if (index >= tblAssets.getRowCount()) {
-            this.moveFirst();
+            this.moveLast();  // Chuyển đến dòng cuối cùng nếu index âm
+        } else if (index >= rowCount) {
+            this.moveFirst(); // Chuyển đến dòng đầu tiên nếu index quá lớn
         } else {
             tblAssets.clearSelection();
             tblAssets.setRowSelectionInterval(index, index);
             this.edit();
         }
+
     }
     private void chooseFile() {
         
@@ -728,5 +790,38 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
             lblImage.setToolTipText(file.getName());
             XIcon.setIcon(lblImage, file);
         }
+    }
+        @Getter
+    @Setter
+    String folder = "images";
+    Consumer<File> fileChanged;
+
+    public String getIcon() {
+        return lblPicture.getToolTipText();
+    }
+
+    public void setIcon(String icon) {
+        lblPicture.setText("");
+        lblPicture.setToolTipText(icon);
+        XIcon.setIcon(lblPicture, new File(this.folder, icon));
+    }
+    
+    @Override
+    public void deleteCheckedItems() {
+            try {
+                int[] selectedRows = tblAssets.getSelectedRows();
+                if (selectedRows.length > 0) {
+                    // Iterate in reverse to avoid issues with index changes after deletion
+                    for (int i = selectedRows.length - 1; i >= 0; i--) {
+                        String roomId = String.valueOf(tblAssets.getValueAt(selectedRows[i], 0));
+                        dao.deleteById(roomId);
+                    }
+                    this.fillToTable();
+                    this.clear();
+                }
+            } catch (Exception e) {
+                XDialog.alert("Xóa tài sản không thành công");
+                System.out.println(e.getMessage());
+            }
     }
 }

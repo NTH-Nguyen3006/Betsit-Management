@@ -6,37 +6,26 @@
     <artifactId>Bedsit-Sofware</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.release>23</maven.compiler.release>
+        <!--        <maven.compiler.release>23</maven.compiler.release>-->
+        <maven.compiler.release>19</maven.compiler.release>
         <exec.mainClass>com.mycompany.bedsit.sofware.BedsitSofware</exec.mainClass>
-        <maven.compiler.source>15</maven.compiler.source>
-        <maven.compiler.target>15</maven.compiler.target>
-        <lombok.version>1.18.38</lombok.version>
     </properties>
 
+
     <dependencies>
-        <!-- SQL Server JDBC Driver -->
         <dependency>
             <groupId>com.microsoft.sqlserver</groupId>
             <artifactId>mssql-jdbc</artifactId>
             <version>12.8.1.jre8</version>
         </dependency>
 
-        <!-- Lombok for automatic getters/setters -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
+            <version>1.18.38</version>
             <scope>provided</scope>
-        </dependency>
-
-        <!-- NetBeans AbsoluteLayout -->
-        <dependency>
-            <groupId>org.netbeans.external</groupId>
-            <artifactId>AbsoluteLayout</artifactId>
-            <version>RELEASE230</version>
         </dependency>
     </dependencies>
 
@@ -46,23 +35,19 @@
                 <directory>src/main/java</directory>
             </resource>
         </resources>
-        <testSourceDirectory>/src/test/java</testSourceDirectory>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.10.1</version>
+                <version>3.11.0</version>                <!-- hoặc 3.8.1 nếu muốn -->
                 <configuration>
-                    <annotationProcessorPaths>
-                        <path>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                            <version>${lombok.version}</version>
-                        </path>
-                    </annotationProcessorPaths>
+                    <source>17</source>                    <!-- hoặc 19 nếu bạn dùng JDK 19 -->
+                    <target>17</target>
                 </configuration>
             </plugin>
         </plugins>
-
     </build>
+ 
+       
 </project>

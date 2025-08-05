@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import ui.ChangePasswordJDialog;
 import ui.LoginJDialog;
 import ui.WelcomeJDialog;
+import ui.manager.AssetsManagerJDialog;
 import ui.manager.RolesManagerJDialog;
 import ui.manager.RoomManagerJDialog;
 import ui.manager.ServiceManagerJDialog;
@@ -71,5 +72,9 @@ public interface BedsitController {
 
     default void showRoleJDialog(JFrame frame) {
         this.showJDialog(new RolesManagerJDialog(frame, true));
+    }
+    
+    default void showAssetJDialog(JFrame frame) {
+        this.showJDialog(new AssetsManagerJDialog(frame, true));
     }
 }

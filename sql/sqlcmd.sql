@@ -2,8 +2,8 @@ CREATE DATABASE BEDSIT;
 GO
 USE BEDSIT
 GO
-
--- DROP DATABASE BEDSIT
+use Lab2_QLDA
+DROP DATABASE BEDSIT
 
 CREATE TABLE Rooms (
     RoomId INT IDENTITY(1,1) PRIMARY KEY,
@@ -14,7 +14,8 @@ CREATE TABLE Rooms (
     RoomType NVARCHAR(100),
     Notes NVARCHAR(MAX),
 );
-
+SELECT DISTINCT RoomType FROM Rooms WHERE RoomType IS NOT NULL AND RoomType <> '' ORDER BY RoomType
+	select * from Rooms
 CREATE TABLE Assets (
     Id INT IDENTITY(1,1) PRIMARY KEY,
     RoomId INT NOT NULL,
@@ -26,8 +27,7 @@ CREATE TABLE Assets (
     FOREIGN KEY (RoomId) REFERENCES Rooms(RoomID)
 	ON DELETE CASCADE
 );
-select * from Assets
-delete Assets where Id = 1;
+
 
 CREATE TABLE Tenants (
     CitizenId VARCHAR(12) PRIMARY KEY, -- Số Căn cước công dân
@@ -716,7 +716,6 @@ INSERT INTO Contracts (RoomId, Tenant, StartDate, EndDate, DepositAmount, Paymen
 (32, '004234567890', '2024-08-10', '2025-08-09', 8400000.00, 3, NULL, N'Hợp đồng 1 năm, có điều khoản gia hạn'),
 (33, '004345678901', '2024-09-05', '2025-09-04', 5600000.00, 1, NULL, N'Hợp đồng 1 năm, thanh toán hàng tháng');
 --DROP DATABASE BEDSIT
-
 --Dữ liệu bảng Assets
 INSERT INTO Assets (RoomId, AssetName, Quantity, Condition) VALUES
 -- RoomId 1-10
