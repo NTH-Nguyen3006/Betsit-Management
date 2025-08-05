@@ -4,9 +4,9 @@ import entity.Invoice;
 import java.util.List;
 import utils.XJdbc;
 import utils.XQuery;
-import dao.InvoiceDAO;
+import dao.InvoiceDao;
 
-public class InvoiceDAOImpl implements InvoiceDAO {
+public class InvoiceDAOImpl implements InvoiceDao {
 
     private final String createSql = "INSERT INTO Invoice "
             + "(Id, Contract_id, billing_period_month, billing_period_year, previous_debt, discount, total_amount, status, due_date, created_at) "
@@ -24,16 +24,16 @@ public class InvoiceDAOImpl implements InvoiceDAO {
     @Override
     public Invoice create(Invoice entity) {
         Object[] values = {
-            entity.getId(),
-            entity.getContract_id(),
-            entity.getBilling_period_month(),
-            entity.getBilling_period_year(),
-            entity.getPrevious_debt(),
-            entity.getDiscount(),
-            entity.getTotal_amount(),
-            entity.getStatus(),
-            entity.getDue_date(),
-            entity.getCreated_at()
+                entity.getId(),
+                entity.getContract_id(),
+                entity.getBilling_period_month(),
+                entity.getBilling_period_year(),
+                entity.getPrevious_debt(),
+                entity.getDiscount(),
+                entity.getTotal_amount(),
+                entity.getStatus(),
+                entity.getDue_date(),
+                entity.getCreated_at()
         };
         XJdbc.executeUpdate(createSql, values);
         return entity;
@@ -42,16 +42,16 @@ public class InvoiceDAOImpl implements InvoiceDAO {
     @Override
     public void update(Invoice entity) {
         Object[] values = {
-            entity.getContract_id(),
-            entity.getBilling_period_month(),
-            entity.getBilling_period_year(),
-            entity.getPrevious_debt(),
-            entity.getDiscount(),
-            entity.getTotal_amount(),
-            entity.getStatus(),
-            entity.getDue_date(),
-            entity.getCreated_at(),
-            entity.getId()  // WHERE Id = ?
+                entity.getContract_id(),
+                entity.getBilling_period_month(),
+                entity.getBilling_period_year(),
+                entity.getPrevious_debt(),
+                entity.getDiscount(),
+                entity.getTotal_amount(),
+                entity.getStatus(),
+                entity.getDue_date(),
+                entity.getCreated_at(),
+                entity.getId() // WHERE Id = ?
         };
         XJdbc.executeUpdate(updateSql, values);
     }

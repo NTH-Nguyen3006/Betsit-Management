@@ -1,7 +1,11 @@
-
 package ui.manager;
 
-import ui.controller.RoomController;
+import java.math.BigDecimal;
+import java.util.List;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.table.DefaultTableModel;
+
 import dao.RoomDAO;
 import entity.Room;
 import entity.Room.eStatus;
@@ -15,11 +19,9 @@ import javax.swing.JFileChooser;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import utils.XDialog;
-import utils.XJdbc;
 import utils.XOther;
 
 public class RoomManagerJDialog extends javax.swing.JDialog implements RoomController {
-
 
     public RoomManagerJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
