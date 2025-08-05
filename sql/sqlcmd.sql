@@ -2,7 +2,7 @@ CREATE DATABASE BEDSIT;
 GO
 USE BEDSIT
 GO
-SELECT * FROM Invoice
+SELECT CitizenId, FullName FROM Tenants;
 use asm22
 DROP DATABASE BEDSIT
 
@@ -194,21 +194,20 @@ INSERT INTO Invoice (ContractId, Billing_period_month, Billing_period_year, Prev
 	(15, 6, 1, 50000.00, 50000.00); -- Phí Vệ Sinh
 
 
-CREATE TABLE Payments ( --ĐƠn thanh toán
-    Id int PRIMARY KEY IDENTITY(1, 1),
-    InvoiceId int NOT NULL,
-    Tenant varchar(12),
-    Amount decimal(12,2) NOT NULL,
-    PaymentDate datetime NOT NULL,
-    PaymentMethod nvarchar(50) NOT NULL,
-    TransactionCode varchar(100),
-    Note text
+CREATE TABLE Payments ( -- ĐƠn thanh toán
+    Id INT PRIMARY KEY IDENTITY(1, 1),
+    InvoiceId INT NOT NULL,
+    Tenant VARCHAR(12) NOT NULL,
+    Amount DECIMAL(12,2) NOT NULL, -- tự lấy từ Invoice.TotalAmount
+    PaymentDate DATETIME NOT NULL DEFAULT GETDATE(), -- mặc định là ngày tạo
+    PaymentMethod NVARCHAR(50) NOT NULL, -- yêu cầu nhập
+    TransactionCode VARCHAR(100), -- yêu cầu đúng định dạng
+    Note TEXT,
 
-    FOREIGN KEY(InvoiceId) REFERENCES Invoice(Id)
-        ON DELETE CASCADE,
-    FOREIGN KEY(Tenant) REFERENCES Tenants(CitizenId)
-        ON DELETE CASCADE
+    FOREIGN KEY(InvoiceId) REFERENCES Invoice(Id) ON DELETE CASCADE,
+    FOREIGN KEY(Tenant) REFERENCES Tenants(CitizenId) ON DELETE CASCADE
 );
+
 INSERT INTO Payments (InvoiceId, Tenant, Amount, PaymentDate, PaymentMethod, TransactionCode, Note) VALUES
 (1,  '001123456789', 3850000.00, '2025-07-05 09:00:00', N'Cash',          'TXN20250705001', NULL),
 (2,  '001234567890', 4500000.00, '2025-07-12 14:30:00', N'Bank Transfer', 'TXN20250712002', NULL),
