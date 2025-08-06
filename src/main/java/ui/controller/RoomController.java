@@ -4,6 +4,6 @@ import entity.Room;
 
 
 public interface RoomController extends CrudController<Room>{
-    void fillCategories();
+    void fillRoomType();
     void chooseFile();
 }

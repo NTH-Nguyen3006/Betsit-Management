@@ -11,7 +11,7 @@ import java.util.Date;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Payment {
-    int Id;
+    Integer Id;
     int InvoiceId; // ✅ sửa cho khớp cột SQL
     String Tenant;
     BigDecimal Amount;

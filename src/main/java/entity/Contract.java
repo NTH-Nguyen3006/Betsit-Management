@@ -12,13 +12,13 @@ import java.util.Date;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Contract {
-    Integer Id;                     // INT → Integer
-    Integer RoomId;                 // INT → Integer
+    Integer Id;                     // Integer
+    Integer RoomId;                 // Integer
     String Tenant;                  // VARCHAR(12)
     Date StartDate;                 // DATETIME
     Date EndDate;                   // DATETIME
     BigDecimal DepositAmount;      // DECIMAL(10,2)
-    short PaymentCycleMonths;  // TINYINT → Integer
+    Integer PaymentCycleMonths;  //  Integer
     String File_scan_url;          // VARCHAR(20)
     String Notes;                  // NVARCHAR(MAX)
 }

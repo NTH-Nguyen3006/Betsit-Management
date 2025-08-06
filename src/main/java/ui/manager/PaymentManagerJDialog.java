@@ -6,7 +6,11 @@ package ui.manager;
 
 import ui.controller.PaymentManagerController;
 import dao.PaymentDAO;
+import impl.PaymentDAOImpl;
+import entity.Invoice;
+import dao.InvoiceDao;
 import entity.Payment;
+import impl.InvoiceDAOImpl;
 import impl.PaymentDAOImpl;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -23,13 +27,14 @@ import utils.XDialog;
  * @author GAMING
  */
 public class PaymentManagerJDialog extends javax.swing.JDialog implements PaymentManagerController{
-
+    
     /**
      * Creates new form PaymentManagerJDialog
      */
     public PaymentManagerJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
     }
 
     /**
@@ -235,6 +240,11 @@ public class PaymentManagerJDialog extends javax.swing.JDialog implements Paymen
         });
 
         btnMoveFirst.setText("|<");
+        btnMoveFirst.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMoveFirstActionPerformed(evt);
+            }
+        });
 
         btnMovePrevious.setText("<<");
         btnMovePrevious.addActionListener(new java.awt.event.ActionListener() {
@@ -251,6 +261,11 @@ public class PaymentManagerJDialog extends javax.swing.JDialog implements Paymen
         });
 
         btnMoveLast.setText(">|");
+        btnMoveLast.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMoveLastActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -439,14 +454,17 @@ public class PaymentManagerJDialog extends javax.swing.JDialog implements Paymen
 
     private void btnCheckAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckAllActionPerformed
         // TODO add your handling code here:
+        this.checkAll();
     }//GEN-LAST:event_btnCheckAllActionPerformed
 
     private void btnUnCheckAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUnCheckAllActionPerformed
         // TODO add your handling code here:
+        this.uncheckAll();
     }//GEN-LAST:event_btnUnCheckAllActionPerformed
 
     private void btnDeleteCheckedItemsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteCheckedItemsActionPerformed
         // TODO add your handling code here:
+        this.deleteCheckedItems();
         
     }//GEN-LAST:event_btnDeleteCheckedItemsActionPerformed
 
@@ -454,6 +472,16 @@ public class PaymentManagerJDialog extends javax.swing.JDialog implements Paymen
         // TODO add your handling code here:
         this.open();
     }//GEN-LAST:event_formWindowOpened
+
+    private void btnMoveFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveFirstActionPerformed
+        // TODO add your handling code here:
+        this.moveFirst();
+    }//GEN-LAST:event_btnMoveFirstActionPerformed
+
+    private void btnMoveLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveLastActionPerformed
+        // TODO add your handling code here:
+        this.moveLast();
+    }//GEN-LAST:event_btnMoveLastActionPerformed
 
     /**
      * @param args the command line arguments
@@ -533,6 +561,8 @@ public class PaymentManagerJDialog extends javax.swing.JDialog implements Paymen
     private javax.swing.JTextField txtTransactionCode;
     // End of variables declaration//GEN-END:variables
     PaymentDAO dao = new PaymentDAOImpl();
+    InvoiceDao invoiceDAO = new InvoiceDAOImpl();
+    
     List<Payment> items = List.of();
     private int currentRow = -1;
     
@@ -641,21 +671,75 @@ public void fillToTable() {
         }
     }
 
-    @Override
-    public void create() {
-         try {
-        Payment p = getForm(true);
-        dao.create(p);
-        fillToTable();
-        clear();
-        JOptionPane.showMessageDialog(this, "Thêm mới thành công!");
-    } catch (Exception ex) {
-        JOptionPane.showMessageDialog(this, "Lỗi thêm mới: " + ex.getMessage());
-        ex.printStackTrace();
-    }
-    }
+
 
     @Override
+public void create() {
+    try {
+        String invoiceId = txtInvoiceId.getText().trim();
+
+        // Kiểm tra invoiceId có tồn tại không
+        Invoice invoice = invoiceDAO.findById(invoiceId);
+        if (invoice == null) {
+            JOptionPane.showMessageDialog(this, "InvoiceId không tồn tại!");
+            return;
+        }
+
+        // Lấy CCCD người thuê
+        String tenant = txtTenant.getText().trim();
+        if (!tenant.matches("\\d{12}")) {
+            JOptionPane.showMessageDialog(this, "CCCD không hợp lệ (phải đủ 12 chữ số, không chứa chữ cái)");
+            return;
+        }
+
+        // Lấy số tiền từ Invoice
+        BigDecimal amount = invoice.getTotalamount();
+
+        // Ngày thanh toán = ngày hiện tại
+        Date paymentDate = new Date();
+
+        // Phương thức thanh toán
+        String method = txtPaymentMethod.getText().trim();
+        if (method.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập phương thức thanh toán");
+            return;
+        }
+
+        // Mã giao dịch (có thể kiểm tra độ dài/tùy format)
+        String transactionCode = txtTransactionCode.getText().trim();
+        if (transactionCode.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập mã giao dịch");
+            return;
+        }
+
+        // Ghi chú (không bắt buộc)
+        String note = txtNote.getText().trim();
+
+        // Tạo đối tượng Payment
+        Payment payment = Payment.builder()
+            .InvoiceId(Integer.parseInt(invoiceId))
+            .Tenant(tenant)
+            .Amount(amount)
+            .PaymentDate(paymentDate)
+            .PaymentMethod(method)
+            .TransactionCode(transactionCode)
+            .Note(note)
+            .build();
+
+        // Gọi DAO để lưu
+        dao.create(payment);
+        JOptionPane.showMessageDialog(this, "Tạo thanh toán thành công!");
+
+        loadDataToTable(); // làm mới bảng nếu có
+        clear();
+
+    } catch (NumberFormatException ex) {
+        JOptionPane.showMessageDialog(this, "InvoiceId phải là số nguyên!");
+    } catch (Exception ex) {
+        ex.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Lỗi: " + ex.getMessage());
+    }
+}
     public void update() {
          try {
         Payment p = getForm(false);
@@ -773,6 +857,24 @@ public void fillToTable() {
         currentRow = rowIndex;
         tblPayment.setRowSelectionInterval(currentRow, currentRow);
         edit();
+    }
+}
+    private void loadDataToTable() {
+    // Gợi ý: Gọi lại DAO để load tất cả Payment rồi đổ vào JTable
+    List<Payment> payments = dao.findAll();
+    DefaultTableModel model = (DefaultTableModel) tblPayment.getModel();
+    model.setRowCount(0); // clear bảng cũ
+    for (Payment p : payments) {
+        model.addRow(new Object[]{
+            p.getId(),
+            p.getInvoiceId(),
+            p.getTenant(),
+            p.getAmount(),
+            p.getPaymentDate(),
+            p.getPaymentMethod(),
+            p.getTransactionCode(),
+            p.getNote()
+        });
     }
 }
 }

@@ -48,13 +48,13 @@ public class RoomDAOImpl implements RoomDAO {
     @Override
     public void update(Room entity) {
         Object[] values = {
-                entity.getRoomId(),
+                
                 entity.getArea(),
                 entity.getRentPrice(),
                 entity.getStatus(),
                 entity.getRoomType(),
                 entity.getNotes(),
-                entity.getRoomId()
+                entity.getRoomId(),
         };
         XJdbc.executeUpdate(updateSql, values);
     }
@@ -76,8 +76,7 @@ public class RoomDAOImpl implements RoomDAO {
 
     @Override
     public List<String> findAllRoomType() {
-        return XQuery.getBeanList(String.class, findAllRoomTypesSql); // Sử dụng phương thức getList mới của XQuery
-      
+        return XQuery.getList(String.class, findAllRoomTypesSql); // Sử dụng phương thức getList mới của XQuery
     }
     
      public List<Room> findAllRoomIds() {

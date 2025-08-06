@@ -5,9 +5,12 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 
 import ui.ChangePasswordJDialog;
+import ui.ContactJDialog;
 import ui.LoginJDialog;
 import ui.WelcomeJDialog;
+import ui.manager.AssetsManagerJDialog;
 import ui.manager.ContractManagerJDialog;
+import ui.manager.InvoicesManagerJDialog;
 import ui.manager.PaymentManagerJDialog;
 import ui.manager.RolesManagerJDialog;
 import ui.manager.RoomManagerJDialog;
@@ -51,6 +54,7 @@ public interface BedsitController {
     }
 
     default void showInvoicesManagerJDialog(JFrame frame) {
+         this.showJDialog(new InvoicesManagerJDialog(frame, true));
 
     }
 
@@ -72,5 +76,12 @@ public interface BedsitController {
 
     default void showRoleJDialog(JFrame frame) {
         this.showJDialog(new RolesManagerJDialog(frame, true));
+    }
+    
+    default void showAssetJDialog(JFrame frame) {
+        this.showJDialog(new AssetsManagerJDialog(frame, true));
+    }
+    default void showContactJDialog(JFrame frame) {
+        this.showJDialog(new ContactJDialog(frame, true));
     }
 }

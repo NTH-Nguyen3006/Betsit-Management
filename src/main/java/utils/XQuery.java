@@ -51,6 +51,18 @@ public class XQuery {
         }
         return bean;
     }
+    public static <T> List<T> getList(Class<T> typeClass, String sql, Object... values) {
+        List<T> list = new ArrayList<>();
+        try (ResultSet resultSet = XJdbc.executeQuery(sql, values)) {
+            while (resultSet.next()) {
+                list.add((T) resultSet.getObject(1));
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+        return list;
+    }
+
 
     public static void main(String[] args) {
         Tenant t = new Tenant();
