@@ -21,16 +21,6 @@ import ui.controller.ContractTenantManagerController;
  * @author GAMING
  */
 public class ContractTenantManagerJDialog extends javax.swing.JDialog implements ContractTenantManagerController {
-<<<<<<< HEAD
-<<<<<<< HEAD
-    ContractTenantDao dao = new ContractTenantDAOImpl();
-    int currentIndex = -1;
-
-=======
-        ContractTenantDao dao = new ContractTenantDAOImpl();
-        int currentIndex = -1;
-        
-=======
     ContractTenantDao dao = new ContractTenantDAOImpl();
     int currentIndex = -1;
 
@@ -38,17 +28,13 @@ public class ContractTenantManagerJDialog extends javax.swing.JDialog implements
     private TenantDAO tenantDAO = new TenantDAOImpl();
 
     public ContractTenantManagerJDialog(java.awt.Frame parent, boolean modal) {
->>>>>>> Minh
         super(parent, modal);
         initComponents();
         // txtIdContractTenantManager.setEnabled(false);
         tblContractTenantManager.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) {
                 currentIndex = tblContractTenantManager.getSelectedRow();
-<<<<<<< HEAD
-=======
                 if (currentIndex >= 0) {
->>>>>>> Minh
                     edit();
                 }
             }
@@ -139,10 +125,6 @@ public class ContractTenantManagerJDialog extends javax.swing.JDialog implements
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> Minh
                 jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addContainerGap()
@@ -160,76 +142,10 @@ public class ContractTenantManagerJDialog extends javax.swing.JDialog implements
                                                 .createSequentialGroup()
                                                 .addGroup(jPanel2Layout
                                                         .createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-<<<<<<< HEAD
-                                                        .addComponent(txtRoleContractTenantManager,
-                                                                javax.swing.GroupLayout.Alignment.LEADING)
-=======
->>>>>>> Minh
                                                         .addComponent(txtCitizenIdContractTenantManager,
                                                                 javax.swing.GroupLayout.Alignment.LEADING)
                                                         .addComponent(txtIdContractTenantManager,
                                                                 javax.swing.GroupLayout.DEFAULT_SIZE, 381,
-<<<<<<< HEAD
-                                                                Short.MAX_VALUE))
-                                                .addGap(179, 179, 179)))));
-        jPanel2Layout.setVerticalGroup(
-                jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(jLabel12)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtIdContractTenantManager, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel13)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtCitizenIdContractTenantManager, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel14)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtRoleContractTenantManager, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(67, Short.MAX_VALUE)));
-=======
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel12)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel13)
-                            .addComponent(jLabel14))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtCitizenIdContractTenantManager, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtIdContractTenantManager, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)
-                            .addComponent(cobContractTenantStatus, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(179, 179, 179))))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(8, 8, 8)
-                .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtIdContractTenantManager, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtCitizenIdContractTenantManager, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel14)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cobContractTenantStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(67, Short.MAX_VALUE))
-        );
->>>>>>> Trinh
-=======
                                                                 Short.MAX_VALUE)
                                                         .addComponent(cobContractTenantStatus,
                                                                 javax.swing.GroupLayout.Alignment.LEADING, 0,
@@ -254,7 +170,6 @@ public class ContractTenantManagerJDialog extends javax.swing.JDialog implements
                                 .addComponent(cobContractTenantStatus, javax.swing.GroupLayout.PREFERRED_SIZE,
                                         javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(67, Short.MAX_VALUE)));
->>>>>>> Minh
 
         jTabbedPane1.addTab("Biểu Mẫu", jPanel2);
 
@@ -386,19 +301,7 @@ public class ContractTenantManagerJDialog extends javax.swing.JDialog implements
         // TODO add your handling code here:
     }// GEN-LAST:event_txtCitizenIdContractTenantManagerActionPerformed
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-    private void txtRoleContractTenantManagerActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txtRoleContractTenantManagerActionPerformed
-        // TODO add your handling code here:
-    }// GEN-LAST:event_txtRoleContractTenantManagerActionPerformed
-
     private void CreateActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_CreateActionPerformed
-=======
-    private void CreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateActionPerformed
->>>>>>> Trinh
-=======
-    private void CreateActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_CreateActionPerformed
->>>>>>> Minh
         // TODO add your handling code here:
         Create.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -477,45 +380,6 @@ public class ContractTenantManagerJDialog extends javax.swing.JDialog implements
     private javax.swing.JTable tblContractTenantManager;
     private javax.swing.JTextField txtCitizenIdContractTenantManager;
     private javax.swing.JTextField txtIdContractTenantManager;
-<<<<<<< HEAD
-<<<<<<< HEAD
-    private javax.swing.JTextField txtRoleContractTenantManager;
-
-    // End of variables declaration//GEN-END:variables
-    private void fillToTable() {
-        DefaultTableModel model = (DefaultTableModel) tblContractTenantManager.getModel();
-        model.setRowCount(0);
-        try {
-            List<ContractTenant> list = dao.findAll();
-            for (ContractTenant ct : list) {
-                model.addRow(new Object[] {
-                        ct.getContractId(),
-                        ct.getCitizenId(),
-                        ct.getRole() == 0 ? "Chủ hợp đồng" : "Đồng thuê"
-                });
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Lỗi truy vấn dữ liệu: " + e.getMessage());
-            e.printStackTrace();
-=======
-    // End of variables declaration//GEN-END:variables
-    private void fillToTable() {
-    DefaultTableModel model = (DefaultTableModel) tblContractTenantManager.getModel();
-    model.setRowCount(0);
-    try {
-        List<ContractTenant> list = dao.findAll();
-        for (ContractTenant ct : list) {
-            model.addRow(new Object[]{
-                ct.getContractId(),
-                ct.getCitizenId(),
-                ct.getRole() == 0 ? "Chủ hợp đồng" : "Đồng thuê"
-            });
->>>>>>> Trinh
-        }
-    }
-
-<<<<<<< HEAD
-=======
 
     // End of variables declaration//GEN-END:variables
     private void fillToTable() {
@@ -536,69 +400,24 @@ public class ContractTenantManagerJDialog extends javax.swing.JDialog implements
         }
     }
 
->>>>>>> Minh
     private ContractTenant getForm() {
         return ContractTenant.builder()
                 .contractId(Integer.parseInt(txtIdContractTenantManager.getText()))
                 .citizenId(txtCitizenIdContractTenantManager.getText())
-<<<<<<< HEAD
-                .role(Integer.parseInt(txtRoleContractTenantManager.getText()))
-                .build();
-=======
-private ContractTenant getForm() {
-    return ContractTenant.builder()
-            .contractId(Integer.parseInt(txtIdContractTenantManager.getText()))
-            .citizenId(txtCitizenIdContractTenantManager.getText())
-            .role(Integer.parseInt(cobContractTenantStatus.getSelectedItem().toString()))
-            .build();
-}
-
-private void setForm(ContractTenant entity) {
-    txtIdContractTenantManager.setText(String.valueOf(entity.getContractId()));
-    txtCitizenIdContractTenantManager.setText(entity.getCitizenId());
-    cobContractTenantStatus.setSelectedItem(String.valueOf(entity.getRole()));
-}
-private void clear() {
-    txtIdContractTenantManager.setText("");
-    txtCitizenIdContractTenantManager.setText("");
-    cobContractTenantStatus.setSelectedIndex(0);
-    currentIndex = -1;
-    tblContractTenantManager.clearSelection();
-}
-private void update() {
-    try {
-        ContractTenant entity = getForm();
-        dao.update(entity);
-        this.fillToTable();
-        JOptionPane.showMessageDialog(this, "Cập nhật thành công");
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Lỗi cập nhật: " + e.getMessage());
-        e.printStackTrace();
->>>>>>> Trinh
-=======
                 .role(Integer.parseInt(cobContractTenantStatus.getSelectedItem().toString()))
                 .build();
->>>>>>> Minh
     }
 
     private void setForm(ContractTenant entity) {
         txtIdContractTenantManager.setText(String.valueOf(entity.getContractId()));
         txtCitizenIdContractTenantManager.setText(entity.getCitizenId());
-<<<<<<< HEAD
-        txtRoleContractTenantManager.setText(String.valueOf(entity.getRole()));
-=======
         cobContractTenantStatus.setSelectedItem(String.valueOf(entity.getRole()));
->>>>>>> Minh
     }
 
     private void clear() {
         txtIdContractTenantManager.setText("");
         txtCitizenIdContractTenantManager.setText("");
-<<<<<<< HEAD
-        txtRoleContractTenantManager.setText("");
-=======
         cobContractTenantStatus.setSelectedIndex(0);
->>>>>>> Minh
         currentIndex = -1;
         tblContractTenantManager.clearSelection();
     }
@@ -614,15 +433,6 @@ private void update() {
             e.printStackTrace();
         }
     }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-}
-private void create() {
-    try {
-        String citizenId = txtCitizenIdContractTenantManager.getText().trim();
-=======
->>>>>>> Minh
 
     private void delete() {
         int confirm = JOptionPane.showConfirmDialog(this, "Xác nhận xóa?", "Cảnh báo", JOptionPane.YES_NO_OPTION);
@@ -729,81 +539,3 @@ private void create() {
         }
     }
 }
-<<<<<<< HEAD
-}
->>>>>>> Trinh
-
-    private void delete() {
-        int confirm = JOptionPane.showConfirmDialog(this, "Xác nhận xóa?", "Cảnh báo", JOptionPane.YES_NO_OPTION);
-        if (confirm != JOptionPane.YES_OPTION)
-            return;
-
-        try {
-            String contractId = txtIdContractTenantManager.getText();
-            dao.deleteById(contractId);
-            this.fillToTable();
-            this.clear();
-            JOptionPane.showMessageDialog(this, "Xóa thành công");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Lỗi xóa: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void moveFirst() {
-        this.moveTo(0);
-    }
-
-    @Override
-    public void movePrevious() {
-        this.moveTo(tblContractTenantManager.getSelectedRow() - 1);
-    }
-
-    @Override
-    public void moveNext() {
-        this.moveTo(tblContractTenantManager.getSelectedRow() + 1);
-    }
-
-    @Override
-    public void moveLast() {
-        this.moveTo(tblContractTenantManager.getRowCount() - 1);
-    }
-
-    @Override
-    public void moveTo(int index) {
-        if (index < 0) {
-            this.moveLast();
-        } else if (index >= tblContractTenantManager.getRowCount()) {
-            this.moveFirst();
-        } else {
-            tblContractTenantManager.clearSelection();
-            tblContractTenantManager.setRowSelectionInterval(index, index);
-            this.edit();
-        }
-    }
-
-    private void edit() {
-        if (currentIndex < 0 || currentIndex >= tblContractTenantManager.getRowCount())
-            return;
-        int contractId = (int) tblContractTenantManager.getValueAt(currentIndex, 0);
-        ContractTenant entity = dao.findById(String.valueOf(contractId));
-        if (entity != null) {
-            setForm(entity);
-        }
-    }
-
-    private void create() {
-        try {
-            ContractTenant entity = getForm();
-            dao.create(entity);
-            this.fillToTable();
-            JOptionPane.showMessageDialog(this, "Thêm mới thành công");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Lỗi thêm mới: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
-}
-=======
->>>>>>> Minh
