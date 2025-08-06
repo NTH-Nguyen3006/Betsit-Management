@@ -42,6 +42,7 @@ public final class BedsitJFrame extends javax.swing.JFrame implements BedsitCont
         btnRoom = new javax.swing.JButton();
         btnRole = new javax.swing.JButton();
         btnAssets = new javax.swing.JButton();
+        btnExit2 = new javax.swing.JButton();
         pnlBackground = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -66,6 +67,11 @@ public final class BedsitJFrame extends javax.swing.JFrame implements BedsitCont
         lblPhoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/logo1.png"))); // NOI18N
         lblPhoto.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 51, 51), 1, true));
         lblPhoto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        lblPhoto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblPhotoMouseClicked(evt);
+            }
+        });
 
         lblFullname.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         lblFullname.setForeground(new java.awt.Color(255, 51, 0));
@@ -114,14 +120,14 @@ public final class BedsitJFrame extends javax.swing.JFrame implements BedsitCont
         });
         pnlLeftBottom.add(btnServices);
 
-        btnExit1.setText("Kết Thúc");
+        btnExit1.setText("THOÁT CHƯƠNG TRÌNH");
         btnExit1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExit1ActionPerformed(evt);
             }
         });
 
-        btnChangePassword.setText("Đổi Mật Khẩu");
+        btnChangePassword.setText("ĐỔI MẬT KHẨU");
         btnChangePassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnChangePasswordActionPerformed(evt);
@@ -147,9 +153,9 @@ public final class BedsitJFrame extends javax.swing.JFrame implements BedsitCont
                                 .addComponent(pnlLeftBottom, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(21, 21, 21)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(btnExit1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnChangePassword))))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btnExit1, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                                    .addComponent(btnChangePassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -160,9 +166,9 @@ public final class BedsitJFrame extends javax.swing.JFrame implements BedsitCont
                 .addComponent(lblPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblFullname)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addComponent(btnExit1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnChangePassword)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlLeftBottom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -235,6 +241,16 @@ public final class BedsitJFrame extends javax.swing.JFrame implements BedsitCont
         });
         pnlCenterBottom.add(btnAssets);
 
+        btnExit2.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
+        btnExit2.setText("THOÁT CHƯƠNG TRÌNH");
+        btnExit2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnExit2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExit2ActionPerformed(evt);
+            }
+        });
+        pnlCenterBottom.add(btnExit2);
+
         pnlManager.add(pnlCenterBottom, java.awt.BorderLayout.PAGE_END);
 
         pnlCenter.add(pnlManager);
@@ -252,7 +268,7 @@ public final class BedsitJFrame extends javax.swing.JFrame implements BedsitCont
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnContractsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContractsActionPerformed
-
+        this.showContractsManagerJDialog(this);
     }//GEN-LAST:event_btnContractsActionPerformed
 
     private void btnPaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPaymentActionPerformed
@@ -261,7 +277,6 @@ public final class BedsitJFrame extends javax.swing.JFrame implements BedsitCont
 
     private void btnTenantsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTenantsActionPerformed
         this.showTenantsManagerJDialog(this);
-
     }//GEN-LAST:event_btnTenantsActionPerformed
 
     private void btnUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserActionPerformed
@@ -307,6 +322,15 @@ public final class BedsitJFrame extends javax.swing.JFrame implements BedsitCont
         // TODO add your handling code here:
         this.showAssetJDialog(this);
     }//GEN-LAST:event_btnAssetsActionPerformed
+
+    private void btnExit2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExit2ActionPerformed
+        this.exit();
+    }//GEN-LAST:event_btnExit2ActionPerformed
+
+    private void lblPhotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPhotoMouseClicked
+        // TODO add your handling code here:
+        this.showContactJDialog(this);
+    }//GEN-LAST:event_lblPhotoMouseClicked
 
     /**
      * @param args the command line arguments
@@ -355,6 +379,7 @@ public final class BedsitJFrame extends javax.swing.JFrame implements BedsitCont
     private javax.swing.JButton btnChangePassword;
     private javax.swing.JButton btnContracts;
     private javax.swing.JButton btnExit1;
+    private javax.swing.JButton btnExit2;
     private javax.swing.JButton btnInvoices;
     private javax.swing.JButton btnPayment;
     private javax.swing.JButton btnRole;
@@ -389,7 +414,11 @@ public final class BedsitJFrame extends javax.swing.JFrame implements BedsitCont
         entity.Role role = new RoleDAOImpl().findById(roleid);
         boolean isManager = role.getRoleName().equalsIgnoreCase("admin")
                 || role.getRoleName().equalsIgnoreCase("manager");
-        if (!isManager) 
+        if (!isManager) {
             pnlCenter.remove(pnlManager);
+        }
+        else if (isManager){
+            btnExit1.setVisible(false);
+        }
     }
 }

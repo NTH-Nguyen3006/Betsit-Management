@@ -12,7 +12,6 @@ import java.awt.Frame;
 import java.math.BigDecimal;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
-import ui.ServiceUsagesJDialog;
 import utils.XDialog;
 
 /**
