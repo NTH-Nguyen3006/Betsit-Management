@@ -1,13 +1,14 @@
 package impl;
 
-import dao.InvoiceDetailDao;
-import entity.InvoiceDetail;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import dao.InvoiceDetailDao;
+import entity.InvoiceDetail;
 import utils.XJdbc;
 import utils.XQuery;
 
@@ -26,53 +27,53 @@ public class InvoiceDetailDAOImpl implements InvoiceDetailDao {
     private final String findByIdSql = findAllSql + " WHERE InvoiceId=?";
 
     public List<InvoiceDetail> selectByInvoiceId(int invoiceId) {
-    List<InvoiceDetail> list = new ArrayList<>();
-    String sql = "SELECT * FROM Invoice_Details WHERE InvoiceId = ?";
-    try (
-        Connection conn = XJdbc.getConnection();
-        PreparedStatement stmt = conn.prepareStatement(sql)
-    ) {
-        stmt.setInt(1, invoiceId);
-        ResultSet rs = stmt.executeQuery();
-        while (rs.next()) {
-            InvoiceDetail detail = new InvoiceDetail();
-            detail.setId(rs.getInt("Id"));
-            detail.setInvoiceId(rs.getInt("InvoiceId"));
-            detail.setServiceId(rs.getInt("ServiceId"));
-            detail.setQuantity(rs.getInt("Quantity"));
-            detail.setUnitPrice(rs.getBigDecimal("UnitPrice"));
-            detail.setSubtotal(rs.getBigDecimal("Subtotal"));
-            list.add(detail);
+        List<InvoiceDetail> list = new ArrayList<>();
+        String sql = "SELECT * FROM Invoice_Details WHERE InvoiceId = ?";
+        try (
+                Connection conn = XJdbc.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, invoiceId);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                InvoiceDetail detail = new InvoiceDetail();
+                detail.setId(rs.getInt("Id"));
+                detail.setInvoiceId(rs.getInt("InvoiceId"));
+                detail.setServiceId(rs.getInt("ServiceId"));
+                detail.setQuantity(rs.getInt("Quantity"));
+                detail.setUnitPrice(rs.getBigDecimal("UnitPrice"));
+                detail.setSubtotal(rs.getBigDecimal("Subtotal"));
+                list.add(detail);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-    } catch (SQLException e) {
-        e.printStackTrace();
-        throw new RuntimeException(e);
+        return list;
     }
-    return list;
-}
+
     public List<InvoiceDetail> selectAll() {
-    List<InvoiceDetail> list = new ArrayList<>();
-    String sql = "SELECT * FROM Invoice_Details";
-    try (
-        Connection conn = XJdbc.getConnection();
-        PreparedStatement stmt = conn.prepareStatement(sql);
-        ResultSet rs = stmt.executeQuery()
-    ) {
-        while (rs.next()) {
-            InvoiceDetail d = new InvoiceDetail();
-            d.setId(rs.getInt("Id"));
-            d.setInvoiceId(rs.getInt("InvoiceId"));
-            d.setServiceId(rs.getInt("ServiceId"));
-            d.setQuantity(rs.getInt("Quantity"));
-            d.setUnitPrice(rs.getBigDecimal("UnitPrice"));
-            d.setSubtotal(rs.getBigDecimal("Subtotal"));
-            list.add(d);
+        List<InvoiceDetail> list = new ArrayList<>();
+        String sql = "SELECT * FROM Invoice_Details";
+        try (
+                Connection conn = XJdbc.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                InvoiceDetail d = new InvoiceDetail();
+                d.setId(rs.getInt("Id"));
+                d.setInvoiceId(rs.getInt("InvoiceId"));
+                d.setServiceId(rs.getInt("ServiceId"));
+                d.setQuantity(rs.getInt("Quantity"));
+                d.setUnitPrice(rs.getBigDecimal("UnitPrice"));
+                d.setSubtotal(rs.getBigDecimal("Subtotal"));
+                list.add(d);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-    } catch (SQLException e) {
-        e.printStackTrace();
+        return list;
     }
-    return list;
-}
+
     @Override
     public InvoiceDetail create(InvoiceDetail entity) {
         Object[] values = {
@@ -93,7 +94,7 @@ public class InvoiceDetailDAOImpl implements InvoiceDetailDao {
                 entity.getQuantity(),
                 entity.getUnitPrice(),
                 entity.getSubtotal(),
-                entity.getInvoiceId() 
+                entity.getInvoiceId()
         };
         XJdbc.executeUpdate(updateSql, values);
     }

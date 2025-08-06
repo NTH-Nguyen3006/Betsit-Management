@@ -4,15 +4,23 @@
  */
 package ui.manager;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.table.DefaultTableModel;
-
+import dao.ContractDAO;
 import dao.InvoiceDao;
-import entity.Invoice;
-import impl.InvoiceDAOImpl;
 import ui.controller.InvoicesManagerController;
+import entity.Contract;
+import impl.InvoiceDAOImpl;
+import entity.Invoice;
+import impl.ContractDAOImpl;
+import java.awt.Frame;
+import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.text.html.parser.Entity;
 import utils.XDialog;
 
 /**
@@ -28,6 +36,7 @@ public class InvoicesManagerJDialog extends javax.swing.JDialog implements Invoi
         super(parent, modal);
         initComponents();
         loadInvoicesToTable();
+        txtIdInvoice.setEnabled(false);
         TblInvoices.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) {
                 int row = TblInvoices.getSelectedRow();
@@ -63,6 +72,9 @@ public class InvoicesManagerJDialog extends javax.swing.JDialog implements Invoi
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TblInvoices = new javax.swing.JTable();
+        btnCheckAll = new javax.swing.JButton();
+        btnUnCheckAll = new javax.swing.JButton();
+        btnDeleteCheckedItems = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -93,10 +105,11 @@ public class InvoicesManagerJDialog extends javax.swing.JDialog implements Invoi
         txtDueDate = new javax.swing.JTextField();
         txtBillingPeriodMonth = new javax.swing.JTextField();
         txtPreviousDebt = new javax.swing.JTextField();
-        Create = new javax.swing.JButton();
-        Update = new javax.swing.JButton();
-        Delete = new javax.swing.JButton();
+        btnViewInvoicesManager = new javax.swing.JButton();
         Reset = new javax.swing.JButton();
+        Delete = new javax.swing.JButton();
+        Update = new javax.swing.JButton();
+        Create = new javax.swing.JButton();
         btnMoveFirst = new javax.swing.JButton();
         btnMovePrevious = new javax.swing.JButton();
         btnMoveNext = new javax.swing.JButton();
@@ -117,21 +130,54 @@ public class InvoicesManagerJDialog extends javax.swing.JDialog implements Invoi
                 }));
         jScrollPane1.setViewportView(TblInvoices);
 
+        btnCheckAll.setText("Chọn tất cả");
+        btnCheckAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCheckAllActionPerformed(evt);
+            }
+        });
+
+        btnUnCheckAll.setText("Hủy chọn tất cả");
+        btnUnCheckAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUnCheckAllActionPerformed(evt);
+            }
+        });
+
+        btnDeleteCheckedItems.setText("Xóa các mục đã chọn");
+        btnDeleteCheckedItems.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteCheckedItemsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
                 jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 783,
-                                        Short.MAX_VALUE)));
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 783, Short.MAX_VALUE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnCheckAll)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnUnCheckAll)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnDeleteCheckedItems)
+                                .addContainerGap()));
         jPanel1Layout.setVerticalGroup(
                 jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 318,
                                         javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(btnCheckAll)
+                                        .addComponent(btnUnCheckAll)
+                                        .addComponent(btnDeleteCheckedItems))
+                                .addContainerGap(15, Short.MAX_VALUE)));
 
         jTabbedPane1.addTab("Danh sách", jPanel1);
 
@@ -201,6 +247,69 @@ public class InvoicesManagerJDialog extends javax.swing.JDialog implements Invoi
         txtPreviousDebt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPreviousDebtActionPerformed(evt);
+            }
+        });
+
+        btnViewInvoicesManager.setText("Xem sử dụng hóa đơn chi tiết");
+        btnViewInvoicesManager.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewInvoicesManagerActionPerformed(evt);
+            }
+        });
+
+        Reset.setText("Nhập mới");
+        Reset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ResetActionPerformed(evt);
+            }
+        });
+
+        Delete.setText("Xóa");
+        Delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteActionPerformed(evt);
+            }
+        });
+
+        Update.setText("Cập nhật");
+        Update.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateActionPerformed(evt);
+            }
+        });
+
+        Create.setText("Tạo mới");
+        Create.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CreateActionPerformed(evt);
+            }
+        });
+
+        btnMoveFirst.setText("|<");
+        btnMoveFirst.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMoveFirstActionPerformed(evt);
+            }
+        });
+
+        btnMovePrevious.setText("<<");
+        btnMovePrevious.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMovePreviousActionPerformed(evt);
+            }
+        });
+
+        btnMoveNext.setText(">>");
+        btnMoveNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMoveNextActionPerformed(evt);
+            }
+        });
+
+        btnMoveLast.setText(">|");
+        btnMoveLast.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMoveLastActionPerformed(evt);
             }
         });
 
@@ -312,10 +421,34 @@ public class InvoicesManagerJDialog extends javax.swing.JDialog implements Invoi
                                                                 .addGap(18, 18, 18)
                                                                 .addComponent(txtIdContract,
                                                                         javax.swing.GroupLayout.PREFERRED_SIZE, 272,
-                                                                        javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addGap(31, 31, 31)
+                                                                .addComponent(btnViewInvoicesManager))
                                                         .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE,
                                                                 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGap(0, 0, Short.MAX_VALUE)))));
+                                                .addGap(0, 4, Short.MAX_VALUE))))
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(Create)
+                                .addGap(4, 4, 4)
+                                .addComponent(Update)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Delete)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Reset)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnMoveFirst, javax.swing.GroupLayout.PREFERRED_SIZE, 44,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnMovePrevious, javax.swing.GroupLayout.PREFERRED_SIZE, 47,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnMoveNext, javax.swing.GroupLayout.PREFERRED_SIZE, 47,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnMoveLast, javax.swing.GroupLayout.PREFERRED_SIZE, 44,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap()));
         jPanel3Layout.setVerticalGroup(
                 jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel3Layout.createSequentialGroup()
@@ -330,8 +463,9 @@ public class InvoicesManagerJDialog extends javax.swing.JDialog implements Invoi
                                                 javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(txtIdContract, javax.swing.GroupLayout.PREFERRED_SIZE,
                                                 javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(12, 12, 12)
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnViewInvoicesManager))
+                                .addGap(11, 11, 11)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel15)
                                         .addComponent(jLabel12))
@@ -387,7 +521,17 @@ public class InvoicesManagerJDialog extends javax.swing.JDialog implements Invoi
                                         .addComponent(txtDueDate, javax.swing.GroupLayout.PREFERRED_SIZE,
                                                 javax.swing.GroupLayout.DEFAULT_SIZE,
                                                 javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(152, 152, 152)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(Create)
+                                        .addComponent(Delete)
+                                        .addComponent(Update)
+                                        .addComponent(Reset)
+                                        .addComponent(btnMoveFirst)
+                                        .addComponent(btnMovePrevious)
+                                        .addComponent(btnMoveNext)
+                                        .addComponent(btnMoveLast))
+                                .addGap(123, 123, 123)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(jPanel3Layout
                                                 .createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -406,106 +550,16 @@ public class InvoicesManagerJDialog extends javax.swing.JDialog implements Invoi
 
         jTabbedPane1.addTab("Biểu Mẫu", jPanel3);
 
-        Create.setText("Tạo mới");
-        Create.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CreateActionPerformed(evt);
-            }
-        });
-
-        Update.setText("Cập nhật");
-        Update.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UpdateActionPerformed(evt);
-            }
-        });
-
-        Delete.setText("Xóa");
-        Delete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DeleteActionPerformed(evt);
-            }
-        });
-
-        Reset.setText("Nhập mới");
-        Reset.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ResetActionPerformed(evt);
-            }
-        });
-
-        btnMoveFirst.setText("|<");
-        btnMoveFirst.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMoveFirstActionPerformed(evt);
-            }
-        });
-
-        btnMovePrevious.setText("<<");
-        btnMovePrevious.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMovePreviousActionPerformed(evt);
-            }
-        });
-
-        btnMoveNext.setText(">>");
-        btnMoveNext.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMoveNextActionPerformed(evt);
-            }
-        });
-
-        btnMoveLast.setText(">|");
-        btnMoveLast.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMoveLastActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                                .addComponent(Create)
-                                .addGap(4, 4, 4)
-                                .addComponent(Update)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Delete)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Reset)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnMoveFirst, javax.swing.GroupLayout.PREFERRED_SIZE, 44,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnMovePrevious, javax.swing.GroupLayout.PREFERRED_SIZE, 47,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnMoveNext, javax.swing.GroupLayout.PREFERRED_SIZE, 47,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnMoveLast, javax.swing.GroupLayout.PREFERRED_SIZE, 44,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
                                 .addComponent(jTabbedPane1)
                                 .addContainerGap()));
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 362,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(Create)
-                                        .addComponent(Delete)
-                                        .addComponent(Update)
-                                        .addComponent(Reset)
-                                        .addComponent(btnMoveFirst)
-                                        .addComponent(btnMovePrevious)
-                                        .addComponent(btnMoveNext)
-                                        .addComponent(btnMoveLast))
-                                .addContainerGap()));
+                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 409, Short.MAX_VALUE));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -549,27 +603,17 @@ public class InvoicesManagerJDialog extends javax.swing.JDialog implements Invoi
 
     private void UpdateActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_UpdateActionPerformed
         // TODO add your handling code here:
-        Invoice invoice = getFormInvoice();
-        invoiceDAO.update(invoice);
-        loadInvoicesToTable();
+        this.update();
     }// GEN-LAST:event_UpdateActionPerformed
 
     private void DeleteActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_DeleteActionPerformed
         // TODO add your handling code here:
-        if (XDialog.confirm("Bạn thực sự muốn xóa?")) {
-            String id = txtIdInvoice.getText();
-            invoiceDAO.deleteById(id);
-            loadInvoicesToTable();
-            clearForm();
-        }
+        this.delete();
     }// GEN-LAST:event_DeleteActionPerformed
 
     private void CreateActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_CreateActionPerformed
         // TODO add your handling code here:
-        Invoice invoice = getFormInvoice();
-        invoiceDAO.create(invoice);
-        loadInvoicesToTable();
-        clearForm();
+        this.create();
     }// GEN-LAST:event_CreateActionPerformed
 
     private void txtPreviousDebtActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txtPreviousDebtActionPerformed
@@ -585,6 +629,26 @@ public class InvoicesManagerJDialog extends javax.swing.JDialog implements Invoi
         // TODO add your handling code here:
         moveTo(listInvoices.size() - 1);
     }// GEN-LAST:event_btnMoveLastActionPerformed
+
+    private void btnViewInvoicesManagerActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnViewInvoicesManagerActionPerformed
+        // TODO add your handling code here:
+        this.showInvoiceDetailsManagerJDialog();
+    }// GEN-LAST:event_btnViewInvoicesManagerActionPerformed
+
+    private void btnCheckAllActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnCheckAllActionPerformed
+        // TODO add your handling code here:
+        this.checkAll();
+    }// GEN-LAST:event_btnCheckAllActionPerformed
+
+    private void btnUnCheckAllActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnUnCheckAllActionPerformed
+        // TODO add your handling code here:
+        this.uncheckAll();
+    }// GEN-LAST:event_btnUnCheckAllActionPerformed
+
+    private void btnDeleteCheckedItemsActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnDeleteCheckedItemsActionPerformed
+        // TODO add your handling code here:
+        this.deleteCheckedItems();
+    }// GEN-LAST:event_btnDeleteCheckedItemsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -646,6 +710,8 @@ public class InvoicesManagerJDialog extends javax.swing.JDialog implements Invoi
     private javax.swing.JTable TblInvoices;
     private javax.swing.JButton Update;
     private javax.swing.JButton Update1;
+    private javax.swing.JButton btnCheckAll;
+    private javax.swing.JButton btnDeleteCheckedItems;
     private javax.swing.JButton btnMoveFirst;
     private javax.swing.JButton btnMoveFirst1;
     private javax.swing.JButton btnMoveLast;
@@ -654,6 +720,8 @@ public class InvoicesManagerJDialog extends javax.swing.JDialog implements Invoi
     private javax.swing.JButton btnMoveNext1;
     private javax.swing.JButton btnMovePrevious;
     private javax.swing.JButton btnMovePrevious1;
+    private javax.swing.JButton btnUnCheckAll;
+    private javax.swing.JButton btnViewInvoicesManager;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -682,26 +750,33 @@ public class InvoicesManagerJDialog extends javax.swing.JDialog implements Invoi
     private javax.swing.JTextField txtStatus;
     private javax.swing.JTextField txtTotalamount;
     // End of variables declaration//GEN-END:variables
-
+    InvoiceDao dao = new InvoiceDAOImpl();
+    ContractDAO contractDAO = new ContractDAOImpl();
     private InvoiceDao invoiceDAO = new InvoiceDAOImpl();
     private List<Invoice> listInvoices = new ArrayList<>();
     private int currentIndex = -1;
 
+    private void showInvoiceDetailsManagerJDialog() {
+        InvoiceDetailsManagerJDialog dialog = new InvoiceDetailsManagerJDialog((Frame) this.getOwner(), true);
+        dialog.setLocationRelativeTo(this);
+        dialog.setVisible(true);
+    }
+
     private void loadInvoicesToTable() {
         DefaultTableModel model = (DefaultTableModel) TblInvoices.getModel();
-        model.setRowCount(0); // Xóa bảng trước
+        model.setRowCount(0);
 
-        listInvoices = invoiceDAO.findAll(); // Lấy dữ liệu từ DB
+        listInvoices = invoiceDAO.findAll();
 
         for (Invoice i : listInvoices) {
             model.addRow(new Object[] {
                     i.getId(),
-                    i.getContract_id(),
+                    i.getContractid(),
                     i.getBilling_period_month(),
                     i.getBilling_period_year(),
                     i.getPrevious_debt(),
                     i.getDiscount(),
-                    i.getTotal_amount(),
+                    i.getTotalamount(),
                     i.getStatus() ? "Đã thanh toán" : "Chưa thanh toán",
                     i.getDue_date(),
                     i.getCreated_at()
@@ -711,12 +786,12 @@ public class InvoicesManagerJDialog extends javax.swing.JDialog implements Invoi
 
     private void setFormInvoice(Invoice i) {
         txtIdInvoice.setText(String.valueOf(i.getId()));
-        txtIdContract.setText(String.valueOf(i.getContract_id()));
+        txtIdContract.setText(String.valueOf(i.getContractid()));
         txtBillingPeriodMonth.setText(String.valueOf(i.getBilling_period_month()));
         txtBillingPeriodYear.setText(String.valueOf(i.getBilling_period_year()));
         txtPreviousDebt.setText(String.valueOf(i.getPrevious_debt()));
         txtDiscount.setText(String.valueOf(i.getDiscount()));
-        txtTotalamount.setText(String.valueOf(i.getTotal_amount()));
+        txtTotalamount.setText(String.valueOf(i.getTotalamount()));
         txtStatus.setText(i.getStatus() ? "1" : "0");
         txtDueDate.setText(i.getDue_date() != null ? i.getDue_date().toString() : "");
         txtCreatedAt.setText(i.getCreated_at() != null ? i.getCreated_at().toString() : "");
@@ -728,12 +803,12 @@ public class InvoicesManagerJDialog extends javax.swing.JDialog implements Invoi
 
         Invoice i = listInvoices.get(index);
         txtIdInvoice.setText(String.valueOf(i.getId()));
-        txtIdContract.setText(String.valueOf(i.getContract_id()));
+        txtIdContract.setText(String.valueOf(i.getContractid()));
         txtBillingPeriodMonth.setText(String.valueOf(i.getBilling_period_month()));
         txtBillingPeriodYear.setText(String.valueOf(i.getBilling_period_year()));
         txtPreviousDebt.setText(String.valueOf(i.getPrevious_debt()));
         txtDiscount.setText(String.valueOf(i.getDiscount()));
-        txtTotalamount.setText(String.valueOf(i.getTotal_amount()));
+        txtTotalamount.setText(String.valueOf(i.getTotalamount()));
         txtStatus.setText(i.getStatus() ? "1" : "0");
         txtDueDate.setText(i.getDue_date() != null ? i.getDue_date().toString() : "");
         txtCreatedAt.setText(i.getCreated_at() != null ? i.getCreated_at().toString() : "");
@@ -760,7 +835,7 @@ public class InvoicesManagerJDialog extends javax.swing.JDialog implements Invoi
             moveFirst();
         } else {
             TblInvoices.setRowSelectionInterval(index, index);
-            edit(); // bạn phải tự thêm phương thức `edit()` nếu chưa có
+            edit();
         }
     }
 
@@ -790,13 +865,13 @@ public class InvoicesManagerJDialog extends javax.swing.JDialog implements Invoi
         try {
             invoice.setId(Integer.parseInt(txtIdInvoice.getText()));
         } catch (NumberFormatException e) {
-            invoice.setId(0); // hoặc xử lý báo lỗi nếu cần
+            invoice.setId(0);
         }
 
         try {
-            invoice.setContract_id(Integer.parseInt(txtIdContract.getText()));
+            invoice.setContractid(Integer.parseInt(txtIdContract.getText()));
         } catch (NumberFormatException e) {
-            invoice.setContract_id(0);
+            invoice.setContractid(0);
         }
 
         try {
@@ -824,9 +899,9 @@ public class InvoicesManagerJDialog extends javax.swing.JDialog implements Invoi
         }
 
         try {
-            invoice.setTotal_amount(new java.math.BigDecimal(txtTotalamount.getText()));
+            invoice.setTotalamount(new java.math.BigDecimal(txtTotalamount.getText()));
         } catch (NumberFormatException e) {
-            invoice.setTotal_amount(java.math.BigDecimal.ZERO);
+            invoice.setTotalamount(java.math.BigDecimal.ZERO);
         }
 
         invoice.setStatus("1".equals(txtStatus.getText()));
@@ -844,6 +919,188 @@ public class InvoicesManagerJDialog extends javax.swing.JDialog implements Invoi
         }
 
         return invoice;
+    }
+
+    @Override
+    public void open() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from
+                                                                       // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void setForm(Entity entity) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from
+                                                                       // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public Entity getForm() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from
+                                                                       // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void fillToTable() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from
+                                                                       // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void create() {
+        try {
+            Invoice invoice = new Invoice();
+
+            // Lấy và kiểm tra Contract ID
+            String contractIdStr = txtIdContract.getText().trim();
+            if (contractIdStr.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập Mã hợp đồng!", "Thông báo",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            int contractId;
+            try {
+                contractId = Integer.parseInt(contractIdStr);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Mã hợp đồng phải là số!", "Lỗi nhập liệu",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            if (!contractDAO.existsById(contractId)) {
+                JOptionPane.showMessageDialog(this, "❌ Mã hợp đồng không tồn tại!", "Thông báo",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            invoice.setContractid(contractId);
+
+            // Ngày tạo là ngày hiện tại
+            Date now = new Date();
+            invoice.setCreated_at(now);
+
+            // Tự động lấy tháng/năm
+            @SuppressWarnings("deprecation")
+            int month = now.getMonth() + 1;
+            @SuppressWarnings("deprecation")
+            int year = now.getYear() + 1900;
+            invoice.setBilling_period_month(month);
+            invoice.setBilling_period_year(year);
+
+            // Ngày hết hạn
+            String dueDateStr = txtDueDate.getText().trim();
+            if (dueDateStr.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập Ngày hết hạn!", "Thông báo",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            Date dueDate;
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                dueDate = sdf.parse(dueDateStr);
+            } catch (ParseException e) {
+                JOptionPane.showMessageDialog(this, "Ngày hết hạn sai định dạng! Định dạng đúng: yyyy-MM-dd",
+                        "Lỗi định dạng", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            invoice.setDue_date(dueDate);
+
+            // Các trường số
+            try {
+                invoice.setPrevious_debt(new BigDecimal(txtPreviousDebt.getText().trim()));
+                invoice.setDiscount(new BigDecimal(txtDiscount.getText().trim()));
+                invoice.setTotalamount(new BigDecimal(txtTotalamount.getText().trim()));
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this,
+                        "Số tiền không hợp lệ! Kiểm tra lại các trường công nợ, giảm giá và tổng tiền.",
+                        "Lỗi định dạng", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            invoice.setStatus(false); // chưa thanh toán
+
+            // Tạo hóa đơn
+            invoiceDAO.create(invoice);
+
+            loadInvoicesToTable();
+            clearForm();
+
+            JOptionPane.showMessageDialog(this, "✔ Tạo hóa đơn thành công!", "Thành công",
+                    JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "❗ Đã xảy ra lỗi: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    @Override
+    public void update() {
+        Invoice invoice = getFormInvoice();
+        invoiceDAO.update(invoice);
+        loadInvoicesToTable();
+    }
+
+    @Override
+    public void delete() {
+        if (XDialog.confirm("Bạn thực sự muốn xóa?")) {
+            String id = txtIdInvoice.getText();
+            invoiceDAO.deleteById(id);
+            loadInvoicesToTable();
+            clearForm();
+        }
+    }
+
+    @Override
+    public void clear() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from
+                                                                       // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void setEditable(boolean editable) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from
+                                                                       // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void checkAll() {
+        this.setCheckedAll(true);
+    }
+
+    private void setCheckedAll(boolean checked) {
+        for (int i = 0; i < TblInvoices.getRowCount(); i++) {
+            if (TblInvoices.getColumnCount() > 5) {
+                TblInvoices.setValueAt(checked, i, 4);
+            }
+        }
+    }
+
+    @Override
+    public void uncheckAll() {
+        this.setCheckedAll(false);
+    }
+
+    @Override
+    public void deleteCheckedItems() {
+        if (XDialog.confirm("Bạn thực sự muốn xóa?")) {
+            String id = txtIdInvoice.getText();
+            dao.deleteById(id);
+            this.fillToTable();
+            this.clear();
+        }
+    }
+
+    @Override
+    public void movePrevious() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from
+                                                                       // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void moveNext() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from
+                                                                       // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

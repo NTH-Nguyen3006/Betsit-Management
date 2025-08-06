@@ -8,7 +8,16 @@ import javax.swing.table.DefaultTableModel;
 
 import dao.RoomDAO;
 import entity.Room;
+import entity.Room.eStatus;
 import impl.RoomDAOImpl;
+import java.awt.event.ActionEvent;
+import java.io.File;
+import java.math.BigDecimal;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFileChooser;
+import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableModel;
 import ui.controller.RoomController;
 import utils.XDialog;
 import utils.XOther;
@@ -21,21 +30,39 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+//     <editor-fold defaultstate="collapsed" desc="Generated
+//     <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         statusBtnGroup = new javax.swing.ButtonGroup();
         tabs = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblRooms = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         btnCheckAll = new javax.swing.JButton();
         btnUncheckAll = new javax.swing.JButton();
         btnDeleteCheckedItems = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblRooms = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        txtId = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        txtArea = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        txtRentPrice = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        rdopanel = new javax.swing.JPanel();
+        rdoAvailable = new javax.swing.JRadioButton();
+        rdoRented = new javax.swing.JRadioButton();
+        rdoRepair = new javax.swing.JRadioButton();
+        jLabel4 = new javax.swing.JLabel();
+        cboRoomType = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtNotes = new javax.swing.JTextArea();
         jPanel4 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         btnCreate = new javax.swing.JButton();
@@ -48,25 +75,9 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
         btnMoveNext = new javax.swing.JButton();
         btnMoveLast = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
-        jPanel5 = new javax.swing.JPanel();
-        jPanel6 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        txtId = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        txtArea = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        txtRentPrice = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jPanel9 = new javax.swing.JPanel();
-        rdoAvailable = new javax.swing.JRadioButton();
-        rdoRented = new javax.swing.JRadioButton();
-        rdoRepair = new javax.swing.JRadioButton();
-        jLabel4 = new javax.swing.JLabel();
-        cboRoomType = new javax.swing.JComboBox<>();
-        jLabel5 = new javax.swing.JLabel();
-        txtNotes = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Quản Lí Phòng");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -74,6 +85,31 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
         });
 
         jPanel1.setLayout(new java.awt.BorderLayout(15, 15));
+
+        tblRooms.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Mã phòng", "Loại phòng", "Diện tích", "Giá Thuê", "Trạng thái", "Ghi chú"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblRooms.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblRoomsMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblRooms);
+
+        jPanel1.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
         jPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 2, 2));
 
@@ -103,31 +139,152 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
 
         jPanel1.add(jPanel3, java.awt.BorderLayout.PAGE_END);
 
-        tblRooms.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][] {
-
-                },
-                new String[] {
-                        "Mã Phòng", "Loại phòng", "Diện tích", "Giá thuê", "Trạng thái", "Ghi chú"
-                }));
-        tblRooms.setRowHeight(25);
-        tblRooms.setSelectionBackground(new java.awt.Color(255, 255, 0));
-        tblRooms.setSelectionForeground(new java.awt.Color(255, 0, 0));
-        tblRooms.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        tblRooms.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        tblRooms.setShowGrid(true);
-        tblRooms.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblRoomsMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(tblRooms);
-
-        jPanel1.add(jScrollPane1, java.awt.BorderLayout.CENTER);
-
         tabs.addTab("DANH SÁCH", jPanel1);
 
         jPanel2.setLayout(new java.awt.BorderLayout());
+
+        jLabel1.setText("Mã Phòng");
+
+        txtId.setEditable(false);
+        txtId.setAutoscrolls(false);
+        txtId.setFocusable(false);
+        txtId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Diện Tích");
+        jLabel2.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+
+        jLabel3.setText("Giá Thuê");
+
+        txtRentPrice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtRentPriceActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("Trạng thái");
+
+        statusBtnGroup.add(rdoAvailable);
+        rdoAvailable.setText("Chưa Thuê");
+        rdoAvailable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoAvailableActionPerformed(evt);
+            }
+        });
+
+        statusBtnGroup.add(rdoRented);
+        rdoRented.setText("Đã Thuê");
+
+        statusBtnGroup.add(rdoRepair);
+        rdoRepair.setText("Đang Sửa Chửa");
+
+        jLabel4.setText("Kiểu Phòng");
+
+        cboRoomType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboRoomType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboRoomTypeActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout rdopanelLayout = new javax.swing.GroupLayout(rdopanel);
+        rdopanel.setLayout(rdopanelLayout);
+        rdopanelLayout.setHorizontalGroup(
+            rdopanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(rdopanelLayout.createSequentialGroup()
+                .addComponent(rdoAvailable)
+                .addGap(68, 68, 68)
+                .addComponent(rdoRented)
+                .addGap(75, 75, 75)
+                .addComponent(rdoRepair)
+                .addGap(0, 476, Short.MAX_VALUE))
+            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 878, Short.MAX_VALUE)
+            .addComponent(cboRoomType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        rdopanelLayout.setVerticalGroup(
+            rdopanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, rdopanelLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(rdopanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rdoAvailable)
+                    .addComponent(rdoRented)
+                    .addComponent(rdoRepair))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cboRoomType, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jLabel5.setText("Ghi Chú");
+
+        txtNotes.setColumns(20);
+        txtNotes.setRows(5);
+        jScrollPane2.setViewportView(txtNotes);
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 878, Short.MAX_VALUE)
+                    .addComponent(txtId, javax.swing.GroupLayout.DEFAULT_SIZE, 878, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 878, Short.MAX_VALUE)
+                    .addComponent(txtArea, javax.swing.GroupLayout.DEFAULT_SIZE, 878, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 878, Short.MAX_VALUE)
+                    .addComponent(txtRentPrice, javax.swing.GroupLayout.DEFAULT_SIZE, 878, Short.MAX_VALUE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 878, Short.MAX_VALUE)
+                    .addComponent(rdopanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 878, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2))
+                .addGap(66, 66, 66))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtArea, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtRentPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(rdopanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        jPanel2.add(jPanel5, java.awt.BorderLayout.CENTER);
 
         jPanel4.setLayout(new java.awt.BorderLayout(0, 5));
 
@@ -206,207 +363,115 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
 
         jPanel2.add(jPanel4, java.awt.BorderLayout.PAGE_END);
 
-        jPanel6.setLayout(new java.awt.GridLayout(12, 1, 10, 10));
-
-        jLabel1.setText("Mã Phòng");
-        jPanel6.add(jLabel1);
-
-        txtId.setEditable(false);
-        txtId.setAutoscrolls(false);
-        txtId.setFocusable(false);
-        jPanel6.add(txtId);
-
-        jLabel2.setText("Diện Tích");
-        jLabel2.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jPanel6.add(jLabel2);
-        jPanel6.add(txtArea);
-
-        jLabel3.setText("Giá Thuê");
-        jPanel6.add(jLabel3);
-
-        txtRentPrice.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtRentPriceActionPerformed(evt);
-            }
-        });
-        jPanel6.add(txtRentPrice);
-
-        jLabel6.setText("Trạng thái");
-        jPanel6.add(jLabel6);
-
-        statusBtnGroup.add(rdoAvailable);
-        rdoAvailable.setText("Chưa Thuê");
-
-        statusBtnGroup.add(rdoRented);
-        rdoRented.setText("Đã Thuê");
-
-        statusBtnGroup.add(rdoRepair);
-        rdoRepair.setText("Đang Sửa Chửa");
-
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-                jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel9Layout.createSequentialGroup()
-                                .addComponent(rdoAvailable)
-                                .addGap(68, 68, 68)
-                                .addComponent(rdoRented)
-                                .addGap(75, 75, 75)
-                                .addComponent(rdoRepair)
-                                .addGap(0, 452, Short.MAX_VALUE)));
-        jPanel9Layout.setVerticalGroup(
-                jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(rdoAvailable)
-                                        .addComponent(rdoRented)
-                                        .addComponent(rdoRepair))));
-
-        jPanel6.add(jPanel9);
-
-        jLabel4.setText("Kiểu Phòng");
-        jPanel6.add(jLabel4);
-
-        cboRoomType.setModel(
-                new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cboRoomType.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cboRoomTypeActionPerformed(evt);
-            }
-        });
-        jPanel6.add(cboRoomType);
-
-        jLabel5.setText("Ghi Chú");
-        jPanel6.add(jLabel5);
-
-        txtNotes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNotesActionPerformed(evt);
-            }
-        });
-        jPanel6.add(txtNotes);
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-                jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addContainerGap()));
-        jPanel5Layout.setVerticalGroup(
-                jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addContainerGap()));
-
-        jPanel2.add(jPanel5, java.awt.BorderLayout.CENTER);
-
         tabs.addTab("BIỂU MẪU", jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(tabs)
-                                .addContainerGap()));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(tabs)
+        );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 443,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtRentPriceActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txtRentPriceActionPerformed
+    private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
         // TODO add your handling code here:
-    }// GEN-LAST:event_txtRentPriceActionPerformed
+    }//GEN-LAST:event_txtIdActionPerformed
 
-    private void btnMoveLastActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnMoveLastActionPerformed
+    private void rdoAvailableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoAvailableActionPerformed
         // TODO add your handling code here:
-        this.moveLast();
-    }// GEN-LAST:event_btnMoveLastActionPerformed
+      
+    }//GEN-LAST:event_rdoAvailableActionPerformed
 
-    private void btnMoveNextActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnMoveNextActionPerformed
-        // TODO add your handling code here:
-        this.moveNext();
-    }// GEN-LAST:event_btnMoveNextActionPerformed
-
-    private void btnMovePreviousActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnMovePreviousActionPerformed
-        // TODO add your handling code here:
-        this.movePrevious();
-    }// GEN-LAST:event_btnMovePreviousActionPerformed
-
-    private void btnMoveFirstActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnMoveFirstActionPerformed
-        // TODO add your handling code here:
-        this.moveFirst();
-    }// GEN-LAST:event_btnMoveFirstActionPerformed
-
-    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnClearActionPerformed
-        // TODO add your handling code here:
-        this.clear();
-    }// GEN-LAST:event_btnClearActionPerformed
-
-    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnDeleteActionPerformed
-        // TODO add your handling code here:
-        this.delete();
-    }// GEN-LAST:event_btnDeleteActionPerformed
-
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnUpdateActionPerformed
-        // TODO add your handling code here:
-        this.update();
-    }// GEN-LAST:event_btnUpdateActionPerformed
-
-    private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnCreateActionPerformed
-        // TODO add your handling code here:
-        this.create();
-    }// GEN-LAST:event_btnCreateActionPerformed
-
-    private void btnDeleteCheckedItemsActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnDeleteCheckedItemsActionPerformed
-        // TODO add your handling code here:
-        this.deleteCheckedItems();
-    }// GEN-LAST:event_btnDeleteCheckedItemsActionPerformed
-
-    private void btnUncheckAllActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnUncheckAllActionPerformed
-        // TODO add your handling code here:
-        this.uncheckAll();
-    }// GEN-LAST:event_btnUncheckAllActionPerformed
-
-    private void btnCheckAllActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnCheckAllActionPerformed
-        // TODO add your handling code here:
-        this.checkAll();
-    }// GEN-LAST:event_btnCheckAllActionPerformed
-
-    private void tblRoomsMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_tblRoomsMouseClicked
-        // TODO add your handling code here:
+    private void tblRoomsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblRoomsMouseClicked
         if (evt.getClickCount() == 2) {
             this.edit();
         }
-    }// GEN-LAST:event_tblRoomsMouseClicked
+    }//GEN-LAST:event_tblRoomsMouseClicked
 
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {// GEN-FIRST:event_formWindowOpened
+    private void btnCheckAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckAllActionPerformed
         // TODO add your handling code here:
+        this.checkAll();
+    }//GEN-LAST:event_btnCheckAllActionPerformed
+
+    private void btnUncheckAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUncheckAllActionPerformed
+        // TODO add your handling code here:
+        this.uncheckAll();
+    }//GEN-LAST:event_btnUncheckAllActionPerformed
+
+    private void btnDeleteCheckedItemsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteCheckedItemsActionPerformed
+        // TODO add your handling code here:
+        this.deleteCheckedItems();
+    }//GEN-LAST:event_btnDeleteCheckedItemsActionPerformed
+
+    private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
+        // TODO add your handling code here:
+        this.create();
+    }//GEN-LAST:event_btnCreateActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+        this.update();
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        this.delete();
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        // TODO add your handling code here:
+        this.clear();
+    }//GEN-LAST:event_btnClearActionPerformed
+
+    private void btnMoveFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveFirstActionPerformed
+        // TODO add your handling code here:
+        this.moveFirst();
+    }//GEN-LAST:event_btnMoveFirstActionPerformed
+
+    private void btnMovePreviousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMovePreviousActionPerformed
+        // TODO add your handling code here:
+        this.movePrevious();
+    }//GEN-LAST:event_btnMovePreviousActionPerformed
+
+    private void btnMoveNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveNextActionPerformed
+        // TODO add your handling code here:
+        this.moveNext();
+    }//GEN-LAST:event_btnMoveNextActionPerformed
+
+    private void btnMoveLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveLastActionPerformed
+        // TODO add your handling code here:
+        this.moveLast();
+    }//GEN-LAST:event_btnMoveLastActionPerformed
+
+    private void cboRoomTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboRoomTypeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboRoomTypeActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {
+    // TODO: xử lý gì đó khi mở cửa sổ
+        System.out.println("Window opened");
         this.open();
-    }// GEN-LAST:event_formWindowOpened
-
-    private void cboRoomTypeActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cboRoomTypeActionPerformed
-        // TODO add your handling code here:
-    }// GEN-LAST:event_cboRoomTypeActionPerformed
-
-    private void txtNotesActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txtNotesActionPerformed
-        // TODO add your handling code here:
-    }// GEN-LAST:event_txtNotesActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
+    }
+    public void txtNotesActionPerformed(java.awt.event.ActionEvent evt) {
+               
+    }
+    public void txtRentPriceActionPerformed(java.awt.event.ActionEvent evt) {
+                
+    }     
+    public void abtnMoveLastActionPerformed(java.awt.event.ActionEvent evt) {
+                
+    }
+    
+    
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         // <editor-fold defaultstate="collapsed" desc=" Look and feel setting code
@@ -481,129 +546,148 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JRadioButton rdoAvailable;
     private javax.swing.JRadioButton rdoRented;
     private javax.swing.JRadioButton rdoRepair;
+    private javax.swing.JPanel rdopanel;
     private javax.swing.ButtonGroup statusBtnGroup;
     private javax.swing.JTabbedPane tabs;
     private javax.swing.JTable tblRooms;
     private javax.swing.JTextField txtArea;
     private javax.swing.JTextField txtId;
-    private javax.swing.JTextField txtNotes;
+    private javax.swing.JTextArea txtNotes;
     private javax.swing.JTextField txtRentPrice;
     // End of variables declaration//GEN-END:variables
     RoomDAO dao = new RoomDAOImpl();
     List<Room> items = List.of();
-    private int index = -1;
-    private List<Room> listRooms;
-
-    @Override
-    public void chooseFile() {
-
-    }
+    List<String> room = List.of();
+//    private int index = 0;
 
     @Override
     public void open() {
-        this.clear(); // xóa form
-        this.index = -1; // ặt lại chỉ số chọn
-        this.setEditable(true); // Bật chỉnh sửa cho form
+        setLocationRelativeTo(null);
         this.fillToTable(); // Đổ dữ liệu lên bảng
-        this.fillRoomTypes(); // Đổ dữ liệu cho combobox loại phòng
+        this.fillRoomType(); // đổ dữ liệu vào cbo
+    }
+
+    List<String> roomtype = List.of("Phòng Deluxe", "Phòng Đôi", "Phòng Đơn","Phòng Gia Đình","Phòng Mini","Phòng Studio", "Khác");
+    @Override
+    public void fillRoomType() {
+        DefaultComboBoxModel<String> cboModel = (DefaultComboBoxModel<String>) cboRoomType.getModel();
+        cboModel.removeAllElements(); // Xóa tất cả các mục hiện có trong ComboBox
+        
+        roomtype.forEach(roomType -> {
+            cboModel.addElement(roomType);
+        });
+
+        if (cboModel.getSize() > 0) {
+            cboRoomType.setSelectedIndex(0);
+        }
+    }
+    
+    @Override
+    public void fillToTable() {
+        DefaultTableModel tblModel = (DefaultTableModel) tblRooms.getModel();
+        tblModel.setRowCount(0); 
+
+        items = dao.findAll();
+        
+        if (items != null) {
+            for (Room room : items) {
+                tblModel.addRow(new Object[]{
+                    room.getRoomId(),
+                    room.getRoomType(),
+                    room.getArea(), 
+                    room.getRentPrice(),
+//                    room.getStatus(),
+                    eStatus.values()[room.getStatus()].name(),
+                   
+                    room.getNotes()
+                });
+            }
+        }
+    }
+    
+    @Override
+    public void edit() {
+        Room entity = items.get(tblRooms.getSelectedRow());
+        this.setForm(entity);
+        this.setEditable(true);
+        tabs.setSelectedIndex(1);
+    }
+    
+    @Override
+    public void checkAll() {
+        setCheckedAll(true);
     }
 
     @Override
+    public void uncheckAll() {
+        tblRooms.clearSelection();
+        this.setEditable(false);
+    }
+    
+    private void setCheckedAll(boolean checked) {
+        tblRooms.selectAll();
+    }
+    
+    @Override
     public void setForm(Room entity) {
+        txtId.setText(String.valueOf(entity.getRoomId()));
         txtArea.setText(String.valueOf(entity.getArea()));
         txtRentPrice.setText(String.valueOf(entity.getRentPrice()));
         // txtStatus.setText(String.valueOf(entity.getStatus()));
-
-        cboRoomType.setSelectedItem(entity.getRoomType());
+        Room rooms = new Room();
+        eStatus status = eStatus.values()[rooms.getStatus()];
+        if (status == eStatus.Available) {
+            rdoAvailable.setSelected(true);
+        } else if (status == eStatus.Rented) {
+            rdoRented.setSelected(true);
+        } else if (status == eStatus.Repair) {
+            rdoRepair.setSelected(true);
+        }
+        
+        cboRoomType.setSelectedIndex(roomtype.size()-1);
+        for (int i = 0; i < roomtype.size(); i++) {
+            if (roomtype.get(i).equals(entity.getRoomType())){
+               cboRoomType.setSelectedIndex(i);
+            }
+        }
+               
         txtNotes.setText(entity.getNotes());
 
     }
 
     @Override
     public Room getForm() {
-        Room room = new Room();
-        // Kiểm tra dữ liệu đầu vào cơ bản
-
-        boolean hasEmpty = XOther.hasTextFieldEmpty(txtArea, txtRentPrice, txtNotes);
-        if (hasEmpty)
-            XDialog.alert("Vui lòng điền đủ thông tin");
-
-        // if (txtArea.getText().isEmpty()) {
-        // XDialog.alert("Diện tích không được để trống!");
-        // return null;
-        // }
-        // if (txtRentPrice.getText().isEmpty()) {
-        // XDialog.alert("Giá thuê không được để trống!");
-        // return null;
-        // }
-
-        try {
-            int _status = 0; // Avaliable
-            if (rdoRented.isSelected())
-                _status = Room.eStatus.Rented.ordinal();
-            else
-                _status = Room.eStatus.Repair.ordinal();
-
-            Room.builder().area(Float.parseFloat(txtArea.getText()))
-                    .rentPrice(new BigDecimal(txtRentPrice.getText()))
-                    .status(_status).roomType((String) cboRoomType.getSelectedItem())
-                    .notes(txtNotes.getText());
-
-            // room.setArea(Float.parseFloat(txtArea.getText()));
-            // room.setRentPrice(new BigDecimal(txtRentPrice.getText()));
-            // room.setStatus(Integer.parseInt(txtStatus.getText()));
-            // room.setRoomType((String) cboRoomType.getSelectedItem());
-            // room.setNotes(txtNotes.getText());
-        } catch (NumberFormatException e) {
-            XDialog.alert("Dữ liệu diện tích hoặc giá thuê không hợp lệ!");
-            return null;
+        System.out.println("getform ............");
+        Room entity = new Room();
+        if(!txtId.getText().isEmpty()){
+            entity.setRoomId(Integer.parseInt(txtId.getText()));
         }
-        return room;
-    }
+        entity.setArea(Double.parseDouble(txtArea.getText()));
+        entity.setRentPrice(new BigDecimal(txtRentPrice.getText()));
 
-    @Override
-    public void fillToTable() {
-        DefaultTableModel tblModel = (DefaultTableModel) tblRooms.getModel();
-        tblModel.setRowCount(0); // Xóa tất cả các hàng hiện có trong bảng phòng
-
-        // Sử dụng instance dao đã được khai báo ở cấp lớp
-        listRooms = dao.findAll();
-
-        if (listRooms != null) {
-            for (Room room : listRooms) {
-                tblModel.addRow(new Object[] {
-                        room.getRoomId(),
-                        room.getRoomType(),
-                        room.getArea(),
-                        room.getRentPrice(),
-                        room.getStatus(),
-                        // eStatus.values()[room.getStatus()].name(),
-
-                        room.getNotes()
-                });
-            }
+        eStatus status = eStatus.values()[entity.getStatus()];
+        if ( rdoAvailable.isSelected()) {
+            status = eStatus.Available;
+            
+        } else if (rdoRented.isSelected()) {
+            status = eStatus.Rented;
+            
+        } else if (rdoRepair.isSelected()) {
+            status = eStatus.Repair;
         }
-    }
-
-    @Override
-    public void edit() {
-        this.index = tblRooms.getSelectedRow();
-        if (this.index >= 0) {
-            String roomId = String.valueOf(tblRooms.getValueAt(this.index, 1)); // Lấy RoomId từ cột thứ 2 (index 1)
-            Room entity = dao.findById(roomId);
-            if (entity != null) {
-                this.setForm(entity);
-                this.setEditable(false); // Vô hiệu hóa trường RoomId khi chỉnh sửa
-            } else {
-                XDialog.alert("Không tìm thấy thông tin phòng cho mã này.");
-            }
-        }
+        entity.setStatus(status.ordinal());
+        
+        String SelectedItem = cboRoomType.getSelectedItem().toString();
+        entity.setRoomType(SelectedItem);
+        
+        entity.setNotes(txtNotes.getText());
+        return entity;
     }
 
     @Override
@@ -623,10 +707,13 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
 
     @Override
     public void update() {
+        System.out.println("cập nhật");
         Room room = getForm();
         if (room != null) {
             try {
+                
                 dao.update(room);
+                
                 XDialog.alert("Cập nhật phòng thành công!");
                 this.fillToTable();
                 // Không cần clear() ở đây để người dùng có thể thấy thông tin vừa cập nhật
@@ -654,59 +741,27 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
 
     @Override
     public void clear() {
-
         txtArea.setText("");
-        txtRentPrice.setText("");
-        // txtStatus.setText(""); // Đặt lại lựa chọn đầu tiên
-        cboRoomType.setSelectedIndex(0); // Đặt lại lựa chọn đầu tiên
+        txtId.setText("");
         txtNotes.setText("");
-        this.index = -1;
-        this.setEditable(true); // Kích hoạt tất cả trường cho trạng thái thêm mới
-        tblRooms.clearSelection(); // Bỏ chọn trên bảng
+        txtRentPrice.setText("");
+        rdoAvailable.setSelected(false);
+        rdoRented.setSelected(false);       
+        rdoRepair.setSelected(false);
+        this.setEditable(false);
     }
 
     @Override
     public void setEditable(boolean editable) {
+        btnCreate.setEnabled(!editable);
+        btnUpdate.setEnabled(editable);
+        btnDelete.setEnabled(editable);
 
-        txtArea.setEditable(true);
-        txtRentPrice.setEditable(true);
-        // txtStatus.setEditable(true);
-        cboRoomType.setEnabled(true);
-        txtNotes.setEditable(true);
-        // txtId.setEnabled(!editable);
-        // btnCreate.setEnabled(!editable);
-        // btnUpdate.setEnabled(editable);
-        // btnDelete.setEnabled(editable);
-        //
-        // int rowCount = tblRooms.getRowCount();
-        // btnMoveFirst.setEnabled(editable && rowCount > 0);
-        // btnMovePrevious.setEnabled(editable && rowCount > 0);
-        // btnMoveNext.setEnabled(editable && rowCount > 0);
-        // btnMoveLast.setEnabled(editable && rowCount > 0);
-    }
-
-    @Override
-    public void checkAll() {
-        tblRooms.selectAll();
-    }
-
-    @Override
-    public void uncheckAll() {
-        tblRooms.clearSelection();
-    }
-
-    @Override
-    public void deleteCheckedItems() {
-        int[] selectedRows = tblRooms.getSelectedRows();
-        if (selectedRows.length > 0) {
-            // Iterate in reverse to avoid issues with index changes after deletion
-            for (int i = selectedRows.length - 1; i >= 0; i--) {
-                String roomId = String.valueOf(tblRooms.getValueAt(selectedRows[i], 0));
-                dao.deleteById(roomId);
-            }
-            fillToTable();
-            clear();
-        }
+        int rowCount = tblRooms.getRowCount();
+        btnMoveFirst.setEnabled(editable && rowCount > 0);
+        btnMovePrevious.setEnabled(editable && rowCount > 0);
+        btnMoveNext.setEnabled(editable && rowCount > 0);
+        btnMoveLast.setEnabled(editable && rowCount > 0);
     }
 
     @Override
@@ -741,32 +796,23 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
             this.edit();
         }
     }
-
+    
+    
     @Override
-    public void fillCategories() {
+    public void chooseFile() {
+        
     }
-
-    private void setCheckedAll(boolean checked) {
-        for (int i = 0; i < tblRooms.getRowCount(); i++) {
-            tblRooms.setValueAt(checked, i, 5);
-        }
-    }
-
-    private void fillRoomTypes() {
-        DefaultComboBoxModel<String> cboModel = (DefaultComboBoxModel<String>) cboRoomType.getModel();
-        cboModel.removeAllElements(); // Xóa tất cả các mục hiện có trong ComboBox
-
-        // Lấy danh sách các loại phòng từ DAO
-        List<String> roomTypes = dao.findAllRoomType();
-
-        // Thêm các loại phòng vào ComboBox
-        roomTypes.forEach(roomType -> {
-            cboModel.addElement(roomType);
-        });
-
-        // Chọn mục đầu tiên (ví dụ: "Tất cả") nếu có mục nào đó
-        if (cboModel.getSize() > 0) {
-            cboRoomType.setSelectedIndex(0);
+    @Override
+    public void deleteCheckedItems() {
+        int[] selectedRows = tblRooms.getSelectedRows();
+        if (selectedRows.length > 0) {
+            // Iterate in reverse to avoid issues with index changes after deletion
+            for (int i = selectedRows.length - 1; i >= 0; i--) {
+                String roomId = String.valueOf(tblRooms.getValueAt(selectedRows[i], 0));
+                dao.deleteById(roomId);
+            }
+            fillToTable();
+            clear();
         }
     }
 }

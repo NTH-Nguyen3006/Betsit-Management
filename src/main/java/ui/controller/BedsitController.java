@@ -5,8 +5,13 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 
 import ui.ChangePasswordJDialog;
+import ui.ContactJDialog;
 import ui.LoginJDialog;
 import ui.WelcomeJDialog;
+import ui.manager.AssetsManagerJDialog;
+import ui.manager.ContractManagerJDialog;
+import ui.manager.InvoicesManagerJDialog;
+import ui.manager.PaymentManagerJDialog;
 import ui.manager.RolesManagerJDialog;
 import ui.manager.RoomManagerJDialog;
 import ui.manager.ServiceManagerJDialog;
@@ -45,16 +50,16 @@ public interface BedsitController {
     }
 
     default void showContractsManagerJDialog(JFrame frame) {
-//         this.showJDialog(new ContractsManagerJDialog(frame, true));
+         this.showJDialog(new ContractManagerJDialog(frame, true));
     }
 
     default void showInvoicesManagerJDialog(JFrame frame) {
-//         this.showJDialog(new InvoicesManagerJDialog(frame, true));
+         this.showJDialog(new InvoicesManagerJDialog(frame, true));
 
     }
 
     default void showPaymentsManagerJDialog(JFrame frame) {
-//         this.showJDialog(new PaymentManagerJDialog(frame, true));
+         this.showJDialog(new PaymentManagerJDialog(frame, true));
     }
 
     default void showServicesManagerJDialog(JFrame frame) {
@@ -71,5 +76,12 @@ public interface BedsitController {
 
     default void showRoleJDialog(JFrame frame) {
         this.showJDialog(new RolesManagerJDialog(frame, true));
+    }
+    
+    default void showAssetJDialog(JFrame frame) {
+        this.showJDialog(new AssetsManagerJDialog(frame, true));
+    }
+    default void showContactJDialog(JFrame frame) {
+        this.showJDialog(new ContactJDialog(frame, true));
     }
 }

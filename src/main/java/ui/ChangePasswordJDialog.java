@@ -4,7 +4,7 @@
  */
 package ui;
 
-import ui.ChangePasswordController;
+import ui.controller.ChangePasswordController;
 import dao.UserDAO;
 import impl.UserDAOImpl;
 import utils.XAuth;

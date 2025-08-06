@@ -31,7 +31,6 @@ private final String findAllConditionsSql = "SELECT DISTINCT Condition FROM Asse
             entity.getAssetName(),
             entity.getQuantity(),
             entity.getCondition(),
-            entity.getId()
         };
         XJdbc.executeUpdate(insertSql, values);
         return entity;    

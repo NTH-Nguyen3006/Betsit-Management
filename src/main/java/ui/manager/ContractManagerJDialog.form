@@ -23,23 +23,6 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <Component id="Create" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="Update" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="Delete" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="Reset" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="btnMoveFirst" min="-2" pref="44" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="btnMovePrevious" min="-2" pref="47" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="btnMoveNext" min="-2" pref="47" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="btnMoveLast" min="-2" pref="44" max="-2" attributes="0"/>
-          </Group>
           <Group type="102" alignment="0" attributes="0">
               <Component id="tabs" min="-2" pref="778" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -48,24 +31,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <Component id="tabs" min="-2" pref="454" max="-2" attributes="0"/>
-              <EmptySpace pref="7" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                      <Component id="Delete" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="Reset" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnMoveFirst" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnMovePrevious" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnMoveNext" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnMoveLast" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                      <Component id="Create" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="Update" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-          </Group>
+          <Component id="tabs" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -86,7 +52,15 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" alignment="1" pref="778" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" pref="778" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="btnCheckAll" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnUnCheckAll" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnDeleteCheckedItems" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -94,7 +68,13 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" pref="403" max="-2" attributes="0"/>
-                      <EmptySpace pref="7" max="32767" attributes="0"/>
+                      <EmptySpace pref="28" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btnCheckAll" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnUnCheckAll" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnDeleteCheckedItems" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -111,15 +91,15 @@
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="9" rowCount="4">
-                        <Column editable="true" title="M&#xe3; h&#x1ee3;p &#x111;&#x1ed3;ng" type="java.lang.Object"/>
-                        <Column editable="true" title="M&#xe3; ph&#xf2;ng" type="java.lang.Object"/>
-                        <Column editable="true" title="M&#xe3; ng&#x1b0;&#x1edd;i thu&#xea;" type="java.lang.Object"/>
-                        <Column editable="true" title="Ng&#xe0;y b&#x1eaf;t &#x111;&#x1ea7;u" type="java.lang.Object"/>
-                        <Column editable="true" title="Ng&#xe0;y k&#x1ebf;t th&#xfa;c" type="java.lang.Object"/>
-                        <Column editable="true" title="Ti&#x1ec1;n &#x111;&#x1eb7;t c&#x1ecd;c" type="java.lang.Object"/>
-                        <Column editable="true" title="Ti&#x1ec1;n th&#xe1;ng" type="java.lang.Object"/>
-                        <Column editable="true" title="&#x1ea2;nh" type="java.lang.Object"/>
-                        <Column editable="true" title="Ghi ch&#xfa;" type="java.lang.Object"/>
+                        <Column editable="false" title="M&#xe3; h&#x1ee3;p &#x111;&#x1ed3;ng" type="java.lang.Object"/>
+                        <Column editable="false" title="M&#xe3; ph&#xf2;ng" type="java.lang.Object"/>
+                        <Column editable="false" title="M&#xe3; ng&#x1b0;&#x1edd;i thu&#xea;" type="java.lang.Object"/>
+                        <Column editable="false" title="Ng&#xe0;y b&#x1eaf;t &#x111;&#x1ea7;u" type="java.lang.Object"/>
+                        <Column editable="false" title="Ng&#xe0;y k&#x1ebf;t th&#xfa;c" type="java.lang.Object"/>
+                        <Column editable="false" title="Ti&#x1ec1;n &#x111;&#x1eb7;t c&#x1ecd;c" type="java.lang.Object"/>
+                        <Column editable="false" title="Ti&#x1ec1;n th&#xe1;ng" type="java.lang.Object"/>
+                        <Column editable="false" title="&#x1ea2;nh" type="java.lang.Object"/>
+                        <Column editable="false" title="Ghi ch&#xfa;" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -175,9 +155,36 @@
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblContractManagerMouseClicked"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
+            <Component class="javax.swing.JButton" name="btnCheckAll">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Ch&#x1ecd;n t&#x1ea5;t c&#x1ea3;"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCheckAllActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnUnCheckAll">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="H&#x1ee7;y ch&#x1ecd;n t&#x1ea5;t c&#x1ea3;"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUnCheckAllActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnDeleteCheckedItems">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="X&#xf3;a c&#xe1;c m&#x1ee5;c &#x111;&#xe3; ch&#x1ecd;n"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDeleteCheckedItemsActionPerformed"/>
+              </Events>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanel2">
@@ -214,7 +221,10 @@
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="Note" max="32767" attributes="0"/>
-                                          <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                                          <Group type="102" attributes="0">
+                                              <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="0" pref="287" max="32767" attributes="0"/>
+                                          </Group>
                                       </Group>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
@@ -259,6 +269,24 @@
                                   </Group>
                               </Group>
                               <EmptySpace min="120" pref="120" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="Create" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="Update" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="Delete" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="Reset" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="btnMoveFirst" min="-2" pref="44" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="btnMovePrevious" min="-2" pref="47" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="btnMoveNext" min="-2" pref="47" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="btnMoveLast" min="-2" pref="44" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -307,16 +335,24 @@
                           <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="Note" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                          <Component id="Note" min="-2" max="-2" attributes="0"/>
+                          <Component id="ContractScanUrl" alignment="0" min="-2" pref="154" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="39" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                              <Component id="Delete" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="Reset" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnMoveFirst" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnMovePrevious" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnMoveNext" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnMoveLast" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="ContractScanUrl" min="-2" pref="154" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                              <Component id="Create" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="Update" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -424,67 +460,67 @@
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ContractScanUrlMouseClicked"/>
               </Events>
             </Component>
+            <Component class="javax.swing.JButton" name="Reset">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Nh&#x1ead;p m&#x1edb;i"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ResetActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="Delete">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="X&#xf3;a"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DeleteActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="Update">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="C&#x1ead;p nh&#x1ead;t"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="UpdateActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="Create">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="T&#x1ea1;o m&#x1edb;i"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CreateActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnMoveFirst">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="|&lt;"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnMovePrevious">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&lt;&lt;"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMovePreviousActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnMoveNext">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&gt;&gt;"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMoveNextActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnMoveLast">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&gt;|"/>
+              </Properties>
+            </Component>
           </SubComponents>
         </Container>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="Create">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="T&#x1ea1;o m&#x1edb;i"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CreateActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="Update">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="C&#x1ead;p nh&#x1ead;t"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="UpdateActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="Delete">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="X&#xf3;a"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DeleteActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="Reset">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Nh&#x1ead;p m&#x1edb;i"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ResetActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnMoveFirst">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="|&lt;"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnMovePrevious">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="&lt;&lt;"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMovePreviousActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnMoveNext">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="&gt;&gt;"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMoveNextActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnMoveLast">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="&gt;|"/>
-      </Properties>
-    </Component>
   </SubComponents>
 </Form>

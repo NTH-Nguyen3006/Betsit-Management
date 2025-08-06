@@ -1,10 +1,17 @@
-
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
+ */
 package dao;
 
-import entity.InvoiceDetail;
 import java.util.List;
 
-public interface InvoiceDetailDao extends CrudDAO<InvoiceDetail, String> {
-List<InvoiceDetail> selectByInvoiceId(String invoiceId);
+import entity.InvoiceDetail;
 
+/**
+ *
+ * @author GAMING
+ */
+public interface InvoiceDetailDao extends CrudDAO<InvoiceDetail,String>{
+    List<InvoiceDetail> selectByInvoiceId(String invoiceId);
 }
