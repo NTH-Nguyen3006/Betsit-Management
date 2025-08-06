@@ -2,8 +2,26 @@ CREATE DATABASE BEDSIT;
 GO
 USE BEDSIT
 GO
+USE master;
+GO
 
---DROP DATABASE BEDSIT
+ALTER DATABASE BEDSIT SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+DROP DATABASE BEDSIT;
+SELECT * FROM dbo.Assets;
+SELECT * FROM dbo.Contract_Tenants;
+SELECT * FROM dbo.Contracts;
+SELECT * FROM dbo.Invoice;
+SELECT * FROM dbo.Invoice_Details;
+SELECT * FROM dbo.Payments;
+SELECT * FROM dbo.Roles;
+SELECT * FROM dbo.Rooms;
+SELECT * FROM dbo.Services;
+SELECT * FROM dbo.ServiceUsages;
+SELECT * FROM dbo.Tenant_Details;
+SELECT * FROM dbo.Tenants;
+SELECT * FROM dbo.Users;
+
+
 
 CREATE TABLE Rooms (
     RoomId INT IDENTITY(1,1) PRIMARY KEY,
@@ -14,8 +32,7 @@ CREATE TABLE Rooms (
     RoomType NVARCHAR(100),
     Notes NVARCHAR(MAX),
 );
-SELECT DISTINCT RoomType FROM Rooms WHERE RoomType IS NOT NULL AND RoomType <> '' ORDER BY RoomType
-	select * from Rooms
+
 CREATE TABLE Assets (
     Id INT IDENTITY(1,1) PRIMARY KEY,
     RoomId INT NOT NULL,
@@ -66,6 +83,7 @@ CREATE TABLE Contracts (
 );
 
 
+
 CREATE TABLE Services (
     Id INT IDENTITY(1,1) PRIMARY KEY,
     ServiceName NVARCHAR(100) NOT NULL,
@@ -101,22 +119,6 @@ CREATE TABLE Invoice (
     FOREIGN KEY(ContractId) REFERENCES Contracts(Id)
         ON DELETE SET NULL
 );
-INSERT INTO Invoice (ContractId, Billing_period_month, Billing_period_year, Previous_debt, Discount, TotalAmount, [Status], Due_date, Created_at) VALUES
-(1,  6, 2025, 0.00, 0.00, 3850000.00, 0, '2025-07-10', GETDATE()), -- Invoice ID sẽ là 1 (ContractId 1)
-(5,  6, 2025, 0.00, 0.00, 4500000.00, 0, '2025-07-15', GETDATE()), -- Invoice ID sẽ là 2 (ContractId 5)
-(10, 6, 2025, 50000.00, 0.00, 3100000.00, 0, '2025-07-20', GETDATE()), -- Invoice ID sẽ là 3 (ContractId 10)
-(15, 7, 2025, 0.00, 100000.00, 5200000.00, 0, '2025-08-01', GETDATE()), -- Invoice ID sẽ là 4 (ContractId 15)
-(20, 7, 2025, 0.00, 0.00, 4100000.00, 0, '2025-08-05', GETDATE()), -- Invoice ID sẽ là 5 (ContractId 20)
-(25, 7, 2025, 0.00, 0.00, 3300000.00, 0, '2025-08-10', GETDATE()), -- Invoice ID sẽ là 6 (ContractId 25)
-(30, 8, 2025, 0.00, 0.00, 3950000.00, 0, '2025-09-01', GETDATE()), -- Invoice ID sẽ là 7 (ContractId 30)
-(2,  8, 2025, 0.00, 0.00, 4600000.00, 0, '2025-09-05', GETDATE()), -- Invoice ID sẽ là 8 (ContractId 2)
-(7,  8, 2025, 0.00, 0.00, 3050000.00, 0, '2025-09-10', GETDATE()), -- Invoice ID sẽ là 9 (ContractId 7)
-(12, 9, 2025, 0.00, 0.00, 5600000.00, 0, '2025-10-01', GETDATE()), -- Invoice ID sẽ là 10 (ContractId 12)
-(17, 9, 2025, 0.00, 0.00, 3800000.00, 0, '2025-10-05', GETDATE()), -- Invoice ID sẽ là 11 (ContractId 17)
-(22, 9, 2025, 0.00, 0.00, 4700000.00, 0, '2025-10-10', GETDATE()), -- Invoice ID sẽ là 12 (ContractId 22)
-(27, 10, 2025, 0.00, 0.00, 3400000.00, 0, '2025-11-01', GETDATE()), -- Invoice ID sẽ là 13 (ContractId 27)
-(32, 10, 2025, 0.00, 0.00, 4200000.00, 0, '2025-11-05', GETDATE()), -- Invoice ID sẽ là 14 (ContractId 32)
-(33, 11, 2025, 0.00, 0.00, 3900000.00, 0, '2025-12-01', GETDATE()); -- Invoice ID sẽ là 15 (ContractId 33)
 
 	CREATE TABLE Invoice_Details (
 	  Id INT IDENTITY(1,1) PRIMARY KEY,
@@ -128,71 +130,6 @@ INSERT INTO Invoice (ContractId, Billing_period_month, Billing_period_year, Prev
 	  FOREIGN KEY(InvoiceId) REFERENCES Invoice(Id) ON DELETE CASCADE,
 	  FOREIGN KEY(ServiceId) REFERENCES Services(Id) 
 	);
-	INSERT INTO Invoice_Details (InvoiceId, ServiceId, Quantity, UnitPrice, Subtotal) VALUES
-	-- Chi tiết cho Invoice 1 (ID 1)
-	(1, 1, 65, 3500.00, 227500.00), -- Tiền Điện (ID 1)
-	(1, 2, 8, 18000.00, 144000.00), -- Tiền Nước (ID 2)
-	(1, 3, 1, 150000.00, 150000.00), -- Tiền Internet (ID 3)
-
-	-- Chi tiết cho Invoice 2 (ID 2)
-	(2, 1, 70, 3500.00, 245000.00), -- Tiền Điện
-	(2, 2, 10, 18000.00, 180000.00), -- Tiền Nước
-	(2, 4, 1, 100000.00, 100000.00), -- Phí Gửi Xe Máy (ID 4)
-
-	-- Chi tiết cho Invoice 3 (ID 3)
-	(3, 1, 55, 3500.00, 192500.00), -- Tiền Điện
-	(3, 2, 7, 18000.00, 126000.00), -- Tiền Nước
-	(3, 6, 1, 50000.00, 50000.00), -- Phí Vệ Sinh (ID 6)
-
-	-- Chi tiết cho Invoice 4 (ID 4)
-	(4, 1, 80, 3500.00, 280000.00), -- Tiền Điện
-	(4, 2, 12, 18000.00, 216000.00), -- Tiền Nước
-	(4, 3, 1, 150000.00, 150000.00), -- Tiền Internet
-
-	-- Chi tiết cho Invoice 5 (ID 5)
-	(5, 1, 68, 3500.00, 238000.00), -- Tiền Điện
-	(5, 4, 1, 100000.00, 100000.00), -- Phí Gửi Xe Máy
-
-	-- Chi tiết cho Invoice 6 (ID 6)
-	(6, 1, 60, 3500.00, 210000.00), -- Tiền Điện
-	(6, 6, 1, 50000.00, 50000.00), -- Phí Vệ Sinh
-
-	-- Chi tiết cho Invoice 7 (ID 7)
-	(7, 1, 75, 3500.00, 262500.00), -- Tiền Điện
-	(7, 2, 11, 18000.00, 198000.00), -- Tiền Nước
-
-	-- Chi tiết cho Invoice 8 (ID 8)
-	(8, 1, 85, 3500.00, 297500.00), -- Tiền Điện
-	(8, 3, 1, 150000.00, 150000.00), -- Tiền Internet
-
-	-- Chi tiết cho Invoice 9 (ID 9)
-	(9, 1, 50, 3500.00, 175000.00), -- Tiền Điện
-	(9, 2, 6, 18000.00, 108000.00), -- Tiền Nước
-
-	-- Chi tiết cho Invoice 10 (ID 10)
-	(10, 1, 90, 3500.00, 315000.00), -- Tiền Điện
-	(10, 5, 1, 800000.00, 800000.00), -- Phí Gửi Xe Ô Tô
-
-	-- Chi tiết cho Invoice 11 (ID 11)
-	(11, 1, 68, 3500.00, 238000.00), -- Tiền Điện
-	(11, 2, 10, 18000.00, 180000.00), -- Tiền Nước
-
-	-- Chi tiết cho Invoice 12 (ID 12)
-	(12, 1, 70, 3500.00, 245000.00), -- Tiền Điện
-	(12, 3, 1, 150000.00, 150000.00), -- Tiền Internet
-
-	-- Chi tiết cho Invoice 13 (ID 13)
-	(13, 1, 60, 3500.00, 210000.00), -- Tiền Điện
-	(13, 4, 1, 100000.00, 100000.00), -- Phí Gửi Xe Máy
-
-	-- Chi tiết cho Invoice 14 (ID 14)
-	(14, 1, 75, 3500.00, 262500.00), -- Tiền Điện
-	(14, 2, 11, 18000.00, 198000.00), -- Tiền Nước
-
-	-- Chi tiết cho Invoice 15 (ID 15)
-	(15, 1, 65, 3500.00, 227500.00), -- Tiền Điện
-	(15, 6, 1, 50000.00, 50000.00); -- Phí Vệ Sinh
-
 
 CREATE TABLE Payments ( -- ĐƠn thanh toán
     Id INT PRIMARY KEY IDENTITY(1, 1),
@@ -208,32 +145,11 @@ CREATE TABLE Payments ( -- ĐƠn thanh toán
     FOREIGN KEY(Tenant) REFERENCES Tenants(CitizenId) ON DELETE CASCADE
 );
 
-INSERT INTO Payments (InvoiceId, Tenant, Amount, PaymentDate, PaymentMethod, TransactionCode, Note) VALUES
-(1,  '001123456789', 3850000.00, '2025-07-05 09:00:00', N'Cash',          'TXN20250705001', NULL),
-(2,  '001234567890', 4500000.00, '2025-07-12 14:30:00', N'Bank Transfer', 'TXN20250712002', NULL),
-(3,  '001345678901', 3100000.00, '2025-07-18 11:15:00', N'Cash',          'TXN20250718003', NULL),
-(4,  '001456789012', 5200000.00, '2025-07-30 16:45:00', N'Credit Card',   'TXN20250730004', NULL),
-(5,  '001567890123', 4100000.00, '2025-08-02 10:20:00', N'Cash',          'TXN20250802005', NULL),
-(6,  '001678901234', 3300000.00, '2025-08-08 13:50:00', N'Bank Transfer', 'TXN20250808006', NULL),
-(7,  '001789012345', 3950000.00, '2025-08-30 09:40:00', N'Cash',          'TXN20250830007', NULL),
-(8,  '001890123456', 4600000.00, '2025-09-03 15:25:00', N'Credit Card',   'TXN20250903008', NULL),
-(9,  '001901234567', 3050000.00, '2025-09-08 11:55:00', N'Cash',          'TXN20250908009', NULL),
-(10, '002012345678', 5600000.00, '2025-09-28 17:10:00', N'Bank Transfer', 'TXN20250928010', NULL),
-(11, '002123456789', 3800000.00, '2025-10-03 09:30:00', N'Cash',          'TXN20251003011', NULL),
-(12, '002234567890', 4700000.00, '2025-10-07 14:00:00', N'Credit Card',   'TXN20251007012', NULL),
-(13, '002345678901', 3400000.00, '2025-10-29 10:45:00', N'Bank Transfer', 'TXN20251029013', NULL),
-(14, '002456789012', 4200000.00, '2025-11-03 12:15:00', N'Cash',          'TXN20251103014', NULL),
-(15, '002567890123', 3900000.00, '2025-11-28 16:40:00', N'Bank Transfer', 'TXN20251128015', NULL);
-
-
-
-
 CREATE TABLE Roles (
   Id int PRIMARY KEY IDENTITY(1, 1),
   RoleName varchar(50) UNIQUE NOT NULL,
-  [Description] text
+  [Description] NVARCHAR(100)
 );
-
 CREATE TABLE Users (
   Username varchar(50) PRIMARY KEY,
   [Password] varchar(100) NOT NULL,
@@ -246,9 +162,7 @@ CREATE TABLE Users (
 
   FOREIGN KEY (RoleId) REFERENCES Roles(Id) ON DELETE SET NULL
 );
-GO
-DROP TABLE IF EXISTS Contract_Tenants;
-
+drop table Contract_Tenants
 CREATE TABLE Contract_Tenants (
     ContractId INT NOT NULL,
     CitizenId VARCHAR(12) NOT NULL,
@@ -259,56 +173,7 @@ CREATE TABLE Contract_Tenants (
     FOREIGN KEY (CitizenId) REFERENCES Tenants(CitizenId) ON DELETE NO ACTION
 );
 
-DROP DATABASE BEDSIT
-/*
-CREATE TABLE Contract_Tenants (
-    ContractId INT PRIMARY KEY,	
-    PersonalId VARCHAR(12),
-    [Role] TINYINT, -- Enum
-    FOREIGN KEY(ContractId) REFERENCES Contracts(Id) ON DELETE CASCADE,
-	FOREIGN KEY (PersonalId) REFERENCES Tenants(CitizenId) ON DELETE NO ACTION,
-);
-*/
-INSERT INTO Contract_Tenants (ContractId, CitizenId, Role) VALUES
-(1, '001123456789', 0),
-(2, '001234567890', 0),
-(2, '003123456789', 1),
-(3, '001345678901', 0),
-(3, '003234567890', 1),
-(4, '001456789012', 0),
-(5, '001567890123', 0),
-(6, '001678901234', 0),
-(7, '001789012345', 0),
-(7, '004345678901', 1),
-(8, '001890123456', 0),
-(9, '001901234567', 0),
-(10, '001012345678', 0),
-(11, '002123456789', 0),
-(12, '002234567890', 0),
-(12, '003345678901', 1),
-(13, '002345678901', 0),
-(14, '002456789012', 0),
-(15, '002567890123', 0),
-(16, '002678901234', 0),
-(17, '002789012345', 0),
-(18, '002890123456', 0),
-(19, '002901234567', 0),
-(20, '002012345678', 0),
-(21, '003123456789', 0),
-(22, '003234567890', 0),
-(23, '003345678901', 0),
-(24, '003456789012', 0),
-(25, '003567890123', 0),
-(26, '003678901234', 0),
-(27, '003789012345', 0),
-(28, '003890123456', 0),
-(29, '003901234567', 0),
-(30, '003012345678', 0),
-(31, '004123456789', 0),
-(32, '004234567890', 0),
-(33, '004345678901', 0);
-
--- Dữ liệu cho bảng Rooms (ít nhất 30 phòng)
+-- Dữ liệu cho bảng Rooms 
 INSERT INTO Rooms (Area, RentPrice, Status, RoomType, Notes) VALUES
 (25.0, 3500000.00, 0, N'Phòng Đơn', N'Phòng có ban công hướng Đông, thoáng mát'),
 (30.0, 4200000.00, 1, N'Phòng Đôi', N'Đang có người thuê, hợp đồng đến 12/2025'),
@@ -350,7 +215,6 @@ INSERT INTO Rooms (Area, RentPrice, Status, RoomType, Notes) VALUES
 (26.0, 3600000.00, 0, N'Phòng Đơn', N'Phòng có điều hòa sẵn'),
 (38.0, 5800000.00, 0, N'Phòng Gia Đình', N'Phòng rộng, thích hợp cho 3-4 người'),
 (20.0, 2800000.00, 1, N'Phòng Đơn', N'Đang có người thuê, hợp đồng đến 07/2025');
-
 
 -- Dữ liệu cho bảng Tenants 
 INSERT INTO Tenants (CitizenId, FullName, DateOfBirth, PhoneNumber, Email, VehiclePlate) VALUES
@@ -552,37 +416,9 @@ INSERT INTO Roles (RoleName, Description) VALUES
 (N'Staff', N'Nhân viên điều hành hàng ngày'),
 (N'Maintenance', N'Nhân viên bảo trì cơ sở vật chất'),
 (N'Security', N'Nhân viên bảo vệ'),
-(N'Cleaner', N'Nhân viên vệ sinh'),
-(N'Marketing', N'Nhân viên Marketing và quảng bá'),
-(N'CustomerService', N'Nhân viên chăm sóc khách hàng'),
-(N'SeniorManager', N'Quản lý cấp cao'),
-(N'JuniorStaff', N'Nhân viên mới/tập sự'),
-(N'LeadAccountant', N'Trưởng phòng kế toán'),
-(N'LeadMaintenance', N'Trưởng nhóm bảo trì'),
-(N'HeadOfSecurity', N'Trưởng phòng bảo vệ'),
-(N'SupervisorCleaner', N'Giám sát vệ sinh'),
-(N'MarketingSpecialist', N'Chuyên viên Marketing'),
-(N'CustomerSupport', N'Hỗ trợ khách hàng'),
-(N'Guest', N'Khách vãng lai'),
-(N'Partner', N'Đối tác kinh doanh'),
-(N'Investor', N'Nhà đầu tư'),
-(N'HRManager', N'Quản lý nhân sự'),
-(N'Developer', N'Nhân viên phát triển phần mềm'),
-(N'DataAnalyst', N'Chuyên viên phân tích dữ liệu'),
-(N'LegalCounsel', N'Cố vấn pháp lý'),
-(N'PublicRelations', N'Quan hệ công chúng'),
-(N'Intern', N'Thực tập sinh'),
-(N'ProjectManager', N'Quản lý dự án'),
-(N'FinancialAnalyst', N'Chuyên viên phân tích tài chính'),
-(N'PurchasingOfficer', N'Nhân viên thu mua'),
-(N'WarehouseManager', N'Quản lý kho'),
-(N'Receptionist', N'Lễ tân'),
-(N'ITSupport', N'Hỗ trợ kỹ thuật IT'),
-(N'TrainingCoordinator', N'Điều phối viên đào tạo'),
-(N'LogisticsCoordinator', N'Điều phối viên hậu cần');
-*/
+(N'Cleaner', N'Nhân viên vệ sinh');
 
--- Dữ liệu cho bảng Services (ít nhất 30 dịch vụ)
+-- Dữ liệu cho bảng Services 
 INSERT INTO Services (ServiceName, Unit, Price, Description) VALUES
 (N'Tiền Điện', N'kWh', 3500.00, N'Giá điện tính theo kWh sử dụng hàng tháng'),
 (N'Tiền Nước', N'm3', 18000.00, N'Giá nước tính theo m3 sử dụng hàng tháng'),
@@ -658,54 +494,18 @@ INSERT INTO Users (Username, Password, Fullname, Email, PhoneNumber, RoleId, Sta
 ('admin01', '123456', N'Nguyễn Tấn Hoàng Nguyên', 'nguyenth@gmail.com', '0912345601', 1, 1, GETDATE()),
 ('manager01', '123456', N'Phạm Thùy Trinh', 'Trinhpt@gmail.com', '0912345602', 2, 1, GETDATE()),
 ('staff01', '123456', N'Như Lê Hoàng Minh', 'Minhnlh@gmail.com', '0912345603', 3, 1, GETDATE()),
-('staff02', '123456', N'Nguyễn Đài Vĩnh Khánh', 'Khanhndvts02245@gmail.com', '0931489629', 3, 1, GETDATE());
-
-
-
-select * from Rooms
-
-/*
-('staff02', '123456', N'Nguyễn Thanh Tùng', 'nguyenthanhtung@gmail.com', '0912345604', 3, 1, GETDATE()),
-('accountant01', '123456', N'Võ Thị Thu Hà', 'vothithuha@gmail.com', '0912345605', 5, 1, GETDATE()),
-('maintenance01', '123456', N'Hoàng Văn Đạt', 'hoangvandat@gmail.com', '0912345606', 6, 1, GETDATE()),
-('staff03', '123456', N'Đặng Thanh Bình', 'dangthanhbinh@gmail.com', '0912345607', 3, 1, GETDATE()),
-('manager02', '123456', N'Bùi Thị Hồng', 'buithihong@gmail.com', '0912345608', 2, 1, GETDATE()),
-('security01', '123456', N'Phan Đình Kiên', 'phandinhkien@gmail.com', '0912345609', 7, 1, GETDATE()),
-('cleaner01', '123456', N'Đỗ Thị Mai', 'dothimai@gmail.com', '0912345610', 8, 1, GETDATE()),
-('staff04', '123456', N'Trương Minh Quân', 'truongminhquan@gmail.com', '0912345611', 3, 1, GETDATE()),
-('marketing01', '123456', N'Nguyễn Thị Ngọc', 'nguyenthingoc@gmail.com', '0912345612', 9, 1, GETDATE()),
-('customerservice01', '123456', N'Lý Văn Thanh', 'lyvanthanh@gmail.com', '0912345613', 10, 1, GETDATE()),
-('staff05', '123456', N'Hoàng Thị Lan', 'hoangthilan@gmail.com', '0912345614', 3, 1, GETDATE()),
-('manager03', '123456', N'Châu Minh Khoa', 'chauminhkhoa@gmail.com', '0912345615', 2, 1, GETDATE()),
-('accountant02', '123456', N'Dương Trọng Phúc', 'duongtrongphuc@gmail.com', '0912345616', 5, 1, GETDATE()),
-('maintenance02', '123456', N'Hồ Tấn Đạt', 'hotandat@gmail.com', '0912345617', 6, 1, GETDATE()),
-('staff06', '123456', N'Đinh Thị Thu', 'dinhthithu@gmail.com', '0912345618', 3, 1, GETDATE()),
-('security02', '123456', N'Cao Văn Lộc', 'caovanloc@gmail.com', '0912345619', 7, 1, GETDATE()),
-('cleaner02', '123456', N'Lâm Thị Huyền', 'lamthihuyen@gmail.com', '0912345620', 8, 1, GETDATE()),
-('staff07', '123456', N'Mai Văn An', 'maivan@gmail.com', '0912345621', 3, 1, GETDATE()),
-('marketing02', '123456', N'Võ Thị Trà My', 'vothitramy@gmail.com', '0912345622', 9, 1, GETDATE()),
-('customerservice02', '123456', N'Bạch Quang Sáng', 'bachquangsang@gmail.com', '0912345623', 10, 1, GETDATE()),
-('staff08', '123456', N'Đào Trọng Nghĩa', 'daotrongnghia@gmail.com', '0912345624', 3, 1, GETDATE()),
-('manager04', '123456', N'Nguyễn Bảo Nam', 'nguyenbaonam@gmail.com', '0912345625', 2, 1, GETDATE()),
-('accountant03', '123456', N'Trần Thị Quỳnh', 'tranthiquynh@gmail.com', '0912345626', 5, 1, GETDATE()),
-('maintenance03', '123456', N'Lê Minh Khôi', 'leminhkhoi@gmail.com', '0912345627', 6, 1, GETDATE()),
-('staff09', '123456', N'Phạm Thu Giang', 'phamthugiang@gmail.com', '0912345628', 3, 1, GETDATE()),
-('security03', '123456', N'Huỳnh Trọng Hải', 'huynhtronghai@gmail.com', '0912345629', 7, 1, GETDATE()),
-('cleaner03', '123456', N'Đặng Thị Kim', 'dangthikim@gmail.com', '0912345630', 8, 1, GETDATE());
-*/
 ('staff02', '123456', N'Nguyễn Đài Vĩnh Khánh', 'Khanhndv@gmail.com', '0912345605', 3, 1, GETDATE()),
 ('maintenance01', '123456', N'Hoàng Văn Đạt', 'hoangvandat@gmail.com', '0912345606', 4, 1, GETDATE()),
 ('maintenance02', '123456', N'Hồ Tấn Đạt', 'hotandat@gmail.com', '0912345617', 4, 1, GETDATE()),
 ('maintenance03', '123456', N'Lê Minh Khôi', 'leminhkhoi@gmail.com', '0912345627', 4, 1, GETDATE()),
 ('security01', '123456', N'Phan Đình Kiên', 'phandinhkien@gmail.com', '0912345609', 5, 1, GETDATE()),
-('security02', '123456', N'Cao Văn Lộc', 'caovanloc@gmail.com', '0912345619', 5, 1, GETDATE()),
+('security02', '123456', N'Cao Văn Lộc', 'caovanloc@gmail.com', '0912345619', 5, 0, GETDATE()),
 ('security03', '123456', N'Huỳnh Trọng Hải', 'huynhtronghai@gmail.com', '0912345629', 5, 1, GETDATE()),
 ('cleaner01', '123456', N'Đỗ Thị Mai', 'dothimai@gmail.com', '0912345610', 6, 1, GETDATE()),
 ('cleaner02', '123456', N'Lâm Thị Huyền', 'lamthihuyen@gmail.com', '0912345620', 6, 1, GETDATE()),
 ('cleaner03', '123456', N'Đặng Thị Kim', 'dangthikim@gmail.com', '0912345630', 6, 1, GETDATE());
 
--- Dữ liệu cho bảng Tenant_Details (ít nhất 30 chi tiết người thuê)
--- Sử dụng CitizenId đã tạo ở bước trước
+-- Dữ liệu cho bảng Tenant_Details 
 INSERT INTO Tenant_Details (CitizenId, PerCardFrontImage, PerCardBackImage, ResidencyStatus, Occupation, Hometown) VALUES
 ('001123456789', NULL, NULL, 1, N'Kỹ sư phần mềm', N'Hà Nội'),
 ('001234567890', NULL, NULL, 0, N'Giáo viên', N'Đà Nẵng'),
@@ -898,10 +698,7 @@ INSERT INTO Tenant_Details (CitizenId, PerCardFrontImage, PerCardBackImage, Resi
 ('019901234567', NULL, NULL, 2, N'Họa sĩ', N'Đà Lạt'),
 ('019012345678', NULL, NULL, 0, N'Thợ điện', N'Biên Hòa');
 
--- Dữ liệu cho bảng Contracts (ít nhất 30 hợp đồng)
--- Sử dụng RoomId và CitizenId đã tạo ở bước trước
--- RoomId sẽ được lấy ngẫu nhiên từ 1 đến 40 (số lượng phòng đã tạo)
--- Tenant sẽ được lấy ngẫu nhiên từ các CitizenId đã tạo (100 người)
+-- Dữ liệu cho bảng Contracts 
 INSERT INTO Contracts (RoomId, Tenant, StartDate, EndDate, DepositAmount,PaymentCycleMonths, File_scan_url, Notes) VALUES
 (1, '001123456789', '2024-01-01', '2025-12-31', 7000000.00, 6, NULL, N'Hợp đồng 2 năm, thanh toán 6 tháng/lần'),
 (2, '001234567890', '2024-02-15', '2025-08-14', 8400000.00, 3, NULL, N'Hợp đồng 18 tháng, có điều khoản gia hạn'),
@@ -937,7 +734,6 @@ INSERT INTO Contracts (RoomId, Tenant, StartDate, EndDate, DepositAmount,Payment
 (32, '004234567890', '2024-08-10', '2025-08-09', 8400000.00, 3, NULL, N'Hợp đồng 1 năm, có điều khoản gia hạn'),
 (33, '004345678901', '2024-09-05', '2025-09-04', 5600000.00, 1, NULL, N'Hợp đồng 1 năm, thanh toán hàng tháng');
 --DROP DATABASE BEDSIT
-select * from Assets
 --Dữ liệu bảng Assets
 INSERT INTO Assets (RoomId, AssetName, Quantity, Condition) VALUES
 -- RoomId 1-10
@@ -1148,3 +944,142 @@ INSERT INTO Assets (RoomId, AssetName, Quantity, Condition) VALUES
 (40, N'Điều khiển Tivi', 1, N'Tốt'),
 (40, N'Kệ Tivi', 1, N'Mới');
 */ 
+INSERT INTO Invoice (ContractId, Billing_period_month, Billing_period_year, Previous_debt, Discount, TotalAmount, [Status], Due_date, Created_at) VALUES
+(1,  6, 2025, 0.00, 0.00, 3850000.00, 0, '2025-07-10', GETDATE()), -- Invoice ID sẽ là 1 (ContractId 1)
+(5,  6, 2025, 0.00, 0.00, 4500000.00, 0, '2025-07-15', GETDATE()), -- Invoice ID sẽ là 2 (ContractId 5)
+(10, 6, 2025, 50000.00, 0.00, 3100000.00, 0, '2025-07-20', GETDATE()), -- Invoice ID sẽ là 3 (ContractId 10)
+(15, 7, 2025, 0.00, 100000.00, 5200000.00, 0, '2025-08-01', GETDATE()), -- Invoice ID sẽ là 4 (ContractId 15)
+(20, 7, 2025, 0.00, 0.00, 4100000.00, 0, '2025-08-05', GETDATE()), -- Invoice ID sẽ là 5 (ContractId 20)
+(25, 7, 2025, 0.00, 0.00, 3300000.00, 0, '2025-08-10', GETDATE()), -- Invoice ID sẽ là 6 (ContractId 25)
+(30, 8, 2025, 0.00, 0.00, 3950000.00, 0, '2025-09-01', GETDATE()), -- Invoice ID sẽ là 7 (ContractId 30)
+(2,  8, 2025, 0.00, 0.00, 4600000.00, 0, '2025-09-05', GETDATE()), -- Invoice ID sẽ là 8 (ContractId 2)
+(7,  8, 2025, 0.00, 0.00, 3050000.00, 0, '2025-09-10', GETDATE()), -- Invoice ID sẽ là 9 (ContractId 7)
+(12, 9, 2025, 0.00, 0.00, 5600000.00, 0, '2025-10-01', GETDATE()), -- Invoice ID sẽ là 10 (ContractId 12)
+(17, 9, 2025, 0.00, 0.00, 3800000.00, 0, '2025-10-05', GETDATE()), -- Invoice ID sẽ là 11 (ContractId 17)
+(22, 9, 2025, 0.00, 0.00, 4700000.00, 0, '2025-10-10', GETDATE()), -- Invoice ID sẽ là 12 (ContractId 22)
+(27, 10, 2025, 0.00, 0.00, 3400000.00, 0, '2025-11-01', GETDATE()), -- Invoice ID sẽ là 13 (ContractId 27)
+(32, 10, 2025, 0.00, 0.00, 4200000.00, 0, '2025-11-05', GETDATE()), -- Invoice ID sẽ là 14 (ContractId 32)
+(33, 11, 2025, 0.00, 0.00, 3900000.00, 0, '2025-12-01', GETDATE()); -- Invoice ID sẽ là 15 (ContractId 33)
+
+
+INSERT INTO Invoice_Details (InvoiceId, ServiceId, Quantity, UnitPrice, Subtotal) VALUES
+	-- Chi tiết cho Invoice 1 (ID 1)
+	(1, 1, 65, 3500.00, 227500.00), -- Tiền Điện (ID 1)
+	(1, 2, 8, 18000.00, 144000.00), -- Tiền Nước (ID 2)
+	(1, 3, 1, 150000.00, 150000.00), -- Tiền Internet (ID 3)
+
+	-- Chi tiết cho Invoice 2 (ID 2)
+	(2, 1, 70, 3500.00, 245000.00), -- Tiền Điện
+	(2, 2, 10, 18000.00, 180000.00), -- Tiền Nước
+	(2, 4, 1, 100000.00, 100000.00), -- Phí Gửi Xe Máy (ID 4)
+
+	-- Chi tiết cho Invoice 3 (ID 3)
+	(3, 1, 55, 3500.00, 192500.00), -- Tiền Điện
+	(3, 2, 7, 18000.00, 126000.00), -- Tiền Nước
+	(3, 6, 1, 50000.00, 50000.00), -- Phí Vệ Sinh (ID 6)
+
+	-- Chi tiết cho Invoice 4 (ID 4)
+	(4, 1, 80, 3500.00, 280000.00), -- Tiền Điện
+	(4, 2, 12, 18000.00, 216000.00), -- Tiền Nước
+	(4, 3, 1, 150000.00, 150000.00), -- Tiền Internet
+
+	-- Chi tiết cho Invoice 5 (ID 5)
+	(5, 1, 68, 3500.00, 238000.00), -- Tiền Điện
+	(5, 4, 1, 100000.00, 100000.00), -- Phí Gửi Xe Máy
+
+	-- Chi tiết cho Invoice 6 (ID 6)
+	(6, 1, 60, 3500.00, 210000.00), -- Tiền Điện
+	(6, 6, 1, 50000.00, 50000.00), -- Phí Vệ Sinh
+
+	-- Chi tiết cho Invoice 7 (ID 7)
+	(7, 1, 75, 3500.00, 262500.00), -- Tiền Điện
+	(7, 2, 11, 18000.00, 198000.00), -- Tiền Nước
+
+	-- Chi tiết cho Invoice 8 (ID 8)
+	(8, 1, 85, 3500.00, 297500.00), -- Tiền Điện
+	(8, 3, 1, 150000.00, 150000.00), -- Tiền Internet
+
+	-- Chi tiết cho Invoice 9 (ID 9)
+	(9, 1, 50, 3500.00, 175000.00), -- Tiền Điện
+	(9, 2, 6, 18000.00, 108000.00), -- Tiền Nước
+
+	-- Chi tiết cho Invoice 10 (ID 10)
+	(10, 1, 90, 3500.00, 315000.00), -- Tiền Điện
+	(10, 5, 1, 800000.00, 800000.00), -- Phí Gửi Xe Ô Tô
+
+	-- Chi tiết cho Invoice 11 (ID 11)
+	(11, 1, 68, 3500.00, 238000.00), -- Tiền Điện
+	(11, 2, 10, 18000.00, 180000.00), -- Tiền Nước
+
+	-- Chi tiết cho Invoice 12 (ID 12)
+	(12, 1, 70, 3500.00, 245000.00), -- Tiền Điện
+	(12, 3, 1, 150000.00, 150000.00), -- Tiền Internet
+
+	-- Chi tiết cho Invoice 13 (ID 13)
+	(13, 1, 60, 3500.00, 210000.00), -- Tiền Điện
+	(13, 4, 1, 100000.00, 100000.00), -- Phí Gửi Xe Máy
+
+	-- Chi tiết cho Invoice 14 (ID 14)
+	(14, 1, 75, 3500.00, 262500.00), -- Tiền Điện
+	(14, 2, 11, 18000.00, 198000.00), -- Tiền Nước
+
+	-- Chi tiết cho Invoice 15 (ID 15)
+	(15, 1, 65, 3500.00, 227500.00), -- Tiền Điện
+	(15, 6, 1, 50000.00, 50000.00); -- Phí Vệ Sinh
+
+
+INSERT INTO Payments (InvoiceId, Tenant, Amount, PaymentDate, PaymentMethod, TransactionCode, Note) VALUES
+(1,  '001123456789', 3850000.00, '2025-07-05 09:00:00', N'Cash',          'TXN20250705001', NULL),
+(2,  '001234567890', 4500000.00, '2025-07-12 14:30:00', N'Bank Transfer', 'TXN20250712002', NULL),
+(3,  '001345678901', 3100000.00, '2025-07-18 11:15:00', N'Cash',          'TXN20250718003', NULL),
+(4,  '001456789012', 5200000.00, '2025-07-30 16:45:00', N'Credit Card',   'TXN20250730004', NULL),
+(5,  '001567890123', 4100000.00, '2025-08-02 10:20:00', N'Cash',          'TXN20250802005', NULL),
+(6,  '001678901234', 3300000.00, '2025-08-08 13:50:00', N'Bank Transfer', 'TXN20250808006', NULL),
+(7,  '001789012345', 3950000.00, '2025-08-30 09:40:00', N'Cash',          'TXN20250830007', NULL),
+(8,  '001890123456', 4600000.00, '2025-09-03 15:25:00', N'Credit Card',   'TXN20250903008', NULL),
+(9,  '001901234567', 3050000.00, '2025-09-08 11:55:00', N'Cash',          'TXN20250908009', NULL),
+(10, '002012345678', 5600000.00, '2025-09-28 17:10:00', N'Bank Transfer', 'TXN20250928010', NULL),
+(11, '002123456789', 3800000.00, '2025-10-03 09:30:00', N'Cash',          'TXN20251003011', NULL),
+(12, '002234567890', 4700000.00, '2025-10-07 14:00:00', N'Credit Card',   'TXN20251007012', NULL),
+(13, '002345678901', 3400000.00, '2025-10-29 10:45:00', N'Bank Transfer', 'TXN20251029013', NULL),
+(14, '002456789012', 4200000.00, '2025-11-03 12:15:00', N'Cash',          'TXN20251103014', NULL),
+(15, '002567890123', 3900000.00, '2025-11-28 16:40:00', N'Bank Transfer', 'TXN20251128015', NULL);
+
+INSERT INTO Contract_Tenants (ContractId, CitizenId, Role) VALUES
+(1, '001123456789', 0),
+(2, '001234567890', 0),
+(2, '003123456789', 1),
+(3, '001345678901', 0),
+(3, '003234567890', 1),
+(4, '001456789012', 0),
+(5, '001567890123', 0),
+(6, '001678901234', 0),
+(7, '001789012345', 0),
+(7, '004345678901', 1),
+(8, '001890123456', 0),
+(9, '001901234567', 0),
+(10, '001012345678', 0),
+(11, '002123456789', 0),
+(12, '002234567890', 0),
+(12, '003345678901', 1),
+(13, '002345678901', 0),
+(14, '002456789012', 0),
+(15, '002567890123', 0),
+(16, '002678901234', 0),
+(17, '002789012345', 0),
+(18, '002890123456', 0),
+(19, '002901234567', 0),
+(20, '002012345678', 0),
+(21, '003123456789', 0),
+(22, '003234567890', 0),
+(23, '003345678901', 0),
+(24, '003456789012', 0),
+(25, '003567890123', 0),
+(26, '003678901234', 0),
+(27, '003789012345', 0),
+(28, '003890123456', 0),
+(29, '003901234567', 0),
+(30, '003012345678', 0),
+(31, '004123456789', 0),
+(32, '004234567890', 0),
+(33, '004345678901', 0);
