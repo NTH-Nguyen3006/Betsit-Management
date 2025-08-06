@@ -4,8 +4,9 @@
  */
 package dao;
 
-import entity.InvoiceDetail;
 import java.util.List;
+
+import entity.InvoiceDetail;
 
 /**
  *
