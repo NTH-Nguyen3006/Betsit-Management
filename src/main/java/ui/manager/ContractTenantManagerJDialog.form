@@ -170,9 +170,9 @@
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="txtRoleContractTenantManager" alignment="0" max="32767" attributes="0"/>
                                   <Component id="txtCitizenIdContractTenantManager" alignment="0" max="32767" attributes="0"/>
                                   <Component id="txtIdContractTenantManager" pref="381" max="32767" attributes="0"/>
+                                  <Component id="cobContractTenantStatus" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="179" max="-2" attributes="0"/>
                           </Group>
@@ -194,7 +194,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="txtRoleContractTenantManager" min="-2" max="-2" attributes="0"/>
+                      <Component id="cobContractTenantStatus" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="67" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -213,7 +213,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel13">
               <Properties>
-                <Property name="text" type="java.lang.String" value="M&#xe3; h&#x1ee3;p &#x111;&#x1ed3;ng"/>
+                <Property name="text" type="java.lang.String" value="M&#xe3; ng&#x1b0;&#x1edd;i thu&#xea;"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtCitizenIdContractTenantManager">
@@ -226,10 +226,19 @@
                 <Property name="text" type="java.lang.String" value="Vai tr&#xf2; ng&#x1b0;&#x1edd;i thu&#xea;"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtRoleContractTenantManager">
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtRoleContractTenantManagerActionPerformed"/>
-              </Events>
+            <Component class="javax.swing.JComboBox" name="cobContractTenantStatus">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="3">
+                    <StringItem index="0" value="Ch&#x1ee7; h&#x1ee3;p &#x111;&#x1ed3;ng"/>
+                    <StringItem index="1" value="&#x110;&#x1ed3;ng Thu&#xea;"/>
+                    <StringItem index="2" value="kh&#xe1;c"/>
+                  </StringArray>
+                </Property>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>

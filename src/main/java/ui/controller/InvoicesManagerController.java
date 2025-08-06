@@ -4,12 +4,14 @@
  */
 package ui.controller;
 
-import entity.Contract;
+
+
+import javax.swing.text.html.parser.Entity;
 
 /**
  *
  * @author GAMING
  */
-public interface InvoicesManagerController {
+public interface InvoicesManagerController extends CrudController <Entity> {
     
 }

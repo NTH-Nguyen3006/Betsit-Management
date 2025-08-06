@@ -66,4 +66,10 @@ public class ContractTenantDAOImpl implements ContractTenantDao {
     public ContractTenant findById(String id) {
         return XQuery.getSingleBean(ContractTenant.class, findByIdSql, id);
     }
+    private final String findByCitizenIdSql = findAllSql + " WHERE CitizenId = ?";
+
+@Override
+public ContractTenant findByCitizenId(String citizenId) {
+    return XQuery.getSingleBean(ContractTenant.class, findByCitizenIdSql, citizenId);
+}
 }

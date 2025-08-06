@@ -4,30 +4,37 @@
  */
 package ui.manager;
 
-import dao.ContractTenantDao;
-import entity.ContractTenant;
-import impl.ContractTenantDAOImpl;
 import ui.controller.ContractTenantManagerController;
-
+import dao.ContractTenantDao;
+import dao.TenantDAO;
+import entity.ContractTenant;
+import entity.Tenant;
+import impl.ContractTenantDAOImpl;
+import impl.TenantDAOImpl;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import dao.ContractTenantDao;
 
 /**
  *
  * @author GAMING
  */
 public class ContractTenantManagerJDialog extends javax.swing.JDialog implements ContractTenantManagerController {
+<<<<<<< HEAD
     ContractTenantDao dao = new ContractTenantDAOImpl();
     int currentIndex = -1;
 
-    public ContractTenantManagerJDialog(java.awt.Frame parent, boolean modal) {
+=======
+        ContractTenantDao dao = new ContractTenantDAOImpl();
+        int currentIndex = -1;
+        
         super(parent, modal);
         initComponents();
+//        txtIdContractTenantManager.setEnabled(false);
         tblContractTenantManager.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) {
                 currentIndex = tblContractTenantManager.getSelectedRow();
-                if (currentIndex >= 0) {
                     edit();
                 }
             }
@@ -56,7 +63,7 @@ public class ContractTenantManagerJDialog extends javax.swing.JDialog implements
         jLabel13 = new javax.swing.JLabel();
         txtCitizenIdContractTenantManager = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        txtRoleContractTenantManager = new javax.swing.JTextField();
+        cobContractTenantStatus = new javax.swing.JComboBox<>();
         Create = new javax.swing.JButton();
         Update = new javax.swing.JButton();
         Delete = new javax.swing.JButton();
@@ -102,7 +109,7 @@ public class ContractTenantManagerJDialog extends javax.swing.JDialog implements
 
         jLabel12.setText("Mã hợp đồng");
 
-        jLabel13.setText("Mã hợp đồng");
+        jLabel13.setText("Mã người thuê");
 
         txtCitizenIdContractTenantManager.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,15 +119,12 @@ public class ContractTenantManagerJDialog extends javax.swing.JDialog implements
 
         jLabel14.setText("Vai trò người thuê");
 
-        txtRoleContractTenantManager.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtRoleContractTenantManagerActionPerformed(evt);
-            }
-        });
+        cobContractTenantStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chủ hợp đồng", "Đồng Thuê", "khác" }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
+<<<<<<< HEAD
                 jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addContainerGap()
@@ -165,6 +169,44 @@ public class ContractTenantManagerJDialog extends javax.swing.JDialog implements
                                 .addComponent(txtRoleContractTenantManager, javax.swing.GroupLayout.PREFERRED_SIZE,
                                         javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(67, Short.MAX_VALUE)));
+=======
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel14))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtCitizenIdContractTenantManager, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtIdContractTenantManager, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)
+                            .addComponent(cobContractTenantStatus, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(179, 179, 179))))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(8, 8, 8)
+                .addComponent(jLabel12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtIdContractTenantManager, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel13)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtCitizenIdContractTenantManager, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel14)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cobContractTenantStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(67, Short.MAX_VALUE))
+        );
+>>>>>>> Trinh
 
         jTabbedPane1.addTab("Biểu Mẫu", jPanel2);
 
@@ -296,11 +338,15 @@ public class ContractTenantManagerJDialog extends javax.swing.JDialog implements
         // TODO add your handling code here:
     }// GEN-LAST:event_txtCitizenIdContractTenantManagerActionPerformed
 
+<<<<<<< HEAD
     private void txtRoleContractTenantManagerActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txtRoleContractTenantManagerActionPerformed
         // TODO add your handling code here:
     }// GEN-LAST:event_txtRoleContractTenantManagerActionPerformed
 
     private void CreateActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_CreateActionPerformed
+=======
+    private void CreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateActionPerformed
+>>>>>>> Trinh
         // TODO add your handling code here:
         Create.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -368,6 +414,7 @@ public class ContractTenantManagerJDialog extends javax.swing.JDialog implements
     private javax.swing.JButton btnMoveLast;
     private javax.swing.JButton btnMoveNext;
     private javax.swing.JButton btnMovePrevious;
+    private javax.swing.JComboBox<String> cobContractTenantStatus;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -378,6 +425,7 @@ public class ContractTenantManagerJDialog extends javax.swing.JDialog implements
     private javax.swing.JTable tblContractTenantManager;
     private javax.swing.JTextField txtCitizenIdContractTenantManager;
     private javax.swing.JTextField txtIdContractTenantManager;
+<<<<<<< HEAD
     private javax.swing.JTextField txtRoleContractTenantManager;
 
     // End of variables declaration//GEN-END:variables
@@ -396,15 +444,61 @@ public class ContractTenantManagerJDialog extends javax.swing.JDialog implements
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Lỗi truy vấn dữ liệu: " + e.getMessage());
             e.printStackTrace();
+=======
+    // End of variables declaration//GEN-END:variables
+    private void fillToTable() {
+    DefaultTableModel model = (DefaultTableModel) tblContractTenantManager.getModel();
+    model.setRowCount(0);
+    try {
+        List<ContractTenant> list = dao.findAll();
+        for (ContractTenant ct : list) {
+            model.addRow(new Object[]{
+                ct.getContractId(),
+                ct.getCitizenId(),
+                ct.getRole() == 0 ? "Chủ hợp đồng" : "Đồng thuê"
+            });
+>>>>>>> Trinh
         }
     }
 
+<<<<<<< HEAD
     private ContractTenant getForm() {
         return ContractTenant.builder()
                 .contractId(Integer.parseInt(txtIdContractTenantManager.getText()))
                 .citizenId(txtCitizenIdContractTenantManager.getText())
                 .role(Integer.parseInt(txtRoleContractTenantManager.getText()))
                 .build();
+=======
+private ContractTenant getForm() {
+    return ContractTenant.builder()
+            .contractId(Integer.parseInt(txtIdContractTenantManager.getText()))
+            .citizenId(txtCitizenIdContractTenantManager.getText())
+            .role(Integer.parseInt(cobContractTenantStatus.getSelectedItem().toString()))
+            .build();
+}
+
+private void setForm(ContractTenant entity) {
+    txtIdContractTenantManager.setText(String.valueOf(entity.getContractId()));
+    txtCitizenIdContractTenantManager.setText(entity.getCitizenId());
+    cobContractTenantStatus.setSelectedItem(String.valueOf(entity.getRole()));
+}
+private void clear() {
+    txtIdContractTenantManager.setText("");
+    txtCitizenIdContractTenantManager.setText("");
+    cobContractTenantStatus.setSelectedIndex(0);
+    currentIndex = -1;
+    tblContractTenantManager.clearSelection();
+}
+private void update() {
+    try {
+        ContractTenant entity = getForm();
+        dao.update(entity);
+        this.fillToTable();
+        JOptionPane.showMessageDialog(this, "Cập nhật thành công");
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Lỗi cập nhật: " + e.getMessage());
+        e.printStackTrace();
+>>>>>>> Trinh
     }
 
     private void setForm(ContractTenant entity) {
@@ -432,6 +526,60 @@ public class ContractTenantManagerJDialog extends javax.swing.JDialog implements
             e.printStackTrace();
         }
     }
+<<<<<<< HEAD
+=======
+}
+private void create() {
+    try {
+        String citizenId = txtCitizenIdContractTenantManager.getText().trim();
+
+
+        if (!citizenId.matches("\\d{12}")) {
+            JOptionPane.showMessageDialog(this, "CCCD không hợp lệ!");
+            return;
+        }
+
+       
+        if (tenantDAO.findById(citizenId) == null) {
+            JOptionPane.showMessageDialog(this, "Người dùng chưa tồn tại! Vui lòng tạo người dùng trước.");
+            return;
+        }
+        
+    
+        int selectedRow = tblContractTenantManager.getSelectedRow();
+        int contractId;
+        if (selectedRow >= 0) {
+            contractId = Integer.parseInt(tblContractTenantManager.getValueAt(selectedRow, 0).toString());
+        } else {
+            try {
+                contractId = Integer.parseInt(txtIdContractTenantManager.getText().trim());
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập mã hợp đồng hợp lệ.");
+                return;
+            }
+        }
+
+        
+        txtIdContractTenantManager.setText(String.valueOf(contractId));
+
+        
+        ContractTenant entity = ContractTenant.builder()
+                .contractId(contractId)
+                .citizenId(citizenId)
+                .role(cobContractTenantStatus.getSelectedIndex() + 1)
+                .build();
+
+        dao.create(entity);
+        this.fillToTable();
+        JOptionPane.showMessageDialog(this, "Thêm mới thành công!");
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Lỗi thêm mới: " + e.getMessage());
+        e.printStackTrace();
+    }
+}
+}
+>>>>>>> Trinh
 
     private void delete() {
         int confirm = JOptionPane.showConfirmDialog(this, "Xác nhận xóa?", "Cảnh báo", JOptionPane.YES_NO_OPTION);

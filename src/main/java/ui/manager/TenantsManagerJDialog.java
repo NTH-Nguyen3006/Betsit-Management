@@ -999,23 +999,15 @@ public class TenantsManagerJDialog extends javax.swing.JDialog implements Tenant
         }
     }
 
-    @Override
+    @Override   
     public void clear() {
-        txtCitizen_id.setText("");
-        txtFullName.setText("");
-        txtDateOfBirth.setText("");
-        txtPhoneNumber.setText("");
-        txtEmail.setText("");
-        txtVehiclePlate.setText("");
-        lblPerCard_FrontImage.setText("");
-        lblPerCard_FrontImage.setIcon(null);  
-        lblPerCard_BackImage.setText("");
-        lblPerCard_BackImage.setIcon(null);
-        cobResidencyStatus.setSelectedIndex(0);
-        txtOccupation.setText("");
-        txtHometown.setText("");
-        this.setEditable(false);
+        setForm(new Tenant());
+        setDetailForm(new TenantDetail());
+        frontCardImage = null;
+        backCardImage = null;
+        setEditable(false);
     }
+
 
     @Override
     public void setEditable(boolean editable) {

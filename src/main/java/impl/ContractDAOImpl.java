@@ -7,13 +7,14 @@ import java.util.List;
 import entity.Contract;
 import utils.XJdbc;
 import dao.ContractDAO;
+import java.sql.ResultSet;
 import utils.XQuery;
 
 public class ContractDAOImpl implements ContractDAO {
 
     private final String createSql = "INSERT INTO Contracts "
-            + "(Id, RoomId, Tenant, StartDate, EndDate, depositAmount,PaymentCycleMonths, File_scan_url, Notes) "
-            + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            + "( RoomId, Tenant, StartDate, EndDate, depositAmount,PaymentCycleMonths, File_scan_url, Notes) "
+            + "VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)";
 
     private final String updateSql = "UPDATE Contracts SET "
             + "RoomId = ?, Tenant = ?, StartDate = ?, EndDate = ?, depositAmount = ?, "
@@ -30,7 +31,7 @@ public class ContractDAOImpl implements ContractDAO {
     @Override
     public Contract create(Contract entity) {
         Object[] values = {
-                entity.getId(),
+                
                 entity.getRoomId(),
                 entity.getTenant(),
                 entity.getStartDate(),
@@ -90,4 +91,19 @@ public class ContractDAOImpl implements ContractDAO {
             return false;
         }
     }
+    @Override
+public boolean existsById(int id) {
+    String sql = "SELECT 1 FROM Contracts WHERE Id = ?";
+    try (
+        Connection conn = XJdbc.getConnection();
+        PreparedStatement stmt = conn.prepareStatement(sql)
+    ) {
+        stmt.setInt(1, id);
+        ResultSet rs = stmt.executeQuery();
+        return rs.next(); // nếu có dòng nào → true
+    } catch (Exception e) {
+        e.printStackTrace();
+        return false;
+    }
+}
 }
