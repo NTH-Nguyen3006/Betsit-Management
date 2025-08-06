@@ -22,6 +22,9 @@ import entity.Tenant;
 import entity.TenantDetail;
 import impl.TenantDAOImpl;
 import impl.TenantDetailDAOImpl;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import ui.controller.TenantController;
 import utils.XDate;
 import utils.XDialog;
@@ -1194,11 +1197,22 @@ public class TenantsManagerJDialog extends javax.swing.JDialog implements Tenant
             txtDateOfBirth.requestFocus();
             return false;
         }
-        if (XDate.parse(dateOfBirth) == null) {
-            XDialog.alert("Ngày sinh không đúng định dạng dd/MM/yyyy.");
+
+        if (!dateOfBirth.matches("^([0-2][0-9]|3[01])/([0][1-9]|1[0-2])/\\d{4}$")) {
+            XDialog.alert("Ngày sinh phải đúng định dạng dd/MM/yyyy.");
             txtDateOfBirth.requestFocus();
             return false;
         }
+
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate date = LocalDate.parse(dateOfBirth, formatter);
+        } catch (DateTimeParseException e) {
+            XDialog.alert("Ngày sinh không hợp lệ (kiểm tra ngày và tháng).");
+            txtDateOfBirth.requestFocus();
+            return false;
+        }
+
 
         if (phoneNumber.isEmpty()) {
             XDialog.alert("Vui lòng nhập số điện thoại.");
