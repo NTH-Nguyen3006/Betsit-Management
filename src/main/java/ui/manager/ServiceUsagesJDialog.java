@@ -574,8 +574,8 @@ public class ServiceUsagesJDialog extends javax.swing.JDialog implements Service
 
         if (!beginText.isEmpty() && !endText.isEmpty()) {
             try {
-                Date begin = XDate.parse(beginText, "dd/MM/yyyy");
-                Date end = XDate.parse(endText, "dd/MM/yyyy");
+                Date begin = XDate.parse(beginText, "yyyy-MM-dd");
+                Date end = XDate.parse(endText, "yyyy-MM-dd");
                 
                 if (end.before(begin)) {
                     XDialog.alert("Ngày kết thúc không được nhỏ hơn ngày bắt đầu.");
@@ -584,7 +584,7 @@ public class ServiceUsagesJDialog extends javax.swing.JDialog implements Service
                 
                 list = dao.findByTimeRange(begin, end);
             } catch (Exception e) {
-                XDialog.alert("Ngày không hợp lệ. Vui lòng nhập theo định dạng dd/MM/yyyy.");
+                XDialog.alert("Ngày không hợp lệ. Vui lòng nhập theo định dạng yyyy-MM-dd.");
                 return;
             }
         } else {
@@ -597,8 +597,8 @@ public class ServiceUsagesJDialog extends javax.swing.JDialog implements Service
             model.addRow(new Object[]{
                 s.getServiceId(), 
                 s.getContractId(),
-                XDate.format(s.getStartDate(), "dd/MM/yyyy"),
-                s.getEndDate() != null ? XDate.format(s.getEndDate(), "dd/MM/yyyy") : "",
+                XDate.format(s.getStartDate(), "yyyy-MM-dd HH:mm"),
+                s.getEndDate() != null ? XDate.format(s.getEndDate(), "yyyy-MM-dd HH:mm") : "",
                 false,
             });
         }
@@ -703,7 +703,7 @@ public class ServiceUsagesJDialog extends javax.swing.JDialog implements Service
         this.clear();
         XDialog.alert("Thêm mới thành công.");
         } catch (Exception e) {
-        XDialog.alert("Lỗi khi thêm mới. ");
+        XDialog.alert("Lỗi khi thêm mới. " + e);
     }
     }
 
@@ -750,7 +750,7 @@ public class ServiceUsagesJDialog extends javax.swing.JDialog implements Service
         
         if (createdAtTimer == null) {
             createdAtTimer = new Timer(1000, e -> {
-                txtStartDate.setText(XDate.format(new Date(), "yyyy-MM-dd"));
+                txtStartDate.setText(XDate.format(new Date(), "yyyy-MM-dd HH:mm"));
             });
         }
 
@@ -822,9 +822,9 @@ public class ServiceUsagesJDialog extends javax.swing.JDialog implements Service
         }
         
         try {
-            Date startDate = XDate.parse(txtStartDate.getText(), "yyyy-MM-dd");
+            Date startDate = XDate.parse(txtStartDate.getText(), "yyyy-MM-dd HH:mm");
             if (!txtEndDate.getText().isBlank()) {
-                Date endDate = XDate.parse(txtEndDate.getText(), "yyyy-MM-dd");
+                Date endDate = XDate.parse(txtEndDate.getText(), "yyyy-MM-dd HH:mm");
                 if (endDate.before(startDate)) {
                     XDialog.alert("Ngày kết thúc không được nhỏ hơn ngày bắt đầu.");
                     txtEndDate.requestFocus();
@@ -853,6 +853,5 @@ public class ServiceUsagesJDialog extends javax.swing.JDialog implements Service
         for (Contract c : contracts) {
             cboContractId.addItem(c.getId());
         }
-    }
-    
+    }  
 }
