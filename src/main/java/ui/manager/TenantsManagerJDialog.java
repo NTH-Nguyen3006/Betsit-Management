@@ -827,7 +827,20 @@ public class TenantsManagerJDialog extends javax.swing.JDialog implements Tenant
 
     @Override
     public void deleteCheckedItems() {
-        if (XDialog.confirm("Bạn thực sự muốn xóa các mục chọn?")) {
+        int selectedCount = 0;
+        for (int i = 0; i < tblTenants.getRowCount(); i++) {
+            Boolean checked = (Boolean) tblTenants.getValueAt(i, 6);
+            if (checked != null && checked) {
+                selectedCount++;
+            }
+        }
+
+        if (selectedCount == 0) {
+            XDialog.alert("Vui lòng chọn ít nhất một mục để xóa.");
+            return;
+        }
+
+        if (XDialog.confirm("Bạn thực sự muốn xóa " + selectedCount + " mục đã chọn?")) {
             try {
                 for (int i = 0; i < tblTenants.getRowCount(); i++) {
                     if ((Boolean) tblTenants.getValueAt(i, 6)) {
@@ -980,10 +993,10 @@ public class TenantsManagerJDialog extends javax.swing.JDialog implements Tenant
             XDialog.alert("Cập nhật cư dân thành công.");
 
             this.fillToTable();
+            this.clear();
         } catch (Exception e) {
             XDialog.alert("Cập nhật cư dân thất bại.");
         }
-        this.clear();
     }
 
     @Override
@@ -1185,6 +1198,12 @@ public class TenantsManagerJDialog extends javax.swing.JDialog implements Tenant
             txtCitizen_id.requestFocus();
             return false;
         }
+        Tenant existingTenant = dao.findById(citizenId);
+        if (existingTenant != null && !btnUpdate.isEnabled()) { 
+            XDialog.alert("Số CCCD đã tồn tại.");
+            txtCitizen_id.requestFocus();
+            return false;
+        }
 
         if (fullName.isEmpty()) {
             XDialog.alert("Vui lòng nhập họ tên.");
@@ -1235,6 +1254,14 @@ public class TenantsManagerJDialog extends javax.swing.JDialog implements Tenant
             XDialog.alert("Biển số xe không đúng định dạng.");
             txtVehiclePlate.requestFocus();
             return false;
+        }
+        if (!vehiclePlate.isEmpty()) {
+            Tenant existingPlate = dao.findByVehiclePlate(vehiclePlate);
+            if (existingPlate != null && !existingPlate.getCitizenId().equals(citizenId)) {
+                XDialog.alert("Biển số xe đã tồn tại.");
+                txtVehiclePlate.requestFocus();
+                return false;
+            }
         }
         
         if (hometown.isEmpty()) {

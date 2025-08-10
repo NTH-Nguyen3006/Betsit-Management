@@ -676,7 +676,19 @@ public class UserManagerJDailog extends javax.swing.JDialog implements UserContr
 
     @Override
     public void deleteCheckedItems() {
-        if (XDialog.confirm("Bạn thực sự muốn xóa các mục chọn?")) {
+        int selectedCount = 0;
+        for (int i = 0; i < tblUsers.getRowCount(); i++) {
+            if (Boolean.TRUE.equals(tblUsers.getValueAt(i, 5))) {
+                selectedCount++;
+            }
+        }
+
+        if (selectedCount == 0) {
+            XDialog.alert("Vui lòng chọn ít nhất một mục để xóa.");
+            return;
+        }
+
+        if (XDialog.confirm("Bạn thực sự muốn xóa " + selectedCount + " mục đã chọn?")) {
             try {
                 for (int i = 0; i < tblUsers.getRowCount(); i++) {
                     if (Boolean.TRUE.equals(tblUsers.getValueAt(i, 5))) {
@@ -684,12 +696,13 @@ public class UserManagerJDailog extends javax.swing.JDialog implements UserContr
                     }
                 }
                 fillToTable();
-                XDialog.alert("Đã xóa thành công các mục chọn.");
+                XDialog.alert("Đã xóa thành công " + selectedCount + " mục.");
             } catch (Exception e) {
                 XDialog.alert("Lỗi khi xóa.");
             }
         }
     }
+
     
     @Override
     public void moveFirst() {
@@ -837,6 +850,12 @@ public class UserManagerJDailog extends javax.swing.JDialog implements UserContr
 
         if (username.isEmpty()) {
             XDialog.alert("Vui lòng nhập tên đăng nhập.");
+            txtUsername.requestFocus();
+            return false;
+        }
+        User existingUser = dao.findById(username);
+        if (btnCreate.isEnabled() && existingUser != null) {
+            XDialog.alert("Tên đăng nhập đã tồn tại.");
             txtUsername.requestFocus();
             return false;
         }
