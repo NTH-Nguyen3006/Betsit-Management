@@ -496,6 +496,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="|&lt;"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMoveFirstActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnMovePrevious">
               <Properties>
@@ -517,6 +520,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="&gt;|"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMoveLastActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
