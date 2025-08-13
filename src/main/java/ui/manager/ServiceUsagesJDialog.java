@@ -566,13 +566,29 @@ public class ServiceUsagesJDialog extends javax.swing.JDialog implements Service
         String beginText = txtBegin.getText().trim();
         String endText = txtEnd.getText().trim();
         List<ServiceUsages> list;
+        
+         if ((beginText.isEmpty() && !endText.isEmpty()) || (!beginText.isEmpty() && endText.isEmpty())) {
+            XDialog.alert("Vui lòng nhập đầy đủ cả ngày bắt đầu và ngày kết thúc.");
+            return;
+        }
 
         if (!beginText.isEmpty() && !endText.isEmpty()) {
-            Date begin = XDate.parse(beginText, "dd/MM/yyyy");
-            Date end = XDate.parse(endText, "dd/MM/yyyy");
-            list = dao.findByTimeRange(begin, end);
+            try {
+                Date begin = XDate.parse(beginText, "yyyy-MM-dd");
+                Date end = XDate.parse(endText, "yyyy-MM-dd");
+                
+                if (end.before(begin)) {
+                    XDialog.alert("Ngày kết thúc không được nhỏ hơn ngày bắt đầu.");
+                    return;
+                }
+                
+                list = dao.findByTimeRange(begin, end);
+            } catch (Exception e) {
+                XDialog.alert("Ngày không hợp lệ. Vui lòng nhập theo định dạng yyyy-MM-dd.");
+                return;
+            }
         } else {
-            list = dao.findAll(); 
+            list = dao.findAll();
         }
 
         DefaultTableModel model = (DefaultTableModel) tblServiceUsages.getModel();
@@ -581,8 +597,8 @@ public class ServiceUsagesJDialog extends javax.swing.JDialog implements Service
             model.addRow(new Object[]{
                 s.getServiceId(), 
                 s.getContractId(),
-                XDate.format(s.getStartDate(), "dd/MM/yyyy"),
-                s.getEndDate() != null ? XDate.format(s.getEndDate(), "dd/MM/yyyy") : "",
+                XDate.format(s.getStartDate(), "yyyy-MM-dd HH:mm"),
+                s.getEndDate() != null ? XDate.format(s.getEndDate(), "yyyy-MM-dd HH:mm") : "",
                 false,
             });
         }
@@ -618,17 +634,29 @@ public class ServiceUsagesJDialog extends javax.swing.JDialog implements Service
 
     @Override
     public void deleteCheckedItems() {
-        if (XDialog.confirm("Bạn thực sự muốn xóa các mục chọn?")) {
+        int selectedCount = 0;
+        for (int i = 0; i < tblServiceUsages.getRowCount(); i++) {
+            if (Boolean.TRUE.equals(tblServiceUsages.getValueAt(i, 4))) {
+                selectedCount++;
+            }
+        }
+
+        if (selectedCount == 0) {
+            XDialog.alert("Vui lòng chọn ít nhất một mục để xóa.");
+            return;
+        }
+
+        if (XDialog.confirm("Bạn thực sự muốn xóa " + selectedCount + " mục đã chọn?")) {
             try {
                 for (int i = 0; i < tblServiceUsages.getRowCount(); i++) {
-                    if ((Boolean) tblServiceUsages.getValueAt(i, 4)) {
+                    if (Boolean.TRUE.equals(tblServiceUsages.getValueAt(i, 4))) {
                         int serviceId = (Integer) tblServiceUsages.getValueAt(i, 0);
                         int contractId = (Integer) tblServiceUsages.getValueAt(i, 1);
                         dao.deleteById(serviceId, contractId);
                     }
                 }
                 this.fillToTable();
-                XDialog.alert("Đã xóa thành công các mục chọn.");
+                XDialog.alert("Đã xóa thành công " + selectedCount + " mục.");
             } catch (Exception e) {
                 XDialog.alert("Lỗi khi xóa.");
             }
@@ -675,7 +703,7 @@ public class ServiceUsagesJDialog extends javax.swing.JDialog implements Service
         this.clear();
         XDialog.alert("Thêm mới thành công.");
         } catch (Exception e) {
-        XDialog.alert("Lỗi khi thêm mới: ");
+        XDialog.alert("Lỗi khi thêm mới. " + e);
     }
     }
 
@@ -695,6 +723,7 @@ public class ServiceUsagesJDialog extends javax.swing.JDialog implements Service
 
     @Override
     public void delete() {
+        
         if (XDialog.confirm("Bạn thực sự muốn xóa?")) {
             try {
                 Integer contractId = (Integer) cboContractId.getSelectedItem();
@@ -712,6 +741,8 @@ public class ServiceUsagesJDialog extends javax.swing.JDialog implements Service
 
     @Override
     public void clear() {
+        if (!checkForm()) return;
+        
         cboContractId.setSelectedIndex(-1);
         cboServiceId.setSelectedIndex(-1);
         txtEndDate.setText("");
@@ -719,7 +750,7 @@ public class ServiceUsagesJDialog extends javax.swing.JDialog implements Service
         
         if (createdAtTimer == null) {
             createdAtTimer = new Timer(1000, e -> {
-                txtStartDate.setText(XDate.format(new Date(), "yyyy-MM-dd"));
+                txtStartDate.setText(XDate.format(new Date(), "yyyy-MM-dd HH:mm"));
             });
         }
 
@@ -790,6 +821,21 @@ public class ServiceUsagesJDialog extends javax.swing.JDialog implements Service
             return false;
         }
         
+        try {
+            Date startDate = XDate.parse(txtStartDate.getText(), "yyyy-MM-dd HH:mm");
+            if (!txtEndDate.getText().isBlank()) {
+                Date endDate = XDate.parse(txtEndDate.getText(), "yyyy-MM-dd HH:mm");
+                if (endDate.before(startDate)) {
+                    XDialog.alert("Ngày kết thúc không được nhỏ hơn ngày bắt đầu.");
+                    txtEndDate.requestFocus();
+                    return false;
+                }
+            }
+        } catch (Exception e) {
+            XDialog.alert("Ngày không hợp lệ. Vui lòng nhập đúng định dạng.");
+            return false;
+        }
+        
         return true;
     }
     
@@ -807,5 +853,5 @@ public class ServiceUsagesJDialog extends javax.swing.JDialog implements Service
         for (Contract c : contracts) {
             cboContractId.addItem(c.getId());
         }
-    }
+    }  
 }

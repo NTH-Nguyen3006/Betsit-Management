@@ -7,5 +7,5 @@ import entity.Role;
  * @author nhukhue
  */
 public interface RoleDAO extends CrudDAO<Role, Integer>{
-
+    Role findByName(String roleName);
 }
