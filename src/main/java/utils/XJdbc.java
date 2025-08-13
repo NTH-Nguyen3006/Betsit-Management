@@ -26,8 +26,8 @@ public class XJdbc {
         var dburl = "jdbc:sqlserver://localhost:1433;database=BEDSIT;encrypt=true;trustServerCertificate=true;";
         var username = "sa";
 
-        var password = "123456"; // by Trinh 
-//      var password = "123"; // by Khanh
+//        var password = "123456"; // by Trinh 
+      var password = "123"; // by Khanh
 //      password = "Password123"; // by Nguyen
         try {
             if (!XJdbc.isReady()) {

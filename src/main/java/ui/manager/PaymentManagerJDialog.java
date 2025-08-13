@@ -34,7 +34,8 @@ public class PaymentManagerJDialog extends javax.swing.JDialog implements Paymen
     public PaymentManagerJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+        txtId.setEnabled(false);
+        txtPaymentDate.setEnabled(false);
     }
 
     /**
@@ -97,6 +98,11 @@ public class PaymentManagerJDialog extends javax.swing.JDialog implements Paymen
                 "Id", "InvoiceId", "Tenant", "Amont", "PaymentDate", "PaymentMethod", "TransactionCode", "Note"
             }
         ));
+        tblPayment.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblPaymentMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblPayment);
 
         btnCheckAll.setText("Chọn tất cả");
@@ -483,6 +489,10 @@ public class PaymentManagerJDialog extends javax.swing.JDialog implements Paymen
         this.moveLast();
     }//GEN-LAST:event_btnMoveLastActionPerformed
 
+    private void tblPaymentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPaymentMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblPaymentMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -580,7 +590,7 @@ public class PaymentManagerJDialog extends javax.swing.JDialog implements Paymen
 
         tblPayment.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                if (e.getClickCount() == 1) {
+                if (e.getClickCount() == 2  ) {
                     edit();
                 }
             }
@@ -676,77 +686,160 @@ public void fillToTable() {
     @Override
 public void create() {
     try {
-        String invoiceId = txtInvoiceId.getText().trim();
+        if (
+            txtInvoiceId.getText().trim().isEmpty() ||
+            txtTenant.getText().trim().isEmpty() ||
+            txtAmount.getText().trim().isEmpty() ||
+            txtPaymentMethod.getText().trim().isEmpty() ||
+            txtTransactionCode.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng điền đầy đủ thông tin!");
+            return;
+        }
 
-        // Kiểm tra invoiceId có tồn tại không
+        String invoiceId = txtInvoiceId.getText().trim();
+        if (!invoiceId.matches("\\d+")) {
+            JOptionPane.showMessageDialog(this, "Mã hóa đơn phải là số!");
+            return;
+        }
         Invoice invoice = invoiceDAO.findById(invoiceId);
         if (invoice == null) {
-            JOptionPane.showMessageDialog(this, "InvoiceId không tồn tại!");
+            JOptionPane.showMessageDialog(this, "Mã hóa đơn không tồn tại!");
             return;
         }
 
-        // Lấy CCCD người thuê
         String tenant = txtTenant.getText().trim();
-        if (!tenant.matches("\\d{12}")) {
-            JOptionPane.showMessageDialog(this, "CCCD không hợp lệ (phải đủ 12 chữ số, không chứa chữ cái)");
+        if (!tenant.matches("\\d+")) {
+            JOptionPane.showMessageDialog(this, "Mã người thuê phải là số!");
             return;
         }
 
-        // Lấy số tiền từ Invoice
-        BigDecimal amount = invoice.getTotalamount();
+        String amountStr = txtAmount.getText().trim();
+        if (!amountStr.matches("\\d+(\\.\\d+)?")) {
+            JOptionPane.showMessageDialog(this, "Tổng phải là số!");
+            return;
+        }
 
-        // Ngày thanh toán = ngày hiện tại
         Date paymentDate = new Date();
 
-        // Phương thức thanh toán
         String method = txtPaymentMethod.getText().trim();
-        if (method.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Vui lòng nhập phương thức thanh toán");
+        if (!method.matches("(?i)(cash|credit|bank)")) {
+            JOptionPane.showMessageDialog(this, "Phương thức thanh toán không hợp lệ!");
             return;
         }
 
-        // Mã giao dịch (có thể kiểm tra độ dài/tùy format)
         String transactionCode = txtTransactionCode.getText().trim();
-        if (transactionCode.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Vui lòng nhập mã giao dịch");
+        if (dao.existsTransactionCode(transactionCode)) {
+            JOptionPane.showMessageDialog(this, "Trùng mã giao dịch!");
             return;
         }
 
-        // Ghi chú (không bắt buộc)
-        String note = txtNote.getText().trim();
-
-        // Tạo đối tượng Payment
         Payment payment = Payment.builder()
-            .InvoiceId(Integer.parseInt(invoiceId))
+            .InvoiceId(Integer.parseInt(invoiceId)) 
             .Tenant(tenant)
-            .Amount(amount)
+            .Amount(new BigDecimal(amountStr))
             .PaymentDate(paymentDate)
             .PaymentMethod(method)
             .TransactionCode(transactionCode)
-            .Note(note)
             .build();
 
-        // Gọi DAO để lưu
         dao.create(payment);
         JOptionPane.showMessageDialog(this, "Tạo thanh toán thành công!");
-
-        loadDataToTable(); // làm mới bảng nếu có
+        fillToTable();
         clear();
 
-    } catch (NumberFormatException ex) {
-        JOptionPane.showMessageDialog(this, "InvoiceId phải là số nguyên!");
     } catch (Exception ex) {
-        ex.printStackTrace();
         JOptionPane.showMessageDialog(this, "Lỗi: " + ex.getMessage());
+        ex.printStackTrace();
     }
 }
     public void update() {
          try {
-        Payment p = getForm(false);
-        dao.update(p);
+        if (txtId.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn 1 thanh toán để cập nhật!");
+            return;
+        }
+
+        String invoiceId = txtInvoiceId.getText().trim();
+        if (invoiceId.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Trống mã hóa đơn!");
+            return;
+        }
+        if (!invoiceId.matches("\\d+")) {
+            JOptionPane.showMessageDialog(this, "Mã hóa đơn phải là số!");
+            return;
+        }
+        if (invoiceDAO.findById(invoiceId) == null) {
+            JOptionPane.showMessageDialog(this, "Mã hóa đơn không tồn tại!");
+            return;
+        }
+
+        String tenant = txtTenant.getText().trim();
+        if (tenant.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Trống mã người thuê!");
+            return;
+        }
+        if (!tenant.matches("\\d+")) {
+            JOptionPane.showMessageDialog(this, "Mã người thuê phải là số!");
+            return;
+        }
+
+        String amountStr = txtAmount.getText().trim();
+        if (amountStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Trống tổng!");
+            return;
+        }
+        if (!amountStr.matches("\\d+(\\.\\d+)?")) {
+            JOptionPane.showMessageDialog(this, "Tổng phải là số!");
+            return;
+        }
+
+        String dateStr = txtPaymentDate.getText().trim();
+        if (dateStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Trống ngày thanh toán!");
+            return;
+        }
+        try {
+            new SimpleDateFormat("yyyy-MM-dd").parse(dateStr);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ngày thanh toán sai định dạng!");
+            return;
+        }
+
+        String method = txtPaymentMethod.getText().trim();
+        if (method.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Trống phương thức thanh toán!");
+            return;
+        }
+        if (!method.matches("(?i)(cash|credit|bank)")) {
+            JOptionPane.showMessageDialog(this, "Phương thức thanh toán không hợp lệ!");
+            return;
+        }
+
+        String transactionCode = txtTransactionCode.getText().trim();
+        if (transactionCode.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Trống mã giao dịch!");
+            return;
+        }
+        if (dao.existsTransactionCodeForOtherId(transactionCode, txtId.getText().trim())) {
+            JOptionPane.showMessageDialog(this, "Trùng mã giao dịch!");
+            return;
+        }
+
+        Payment payment = Payment.builder()
+            .Id(Integer.parseInt(txtId.getText().trim()))
+            .InvoiceId(Integer.parseInt(invoiceId))
+            .Tenant(tenant)
+            .Amount(new BigDecimal(amountStr))
+            .PaymentDate(new SimpleDateFormat("yyyy-MM-dd").parse(dateStr))
+            .PaymentMethod(method)
+            .TransactionCode(transactionCode)
+            .build();
+
+        dao.update(payment);
+        JOptionPane.showMessageDialog(this, "Cập nhật thành công!");
         fillToTable();
         clear();
-        JOptionPane.showMessageDialog(this, "Cập nhật thành công!");
+
     } catch (Exception ex) {
         JOptionPane.showMessageDialog(this, "Lỗi cập nhật: " + ex.getMessage());
         ex.printStackTrace();
@@ -755,7 +848,13 @@ public void create() {
 
     @Override
     public void delete() {
-        if (XDialog.confirm("Bạn thực sự muốn xóa?")) {
+        int selectedRow = tblPayment.getSelectedRow();
+    if (selectedRow == -1) {
+        JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng cần xóa!");
+        return;
+    }
+
+    if (XDialog.confirm("Bạn thực sự muốn xóa?")) {
         String id = txtId.getText();
         dao.deleteById(id);
         this.fillToTable();
@@ -792,12 +891,25 @@ public void create() {
 
     @Override
     public void checkAll() {
-         tblPayment.setRowSelectionInterval(0, tblPayment.getRowCount() - 1);
+          tblPayment.getSelectionModel().setValueIsAdjusting(true);
+    if (tblPayment.getRowCount() > 0) {
+        tblPayment.setRowSelectionInterval(0, tblPayment.getRowCount() - 1);
+    }
+
+    tblPayment.getSelectionModel().setValueIsAdjusting(false);
+
+    JOptionPane.showMessageDialog(this, "Đã chọn tất cả!");
 }
 
     @Override
     public void uncheckAll() {
-        tblPayment.clearSelection();
+        if (tblPayment.getSelectedRowCount() == 0) {
+        JOptionPane.showMessageDialog(this, "Không có dòng nào để bỏ chọn!");
+        return;
+    }
+    
+    tblPayment.clearSelection();
+    JOptionPane.showMessageDialog(this, "Đã hủy chọn tất cả!");
 }
 
     @Override
@@ -860,7 +972,6 @@ public void create() {
     }
 }
     private void loadDataToTable() {
-    // Gợi ý: Gọi lại DAO để load tất cả Payment rồi đổ vào JTable
     List<Payment> payments = dao.findAll();
     DefaultTableModel model = (DefaultTableModel) tblPayment.getModel();
     model.setRowCount(0); // clear bảng cũ

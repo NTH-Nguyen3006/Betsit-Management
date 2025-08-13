@@ -2,6 +2,10 @@ package impl;
 
 import dao.PaymentDAO;
 import entity.Payment;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import utils.XJdbc;
 import utils.XQuery;
@@ -68,4 +72,40 @@ public class PaymentDAOImpl implements PaymentDAO {
     public Payment findById(String id) {
         return XQuery.getSingleBean(Payment.class, findByIdSql, id);
     }
+    @Override
+public boolean existsTransactionCode(String transactionCode) {
+    String sql = "SELECT COUNT(*) FROM Payments WHERE TransactionCode = ?";
+    try (
+        Connection con = XJdbc.getConnection();
+        PreparedStatement ps = con.prepareStatement(sql)
+    ) {
+        ps.setString(1, transactionCode);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            return rs.getInt(1) > 0;
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return false;
+}
+
+@Override
+public boolean existsTransactionCodeForOtherId(String paymentId, String transactionCode) {
+    String sql = "SELECT COUNT(*) FROM Payments WHERE TransactionCode = ? AND PaymentId <> ?";
+    try (
+        Connection con = XJdbc.getConnection();
+        PreparedStatement ps = con.prepareStatement(sql)
+    ) {
+        ps.setString(1, transactionCode);
+        ps.setString(2, paymentId);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            return rs.getInt(1) > 0;
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return false;
+}
 }

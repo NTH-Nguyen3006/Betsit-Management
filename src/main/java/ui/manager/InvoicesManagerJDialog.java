@@ -37,6 +37,7 @@ public class InvoicesManagerJDialog extends javax.swing.JDialog implements Invoi
         initComponents();
         loadInvoicesToTable();
         txtIdInvoice.setEnabled(false);
+        txtCreatedAt.setEnabled(false);
         TblInvoices.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) {
                 int row = TblInvoices.getSelectedRow();
@@ -63,7 +64,7 @@ public class InvoicesManagerJDialog extends javax.swing.JDialog implements Invoi
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jTextField13 = new javax.swing.JTextField();
@@ -118,16 +119,21 @@ public class InvoicesManagerJDialog extends javax.swing.JDialog implements Invoi
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         TblInvoices.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][] {
-                        { null, null, null, null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null, null, null, null }
-                },
-                new String[] {
-                        "Mã hóa đơn", "Mã hợp đồng", "Tiền tháng", "Tiền năm", "Nợ cũ", "Giảm giá", "Tổng",
-                        "Trạng thái", "Ngày hết hạn", "Ngày tạo"
-                }));
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Mã hóa đơn", "Mã hợp đồng", "Tiền tháng", "Tiền năm", "Nợ cũ", "Giảm giá", "Tổng", "Trạng thái", "Ngày hết hạn", "Ngày tạo"
+            }
+        ));
+        TblInvoices.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TblInvoicesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(TblInvoices);
 
         btnCheckAll.setText("Chọn tất cả");
@@ -154,30 +160,31 @@ public class InvoicesManagerJDialog extends javax.swing.JDialog implements Invoi
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 783, Short.MAX_VALUE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnCheckAll)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnUnCheckAll)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnDeleteCheckedItems)
-                                .addContainerGap()));
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 783, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnCheckAll)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnUnCheckAll)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnDeleteCheckedItems)
+                .addContainerGap())
+        );
         jPanel1Layout.setVerticalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 318,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(btnCheckAll)
-                                        .addComponent(btnUnCheckAll)
-                                        .addComponent(btnDeleteCheckedItems))
-                                .addContainerGap(15, Short.MAX_VALUE)));
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCheckAll)
+                    .addComponent(btnUnCheckAll)
+                    .addComponent(btnDeleteCheckedItems))
+                .addContainerGap(15, Short.MAX_VALUE))
+        );
 
         jTabbedPane1.addTab("Danh sách", jPanel1);
 
@@ -239,6 +246,12 @@ public class InvoicesManagerJDialog extends javax.swing.JDialog implements Invoi
         jLabel15.setText("Tổng");
 
         jLabel16.setText("Mã hợp đồng");
+
+        txtIdContract.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdContractActionPerformed(evt);
+            }
+        });
 
         jLabel17.setText("Ngày hết hạn");
 
@@ -316,253 +329,192 @@ public class InvoicesManagerJDialog extends javax.swing.JDialog implements Invoi
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
-                jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(Create1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(Update1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Delete1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Reset1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnMoveFirst1, javax.swing.GroupLayout.PREFERRED_SIZE, 44,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnMovePrevious1, javax.swing.GroupLayout.PREFERRED_SIZE, 47,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnMoveNext1, javax.swing.GroupLayout.PREFERRED_SIZE, 47,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnMoveLast1, javax.swing.GroupLayout.PREFERRED_SIZE, 44,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(4, 4, 4))
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addContainerGap()
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(Create1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Update1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Delete1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Reset1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnMoveFirst1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnMovePrevious1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnMoveNext1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnMoveLast1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel3Layout.createSequentialGroup()
-                                                .addGroup(jPanel3Layout
-                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addGroup(jPanel3Layout.createSequentialGroup()
-                                                                .addGroup(jPanel3Layout.createParallelGroup(
-                                                                        javax.swing.GroupLayout.Alignment.LEADING)
-                                                                        .addComponent(jLabel11)
-                                                                        .addComponent(jLabel13)
-                                                                        .addComponent(jLabel12))
-                                                                .addGap(239, 239, 239)
-                                                                .addGroup(jPanel3Layout.createParallelGroup(
-                                                                        javax.swing.GroupLayout.Alignment.LEADING)
-                                                                        .addComponent(jLabel15)
-                                                                        .addComponent(jLabel16)
-                                                                        .addComponent(jLabel10,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                73,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                                        .addComponent(jLabel14)
-                                                        .addGroup(jPanel3Layout.createSequentialGroup()
-                                                                .addComponent(txtDiscount,
-                                                                        javax.swing.GroupLayout.PREFERRED_SIZE, 272,
-                                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addGap(18, 18, 18)
-                                                                .addComponent(txtTotalamount,
-                                                                        javax.swing.GroupLayout.PREFERRED_SIZE, 272,
-                                                                        javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                        .addGroup(jPanel3Layout.createSequentialGroup()
-                                                                .addGroup(jPanel3Layout.createParallelGroup(
-                                                                        javax.swing.GroupLayout.Alignment.LEADING)
-                                                                        .addComponent(txtStatus,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                272,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                        .addComponent(jLabel9)
-                                                                        .addComponent(txtDueDate,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                272,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                        .addComponent(txtBillingPeriodMonth,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                272,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                                .addGap(18, 18, 18)
-                                                                .addGroup(jPanel3Layout.createParallelGroup(
-                                                                        javax.swing.GroupLayout.Alignment.LEADING)
-                                                                        .addComponent(txtBillingPeriodYear,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                272,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                        .addGroup(jPanel3Layout.createSequentialGroup()
-                                                                                .addGap(6, 6, 6)
-                                                                                .addComponent(jLabel18,
-                                                                                        javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                        90,
-                                                                                        javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                                        .addComponent(jLabel7,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                90,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                        .addComponent(txtCreatedAt,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                272,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                        .addComponent(txtPreviousDebt,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                272,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                                .addContainerGap(221, Short.MAX_VALUE))
-                                        .addGroup(jPanel3Layout.createSequentialGroup()
-                                                .addGroup(jPanel3Layout
-                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addGroup(jPanel3Layout.createSequentialGroup()
-                                                                .addComponent(txtIdInvoice,
-                                                                        javax.swing.GroupLayout.PREFERRED_SIZE, 272,
-                                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addGap(18, 18, 18)
-                                                                .addComponent(txtIdContract,
-                                                                        javax.swing.GroupLayout.PREFERRED_SIZE, 272,
-                                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addGap(31, 31, 31)
-                                                                .addComponent(btnViewInvoicesManager))
-                                                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGap(0, 4, Short.MAX_VALUE))))
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(Create)
-                                .addGap(4, 4, 4)
-                                .addComponent(Update)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Delete)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Reset)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnMoveFirst, javax.swing.GroupLayout.PREFERRED_SIZE, 44,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnMovePrevious, javax.swing.GroupLayout.PREFERRED_SIZE, 47,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnMoveNext, javax.swing.GroupLayout.PREFERRED_SIZE, 47,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnMoveLast, javax.swing.GroupLayout.PREFERRED_SIZE, 44,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap()));
-        jPanel3Layout.setVerticalGroup(
-                jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(14, 14, 14)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel16)
-                                        .addComponent(jLabel11))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(txtIdInvoice, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtIdContract, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(btnViewInvoicesManager))
-                                .addGap(11, 11, 11)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel15)
-                                        .addComponent(jLabel12))
+                                    .addComponent(jLabel11)
+                                    .addComponent(jLabel13)
+                                    .addComponent(jLabel12))
+                                .addGap(239, 239, 239)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel3Layout.createSequentialGroup()
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addGroup(jPanel3Layout
-                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(txtDiscount,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(txtTotalamount,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-                                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(jLabel13))
-                                        .addGroup(jPanel3Layout.createSequentialGroup()
-                                                .addGap(30, 30, 30)
-                                                .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(txtStatus, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtPreviousDebt, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(7, 7, 7)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel7)
-                                        .addComponent(jLabel9))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(txtBillingPeriodYear, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtBillingPeriodMonth, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel15)
+                                    .addComponent(jLabel16)
+                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel14)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(txtDiscount, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel17)
-                                        .addComponent(jLabel18))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(txtCreatedAt, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtDueDate, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(Create)
-                                        .addComponent(Delete)
-                                        .addComponent(Update)
-                                        .addComponent(Reset)
-                                        .addComponent(btnMoveFirst)
-                                        .addComponent(btnMovePrevious)
-                                        .addComponent(btnMoveNext)
-                                        .addComponent(btnMoveLast))
-                                .addGap(123, 123, 123)
+                                .addComponent(txtTotalamount, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel3Layout
-                                                .createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                .addComponent(Delete1)
-                                                .addComponent(Reset1)
-                                                .addComponent(btnMoveFirst1)
-                                                .addComponent(btnMovePrevious1)
-                                                .addComponent(btnMoveNext1)
-                                                .addComponent(btnMoveLast1))
-                                        .addGroup(jPanel3Layout
-                                                .createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                .addComponent(Create1)
-                                                .addComponent(Update1))
-                                        .addComponent(jLabel14))
-                                .addGap(18, 18, 18)));
+                                    .addComponent(txtStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel9)
+                                    .addComponent(txtDueDate, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtBillingPeriodMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtBillingPeriodYear, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
+                                        .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtCreatedAt, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtPreviousDebt, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addContainerGap(221, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(txtIdInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtIdContract, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(31, 31, 31)
+                                .addComponent(btnViewInvoicesManager))
+                            .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 4, Short.MAX_VALUE))))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(Create)
+                .addGap(4, 4, 4)
+                .addComponent(Update)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Delete)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Reset)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnMoveFirst, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnMovePrevious, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnMoveNext, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnMoveLast, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(jLabel11))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtIdInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtIdContract, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnViewInvoicesManager))
+                .addGap(11, 11, 11)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(jLabel12))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtDiscount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtTotalamount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel13))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPreviousDebt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(7, 7, 7)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtBillingPeriodYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBillingPeriodMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel17)
+                    .addComponent(jLabel18))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCreatedAt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDueDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Create)
+                    .addComponent(Delete)
+                    .addComponent(Update)
+                    .addComponent(Reset)
+                    .addComponent(btnMoveFirst)
+                    .addComponent(btnMovePrevious)
+                    .addComponent(btnMoveNext)
+                    .addComponent(btnMoveLast))
+                .addGap(123, 123, 123)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(Delete1)
+                        .addComponent(Reset1)
+                        .addComponent(btnMoveFirst1)
+                        .addComponent(btnMovePrevious1)
+                        .addComponent(btnMoveNext1)
+                        .addComponent(btnMoveLast1))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(Create1)
+                        .addComponent(Update1))
+                    .addComponent(jLabel14))
+                .addGap(18, 18, 18))
+        );
 
         jTabbedPane1.addTab("Biểu Mẫu", jPanel3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTabbedPane1)
-                                .addContainerGap()));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jTabbedPane1)
+                .addContainerGap())
+        );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 409, Short.MAX_VALUE));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 409, Short.MAX_VALUE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtIdContractActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdContractActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdContractActionPerformed
+
+    private void TblInvoicesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TblInvoicesMouseClicked
+        // TODO add your handling code here:
+         if (evt.getClickCount() == 2) { 
+        int row = TblInvoices.getSelectedRow();
+        if (row >= 0) {
+            edit(); 
+        }
+    }
+    }//GEN-LAST:event_TblInvoicesMouseClicked
 
     private void Update1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_Update1ActionPerformed
         // TODO add your handling code here:
@@ -948,108 +900,265 @@ public class InvoicesManagerJDialog extends javax.swing.JDialog implements Invoi
     @Override
     public void create() {
         try {
-            Invoice invoice = new Invoice();
+        Invoice invoice = new Invoice();
 
-            // Lấy và kiểm tra Contract ID
-            String contractIdStr = txtIdContract.getText().trim();
-            if (contractIdStr.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Vui lòng nhập Mã hợp đồng!", "Thông báo",
-                        JOptionPane.WARNING_MESSAGE);
-                return;
-            }
-
-            int contractId;
-            try {
-                contractId = Integer.parseInt(contractIdStr);
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "Mã hợp đồng phải là số!", "Lỗi nhập liệu",
-                        JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-
-            if (!contractDAO.existsById(contractId)) {
-                JOptionPane.showMessageDialog(this, "❌ Mã hợp đồng không tồn tại!", "Thông báo",
-                        JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-            invoice.setContractid(contractId);
-
-            // Ngày tạo là ngày hiện tại
-            Date now = new Date();
-            invoice.setCreated_at(now);
-
-            // Tự động lấy tháng/năm
-            @SuppressWarnings("deprecation")
-            int month = now.getMonth() + 1;
-            @SuppressWarnings("deprecation")
-            int year = now.getYear() + 1900;
-            invoice.setBilling_period_month(month);
-            invoice.setBilling_period_year(year);
-
-            // Ngày hết hạn
-            String dueDateStr = txtDueDate.getText().trim();
-            if (dueDateStr.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Vui lòng nhập Ngày hết hạn!", "Thông báo",
-                        JOptionPane.WARNING_MESSAGE);
-                return;
-            }
-
-            Date dueDate;
-            try {
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                dueDate = sdf.parse(dueDateStr);
-            } catch (ParseException e) {
-                JOptionPane.showMessageDialog(this, "Ngày hết hạn sai định dạng! Định dạng đúng: yyyy-MM-dd",
-                        "Lỗi định dạng", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-            invoice.setDue_date(dueDate);
-
-            // Các trường số
-            try {
-                invoice.setPrevious_debt(new BigDecimal(txtPreviousDebt.getText().trim()));
-                invoice.setDiscount(new BigDecimal(txtDiscount.getText().trim()));
-                invoice.setTotalamount(new BigDecimal(txtTotalamount.getText().trim()));
-            } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(this,
-                        "Số tiền không hợp lệ! Kiểm tra lại các trường công nợ, giảm giá và tổng tiền.",
-                        "Lỗi định dạng", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-
-            invoice.setStatus(false); // chưa thanh toán
-
-            // Tạo hóa đơn
-            invoiceDAO.create(invoice);
-
-            loadInvoicesToTable();
-            clearForm();
-
-            JOptionPane.showMessageDialog(this, "✔ Tạo hóa đơn thành công!", "Thành công",
-                    JOptionPane.INFORMATION_MESSAGE);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "❗ Đã xảy ra lỗi: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+        String contractIdStr = txtIdContract.getText().trim();
+        if (contractIdStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập Mã hợp đồng", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
         }
+        int contractId;
+        try {
+            contractId = Integer.parseInt(contractIdStr);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Tạo mới Mã hợp đồng là chữ", "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (!contractDAO.existsById(contractId)) {
+            JOptionPane.showMessageDialog(this, "❌ Mã hợp đồng không tồn tại!", "Thông báo", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        invoice.setContractid(contractId);
+
+        Date now = new Date();
+        invoice.setCreated_at(now);
+
+        @SuppressWarnings("deprecation")
+        int month = now.getMonth() + 1;
+        @SuppressWarnings("deprecation")
+        int year = now.getYear() + 1900;
+        invoice.setBilling_period_month(month);
+        invoice.setBilling_period_year(year);
+
+        // Ngày hết hạn
+        String dueDateStr = txtDueDate.getText().trim();
+        if (dueDateStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Tạo mới trống Ngày hết hạn", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        Date dueDate;
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            dueDate = sdf.parse(dueDateStr);
+        } catch (ParseException e) {
+            JOptionPane.showMessageDialog(this, "Tạo mới Ngày hết hạn sai định dạng (yyyy-MM-dd)", "Lỗi định dạng", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        invoice.setDue_date(dueDate);
+
+        // Nợ cũ
+        String prevDebtStr = txtPreviousDebt.getText().trim();
+        if (prevDebtStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Tạo mới trống Nợ cũ", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        try {
+            invoice.setPrevious_debt(new BigDecimal(prevDebtStr));
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Tạo mới Nợ cũ là chữ", "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Giảm giá
+        String discountStr = txtDiscount.getText().trim();
+        if (discountStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Tạo mới trống Giảm giá", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        try {
+            invoice.setDiscount(new BigDecimal(discountStr));
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Tạo mới Giảm giá là chữ", "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Tổng tiền
+        String totalStr = txtTotalamount.getText().trim();
+        if (totalStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Tạo mới trống Tổng", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        try {
+            invoice.setTotalamount(new BigDecimal(totalStr));
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Tạo mới Tổng là chữ", "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Trạng thái
+        String statusStr = txtStatus.getText().trim();
+    if (statusStr.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Tạo mới trống Trạng thái", "Thông báo", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+    if (statusStr.equalsIgnoreCase("Chưa thanh toán")) {
+        invoice.setStatus(false);
+    } else if (statusStr.equalsIgnoreCase("Đã thanh toán")) {
+        invoice.setStatus(true);
+    } else {
+        JOptionPane.showMessageDialog(this,
+                "Trạng thái không hợp lệ! Chỉ được nhập: 'Chưa thanh toán' hoặc 'Đã thanh toán'.",
+                "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+        invoiceDAO.create(invoice);
+        loadInvoicesToTable();
+        clearForm();
+
+        JOptionPane.showMessageDialog(this, "✔ Tạo hóa đơn thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+
+    } catch (Exception e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this, "❗ Đã xảy ra lỗi: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+    }
     }
 
     @Override
     public void update() {
-        Invoice invoice = getFormInvoice();
+        try {
+        Invoice invoice = new Invoice();
+
+        String contractIdStr = txtIdContract.getText().trim();
+        if (contractIdStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Cập nhật trống Mã hợp đồng", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        int contractId;
+        try {
+            contractId = Integer.parseInt(contractIdStr);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Cập nhật Mã hợp đồng là chữ", "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (!contractDAO.existsById(contractId)) {
+            JOptionPane.showMessageDialog(this, "❌ Mã hợp đồng không tồn tại!", "Thông báo", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        invoice.setContractid(contractId);
+
+        // Hóa đơn tháng
+        String monthStr = txtBillingPeriodMonth.getText().trim();
+        if (monthStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Cập nhật trống Hóa đơn tháng", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        try {
+            invoice.setBilling_period_month(Integer.parseInt(monthStr));
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Cập nhật Hóa đơn tháng là chữ", "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Hóa đơn năm
+        String yearStr = txtBillingPeriodYear.getText().trim();
+        if (yearStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Cập nhật trống Hóa đơn năm", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        try {
+            invoice.setBilling_period_year(Integer.parseInt(yearStr));
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Cập nhật Hóa đơn năm là chữ", "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Ngày hết hạn
+        String dueDateStr = txtDueDate.getText().trim();
+        if (dueDateStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Cập nhật trống Ngày hết hạn", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        Date dueDate;
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            dueDate = sdf.parse(dueDateStr);
+        } catch (ParseException e) {
+            JOptionPane.showMessageDialog(this, "Cập nhật Ngày hết hạn sai định dạng (yyyy-MM-dd)", "Lỗi định dạng", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        invoice.setDue_date(dueDate);
+
+        // Nợ cũ
+        String prevDebtStr = txtPreviousDebt.getText().trim();
+        if (prevDebtStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Cập nhật trống Nợ cũ", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        try {
+            invoice.setPrevious_debt(new BigDecimal(prevDebtStr));
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Cập nhật Nợ cũ là chữ", "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Giảm giá
+        String discountStr = txtDiscount.getText().trim();
+        if (discountStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Cập nhật trống Giảm giá", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        try {
+            invoice.setDiscount(new BigDecimal(discountStr));
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Cập nhật Giảm giá là chữ", "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Tổng tiền
+        String totalStr = txtTotalamount.getText().trim();
+        if (totalStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Cập nhật trống Tổng", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        try {
+            invoice.setTotalamount(new BigDecimal(totalStr));
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Cập nhật Tổng là chữ", "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Trạng thái
+        String statusStr = txtStatus.getText().trim();
+        if (statusStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Cập nhật trống Trạng thái", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        try {
+            int statusInt = Integer.parseInt(statusStr);
+            invoice.setStatus(statusInt == 1);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Cập nhật Trạng thái là chữ", "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         invoiceDAO.update(invoice);
         loadInvoicesToTable();
+
+        JOptionPane.showMessageDialog(this, "✔ Cập nhật hóa đơn thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+
+    } catch (Exception e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this, "❗ Đã xảy ra lỗi: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+    }
     }
 
     @Override
     public void delete() {
-        if (XDialog.confirm("Bạn thực sự muốn xóa?")) {
-            String id = txtIdInvoice.getText();
-            invoiceDAO.deleteById(id);
-            loadInvoicesToTable();
-            clearForm();
-        }
+        int selectedRow = TblInvoices.getSelectedRow();
+    if (selectedRow == -1) {
+        JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng cần xóa!");
+        return;
     }
+
+    if (XDialog.confirm("Bạn thực sự muốn xóa?")) {
+        String id = txtIdInvoice.getText();
+        dao.deleteById(id);
+        this.fillToTable();
+        this.clear();
+    }
+}
 
     @Override
     public void clear() {
@@ -1065,20 +1174,25 @@ public class InvoicesManagerJDialog extends javax.swing.JDialog implements Invoi
 
     @Override
     public void checkAll() {
-        this.setCheckedAll(true);
+        TblInvoices.getSelectionModel().setValueIsAdjusting(true);
+    if (TblInvoices.getRowCount() > 0) {
+        TblInvoices.setRowSelectionInterval(0, TblInvoices.getRowCount() - 1);
     }
 
-    private void setCheckedAll(boolean checked) {
-        for (int i = 0; i < TblInvoices.getRowCount(); i++) {
-            if (TblInvoices.getColumnCount() > 5) {
-                TblInvoices.setValueAt(checked, i, 4);
-            }
-        }
+    TblInvoices.getSelectionModel().setValueIsAdjusting(false);
+
+    JOptionPane.showMessageDialog(this, "Đã chọn tất cả!");
     }
 
     @Override
     public void uncheckAll() {
-        this.setCheckedAll(false);
+    if (TblInvoices.getSelectedRowCount() == 0) {
+        JOptionPane.showMessageDialog(this, "Không có dòng nào để bỏ chọn!");
+        return;
+    }
+    
+    TblInvoices.clearSelection();
+    JOptionPane.showMessageDialog(this, "Đã hủy chọn tất cả!");
     }
 
     @Override
