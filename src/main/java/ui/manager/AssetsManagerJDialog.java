@@ -266,6 +266,11 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
         });
 
         jPanel4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 102, 102), 1, true));
+        jPanel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel4MouseClicked(evt);
+            }
+        });
         jPanel4.setLayout(new java.awt.BorderLayout());
 
         lblPicture.setFont(new java.awt.Font("Impact", 1, 18)); // NOI18N
@@ -411,7 +416,7 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabs, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
+            .addComponent(tabs, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 372, Short.MAX_VALUE)
         );
 
         pack();
@@ -495,6 +500,11 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
             }
         }
     }//GEN-LAST:event_lblPictureMouseClicked
+
+    private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
+        // TODO add your handling code here:
+        this.chooseFile();
+    }//GEN-LAST:event_jPanel4MouseClicked
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
