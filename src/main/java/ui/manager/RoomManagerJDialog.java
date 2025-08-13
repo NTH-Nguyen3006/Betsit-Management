@@ -590,6 +590,7 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
     
     @Override
     public void fillToTable() {
+        String[] statusVN = {"Đang thuê", "Chưa thuê", "Sửa chữa"};
         DefaultTableModel tblModel = (DefaultTableModel) tblRooms.getModel();
         tblModel.setRowCount(0); 
 
@@ -597,14 +598,17 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
         
         if (items != null) {
             for (Room room : items) {
+                int statusIndex = room.getStatus();
+                String statusName = (statusIndex >= 0 && statusIndex < statusVN.length) 
+                                ? statusVN[statusIndex] 
+                                : "Không xác định";
                 tblModel.addRow(new Object[]{
                     room.getRoomId(),
                     room.getRoomType(),
                     room.getArea(), 
                     room.getRentPrice(),
 //                    room.getStatus(),
-                    eStatus.values()[room.getStatus()].name(),
-                   
+                    statusName,
                     room.getNotes()
                 });
             }
@@ -626,6 +630,9 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
 
     @Override
     public void uncheckAll() {
+        if(tblRooms.getSelectedRowCount() == 0){
+            XDialog.alert("Bạn đang không chọn bất kì dòng nào","Thông báo chọn");
+        }
         tblRooms.clearSelection();
         this.setEditable(false);
     }
@@ -640,8 +647,7 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
         txtArea.setText(String.valueOf(entity.getArea()));
         txtRentPrice.setText(String.valueOf(entity.getRentPrice()));
         // txtStatus.setText(String.valueOf(entity.getStatus()));
-        Room rooms = new Room();
-        eStatus status = eStatus.values()[rooms.getStatus()];
+        eStatus status = eStatus.values()[entity.getStatus()];
         if (status == eStatus.Available) {
             rdoAvailable.setSelected(true);
         } else if (status == eStatus.Rented) {
@@ -665,28 +671,48 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
     public Room getForm() {
         System.out.println("getform ............");
         Room entity = new Room();
-        if(!txtId.getText().isEmpty()){
+        
+        if(txtArea.getText().isEmpty() && txtNotes.getText().isEmpty() && txtRentPrice.getText().isEmpty()){
+            XDialog.alert("bạn chưa nhập bất kì mục nào", "Thông báo nhập");
+            return null;
+        }else {
+            if(txtArea.getText().isEmpty()){
+                XDialog.alert("Không được để trống mã phòng", "Thông báo nhập");
+                return null;
+            }else if(txtRentPrice.getText().isEmpty()){
+                XDialog.alert("Không được để trống Giá thuê","Thông báo nhập");
+                return null;
+            }else if (cboRoomType.getSelectedIndex() == -1 || cboRoomType.getSelectedItem() == null) {
+                XDialog.alert("Vui lòng chọn loại phòng", "Thông báo nhập");
+                return null;
+            }else if (!rdoAvailable.isSelected() && !rdoRented.isSelected() && !rdoRepair.isSelected()) {
+                XDialog.alert("Vui lòng chọn trạng thái phòng", "Thông báo nhập");
+                return null;
+            }
+        }
+        try{
             entity.setRoomId(Integer.parseInt(txtId.getText()));
-        }
-        entity.setArea(Double.parseDouble(txtArea.getText()));
-        entity.setRentPrice(new BigDecimal(txtRentPrice.getText()));
+            entity.setArea(Double.parseDouble(txtArea.getText()));
+            entity.setRentPrice(new BigDecimal(txtRentPrice.getText()));
+            eStatus status = eStatus.values()[entity.getStatus()];
+            if ( rdoAvailable.isSelected()) {
+                status = eStatus.Available;
 
-        eStatus status = eStatus.values()[entity.getStatus()];
-        if ( rdoAvailable.isSelected()) {
-            status = eStatus.Available;
-            
-        } else if (rdoRented.isSelected()) {
-            status = eStatus.Rented;
-            
-        } else if (rdoRepair.isSelected()) {
-            status = eStatus.Repair;
+            } else if (rdoRented.isSelected()) {
+                status = eStatus.Rented;
+
+            } else if (rdoRepair.isSelected()) {
+                status = eStatus.Repair;
+            }
+            entity.setStatus(status.ordinal());
+            String SelectedItem = cboRoomType.getSelectedItem().toString();
+            entity.setRoomType(SelectedItem);
+            entity.setNotes(txtNotes.getText());
+        }catch(NumberFormatException e){
+            XDialog.alert("Diện tích & Giá thuê phải là số", "Thông báo sai định dạng");
+            System.out.println(e.getMessage());
+            return null;
         }
-        entity.setStatus(status.ordinal());
-        
-        String SelectedItem = cboRoomType.getSelectedItem().toString();
-        entity.setRoomType(SelectedItem);
-        
-        entity.setNotes(txtNotes.getText());
         return entity;
     }
 
@@ -711,14 +737,14 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
         Room room = getForm();
         if (room != null) {
             try {
-                
                 dao.update(room);
-                
                 XDialog.alert("Cập nhật phòng thành công!");
                 this.fillToTable();
+                this.clear();
                 // Không cần clear() ở đây để người dùng có thể thấy thông tin vừa cập nhật
             } catch (Exception e) {
-                XDialog.alert("Cập nhật phòng thất bại: " + e.getMessage());
+                XDialog.alert("Cập nhật phòng thất bại");
+                System.out.println(e.getMessage());
             }
         }
     }
@@ -805,14 +831,24 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
     @Override
     public void deleteCheckedItems() {
         int[] selectedRows = tblRooms.getSelectedRows();
-        if (selectedRows.length > 0) {
-            // Iterate in reverse to avoid issues with index changes after deletion
-            for (int i = selectedRows.length - 1; i >= 0; i--) {
-                String roomId = String.valueOf(tblRooms.getValueAt(selectedRows[i], 0));
-                dao.deleteById(roomId);
+                if(selectedRows.length == 0){
+                    XDialog.alert("Đang không chọn bất kì dòng nào để xóa", "Vui lòng chọn");
+                }
+        if (XDialog.confirm("Bạn chắc chắn muốn xóa mục này chứ?", "Cảnh báo xóa")) {
+            try {               
+                if (selectedRows.length > 0) {
+                    // Iterate in reverse to avoid issues with index changes after deletion
+                    for (int i = selectedRows.length - 1; i >= 0; i--) {
+                        String roomId = String.valueOf(tblRooms.getValueAt(selectedRows[i], 0));
+                        dao.deleteById(roomId);
+                    }
+                    this.fillToTable();
+                    this.clear();
+                }
+            } catch (Exception e) {
+                XDialog.alert("Xóa tài sản không thành công");
+                System.out.println(e.getMessage());
             }
-            fillToTable();
-            clear();
         }
     }
 }

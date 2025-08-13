@@ -174,6 +174,9 @@ public class LoginJDialog extends javax.swing.JDialog implements LoginController
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
             }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
         });
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
@@ -201,7 +204,6 @@ public class LoginJDialog extends javax.swing.JDialog implements LoginController
 
         jLabel11.setText("Tên đăng nhập");
 
-        txtUsername2.setText("admin01");
         txtUsername2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUsername2ActionPerformed(evt);
@@ -210,7 +212,6 @@ public class LoginJDialog extends javax.swing.JDialog implements LoginController
 
         jLabel12.setText("Mật khẩu");
 
-        txtPassword2.setText("123456");
         txtPassword2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPassword2ActionPerformed(evt);
@@ -338,6 +339,10 @@ public class LoginJDialog extends javax.swing.JDialog implements LoginController
         // TODO add your handling code here:
     }//GEN-LAST:event_formWindowClosed
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowOpened
+
     /**
      * @param args the command line arguments
      */
@@ -418,7 +423,18 @@ public class LoginJDialog extends javax.swing.JDialog implements LoginController
     public void login() {
         String username = txtUsername2.getText();
         String password = txtPassword2.getText();
-
+        
+        if (username.isEmpty() && password.isEmpty()) {
+            XDialog.alert("Vui lòng nhập đầy đủ dữ liệu");
+            return;
+        } else if (username.isEmpty()) {
+            XDialog.alert("TVui lòng nhập tên đăng nhập");
+            return;
+        } else if (password.isEmpty()) {
+            XDialog.alert("Vui lòng nhập mật khẩu");
+            return;
+        }
+        
         UserDAO dao = new UserDAOImpl();
         User user = dao.findByUsername(username);
         if (user == null) {

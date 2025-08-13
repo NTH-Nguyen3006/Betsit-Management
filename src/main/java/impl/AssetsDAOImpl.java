@@ -12,21 +12,21 @@ import utils.XQuery;
 
 public class AssetsDAOImpl implements AssetsDAO{
     
-private final String insertSql = "INSERT INTO Assets "
-        + "(RoomId, AssetName, Quantity, Condition) "
-        + "VALUES (?, ?, ?, ?)";
-private final String updateSql = "UPDATE Assets SET "
-        + "RoomId = ?, AssetName = ?, Quantity = ?, Condition = ? "
-        + "WHERE Id = ?";
-private final String deleteByIdSql = "DELETE FROM Assets "
-        + "WHERE Id = ?";
-private final String findAllSql = "SELECT * FROM Assets";
-private final String findByIdSql = findAllSql + " WHERE Id = ?";
-private final String findByRoomIDSql = findAllSql + " WHERE RoomId = ?";
-private final String findAllConditionsSql = "SELECT DISTINCT Condition FROM Assets WHERE Condition IS NOT NULL AND Condition <> '' ORDER BY Condition";
+    private final String insertSql = "INSERT INTO Assets "
+            + "(RoomId, AssetName, Quantity, Condition) "
+            + "VALUES (?, ?, ?, ?)";
+    private final String updateSql = "UPDATE Assets SET "
+            + "RoomId = ?, AssetName = ?, Quantity = ?, Condition = ? "
+            + "WHERE Id = ?";
+    private final String deleteByIdSql = "DELETE FROM Assets "
+            + "WHERE Id = ?";
+    private final String findAllSql = "SELECT * FROM Assets";
+    private final String findByIdSql = findAllSql + " WHERE Id = ?";
+    private final String findByRoomIDSql = findAllSql + " WHERE RoomId = ?";
+    private final String findAllConditionsSql = "SELECT DISTINCT Condition FROM Assets WHERE Condition IS NOT NULL AND Condition <> '' ORDER BY Condition";
     @Override
     public Assets create(Assets entity) {
- Object[] values = {
+        Object[] values = {
             entity.getRoomId(),
             entity.getAssetName(),
             entity.getQuantity(),
