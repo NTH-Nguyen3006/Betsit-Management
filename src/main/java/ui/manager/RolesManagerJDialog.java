@@ -296,10 +296,10 @@ public class RolesManagerJDialog extends javax.swing.JDialog implements RoleCont
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -650,7 +650,14 @@ public class RolesManagerJDialog extends javax.swing.JDialog implements RoleCont
             txtRoleName.requestFocus();
             return false;
         }
-        
+        if (btnCreate.isEnabled()) { 
+            Role existingRole = dao.findByName(txtRoleName.getText().trim());
+            if (existingRole != null) {
+                XDialog.alert("Vai trò này đã tồn tại.");
+                txtRoleName.requestFocus();
+                return false;
+            }
+        }       
         return true;
     }
 }

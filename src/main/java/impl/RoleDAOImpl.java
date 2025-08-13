@@ -18,6 +18,7 @@ public class RoleDAOImpl implements RoleDAO{
     private final String DELETE_SQL = "DELETE FROM Roles WHERE Id=?";
     private final String SELECT_ALL_SQL = "SELECT * FROM Roles";
     private final String SELECT_BY_ID_SQL = "SELECT * FROM Roles WHERE Id=?";
+    private final String SELECT_BY_ROLE_NAME = "SELECT * FROM Roles WHERE RoleName = ?";
     
     @Override
     public Role create(Role entity) {
@@ -52,6 +53,11 @@ public class RoleDAOImpl implements RoleDAO{
     @Override
     public Role findById(Integer id) {
         return XQuery.getSingleBean(Role.class, SELECT_BY_ID_SQL, (int) id);
+    }
+
+    @Override
+    public Role findByName(String roleName) {
+        return XQuery.getSingleBean(Role.class, SELECT_BY_ROLE_NAME, roleName);
     }
 }
 //     @Override

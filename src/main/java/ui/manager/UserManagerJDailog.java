@@ -59,10 +59,6 @@ public class UserManagerJDailog extends javax.swing.JDialog implements UserContr
         btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         btnClear = new javax.swing.JButton();
-        btnMoveFirst = new javax.swing.JButton();
-        btnMovePrevious = new javax.swing.JButton();
-        btnMoveNext = new javax.swing.JButton();
-        btnMoveLast = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         txtPhoneNumber = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -80,6 +76,10 @@ public class UserManagerJDailog extends javax.swing.JDialog implements UserContr
         txtCreated_at = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
+        btnMoveFirst = new javax.swing.JButton();
+        btnMovePrevious = new javax.swing.JButton();
+        btnMoveNext = new javax.swing.JButton();
+        btnMoveLast = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Quản lý tài khoản");
@@ -228,34 +228,6 @@ public class UserManagerJDailog extends javax.swing.JDialog implements UserContr
             }
         });
 
-        btnMoveFirst.setText("|<");
-        btnMoveFirst.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMoveFirstActionPerformed(evt);
-            }
-        });
-
-        btnMovePrevious.setText("<<");
-        btnMovePrevious.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMovePreviousActionPerformed(evt);
-            }
-        });
-
-        btnMoveNext.setText(">>");
-        btnMoveNext.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMoveNextActionPerformed(evt);
-            }
-        });
-
-        btnMoveLast.setText(">|");
-        btnMoveLast.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMoveLastActionPerformed(evt);
-            }
-        });
-
         jLabel1.setText("Số điện thoại:");
 
         jLabel2.setText("Tên đăng nhập:");
@@ -284,13 +256,42 @@ public class UserManagerJDailog extends javax.swing.JDialog implements UserContr
 
         jLabel8.setText("Email:");
 
+        btnMoveFirst.setText("|<");
+        btnMoveFirst.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMoveFirstActionPerformed(evt);
+            }
+        });
+
+        btnMovePrevious.setText("<<");
+        btnMovePrevious.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMovePreviousActionPerformed(evt);
+            }
+        });
+
+        btnMoveNext.setText(">>");
+        btnMoveNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMoveNextActionPerformed(evt);
+            }
+        });
+
+        btnMoveLast.setText(">|");
+        btnMoveLast.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMoveLastActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 743, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(btnCreate)
                         .addGap(6, 6, 6)
@@ -306,8 +307,7 @@ public class UserManagerJDailog extends javax.swing.JDialog implements UserContr
                         .addGap(6, 6, 6)
                         .addComponent(btnMoveNext, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(6, 6, 6)
-                        .addComponent(btnMoveLast, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 743, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnMoveLast, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(13, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -446,6 +446,22 @@ public class UserManagerJDailog extends javax.swing.JDialog implements UserContr
         this.clear();
     }//GEN-LAST:event_btnClearActionPerformed
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        this.open();
+    }//GEN-LAST:event_formWindowOpened
+
+    private void tblUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUsersMouseClicked
+        // TODO add your handling code here:
+        if (evt.getClickCount() == 2) {
+            this.edit();
+        }
+    }//GEN-LAST:event_tblUsersMouseClicked
+
+    private void cboRolesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboRolesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboRolesActionPerformed
+
     private void btnMoveFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveFirstActionPerformed
         // TODO add your handling code here:
         this.moveFirst();
@@ -465,22 +481,6 @@ public class UserManagerJDailog extends javax.swing.JDialog implements UserContr
         // TODO add your handling code here:
         this.moveLast();
     }//GEN-LAST:event_btnMoveLastActionPerformed
-
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        // TODO add your handling code here:
-        this.open();
-    }//GEN-LAST:event_formWindowOpened
-
-    private void tblUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUsersMouseClicked
-        // TODO add your handling code here:
-        if (evt.getClickCount() == 2) {
-            this.edit();
-        }
-    }//GEN-LAST:event_tblUsersMouseClicked
-
-    private void cboRolesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboRolesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cboRolesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -584,6 +584,12 @@ public class UserManagerJDailog extends javax.swing.JDialog implements UserContr
             }
         });
         cboRoles.addActionListener(e -> fillToTable());
+        
+        tblUsers.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) {
+                edit();
+            }
+        });
     
         this.fillToTable();      
         this.clear();            
@@ -702,22 +708,20 @@ public class UserManagerJDailog extends javax.swing.JDialog implements UserContr
             }
         }
     }
-
-    
+   
     @Override
     public void moveFirst() {
-       this.moveTo(0);
+        this.moveTo(0);
     }
 
     @Override
     public void movePrevious() {
         this.moveTo(tblUsers.getSelectedRow() - 1);
-    
     }
 
     @Override
     public void moveNext() {
-      this.moveTo(tblUsers.getSelectedRow() + 1);
+        this.moveTo(tblUsers.getSelectedRow() + 1);
     }
 
     @Override
@@ -727,15 +731,22 @@ public class UserManagerJDailog extends javax.swing.JDialog implements UserContr
 
     @Override
     public void moveTo(int index) {
+        int rowCount = tblUsers.getRowCount();
+
+        if (rowCount == 0) {
+            return;
+        }
+
         if (index < 0) {
-            this.moveLast();
-        } else if (index >= tblUsers.getRowCount()) {
+            this.moveLast();  
+        } else if (index >= rowCount) {
             this.moveFirst();
         } else {
             tblUsers.clearSelection();
             tblUsers.setRowSelectionInterval(index, index);
             this.edit();
         }
+
     }
     
     @Override
