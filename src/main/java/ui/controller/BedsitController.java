@@ -9,7 +9,6 @@ import ui.ContactJDialog;
 import ui.LoginJDialog;
 import ui.WelcomeJDialog;
 import ui.manager.AssetsManagerJDialog;
-import ui.manager.ContractManagerJDialog;
 import ui.manager.InvoicesManagerJDialog;
 import ui.manager.PaymentManagerJDialog;
 import ui.manager.RolesManagerJDialog;
@@ -50,7 +49,6 @@ public interface BedsitController {
     }
 
     default void showContractsManagerJDialog(JFrame frame) {
-         this.showJDialog(new ContractManagerJDialog(frame, true));
     }
 
     default void showInvoicesManagerJDialog(JFrame frame) {

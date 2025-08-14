@@ -10,6 +10,7 @@ import impl.ServiceDAOImpl;
 import entity.Service;
 import java.awt.Frame;
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import utils.XDialog;
@@ -553,13 +554,15 @@ public class ServiceManagerJDialog extends javax.swing.JDialog implements Servic
     public void fillToTable() {
         DefaultTableModel model = (DefaultTableModel) tblServices.getModel();
         model.setRowCount(0);
+        DecimalFormat df = new DecimalFormat("0.##");
         items = dao.findAll();
         for (Service s : items) {
+            String priceDisplay = df.format(s.getPrice());
             Object[] row = {
                 s.getId(),
                 s.getServiceName(),
                 s.getUnit(),
-                s.getPrice(),
+                priceDisplay,
                 s.getDescription(),
                 false 
             };
@@ -602,16 +605,30 @@ public class ServiceManagerJDialog extends javax.swing.JDialog implements Servic
 
     @Override
     public void deleteCheckedItems() {
-        if (XDialog.confirm("Bạn thực sự muốn xóa các mục chọn?")) {
+        int selectedCount = 0;
+        for (int i = 0; i < tblServices.getRowCount(); i++) {
+            Boolean checked = (Boolean) tblServices.getValueAt(i, 5);
+            if (checked != null && checked) {
+                selectedCount++;
+            }
+        }
+
+        if (selectedCount == 0) {
+            XDialog.alert("Vui lòng chọn ít nhất một mục để xóa.");
+            return;
+        }
+
+        if (XDialog.confirm("Bạn thực sự muốn xóa " + selectedCount + " mục đã chọn?")) {
             try {
                 for (int i = 0; i < tblServices.getRowCount(); i++) {
-                    if ((Boolean) tblServices.getValueAt(i, 5)) {
+                    Boolean checked = (Boolean) tblServices.getValueAt(i, 5);
+                    if (checked != null && checked) {
                         dao.deleteById(items.get(i).getId());
                     }
                 }
                 this.fillToTable();
                 this.clear();
-                XDialog.alert("Đã xóa thành công các mục chọn.");
+                XDialog.alert("Đã xóa thành công " + selectedCount + " mục.");
             } catch (Exception e) {
                 XDialog.alert("Lỗi khi xóa.");
             }
@@ -623,7 +640,10 @@ public class ServiceManagerJDialog extends javax.swing.JDialog implements Servic
         txtId.setText(String.valueOf(s.getId()));
         txtServiceName.setText(s.getServiceName());
         txtUnit.setText(s.getUnit());
-        txtPrice.setText(s.getPrice().toString());
+        
+        DecimalFormat df = new DecimalFormat("0.##");
+        txtPrice.setText(df.format(s.getPrice())); 
+        
         txtDescription.setText(s.getDescription());
     }
 
@@ -666,6 +686,7 @@ public class ServiceManagerJDialog extends javax.swing.JDialog implements Servic
             Service s = getForm(false);
             dao.update(s);
             this.fillToTable();
+            this.clear();
             XDialog.alert("Cập nhật thành công.");
         } catch (Exception e) {
             XDialog.alert("Lỗi khi cập nhật.");

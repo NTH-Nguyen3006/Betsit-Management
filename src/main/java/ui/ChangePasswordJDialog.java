@@ -49,6 +49,11 @@ public class ChangePasswordJDialog extends javax.swing.JDialog implements Change
         txtConfirm = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         btnClose.setText("Đóng");
         btnClose.addActionListener(new java.awt.event.ActionListener() {
@@ -76,6 +81,13 @@ public class ChangePasswordJDialog extends javax.swing.JDialog implements Change
         jLabel3.setText("Mật khẩu hiện tại");
         jLabel3.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jPanel2.add(jLabel3);
+
+        txtUsername.setEditable(false);
+        txtUsername.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUsernameActionPerformed(evt);
+            }
+        });
         jPanel2.add(txtUsername);
         jPanel2.add(txtPassword);
 
@@ -152,6 +164,16 @@ public class ChangePasswordJDialog extends javax.swing.JDialog implements Change
         this.save();
     }//GEN-LAST:event_btnSaveActionPerformed
 
+    private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
+        // TODO add your handling code here:
+     
+    }//GEN-LAST:event_txtUsernameActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        txtUsername.setText(XAuth.user.getUsername());
+    }//GEN-LAST:event_formWindowOpened
+
     /**
      * @param args the command line arguments
      */
@@ -215,6 +237,7 @@ public class ChangePasswordJDialog extends javax.swing.JDialog implements Change
     @Override 
     public void open() { 
         this.setLocationRelativeTo(null); 
+        
     } 
 
     @Override 
@@ -224,10 +247,33 @@ public class ChangePasswordJDialog extends javax.swing.JDialog implements Change
 
     @Override 
     public void save() { 
-        String username = txtUsername.getText(); 
-        String password = txtPassword.getText(); 
-        String newpass = txtNewpass.getText(); 
-        String confirm = txtConfirm.getText();
+        String username = XAuth.user.getUsername();
+        
+        String password = txtPassword.getText().trim(); 
+        String newpass = txtNewpass.getText().trim(); 
+        String confirm = txtConfirm.getText().trim();
+        
+        if (username.isEmpty() && password.isEmpty() && newpass.isEmpty() && confirm.isEmpty()) {
+            XDialog.alert("Vui lòng nhập đầy đủ thông tin!");
+            return;
+        }
+        if (username.isEmpty()) {
+            XDialog.alert("Vui lòng nhập tên đăng nhập!");
+            return;
+        }
+        if (password.isEmpty()) {
+            XDialog.alert("Vui lòng nhập mật khẩu hiện tại!");
+            return;
+        }
+        if (newpass.isEmpty()) {
+            XDialog.alert("Vui lòng nhập mật khẩu mới!");
+            return;
+        }
+        if (confirm.isEmpty()) {
+            XDialog.alert("Vui lòng xác nhận mật khẩu mới!");
+            return;
+        }
+
         if (!newpass.equals(confirm)) { 
             XDialog.alert("Xác nhận mật khẩu không đúng!"); 
         } else if (!username.equals(XAuth.user.getUsername())) { 

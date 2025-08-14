@@ -23,4 +23,5 @@ public class User {
     int roleId;
     boolean status;
     Date created_at;
+    String photo = "";
 }

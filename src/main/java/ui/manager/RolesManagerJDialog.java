@@ -296,10 +296,10 @@ public class RolesManagerJDialog extends javax.swing.JDialog implements RoleCont
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -496,20 +496,32 @@ public class RolesManagerJDialog extends javax.swing.JDialog implements RoleCont
 
     @Override
     public void deleteCheckedItems() {
-        if (XDialog.confirm("Bạn thực sự muốn xóa các mục chọn?")) {
+        int selectedCount = 0;
+        for (int i = 0; i < tblRoles.getRowCount(); i++) {
+            if (Boolean.TRUE.equals(tblRoles.getValueAt(i, 3))) {
+                selectedCount++;
+            }
+        }
+
+        if (selectedCount == 0) {
+            XDialog.alert("Vui lòng chọn ít nhất một mục để xóa.");
+            return;
+        }
+
+        if (XDialog.confirm("Bạn thực sự muốn xóa " + selectedCount + " mục đã chọn?")) {
             try {
                 for (int i = 0; i < tblRoles.getRowCount(); i++) {
-                    if ((Boolean) tblRoles.getValueAt(i, 3)) {
+                    if (Boolean.TRUE.equals(tblRoles.getValueAt(i, 3))) {
                         dao.deleteById(items.get(i).getId());
                     }
                 }
                 this.fillToTable();
-                XDialog.alert("Đã xóa thành công các mục chọn.");
+                XDialog.alert("Đã xóa thành công " + selectedCount + " mục.");
             } catch (Exception e) {
                 XDialog.alert("Lỗi khi xóa.");
             }
         }
-    }
+    }   
 
     @Override
     public void setForm(Role entity) {
@@ -638,7 +650,14 @@ public class RolesManagerJDialog extends javax.swing.JDialog implements RoleCont
             txtRoleName.requestFocus();
             return false;
         }
-        
+        if (btnCreate.isEnabled()) { 
+            Role existingRole = dao.findByName(txtRoleName.getText().trim());
+            if (existingRole != null) {
+                XDialog.alert("Vai trò này đã tồn tại.");
+                txtRoleName.requestFocus();
+                return false;
+            }
+        }       
         return true;
     }
 }

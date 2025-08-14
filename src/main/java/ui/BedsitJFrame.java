@@ -410,6 +410,7 @@ public final class BedsitJFrame extends javax.swing.JFrame implements BedsitCont
         if(XAuth.user == null)
             System.exit(0);
         lblFullname.setText(XAuth.user.getFullname());
+        
         int roleid = XAuth.user.getRoleId();
         entity.Role role = new RoleDAOImpl().findById(roleid);
         boolean isManager = role.getRoleName().equalsIgnoreCase("admin")

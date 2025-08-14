@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.function.Consumer;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import lombok.Getter;
@@ -265,6 +266,11 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
         });
 
         jPanel4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 102, 102), 1, true));
+        jPanel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel4MouseClicked(evt);
+            }
+        });
         jPanel4.setLayout(new java.awt.BorderLayout());
 
         lblPicture.setFont(new java.awt.Font("Impact", 1, 18)); // NOI18N
@@ -410,7 +416,7 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabs, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
+            .addComponent(tabs, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 372, Short.MAX_VALUE)
         );
 
         pack();
@@ -494,6 +500,11 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
             }
         }
     }//GEN-LAST:event_lblPictureMouseClicked
+
+    private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
+        // TODO add your handling code here:
+        this.chooseFile();
+    }//GEN-LAST:event_jPanel4MouseClicked
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -639,6 +650,9 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
 
     @Override
     public void uncheckAll() {
+        if(tblAssets.getSelectedRowCount()==0){
+            XDialog.alert("bạn đang không chọn bất kì dòng nào cả", "cảnh báo không chọn");
+        }
         tblAssets.clearSelection();
         this.setEditable(false);
         
@@ -661,23 +675,48 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
     @Override
     public Assets getForm() {
         Assets asset = new Assets();
-//        asset.setId(Integer.parseInt(txtId.getText()));
-        asset.setAssetName(txtAssetName.getText());
-        asset.setQuantity(Integer.parseInt(txtQuantity.getText()));
-        asset.setCondition(txtCondition.getText());
-        asset.setRoomId(Integer.parseInt(txtRoomId.getText()));
-       
+        if(txtRoomId.getText().isEmpty() && txtAssetName.getText().isEmpty() && txtQuantity.getText().isEmpty() && txtCondition.getText().isEmpty()){
+            XDialog.alert("bạn chưa nhập bất kì mục nào", "Thông báo nhập");
+            return null;
+        }else {
+            if(txtRoomId.getText().isEmpty()){
+                XDialog.alert("Không được để trống mã phòng", "Thông báo nhập");
+                return null;
+            }else if(txtAssetName.getText().isEmpty()){
+                XDialog.alert("Không được để trống tên tài sản","Thông báo nhập");
+                return null;
+            }else if(txtQuantity.getText().isEmpty()){
+                XDialog.alert("Không được để trống số lượng","Thông báo nhập");
+                return null;
+            }else if(txtCondition.getText().isEmpty()){
+                XDialog.alert("Không được để trống chất lượng","Thông báo nhập");
+                return null;
+            }
+        }
+        
+        try{
+            asset.setId(Integer.parseInt(txtId.getText()));
+            asset.setAssetName(txtAssetName.getText());
+            asset.setQuantity(Integer.parseInt(txtQuantity.getText()));
+            asset.setCondition(txtCondition.getText());
+            asset.setRoomId(Integer.parseInt(txtRoomId.getText()));
+        }catch(NumberFormatException e){
+                XDialog.alert("Mã phòng và số lượng phải là số", "Sai định dạng");
+                System.out.println(e.getMessage());
+                return null;
+        }
         return asset;    
     }
     
     @Override
     public void create() {
-        Assets asset = getForm();
+        Assets asset = this.getForm();
         if (asset != null) {
             try {
                 dao.create(asset);
                 XDialog.alert("Thêm mới phòng thành công!");
                 this.fillToTable();
+                this.fillroom();
                 this.clear(); // Xóa trắng form sau khi thêm mới
             } catch (Exception e) {
                 XDialog.alert("Thêm mới phòng thất bại");
@@ -688,16 +727,19 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
 
     @Override
     public void update() {
-        try {
-            Assets entity = this.getForm();
-            dao.update(entity);
-            XDialog.alert("Cập nhật thành công");
-            fillToTable();     
-            clear();
-        } catch (Exception e) {
-            XDialog.alert("Cập nhật thất bại! ");
-            System.out.println(e.getMessage());
-        }    
+        Assets entity = this.getForm();
+        if (entity != null) {
+            try {
+                dao.update(entity);
+                XDialog.alert("Cập nhật thành công","Thông báo cập nhật");
+                this.fillroom();
+                this.fillToTable();     
+                this.clear();
+            } catch (Exception e) {
+                XDialog.alert("Cập nhật thất bại! ");
+                System.out.println(e.getMessage());
+            }    
+        }  
     }
 
     @Override
@@ -808,8 +850,12 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
     
     @Override
     public void deleteCheckedItems() {
-            try {
-                int[] selectedRows = tblAssets.getSelectedRows();
+        int[] selectedRows = tblAssets.getSelectedRows();
+        if(selectedRows.length == 0){
+            XDialog.alert("Đang không chọn bất kì dòng nào để xóa", "Vui lòng chọn");
+        }
+        if (XDialog.confirm("Bạn chắc chắn muốn xóa mục này chứ?", "Cảnh báo xóa")) {
+            try {                
                 if (selectedRows.length > 0) {
                     // Iterate in reverse to avoid issues with index changes after deletion
                     for (int i = selectedRows.length - 1; i >= 0; i--) {
@@ -823,5 +869,6 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
                 XDialog.alert("Xóa tài sản không thành công");
                 System.out.println(e.getMessage());
             }
+        }
     }
 }
