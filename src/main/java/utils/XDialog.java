@@ -14,7 +14,9 @@ public class XDialog {
         return XDialog.confirm(message, "Xác nhận!");
     }
     public static boolean confirm(String message, String title){
-        int result = JOptionPane.showConfirmDialog(null, message, title, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        int result = JOptionPane.showConfirmDialog(null, message, title, 
+                                                   JOptionPane.YES_NO_OPTION, 
+                                                   JOptionPane.QUESTION_MESSAGE);
         return (result == JOptionPane.YES_OPTION);
     }
     
