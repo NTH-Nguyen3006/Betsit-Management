@@ -710,7 +710,7 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
         return asset;    
     }
     
-        public Assets getFormUpdate() {
+        public Assets getFormCreate() {
         Assets asset = new Assets();
         if(txtRoomId.getText().isEmpty() && txtAssetName.getText().isEmpty() && txtQuantity.getText().isEmpty() && txtCondition.getText().isEmpty()){
             XDialog.alert("bạn chưa nhập bất kì mục nào", "Thông báo nhập");
@@ -750,11 +750,11 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
     }
     @Override
     public void create() {
-        Assets asset = this.getFormUpdate();
+        Assets asset = this.getFormCreate();
         if (asset != null) {
             try {
                 dao.create(asset);
-                XDialog.alert("Thêm mới phòng thành công!");
+                XDialog.alert("Thêm mới tài sản thành công!");
                 this.fillToTable();
                 this.fillroom();
                 this.clear(); // Xóa trắng form sau khi thêm mới
@@ -771,7 +771,7 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
         if (entity != null) {
             try {
                 dao.update(entity);
-                XDialog.alert("Cập nhật thành công","Thông báo cập nhật");
+                XDialog.alert("Cập nhật tài sản công","Thông báo cập nhật");
                 this.fillroom();
                 this.fillToTable();     
                 this.clear();
@@ -905,6 +905,7 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
                     this.fillToTable();
                     this.clear();
                 }
+                
             } catch (Exception e) {
                 XDialog.alert("Xóa tài sản không thành công");
                 System.out.println(e.getMessage());
