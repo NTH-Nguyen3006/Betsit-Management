@@ -343,7 +343,7 @@ INSERT INTO Tenants (CitizenId, FullName, DateOfBirth, PhoneNumber, Email, Vehic
 ('013345678901', N'Lê Thị Thu An', '1988-08-06', '0833456789', 'thuan.le@gmail.com', '60W5-123.45'),
 ('013456789012', N'Phạm Việt Dũng', '1995-11-23', '0834567890', 'vietdung.pham@gmail.com', '54X5-567.89'),
 ('013567890123', N'Huỳnh Kim Phượng', '1991-05-10', '0835678901', 'kimphuong.huynh@gmail.com', '50Y5-901.23'),
-('013678901234', N'Đặng Văn Long', '1993-02-28', '0836789012', 'vanlong.dang@gmail.com', '43Z5-345.67'), -- Đã sửa ngày 29/02/1993 thành 28/02/1993
+('013678901234', N'Đặng Văn Long', '1993-02-28', '0836789012', 'vanlong.dang@gmail.com', '43Z5-345.67'), 
 ('013789012345', N'Hoàng Thị Hải Anh', '1987-09-18', '0837890123', 'haianh.hoang@gmail.com', '75A6-789.01'),
 ('013890123456', N'Võ Văn Nam', '1994-04-24', '0838901234', 'vannam.vo@gmail.com', '52B6-123.45'),
 ('013901234567', N'Ngô Thị Thúy Vy', '1990-08-12', '0839012345', 'thuyvy.ngo@gmail.com', '37C6-567.89'),
@@ -409,7 +409,7 @@ INSERT INTO Tenants (CitizenId, FullName, DateOfBirth, PhoneNumber, Email, Vehic
 ('019901234567', N'Ngô Thị Thu Hà', '1990-08-18', '0899012345', 'thuha.ngo@gmail.com', '37Q8-567.89'),
 ('019012345678', N'Bùi Thanh Trúc', '1996-06-22', '0900123456', 'thanhtruc.bui2@gmail.com', '29R8-901.23');
 
--- Dữ liệu cho bảng Roles (ít nhất 30 vai trò)
+-- Dữ liệu cho bảng Roles 
 INSERT INTO Roles (RoleName, Description) VALUES
 (N'Admin', N'Người quản trị hệ thống toàn diện'),
 (N'Manager', N'Quản lý chung các hoạt động kinh doanh'),
@@ -736,7 +736,6 @@ INSERT INTO Contracts (RoomId, Tenant, StartDate, EndDate, DepositAmount,Payment
 --DROP DATABASE BEDSIT
 --Dữ liệu bảng Assets
 INSERT INTO Assets (RoomId, AssetName, Quantity, Condition) VALUES
--- RoomId 1-10
 (1, N'Bàn làm việc', 3, N'Mới'),
 (1, N'Ghế xoay', 5, N'Tốt'),
 (1, N'Máy tính', 4, N'Hoạt động tốt'),
