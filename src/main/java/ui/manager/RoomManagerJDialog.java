@@ -690,8 +690,8 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
                 return null;
             }
         }
-        try{
-            entity.setRoomId(Integer.parseInt(txtId.getText()));
+
+//            entity.setRoomId(Integer.parseInt(txtId.getText()));
             entity.setArea(Double.parseDouble(txtArea.getText()));
             entity.setRentPrice(new BigDecimal(txtRentPrice.getText()));
             eStatus status = eStatus.values()[entity.getStatus()];
@@ -708,11 +708,7 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
             String SelectedItem = cboRoomType.getSelectedItem().toString();
             entity.setRoomType(SelectedItem);
             entity.setNotes(txtNotes.getText());
-        }catch(NumberFormatException e){
-            XDialog.alert("Diện tích & Giá thuê phải là số", "Thông báo sai định dạng");
-            System.out.println(e.getMessage());
-            return null;
-        }
+
         return entity;
     }
 

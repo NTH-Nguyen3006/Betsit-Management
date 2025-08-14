@@ -710,9 +710,44 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
         return asset;    
     }
     
+        public Assets getFormUpdate() {
+        Assets asset = new Assets();
+        if(txtRoomId.getText().isEmpty() && txtAssetName.getText().isEmpty() && txtQuantity.getText().isEmpty() && txtCondition.getText().isEmpty()){
+            XDialog.alert("bạn chưa nhập bất kì mục nào", "Thông báo nhập");
+            return null;
+        }else {
+            if(txtRoomId.getText().isEmpty()){
+                XDialog.alert("Không được để trống mã phòng", "Thông báo nhập");
+                return null;
+            }else if(txtAssetName.getText().isEmpty()){
+                XDialog.alert("Không được để trống tên tài sản","Thông báo nhập");
+                return null;
+            }else if(txtQuantity.getText().isEmpty()){
+                XDialog.alert("Không được để trống số lượng","Thông báo nhập");
+                return null;
+            }else if(txtCondition.getText().isEmpty()){
+                XDialog.alert("Không được để trống chất lượng","Thông báo nhập");
+                return null;
+            }
+        }
+        
+//        asset.setId(Integer.parseInt(txtId.getText()));
+        asset.setAssetName(txtAssetName.getText());
+        try{
+
+            asset.setQuantity(Integer.parseInt(txtQuantity.getText()));
+            asset.setRoomId(Integer.parseInt(txtRoomId.getText()));
+        }catch(NumberFormatException e){
+                XDialog.alert("Mã phòng và số lượng phải là số", "Sai định dạng");
+                System.out.println(e.getMessage());
+                return null;
+        }
+        asset.setCondition(txtCondition.getText());
+        return asset;    
+    }
     @Override
     public void create() {
-        Assets asset = this.getForm();
+        Assets asset = this.getFormUpdate();
         if (asset != null) {
             try {
                 dao.create(asset);
