@@ -630,24 +630,6 @@ public class ContractManagerJDialog extends javax.swing.JDialog implements Contr
         this.setLocationRelativeTo(null);
         this.fillToTable();
         this.clear();
-
-//        tblContractManager.getSelectionModel().addListSelectionListener(e -> {
-//            if (!e.getValueIsAdjusting()) {
-//                this.edit();
-//            }
-//        });
-//
-//        tblContractManager.addMouseListener(new MouseAdapter() {
-//            public void mouseClicked(MouseEvent e) {
-//                if (e.getClickCount() == 2) {
-//                    edit();
-//                }
-//            }
-//        });
-//        if (!items.isEmpty()) {
-//            tblContractManager.setRowSelectionInterval(0, 0);
-//            edit();
-//        }
     }
 
     private void showContractTenantManager() {
@@ -1049,24 +1031,35 @@ public void create() {
     }
 
     @Override
-    public void moveFirst() {
-        this.moveTo(0);
+public void moveFirst() {
+    if (tblContractManager.getRowCount() > 0) {
+        moveTo(0);
     }
+}
 
-    @Override
-    public void movePrevious() {
-        this.moveTo(tblContractManager.getSelectedRow() - 1);
+@Override
+public void movePrevious() {
+    int selectedRow = tblContractManager.getSelectedRow();
+    if (selectedRow > 0) {
+        moveTo(selectedRow - 1);
     }
+}
 
-    @Override
-    public void moveNext() {
-        this.moveTo(tblContractManager.getSelectedRow() + 1);
+@Override
+public void moveNext() {
+    int selectedRow = tblContractManager.getSelectedRow();
+    if (selectedRow >= 0 && selectedRow < tblContractManager.getRowCount() - 1) {
+        moveTo(selectedRow + 1);
     }
+}
 
-    @Override
-    public void moveLast() {
-        this.moveTo(tblContractManager.getRowCount() - 1);
+@Override
+public void moveLast() {
+    int rowCount = tblContractManager.getRowCount();
+    if (rowCount > 0) {
+        moveTo(rowCount - 1);
     }
+}
 
     @Override
     public void moveTo(int index) {
