@@ -1071,7 +1071,6 @@ public void moveLast() {
             return;
         }
 
-        // Ngày hết hạn
         String dueDateStr = txtDueDate.getText().trim();
         if (dueDateStr.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Cập nhật trống Ngày hết hạn", "Thông báo", JOptionPane.WARNING_MESSAGE);
@@ -1087,7 +1086,6 @@ public void moveLast() {
         }
         invoice.setDue_date(dueDate);
 
-        // Nợ cũ
         String prevDebtStr = txtPreviousDebt.getText().trim();
         if (prevDebtStr.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Cập nhật trống Nợ cũ", "Thông báo", JOptionPane.WARNING_MESSAGE);
@@ -1100,7 +1098,6 @@ public void moveLast() {
             return;
         }
 
-        // Giảm giá
         String discountStr = txtDiscount.getText().trim();
         if (discountStr.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Cập nhật trống Giảm giá", "Thông báo", JOptionPane.WARNING_MESSAGE);
@@ -1113,7 +1110,6 @@ public void moveLast() {
             return;
         }
 
-        // Tổng tiền
         String totalStr = txtTotalamount.getText().trim();
         if (totalStr.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Cập nhật trống Tổng", "Thông báo", JOptionPane.WARNING_MESSAGE);
