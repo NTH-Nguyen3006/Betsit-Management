@@ -77,6 +77,7 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
         lblImage.setText("jLabel6");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Quản Lí Tài Sản");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -694,17 +695,18 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
             }
         }
         
+        asset.setId(Integer.parseInt(txtId.getText()));
+        asset.setAssetName(txtAssetName.getText());
         try{
-            asset.setId(Integer.parseInt(txtId.getText()));
-            asset.setAssetName(txtAssetName.getText());
+
             asset.setQuantity(Integer.parseInt(txtQuantity.getText()));
-            asset.setCondition(txtCondition.getText());
             asset.setRoomId(Integer.parseInt(txtRoomId.getText()));
         }catch(NumberFormatException e){
                 XDialog.alert("Mã phòng và số lượng phải là số", "Sai định dạng");
                 System.out.println(e.getMessage());
                 return null;
         }
+        asset.setCondition(txtCondition.getText());
         return asset;    
     }
     

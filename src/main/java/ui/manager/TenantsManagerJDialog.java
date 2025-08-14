@@ -122,7 +122,7 @@ public class TenantsManagerJDialog extends javax.swing.JDialog implements Tenant
         jScrollPane1.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Quản lý người thuê");
+        setTitle("Quản Lí Người Thuê");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);

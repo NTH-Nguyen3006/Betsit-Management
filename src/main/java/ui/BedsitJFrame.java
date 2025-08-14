@@ -47,7 +47,7 @@ public final class BedsitJFrame extends javax.swing.JFrame implements BedsitCont
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setTitle("Poly Cafe");
+        setTitle("AHiHi123 - Quản Lí Nhà Trọ");
         setBackground(new java.awt.Color(255, 51, 51));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
