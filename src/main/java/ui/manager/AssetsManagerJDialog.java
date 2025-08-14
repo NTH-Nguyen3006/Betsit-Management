@@ -744,6 +744,9 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
         }
         asset.setCondition(txtCondition.getText());
         return asset;    
+        
+        
+        
     }
     @Override
     public void create() {
