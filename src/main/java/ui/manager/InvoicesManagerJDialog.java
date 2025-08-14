@@ -539,12 +539,12 @@ public class InvoicesManagerJDialog extends javax.swing.JDialog implements Invoi
 
     private void btnMoveNextActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnMoveNextActionPerformed
         // TODO add your handling code here:
-        moveTo(currentIndex + 1);
+        this.moveNext();
     }// GEN-LAST:event_btnMoveNextActionPerformed
 
     private void btnMovePreviousActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnMovePreviousActionPerformed
         // TODO add your handling code here:
-        moveTo(currentIndex - 1);
+        this.movePrevious();
 
     }// GEN-LAST:event_btnMovePreviousActionPerformed
 
@@ -569,17 +569,17 @@ public class InvoicesManagerJDialog extends javax.swing.JDialog implements Invoi
     }// GEN-LAST:event_CreateActionPerformed
 
     private void txtPreviousDebtActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txtPreviousDebtActionPerformed
-        // TODO add your handling code here:
+  
     }// GEN-LAST:event_txtPreviousDebtActionPerformed
 
     private void btnMoveFirstActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnMoveFirstActionPerformed
         // TODO add your handling code here:
-        moveTo(0);
+        this.moveFirst();
     }// GEN-LAST:event_btnMoveFirstActionPerformed
 
     private void btnMoveLastActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnMoveLastActionPerformed
         // TODO add your handling code here:
-        moveTo(listInvoices.size() - 1);
+        this.moveLast();
     }// GEN-LAST:event_btnMoveLastActionPerformed
 
     private void btnViewInvoicesManagerActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnViewInvoicesManagerActionPerformed
@@ -791,13 +791,20 @@ public class InvoicesManagerJDialog extends javax.swing.JDialog implements Invoi
         }
     }
 
-    public void moveFirst() {
+    @Override
+public void moveFirst() {
+    if (TblInvoices.getRowCount() > 0) {
         moveTo(0);
     }
+}
 
-    public void moveLast() {
-        moveTo(TblInvoices.getRowCount() - 1);
+    @Override
+public void moveLast() {
+    int rowCount = TblInvoices.getRowCount();
+    if (rowCount > 0) {
+        moveTo(rowCount - 1);
     }
+}
 
     public void edit() {
         int row = TblInvoices.getSelectedRow();
@@ -1206,15 +1213,19 @@ public class InvoicesManagerJDialog extends javax.swing.JDialog implements Invoi
     }
 
     @Override
-    public void movePrevious() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from
-                                                                       // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+public void movePrevious() {
+    int selectedRow = TblInvoices.getSelectedRow();
+    if (selectedRow > 0) {
+        moveTo(selectedRow - 1);
     }
+}
 
-    @Override
-    public void moveNext() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from
-                                                                       // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+@Override
+public void moveNext() {
+    int selectedRow = TblInvoices.getSelectedRow();
+    if (selectedRow >= 0 && selectedRow < TblInvoices.getRowCount() - 1) {
+        moveTo(selectedRow + 1);
     }
+}
 
 }
