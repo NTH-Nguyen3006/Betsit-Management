@@ -98,6 +98,7 @@ public class ContractManagerJDialog extends javax.swing.JDialog implements Contr
         btnMoveLast = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Quản Lí Hợp Đồng");
 
         tblContractManager.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -112,7 +113,6 @@ public class ContractManagerJDialog extends javax.swing.JDialog implements Contr
         ) {
             Class[] types = new Class [] {
                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
-
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false, false, false, true

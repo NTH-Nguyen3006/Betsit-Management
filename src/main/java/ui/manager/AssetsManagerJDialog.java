@@ -77,6 +77,7 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
         lblImage.setText("jLabel6");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Quản Lí Tài Sản");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -694,27 +695,66 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
             }
         }
         
+        asset.setId(Integer.parseInt(txtId.getText()));
+        asset.setAssetName(txtAssetName.getText());
         try{
-            asset.setId(Integer.parseInt(txtId.getText()));
-            asset.setAssetName(txtAssetName.getText());
+
             asset.setQuantity(Integer.parseInt(txtQuantity.getText()));
-            asset.setCondition(txtCondition.getText());
             asset.setRoomId(Integer.parseInt(txtRoomId.getText()));
         }catch(NumberFormatException e){
                 XDialog.alert("Mã phòng và số lượng phải là số", "Sai định dạng");
                 System.out.println(e.getMessage());
                 return null;
         }
+        asset.setCondition(txtCondition.getText());
         return asset;    
     }
     
+        public Assets getFormCreate() {
+        Assets asset = new Assets();
+        if(txtRoomId.getText().isEmpty() && txtAssetName.getText().isEmpty() && txtQuantity.getText().isEmpty() && txtCondition.getText().isEmpty()){
+            XDialog.alert("bạn chưa nhập bất kì mục nào", "Thông báo nhập");
+            return null;
+        }else {
+            if(txtRoomId.getText().isEmpty()){
+                XDialog.alert("Không được để trống mã phòng", "Thông báo nhập");
+                return null;
+            }else if(txtAssetName.getText().isEmpty()){
+                XDialog.alert("Không được để trống tên tài sản","Thông báo nhập");
+                return null;
+            }else if(txtQuantity.getText().isEmpty()){
+                XDialog.alert("Không được để trống số lượng","Thông báo nhập");
+                return null;
+            }else if(txtCondition.getText().isEmpty()){
+                XDialog.alert("Không được để trống chất lượng","Thông báo nhập");
+                return null;
+            }
+        }
+        
+//        asset.setId(Integer.parseInt(txtId.getText()));
+        asset.setAssetName(txtAssetName.getText());
+        try{
+
+            asset.setQuantity(Integer.parseInt(txtQuantity.getText()));
+            asset.setRoomId(Integer.parseInt(txtRoomId.getText()));
+        }catch(NumberFormatException e){
+                XDialog.alert("Mã phòng và số lượng phải là số", "Sai định dạng");
+                System.out.println(e.getMessage());
+                return null;
+        }
+        asset.setCondition(txtCondition.getText());
+        return asset;    
+        
+        
+        
+    }
     @Override
     public void create() {
-        Assets asset = this.getForm();
+        Assets asset = this.getFormCreate();
         if (asset != null) {
             try {
                 dao.create(asset);
-                XDialog.alert("Thêm mới phòng thành công!");
+                XDialog.alert("Thêm mới tài sản thành công!");
                 this.fillToTable();
                 this.fillroom();
                 this.clear(); // Xóa trắng form sau khi thêm mới
@@ -731,7 +771,7 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
         if (entity != null) {
             try {
                 dao.update(entity);
-                XDialog.alert("Cập nhật thành công","Thông báo cập nhật");
+                XDialog.alert("Cập nhật tài sản công","Thông báo cập nhật");
                 this.fillroom();
                 this.fillToTable();     
                 this.clear();
@@ -865,6 +905,7 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
                     this.fillToTable();
                     this.clear();
                 }
+                
             } catch (Exception e) {
                 XDialog.alert("Xóa tài sản không thành công");
                 System.out.println(e.getMessage());
