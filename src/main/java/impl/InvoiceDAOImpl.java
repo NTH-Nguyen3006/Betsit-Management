@@ -6,7 +6,6 @@ import dao.InvoiceDao;
 import entity.Invoice;
 import utils.XJdbc;
 import utils.XQuery;
-import dao.InvoiceDao;
 
 public class InvoiceDAOImpl implements InvoiceDao {
 

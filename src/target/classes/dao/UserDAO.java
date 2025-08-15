@@ -7,11 +7,8 @@ package dao;
 import entity.User;
 import java.util.List;
 
-/**
- *
- * @author nhukhue
- */
-public interface UserDAO extends CrudDAO<User, String>{
+public interface UserDAO extends CrudDAO<User, String> {
     List<User> findByRoleId(Integer roleId);
+
     User findByUsername(String username);
 }

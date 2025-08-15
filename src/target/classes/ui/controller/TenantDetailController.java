@@ -7,10 +7,6 @@ package ui.controller;
 import dao.CrudDAO;
 import entity.TenantDetail;
 
-/**
- *
- * @author ADMIN
- */
 public interface TenantDetailController extends CrudDAO<TenantDetail, String> {
-    
+
 }

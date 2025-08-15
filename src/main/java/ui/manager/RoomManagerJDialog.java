@@ -10,17 +10,8 @@ import dao.RoomDAO;
 import entity.Room;
 import entity.Room.eStatus;
 import impl.RoomDAOImpl;
-import java.awt.event.ActionEvent;
-import java.io.File;
-import java.math.BigDecimal;
-import java.util.List;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JFileChooser;
-import javax.swing.ListSelectionModel;
-import javax.swing.table.DefaultTableModel;
 import ui.controller.RoomController;
 import utils.XDialog;
-import utils.XOther;
 
 public class RoomManagerJDialog extends javax.swing.JDialog implements RoomController {
 
@@ -30,9 +21,10 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
     }
 
     @SuppressWarnings("unchecked")
-//     <editor-fold defaultstate="collapsed" desc="Generated
-//     <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         statusBtnGroup = new javax.swing.ButtonGroup();
@@ -87,19 +79,18 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
         jPanel1.setLayout(new java.awt.BorderLayout(15, 15));
 
         tblRooms.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+                new Object[][] {
 
-            },
-            new String [] {
-                "Mã phòng", "Loại phòng", "Diện tích", "Giá Thuê", "Trạng thái", "Ghi chú"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                },
+                new String[] {
+                        "Mã phòng", "Loại phòng", "Diện tích", "Giá Thuê", "Trạng thái", "Ghi chú"
+                }) {
+            boolean[] canEdit = new boolean[] {
+                    false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+                return canEdit[columnIndex];
             }
         });
         tblRooms.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -183,7 +174,8 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
 
         jLabel4.setText("Kiểu Phòng");
 
-        cboRoomType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboRoomType.setModel(
+                new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cboRoomType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboRoomTypeActionPerformed(evt);
@@ -193,31 +185,31 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
         javax.swing.GroupLayout rdopanelLayout = new javax.swing.GroupLayout(rdopanel);
         rdopanel.setLayout(rdopanelLayout);
         rdopanelLayout.setHorizontalGroup(
-            rdopanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(rdopanelLayout.createSequentialGroup()
-                .addComponent(rdoAvailable)
-                .addGap(68, 68, 68)
-                .addComponent(rdoRented)
-                .addGap(75, 75, 75)
-                .addComponent(rdoRepair)
-                .addGap(0, 476, Short.MAX_VALUE))
-            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 878, Short.MAX_VALUE)
-            .addComponent(cboRoomType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+                rdopanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(rdopanelLayout.createSequentialGroup()
+                                .addComponent(rdoAvailable)
+                                .addGap(68, 68, 68)
+                                .addComponent(rdoRented)
+                                .addGap(75, 75, 75)
+                                .addComponent(rdoRepair)
+                                .addGap(0, 476, Short.MAX_VALUE))
+                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 878, Short.MAX_VALUE)
+                        .addComponent(cboRoomType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
         rdopanelLayout.setVerticalGroup(
-            rdopanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, rdopanelLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(rdopanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rdoAvailable)
-                    .addComponent(rdoRented)
-                    .addComponent(rdoRepair))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cboRoomType, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+                rdopanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, rdopanelLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(rdopanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(rdoAvailable)
+                                        .addComponent(rdoRented)
+                                        .addComponent(rdoRepair))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 25,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cboRoomType, javax.swing.GroupLayout.PREFERRED_SIZE, 27,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap()));
 
         jLabel5.setText("Ghi Chú");
 
@@ -228,61 +220,78 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 878, Short.MAX_VALUE)
-                    .addComponent(txtId, javax.swing.GroupLayout.DEFAULT_SIZE, 878, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 878, Short.MAX_VALUE)
-                    .addComponent(txtArea, javax.swing.GroupLayout.DEFAULT_SIZE, 878, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 878, Short.MAX_VALUE)
-                    .addComponent(txtRentPrice, javax.swing.GroupLayout.DEFAULT_SIZE, 878, Short.MAX_VALUE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 878, Short.MAX_VALUE)
-                    .addComponent(rdopanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 878, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2))
-                .addGap(66, 66, 66))
-        );
+                jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addGroup(jPanel6Layout
+                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 878,
+                                                Short.MAX_VALUE)
+                                        .addComponent(txtId, javax.swing.GroupLayout.DEFAULT_SIZE, 878, Short.MAX_VALUE)
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 878,
+                                                Short.MAX_VALUE)
+                                        .addComponent(txtArea, javax.swing.GroupLayout.DEFAULT_SIZE, 878,
+                                                Short.MAX_VALUE)
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 878,
+                                                Short.MAX_VALUE)
+                                        .addComponent(txtRentPrice, javax.swing.GroupLayout.DEFAULT_SIZE, 878,
+                                                Short.MAX_VALUE)
+                                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 878,
+                                                Short.MAX_VALUE)
+                                        .addComponent(rdopanel, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 878,
+                                                Short.MAX_VALUE)
+                                        .addComponent(jScrollPane2))
+                                .addGap(66, 66, 66)));
         jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
-                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtArea, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtRentPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(rdopanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+                jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(5, 5, 5)
+                                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 25,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtArea, javax.swing.GroupLayout.PREFERRED_SIZE, 25,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtRentPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 25,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 25,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(10, 10, 10)
+                                .addComponent(rdopanel, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+                jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addContainerGap()));
         jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
+                jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)));
 
         jPanel2.add(jPanel5, java.awt.BorderLayout.CENTER);
 
@@ -368,110 +377,109 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabs)
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(tabs));
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtIdActionPerformed
+    private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txtIdActionPerformed
 
-    private void rdoAvailableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoAvailableActionPerformed
-        // TODO add your handling code here:
-      
-    }//GEN-LAST:event_rdoAvailableActionPerformed
+    }// GEN-LAST:event_txtIdActionPerformed
 
-    private void tblRoomsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblRoomsMouseClicked
+    private void rdoAvailableActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_rdoAvailableActionPerformed
+
+    }// GEN-LAST:event_rdoAvailableActionPerformed
+
+    private void tblRoomsMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_tblRoomsMouseClicked
         if (evt.getClickCount() == 2) {
             this.edit();
         }
-    }//GEN-LAST:event_tblRoomsMouseClicked
+    }// GEN-LAST:event_tblRoomsMouseClicked
 
-    private void btnCheckAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckAllActionPerformed
-        // TODO add your handling code here:
+    private void btnCheckAllActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnCheckAllActionPerformed
+
         this.checkAll();
-    }//GEN-LAST:event_btnCheckAllActionPerformed
+    }// GEN-LAST:event_btnCheckAllActionPerformed
 
-    private void btnUncheckAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUncheckAllActionPerformed
-        // TODO add your handling code here:
+    private void btnUncheckAllActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnUncheckAllActionPerformed
+
         this.uncheckAll();
-    }//GEN-LAST:event_btnUncheckAllActionPerformed
+    }// GEN-LAST:event_btnUncheckAllActionPerformed
 
-    private void btnDeleteCheckedItemsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteCheckedItemsActionPerformed
-        // TODO add your handling code here:
+    private void btnDeleteCheckedItemsActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnDeleteCheckedItemsActionPerformed
+
         this.deleteCheckedItems();
-    }//GEN-LAST:event_btnDeleteCheckedItemsActionPerformed
+    }// GEN-LAST:event_btnDeleteCheckedItemsActionPerformed
 
-    private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
-        // TODO add your handling code here:
+    private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnCreateActionPerformed
+
         this.create();
-    }//GEN-LAST:event_btnCreateActionPerformed
+    }// GEN-LAST:event_btnCreateActionPerformed
 
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        // TODO add your handling code here:
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnUpdateActionPerformed
+
         this.update();
-    }//GEN-LAST:event_btnUpdateActionPerformed
+    }// GEN-LAST:event_btnUpdateActionPerformed
 
-    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        // TODO add your handling code here:
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnDeleteActionPerformed
+
         this.delete();
-    }//GEN-LAST:event_btnDeleteActionPerformed
+    }// GEN-LAST:event_btnDeleteActionPerformed
 
-    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
-        // TODO add your handling code here:
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnClearActionPerformed
+
         this.clear();
-    }//GEN-LAST:event_btnClearActionPerformed
+    }// GEN-LAST:event_btnClearActionPerformed
 
-    private void btnMoveFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveFirstActionPerformed
-        // TODO add your handling code here:
+    private void btnMoveFirstActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnMoveFirstActionPerformed
+
         this.moveFirst();
-    }//GEN-LAST:event_btnMoveFirstActionPerformed
+    }// GEN-LAST:event_btnMoveFirstActionPerformed
 
-    private void btnMovePreviousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMovePreviousActionPerformed
-        // TODO add your handling code here:
+    private void btnMovePreviousActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnMovePreviousActionPerformed
+
         this.movePrevious();
-    }//GEN-LAST:event_btnMovePreviousActionPerformed
+    }// GEN-LAST:event_btnMovePreviousActionPerformed
 
-    private void btnMoveNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveNextActionPerformed
-        // TODO add your handling code here:
+    private void btnMoveNextActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnMoveNextActionPerformed
+
         this.moveNext();
-    }//GEN-LAST:event_btnMoveNextActionPerformed
+    }// GEN-LAST:event_btnMoveNextActionPerformed
 
-    private void btnMoveLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveLastActionPerformed
-        // TODO add your handling code here:
+    private void btnMoveLastActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnMoveLastActionPerformed
+
         this.moveLast();
-    }//GEN-LAST:event_btnMoveLastActionPerformed
+    }// GEN-LAST:event_btnMoveLastActionPerformed
 
-    private void cboRoomTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboRoomTypeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cboRoomTypeActionPerformed
+    private void cboRoomTypeActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cboRoomTypeActionPerformed
+
+    }// GEN-LAST:event_cboRoomTypeActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {
-    // TODO: xử lý gì đó khi mở cửa sổ
+        // TODO: xử lý gì đó khi mở cửa sổ
         System.out.println("Window opened");
         this.open();
     }
+
     public void txtNotesActionPerformed(java.awt.event.ActionEvent evt) {
-               
+
     }
+
     public void txtRentPriceActionPerformed(java.awt.event.ActionEvent evt) {
-                
-    }     
-    public void abtnMoveLastActionPerformed(java.awt.event.ActionEvent evt) {
-                
+
     }
-    
-    
-    
+
+    public void abtnMoveLastActionPerformed(java.awt.event.ActionEvent evt) {
+
+    }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         // <editor-fold defaultstate="collapsed" desc=" Look and feel setting code
@@ -564,7 +572,7 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
     RoomDAO dao = new RoomDAOImpl();
     List<Room> items = List.of();
     List<String> room = List.of();
-//    private int index = 0;
+    // private int index = 0;
 
     @Override
     public void open() {
@@ -573,12 +581,14 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
         this.fillRoomType(); // đổ dữ liệu vào cbo
     }
 
-    List<String> roomtype = List.of("Phòng Deluxe", "Phòng Đôi", "Phòng Đơn","Phòng Gia Đình","Phòng Mini","Phòng Studio", "Khác");
+    List<String> roomtype = List.of("Phòng Deluxe", "Phòng Đôi", "Phòng Đơn", "Phòng Gia Đình", "Phòng Mini",
+            "Phòng Studio", "Khác");
+
     @Override
     public void fillRoomType() {
         DefaultComboBoxModel<String> cboModel = (DefaultComboBoxModel<String>) cboRoomType.getModel();
         cboModel.removeAllElements(); // Xóa tất cả các mục hiện có trong ComboBox
-        
+
         roomtype.forEach(roomType -> {
             cboModel.addElement(roomType);
         });
@@ -587,34 +597,34 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
             cboRoomType.setSelectedIndex(0);
         }
     }
-    
+
     @Override
     public void fillToTable() {
-        String[] statusVN = {"Đang thuê", "Chưa thuê", "Sửa chữa"};
+        String[] statusVN = { "Đang thuê", "Chưa thuê", "Sửa chữa" };
         DefaultTableModel tblModel = (DefaultTableModel) tblRooms.getModel();
-        tblModel.setRowCount(0); 
+        tblModel.setRowCount(0);
 
         items = dao.findAll();
-        
+
         if (items != null) {
             for (Room room : items) {
                 int statusIndex = room.getStatus();
-                String statusName = (statusIndex >= 0 && statusIndex < statusVN.length) 
-                                ? statusVN[statusIndex] 
-                                : "Không xác định";
-                tblModel.addRow(new Object[]{
-                    room.getRoomId(),
-                    room.getRoomType(),
-                    room.getArea(), 
-                    room.getRentPrice(),
-//                    room.getStatus(),
-                    statusName,
-                    room.getNotes()
+                String statusName = (statusIndex >= 0 && statusIndex < statusVN.length)
+                        ? statusVN[statusIndex]
+                        : "Không xác định";
+                tblModel.addRow(new Object[] {
+                        room.getRoomId(),
+                        room.getRoomType(),
+                        room.getArea(),
+                        room.getRentPrice(),
+                        // room.getStatus(),
+                        statusName,
+                        room.getNotes()
                 });
             }
         }
     }
-    
+
     @Override
     public void edit() {
         Room entity = items.get(tblRooms.getSelectedRow());
@@ -622,7 +632,7 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
         this.setEditable(true);
         tabs.setSelectedIndex(1);
     }
-    
+
     @Override
     public void checkAll() {
         setCheckedAll(true);
@@ -630,17 +640,17 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
 
     @Override
     public void uncheckAll() {
-        if(tblRooms.getSelectedRowCount() == 0){
-            XDialog.alert("Bạn đang không chọn bất kì dòng nào","Thông báo chọn");
+        if (tblRooms.getSelectedRowCount() == 0) {
+            XDialog.alert("Bạn đang không chọn bất kì dòng nào", "Thông báo chọn");
         }
         tblRooms.clearSelection();
         this.setEditable(false);
     }
-    
+
     private void setCheckedAll(boolean checked) {
         tblRooms.selectAll();
     }
-    
+
     @Override
     public void setForm(Room entity) {
         txtId.setText(String.valueOf(entity.getRoomId()));
@@ -655,14 +665,14 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
         } else if (status == eStatus.Repair) {
             rdoRepair.setSelected(true);
         }
-        
-        cboRoomType.setSelectedIndex(roomtype.size()-1);
+
+        cboRoomType.setSelectedIndex(roomtype.size() - 1);
         for (int i = 0; i < roomtype.size(); i++) {
-            if (roomtype.get(i).equals(entity.getRoomType())){
-               cboRoomType.setSelectedIndex(i);
+            if (roomtype.get(i).equals(entity.getRoomType())) {
+                cboRoomType.setSelectedIndex(i);
             }
         }
-               
+
         txtNotes.setText(entity.getNotes());
 
     }
@@ -671,43 +681,43 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
     public Room getForm() {
         System.out.println("getform ............");
         Room entity = new Room();
-        
-        if(txtArea.getText().isEmpty() && txtNotes.getText().isEmpty() && txtRentPrice.getText().isEmpty()){
+
+        if (txtArea.getText().isEmpty() && txtNotes.getText().isEmpty() && txtRentPrice.getText().isEmpty()) {
             XDialog.alert("bạn chưa nhập bất kì mục nào", "Thông báo nhập");
             return null;
-        }else {
-            if(txtArea.getText().isEmpty()){
+        } else {
+            if (txtArea.getText().isEmpty()) {
                 XDialog.alert("Không được để trống mã phòng", "Thông báo nhập");
                 return null;
-            }else if(txtRentPrice.getText().isEmpty()){
-                XDialog.alert("Không được để trống Giá thuê","Thông báo nhập");
+            } else if (txtRentPrice.getText().isEmpty()) {
+                XDialog.alert("Không được để trống Giá thuê", "Thông báo nhập");
                 return null;
-            }else if (cboRoomType.getSelectedIndex() == -1 || cboRoomType.getSelectedItem() == null) {
+            } else if (cboRoomType.getSelectedIndex() == -1 || cboRoomType.getSelectedItem() == null) {
                 XDialog.alert("Vui lòng chọn loại phòng", "Thông báo nhập");
                 return null;
-            }else if (!rdoAvailable.isSelected() && !rdoRented.isSelected() && !rdoRepair.isSelected()) {
+            } else if (!rdoAvailable.isSelected() && !rdoRented.isSelected() && !rdoRepair.isSelected()) {
                 XDialog.alert("Vui lòng chọn trạng thái phòng", "Thông báo nhập");
                 return null;
             }
         }
 
-//            entity.setRoomId(Integer.parseInt(txtId.getText()));
-            entity.setArea(Double.parseDouble(txtArea.getText()));
-            entity.setRentPrice(new BigDecimal(txtRentPrice.getText()));
-            eStatus status = eStatus.values()[entity.getStatus()];
-            if ( rdoAvailable.isSelected()) {
-                status = eStatus.Available;
+        // entity.setRoomId(Integer.parseInt(txtId.getText()));
+        entity.setArea(Double.parseDouble(txtArea.getText()));
+        entity.setRentPrice(new BigDecimal(txtRentPrice.getText()));
+        eStatus status = eStatus.values()[entity.getStatus()];
+        if (rdoAvailable.isSelected()) {
+            status = eStatus.Available;
 
-            } else if (rdoRented.isSelected()) {
-                status = eStatus.Rented;
+        } else if (rdoRented.isSelected()) {
+            status = eStatus.Rented;
 
-            } else if (rdoRepair.isSelected()) {
-                status = eStatus.Repair;
-            }
-            entity.setStatus(status.ordinal());
-            String SelectedItem = cboRoomType.getSelectedItem().toString();
-            entity.setRoomType(SelectedItem);
-            entity.setNotes(txtNotes.getText());
+        } else if (rdoRepair.isSelected()) {
+            status = eStatus.Repair;
+        }
+        entity.setStatus(status.ordinal());
+        String SelectedItem = cboRoomType.getSelectedItem().toString();
+        entity.setRoomType(SelectedItem);
+        entity.setNotes(txtNotes.getText());
 
         return entity;
     }
@@ -768,7 +778,7 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
         txtNotes.setText("");
         txtRentPrice.setText("");
         rdoAvailable.setSelected(false);
-        rdoRented.setSelected(false);       
+        rdoRented.setSelected(false);
         rdoRepair.setSelected(false);
         this.setEditable(false);
     }
@@ -818,20 +828,20 @@ public class RoomManagerJDialog extends javax.swing.JDialog implements RoomContr
             this.edit();
         }
     }
-    
-    
+
     @Override
     public void chooseFile() {
-        
+
     }
+
     @Override
     public void deleteCheckedItems() {
         int[] selectedRows = tblRooms.getSelectedRows();
-                if(selectedRows.length == 0){
-                    XDialog.alert("Đang không chọn bất kì dòng nào để xóa", "Vui lòng chọn");
-                }
+        if (selectedRows.length == 0) {
+            XDialog.alert("Đang không chọn bất kì dòng nào để xóa", "Vui lòng chọn");
+        }
         if (XDialog.confirm("Bạn chắc chắn muốn xóa mục này chứ?", "Cảnh báo xóa")) {
-            try {               
+            try {
                 if (selectedRows.length > 0) {
                     // Iterate in reverse to avoid issues with index changes after deletion
                     for (int i = selectedRows.length - 1; i >= 0; i--) {

@@ -6,10 +6,6 @@ package ui.controller;
 
 import entity.ServiceUsages;
 
-/**
- *
- * @author ADMIN
- */
-public interface ServiceUsagesController extends CrudController<ServiceUsages>{
-    
+public interface ServiceUsagesController extends CrudController<ServiceUsages> {
+
 }

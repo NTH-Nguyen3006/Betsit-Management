@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
+
 package ui.manager;
 
 import java.math.BigDecimal;
@@ -400,76 +397,76 @@ public class InvoiceDetailsManagerJDialog extends javax.swing.JDialog implements
     }// </editor-fold>//GEN-END:initComponents
 
     private void UpdateActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_UpdateActionPerformed
-        // TODO add your handling code here:
+
         this.update();
     }// GEN-LAST:event_UpdateActionPerformed
 
     private void DeleteActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_DeleteActionPerformed
-        // TODO add your handling code here:
+
         this.delete();
     }// GEN-LAST:event_DeleteActionPerformed
 
     private void ResetActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_ResetActionPerformed
-        // TODO add your handling code here:
+
         this.clear();
     }// GEN-LAST:event_ResetActionPerformed
 
     private void btnMovePreviousActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnMovePreviousActionPerformed
-        // TODO add your handling code here:
+
         this.movePrevious();
     }// GEN-LAST:event_btnMovePreviousActionPerformed
 
     private void btnMoveNextActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnMoveNextActionPerformed
-        // TODO add your handling code here:
+
         this.moveNext();
     }// GEN-LAST:event_btnMoveNextActionPerformed
 
     private void txtIdInvoiceActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txtIdInvoiceActionPerformed
-        // TODO add your handling code here:
+
     }// GEN-LAST:event_txtIdInvoiceActionPerformed
 
     private void txtSeviceIdActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txtSeviceIdActionPerformed
-        // TODO add your handling code here:
+
     }// GEN-LAST:event_txtSeviceIdActionPerformed
 
     private void txtQuantityActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txtQuantityActionPerformed
-        // TODO add your handling code here:
+
     }// GEN-LAST:event_txtQuantityActionPerformed
 
     private void txtInvoiceIdActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txtInvoiceIdActionPerformed
-        // TODO add your handling code here:
+
     }// GEN-LAST:event_txtInvoiceIdActionPerformed
 
     private void txtTotalActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txtTotalActionPerformed
-        // TODO add your handling code here:
+
     }// GEN-LAST:event_txtTotalActionPerformed
 
     private void txtUnitpriceActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txtUnitpriceActionPerformed
-        // TODO add your handling code here:
+
     }// GEN-LAST:event_txtUnitpriceActionPerformed
 
     private void CreateActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_CreateActionPerformed
-        // TODO add your handling code here:
+
         this.create();
     }// GEN-LAST:event_CreateActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {// GEN-FIRST:event_formWindowOpened
-        // TODO add your handling code here:
+
         this.open();
     }// GEN-LAST:event_formWindowOpened
 
     private void btnCheckAllActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnCheckAllActionPerformed
-        // TODO add your handling code here:
+
         this.checkAll();
     }// GEN-LAST:event_btnCheckAllActionPerformed
 
     private void btnUnCheckAllActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnUnCheckAllActionPerformed
-        // TODO add your handling code here:
+
         this.uncheckAll();
     }// GEN-LAST:event_btnUnCheckAllActionPerformed
 
     private void btnDeleteCheckedItemsActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnDeleteCheckedItemsActionPerformed
-        // TODO add your handling code here:
+
         this.delete();
     }// GEN-LAST:event_btnDeleteCheckedItemsActionPerformed
 

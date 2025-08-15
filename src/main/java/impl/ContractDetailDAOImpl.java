@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package impl;
 
 import dao.ContractDetailDAO;
@@ -12,8 +9,8 @@ import entity.ContractDetail;
  * @author GAMING
  */
 public class ContractDetailDAOImpl implements ContractDetailDAO {
-    
-     @Override
+
+    @Override
     public void create(ContractDetail detail) {
         // Thực hiện lưu detail vào DB
     }

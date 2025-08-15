@@ -4,10 +4,6 @@
  */
 package ui.controller;
 
-/**
- *
- * @author nhukhue
- */
 public interface WelcomeController {
     void waiting();
 }

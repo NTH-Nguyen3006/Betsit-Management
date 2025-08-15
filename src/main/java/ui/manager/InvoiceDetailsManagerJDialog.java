@@ -1,11 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
+
 package ui.manager;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -14,8 +10,6 @@ import javax.swing.table.DefaultTableModel;
 import dao.InvoiceDetailDao;
 import entity.InvoiceDetail;
 import impl.InvoiceDetailDAOImpl;
-import static java.nio.file.Files.list;
-import static java.util.Collections.list;
 import ui.controller.InvoiceDetailsManagerController;
 import utils.XDialog;
 
@@ -58,7 +52,8 @@ public class InvoiceDetailsManagerJDialog extends javax.swing.JDialog implements
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -93,16 +88,15 @@ public class InvoiceDetailsManagerJDialog extends javax.swing.JDialog implements
         Create = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
+                new Object[][] {
+                        { null, null, null, null },
+                        { null, null, null, null },
+                        { null, null, null, null },
+                        { null, null, null, null }
+                },
+                new String[] {
+                        "Title 1", "Title 2", "Title 3", "Title 4"
+                }));
         jScrollPane1.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -113,16 +107,15 @@ public class InvoiceDetailsManagerJDialog extends javax.swing.JDialog implements
         });
 
         tblInvoiceDetails.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "Mã hóa đơn chi tiết", "Mã hóa đơn", "Mã dịch vụ", "Số lượng", "Giá tiền", "Tổng"
-            }
-        ));
+                new Object[][] {
+                        { null, null, null, null, null, null },
+                        { null, null, null, null, null, null },
+                        { null, null, null, null, null, null },
+                        { null, null, null, null, null, null }
+                },
+                new String[] {
+                        "Mã hóa đơn chi tiết", "Mã hóa đơn", "Mã dịch vụ", "Số lượng", "Giá tiền", "Tổng"
+                }));
         jScrollPane2.setViewportView(tblInvoiceDetails);
 
         btnCheckAll.setText("Chọn tất cả");
@@ -149,30 +142,29 @@ public class InvoiceDetailsManagerJDialog extends javax.swing.JDialog implements
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 676, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnCheckAll)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnUnCheckAll)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnDeleteCheckedItems)
-                .addContainerGap())
-        );
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 676, Short.MAX_VALUE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnCheckAll)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnUnCheckAll)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnDeleteCheckedItems)
+                                .addContainerGap()));
         jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCheckAll)
-                    .addComponent(btnUnCheckAll)
-                    .addComponent(btnDeleteCheckedItems))
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 275,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(btnCheckAll)
+                                        .addComponent(btnUnCheckAll)
+                                        .addComponent(btnDeleteCheckedItems))
+                                .addGap(0, 0, Short.MAX_VALUE)));
 
         tabs.addTab("Danh Sách", jPanel1);
 
@@ -283,187 +275,217 @@ public class InvoiceDetailsManagerJDialog extends javax.swing.JDialog implements
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel13)
-                        .addGap(284, 284, 284))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel11)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtIdInvoice, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
-                                .addComponent(txtSeviceId, javax.swing.GroupLayout.Alignment.LEADING))
-                            .addComponent(txtUnitprice, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(26, 26, 26)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel14)
-                            .addComponent(txtInvoiceId, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))
-                        .addGap(0, 71, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(Create)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Update)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Delete)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Reset)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnMoveFirst, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnMovePrevious, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnMoveNext, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnMoveLast, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))))
-        );
+                jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                                .addComponent(jLabel12)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+                                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(jLabel13)
+                                                .addGap(284, 284, 284))
+                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                                .addComponent(jLabel5)
+                                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                                .addGroup(jPanel2Layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(jLabel11)
+                                                        .addGroup(jPanel2Layout
+                                                                .createParallelGroup(
+                                                                        javax.swing.GroupLayout.Alignment.TRAILING,
+                                                                        false)
+                                                                .addComponent(txtIdInvoice,
+                                                                        javax.swing.GroupLayout.Alignment.LEADING,
+                                                                        javax.swing.GroupLayout.DEFAULT_SIZE, 312,
+                                                                        Short.MAX_VALUE)
+                                                                .addComponent(txtSeviceId,
+                                                                        javax.swing.GroupLayout.Alignment.LEADING))
+                                                        .addComponent(txtUnitprice,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE, 312,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGap(26, 26, 26)
+                                                .addGroup(jPanel2Layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(jLabel14)
+                                                        .addComponent(txtInvoiceId,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE, 265,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(txtQuantity,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE, 265,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(jLabel6))
+                                                .addGap(0, 71, Short.MAX_VALUE))
+                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                                .addComponent(Create)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(Update)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(Delete)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(Reset)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+                                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(btnMoveFirst, javax.swing.GroupLayout.PREFERRED_SIZE, 44,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(btnMovePrevious, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                        47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(btnMoveNext, javax.swing.GroupLayout.PREFERRED_SIZE, 47,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(btnMoveLast, javax.swing.GroupLayout.PREFERRED_SIZE, 44,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE)))));
         jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel13))
-                .addGap(10, 10, 10)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtIdInvoice)
-                    .addComponent(txtInvoiceId))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtSeviceId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtUnitprice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(Delete)
-                        .addComponent(Reset)
-                        .addComponent(btnMoveFirst)
-                        .addComponent(btnMovePrevious)
-                        .addComponent(btnMoveNext)
-                        .addComponent(btnMoveLast))
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(Create)
-                        .addComponent(Update)))
-                .addGap(19, 19, 19))
-        );
+                jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel12)
+                                        .addComponent(jLabel13))
+                                .addGap(10, 10, 10)
+                                .addGroup(jPanel2Layout
+                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(txtIdInvoice)
+                                        .addComponent(txtInvoiceId))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel11)
+                                        .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(txtSeviceId, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel5)
+                                        .addComponent(jLabel6))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(txtUnitprice, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109,
+                                        Short.MAX_VALUE)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel2Layout
+                                                .createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addComponent(Delete)
+                                                .addComponent(Reset)
+                                                .addComponent(btnMoveFirst)
+                                                .addComponent(btnMovePrevious)
+                                                .addComponent(btnMoveNext)
+                                                .addComponent(btnMoveLast))
+                                        .addGroup(jPanel2Layout
+                                                .createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addComponent(Create)
+                                                .addComponent(Update)))
+                                .addGap(19, 19, 19)));
 
         tabs.addTab("Biểu Mẫu", jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabs)
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(tabs));
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabs)
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(tabs));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnMoveFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveFirstActionPerformed
+    private void btnMoveFirstActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnMoveFirstActionPerformed
         this.moveFirst();
-    }//GEN-LAST:event_btnMoveFirstActionPerformed
+    }// GEN-LAST:event_btnMoveFirstActionPerformed
 
-    private void btnMoveLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveLastActionPerformed
+    private void btnMoveLastActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnMoveLastActionPerformed
         this.moveLast();
-    }//GEN-LAST:event_btnMoveLastActionPerformed
+    }// GEN-LAST:event_btnMoveLastActionPerformed
 
     private void UpdateActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_UpdateActionPerformed
-        // TODO add your handling code here:
+
         this.update();
     }// GEN-LAST:event_UpdateActionPerformed
 
     private void DeleteActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_DeleteActionPerformed
-        // TODO add your handling code here:
+
         this.delete();
     }// GEN-LAST:event_DeleteActionPerformed
 
     private void ResetActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_ResetActionPerformed
-        // TODO add your handling code here:
+
         this.clear();
     }// GEN-LAST:event_ResetActionPerformed
 
     private void btnMovePreviousActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnMovePreviousActionPerformed
-        // TODO add your handling code here:
+
         this.movePrevious();
     }// GEN-LAST:event_btnMovePreviousActionPerformed
 
     private void btnMoveNextActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnMoveNextActionPerformed
-        // TODO add your handling code here:
+
         this.moveNext();
     }// GEN-LAST:event_btnMoveNextActionPerformed
 
     private void txtIdInvoiceActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txtIdInvoiceActionPerformed
-        // TODO add your handling code here:
+
     }// GEN-LAST:event_txtIdInvoiceActionPerformed
 
     private void txtSeviceIdActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txtSeviceIdActionPerformed
-        // TODO add your handling code here:
+
     }// GEN-LAST:event_txtSeviceIdActionPerformed
 
     private void txtQuantityActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txtQuantityActionPerformed
-        // TODO add your handling code here:
+
     }// GEN-LAST:event_txtQuantityActionPerformed
 
     private void txtInvoiceIdActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txtInvoiceIdActionPerformed
-        // TODO add your handling code here:
+
     }// GEN-LAST:event_txtInvoiceIdActionPerformed
 
     private void txtTotalActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txtTotalActionPerformed
-        // TODO add your handling code here:
+
     }// GEN-LAST:event_txtTotalActionPerformed
 
     private void txtUnitpriceActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txtUnitpriceActionPerformed
-        // TODO add your handling code here:
+
     }// GEN-LAST:event_txtUnitpriceActionPerformed
 
     private void CreateActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_CreateActionPerformed
-        // TODO add your handling code here:
+
         this.create();
     }// GEN-LAST:event_CreateActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {// GEN-FIRST:event_formWindowOpened
-        // TODO add your handling code here:
+
         this.open();
     }// GEN-LAST:event_formWindowOpened
 
     private void btnCheckAllActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnCheckAllActionPerformed
-        // TODO add your handling code here:
+
         this.checkAll();
     }// GEN-LAST:event_btnCheckAllActionPerformed
 
     private void btnUnCheckAllActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnUnCheckAllActionPerformed
-        // TODO add your handling code here:
+
         this.uncheckAll();
     }// GEN-LAST:event_btnUnCheckAllActionPerformed
 
     private void btnDeleteCheckedItemsActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnDeleteCheckedItemsActionPerformed
-        // TODO add your handling code here:
+
         this.delete();
     }// GEN-LAST:event_btnDeleteCheckedItemsActionPerformed
 
@@ -623,55 +645,55 @@ public class InvoiceDetailsManagerJDialog extends javax.swing.JDialog implements
 
     @Override
     public void create() {
-         String invoiceIdStr = txtInvoiceId.getText().trim();
-    if (invoiceIdStr.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Tạo mới trống mã hóa đơn", "Thông báo", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
-    if (!invoiceIdStr.matches("\\d+")) {
-        JOptionPane.showMessageDialog(this, "Mã hóa đơn sai định dạng", "Thông báo", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
+        String invoiceIdStr = txtInvoiceId.getText().trim();
+        if (invoiceIdStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Tạo mới trống mã hóa đơn", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (!invoiceIdStr.matches("\\d+")) {
+            JOptionPane.showMessageDialog(this, "Mã hóa đơn sai định dạng", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
-    String serviceIdStr = txtSeviceId.getText().trim();
-    if (serviceIdStr.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Trống mã dịch vụ", "Thông báo", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
-    if (!serviceIdStr.matches("\\d+")) {
-        JOptionPane.showMessageDialog(this, "Mã dịch vụ sai định dạng", "Thông báo", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
+        String serviceIdStr = txtSeviceId.getText().trim();
+        if (serviceIdStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Trống mã dịch vụ", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (!serviceIdStr.matches("\\d+")) {
+            JOptionPane.showMessageDialog(this, "Mã dịch vụ sai định dạng", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
-    String quantityStr = txtQuantity.getText().trim();
-    if (quantityStr.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Trống số lượng", "Thông báo", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
-    if (!quantityStr.matches("\\d+")) {
-        JOptionPane.showMessageDialog(this, "Số lượng sai định dạng", "Thông báo", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
+        String quantityStr = txtQuantity.getText().trim();
+        if (quantityStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Trống số lượng", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (!quantityStr.matches("\\d+")) {
+            JOptionPane.showMessageDialog(this, "Số lượng sai định dạng", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
-    String priceStr = txtUnitprice.getText().trim();
-    if (priceStr.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Trống giá tiền", "Thông báo", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
-    if (!priceStr.matches("\\d+(\\.\\d+)?")) {
-        JOptionPane.showMessageDialog(this, "Giá tiền sai định dạng", "Thông báo", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
+        String priceStr = txtUnitprice.getText().trim();
+        if (priceStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Trống giá tiền", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (!priceStr.matches("\\d+(\\.\\d+)?")) {
+            JOptionPane.showMessageDialog(this, "Giá tiền sai định dạng", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
-    String totalStr = txtTotal.getText().trim();
-    if (totalStr.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Trống tổng", "Thông báo", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
-    if (!totalStr.matches("\\d+(\\.\\d+)?")) {
-        JOptionPane.showMessageDialog(this, "Tổng sai định dạng", "Thông báo", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
+        String totalStr = txtTotal.getText().trim();
+        if (totalStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Trống tổng", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (!totalStr.matches("\\d+(\\.\\d+)?")) {
+            JOptionPane.showMessageDialog(this, "Tổng sai định dạng", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         try {
             InvoiceDetail detail = getForm();
             dao.create(detail);
@@ -685,55 +707,55 @@ public class InvoiceDetailsManagerJDialog extends javax.swing.JDialog implements
 
     @Override
     public void update() {
-         String invoiceIdStr = txtInvoiceId.getText().trim();
-    if (invoiceIdStr.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Cập nhật trống mã hóa đơn", "Thông báo", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
-    if (!invoiceIdStr.matches("\\d+")) {
-        JOptionPane.showMessageDialog(this, "Mã hóa đơn sai định dạng", "Thông báo", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
+        String invoiceIdStr = txtInvoiceId.getText().trim();
+        if (invoiceIdStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Cập nhật trống mã hóa đơn", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (!invoiceIdStr.matches("\\d+")) {
+            JOptionPane.showMessageDialog(this, "Mã hóa đơn sai định dạng", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
-    String serviceIdStr = txtSeviceId.getText().trim();
-    if (serviceIdStr.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Trống mã dịch vụ", "Thông báo", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
-    if (!serviceIdStr.matches("\\d+")) {
-        JOptionPane.showMessageDialog(this, "Mã dịch vụ sai định dạng", "Thông báo", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
+        String serviceIdStr = txtSeviceId.getText().trim();
+        if (serviceIdStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Trống mã dịch vụ", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (!serviceIdStr.matches("\\d+")) {
+            JOptionPane.showMessageDialog(this, "Mã dịch vụ sai định dạng", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
-    String quantityStr = txtQuantity.getText().trim();
-    if (quantityStr.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Trống số lượng", "Thông báo", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
-    if (!quantityStr.matches("\\d+")) {
-        JOptionPane.showMessageDialog(this, "Số lượng sai định dạng", "Thông báo", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
+        String quantityStr = txtQuantity.getText().trim();
+        if (quantityStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Trống số lượng", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (!quantityStr.matches("\\d+")) {
+            JOptionPane.showMessageDialog(this, "Số lượng sai định dạng", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
-    String priceStr = txtUnitprice.getText().trim();
-    if (priceStr.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Trống giá tiền", "Thông báo", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
-    if (!priceStr.matches("\\d+(\\.\\d+)?")) {
-        JOptionPane.showMessageDialog(this, "Giá tiền sai định dạng", "Thông báo", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
+        String priceStr = txtUnitprice.getText().trim();
+        if (priceStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Trống giá tiền", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (!priceStr.matches("\\d+(\\.\\d+)?")) {
+            JOptionPane.showMessageDialog(this, "Giá tiền sai định dạng", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
-    String totalStr = txtTotal.getText().trim();
-    if (totalStr.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Trống tổng", "Thông báo", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
-    if (!totalStr.matches("\\d+(\\.\\d+)?")) {
-        JOptionPane.showMessageDialog(this, "Tổng sai định dạng", "Thông báo", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
+        String totalStr = txtTotal.getText().trim();
+        if (totalStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Trống tổng", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (!totalStr.matches("\\d+(\\.\\d+)?")) {
+            JOptionPane.showMessageDialog(this, "Tổng sai định dạng", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         try {
             InvoiceDetail detail = getForm();
             dao.update(detail);
@@ -763,54 +785,54 @@ public class InvoiceDetailsManagerJDialog extends javax.swing.JDialog implements
     @Override
     public void clear() {
         String invoiceIdStr = txtInvoiceId.getText().trim();
-    if (invoiceIdStr.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Cập nhật trống mã hóa đơn", "Thông báo", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
-    if (!invoiceIdStr.matches("\\d+")) {
-        JOptionPane.showMessageDialog(this, "Mã hóa đơn sai định dạng", "Thông báo", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
+        if (invoiceIdStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Cập nhật trống mã hóa đơn", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (!invoiceIdStr.matches("\\d+")) {
+            JOptionPane.showMessageDialog(this, "Mã hóa đơn sai định dạng", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
-    String serviceIdStr = txtSeviceId.getText().trim();
-    if (serviceIdStr.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Trống mã dịch vụ", "Thông báo", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
-    if (!serviceIdStr.matches("\\d+")) {
-        JOptionPane.showMessageDialog(this, "Mã dịch vụ sai định dạng", "Thông báo", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
+        String serviceIdStr = txtSeviceId.getText().trim();
+        if (serviceIdStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Trống mã dịch vụ", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (!serviceIdStr.matches("\\d+")) {
+            JOptionPane.showMessageDialog(this, "Mã dịch vụ sai định dạng", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
-    String quantityStr = txtQuantity.getText().trim();
-    if (quantityStr.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Trống số lượng", "Thông báo", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
-    if (!quantityStr.matches("\\d+")) {
-        JOptionPane.showMessageDialog(this, "Số lượng sai định dạng", "Thông báo", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
+        String quantityStr = txtQuantity.getText().trim();
+        if (quantityStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Trống số lượng", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (!quantityStr.matches("\\d+")) {
+            JOptionPane.showMessageDialog(this, "Số lượng sai định dạng", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
-    String priceStr = txtUnitprice.getText().trim();
-    if (priceStr.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Trống giá tiền", "Thông báo", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
-    if (!priceStr.matches("\\d+(\\.\\d+)?")) {
-        JOptionPane.showMessageDialog(this, "Giá tiền sai định dạng", "Thông báo", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
+        String priceStr = txtUnitprice.getText().trim();
+        if (priceStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Trống giá tiền", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (!priceStr.matches("\\d+(\\.\\d+)?")) {
+            JOptionPane.showMessageDialog(this, "Giá tiền sai định dạng", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
-    String totalStr = txtTotal.getText().trim();
-    if (totalStr.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Trống tổng", "Thông báo", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
-    if (!totalStr.matches("\\d+(\\.\\d+)?")) {
-        JOptionPane.showMessageDialog(this, "Tổng sai định dạng", "Thông báo", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
+        String totalStr = txtTotal.getText().trim();
+        if (totalStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Trống tổng", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (!totalStr.matches("\\d+(\\.\\d+)?")) {
+            JOptionPane.showMessageDialog(this, "Tổng sai định dạng", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         txtIdInvoice.setText("");
         txtInvoiceId.setText("");
         txtSeviceId.setText("");
@@ -835,24 +857,24 @@ public class InvoiceDetailsManagerJDialog extends javax.swing.JDialog implements
     @Override
     public void checkAll() {
         tblInvoiceDetails.getSelectionModel().setValueIsAdjusting(true);
-    if (tblInvoiceDetails.getRowCount() > 0) {
-        tblInvoiceDetails.setRowSelectionInterval(0, tblInvoiceDetails.getRowCount() - 1);
-    }
+        if (tblInvoiceDetails.getRowCount() > 0) {
+            tblInvoiceDetails.setRowSelectionInterval(0, tblInvoiceDetails.getRowCount() - 1);
+        }
 
-    tblInvoiceDetails.getSelectionModel().setValueIsAdjusting(false);
+        tblInvoiceDetails.getSelectionModel().setValueIsAdjusting(false);
 
-    JOptionPane.showMessageDialog(this, "Đã chọn tất cả!");
+        JOptionPane.showMessageDialog(this, "Đã chọn tất cả!");
     }
 
     @Override
     public void uncheckAll() {
-    if (tblInvoiceDetails.getSelectedRowCount() == 0) {
-        JOptionPane.showMessageDialog(this, "Không có dòng nào để bỏ chọn!");
-        return;
-    }
-    
-    tblInvoiceDetails.clearSelection();
-    JOptionPane.showMessageDialog(this, "Đã hủy chọn tất cả!");
+        if (tblInvoiceDetails.getSelectedRowCount() == 0) {
+            JOptionPane.showMessageDialog(this, "Không có dòng nào để bỏ chọn!");
+            return;
+        }
+
+        tblInvoiceDetails.clearSelection();
+        JOptionPane.showMessageDialog(this, "Đã hủy chọn tất cả!");
     }
 
     @Override
@@ -866,48 +888,47 @@ public class InvoiceDetailsManagerJDialog extends javax.swing.JDialog implements
     }
 
     @Override
-public void moveFirst() {
-    if (tblInvoiceDetails.getRowCount() > 0) {
-        moveTo(0);
+    public void moveFirst() {
+        if (tblInvoiceDetails.getRowCount() > 0) {
+            moveTo(0);
+        }
     }
-}
 
-@Override
-public void movePrevious() {
-    int selectedRow = tblInvoiceDetails.getSelectedRow();
-    if (selectedRow > 0) {
-        moveTo(selectedRow - 1);
+    @Override
+    public void movePrevious() {
+        int selectedRow = tblInvoiceDetails.getSelectedRow();
+        if (selectedRow > 0) {
+            moveTo(selectedRow - 1);
+        }
     }
-}
 
-@Override
-public void moveNext() {
-    int selectedRow = tblInvoiceDetails.getSelectedRow();
-    if (selectedRow >= 0 && selectedRow < tblInvoiceDetails.getRowCount() - 1) {
-        moveTo(selectedRow + 1);
+    @Override
+    public void moveNext() {
+        int selectedRow = tblInvoiceDetails.getSelectedRow();
+        if (selectedRow >= 0 && selectedRow < tblInvoiceDetails.getRowCount() - 1) {
+            moveTo(selectedRow + 1);
+        }
     }
-}
 
-@Override
-public void moveLast() {
-    int rowCount = tblInvoiceDetails.getRowCount();
-    if (rowCount > 0) {
-        moveTo(rowCount - 1);
+    @Override
+    public void moveLast() {
+        int rowCount = tblInvoiceDetails.getRowCount();
+        if (rowCount > 0) {
+            moveTo(rowCount - 1);
+        }
     }
-}
-
 
     @Override
     public void moveTo(int rowIndex) {
-         if (rowIndex >= 0 && rowIndex < tblInvoiceDetails.getRowCount()) {
-        tblInvoiceDetails.setRowSelectionInterval(rowIndex, rowIndex);
+        if (rowIndex >= 0 && rowIndex < tblInvoiceDetails.getRowCount()) {
+            tblInvoiceDetails.setRowSelectionInterval(rowIndex, rowIndex);
 
-        txtInvoiceId.setText(tblInvoiceDetails.getValueAt(rowIndex, 0).toString());
-        txtSeviceId.setText(tblInvoiceDetails.getValueAt(rowIndex, 1).toString());
-        txtQuantity.setText(tblInvoiceDetails.getValueAt(rowIndex, 2).toString());
-        txtUnitprice.setText(tblInvoiceDetails.getValueAt(rowIndex, 3).toString());
-        txtTotal.setText(tblInvoiceDetails.getValueAt(rowIndex, 4).toString());
-    }                                                    // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            txtInvoiceId.setText(tblInvoiceDetails.getValueAt(rowIndex, 0).toString());
+            txtSeviceId.setText(tblInvoiceDetails.getValueAt(rowIndex, 1).toString());
+            txtQuantity.setText(tblInvoiceDetails.getValueAt(rowIndex, 2).toString());
+            txtUnitprice.setText(tblInvoiceDetails.getValueAt(rowIndex, 3).toString());
+            txtTotal.setText(tblInvoiceDetails.getValueAt(rowIndex, 4).toString());
+        } // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }
