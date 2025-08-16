@@ -554,7 +554,9 @@ public class UserManagerJDailog extends javax.swing.JDialog implements UserContr
 
     @Override
     public void delete() {
+        
         if (XDialog.confirm("Bạn thực sự muốn xóa?")) {
+            
             try {
                 dao.deleteById(txtUsername.getText().trim());
                 fillToTable();
