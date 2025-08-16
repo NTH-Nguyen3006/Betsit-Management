@@ -4,12 +4,10 @@
  */
 package ui.controller;
 
-/**
- *
- * @author nhukhue
- */
 public interface ChangePasswordController {
     void open();
+
     void save();
+
     void close();
 }

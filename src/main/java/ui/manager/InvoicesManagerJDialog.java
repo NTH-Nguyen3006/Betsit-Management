@@ -1,26 +1,24 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
+
 package ui.manager;
 
-import dao.ContractDAO;
-import dao.InvoiceDao;
-import ui.controller.InvoicesManagerController;
-import entity.Contract;
-import impl.InvoiceDAOImpl;
-import entity.Invoice;
-import impl.ContractDAOImpl;
 import java.awt.Frame;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.List;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.html.parser.Entity;
+
+import dao.ContractDAO;
+import dao.InvoiceDao;
+import entity.Invoice;
+import impl.ContractDAOImpl;
+import impl.InvoiceDAOImpl;
+import ui.controller.InvoicesManagerController;
 import utils.XDialog;
 
 /**
@@ -64,7 +62,8 @@ public class InvoicesManagerJDialog extends javax.swing.JDialog implements Invoi
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jTextField13 = new javax.swing.JTextField();
@@ -119,16 +118,16 @@ public class InvoicesManagerJDialog extends javax.swing.JDialog implements Invoi
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         TblInvoices.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "Mã hóa đơn", "Mã hợp đồng", "Tiền tháng", "Tiền năm", "Nợ cũ", "Giảm giá", "Tổng", "Trạng thái", "Ngày hết hạn", "Ngày tạo"
-            }
-        ));
+                new Object[][] {
+                        { null, null, null, null, null, null, null, null, null, null },
+                        { null, null, null, null, null, null, null, null, null, null },
+                        { null, null, null, null, null, null, null, null, null, null },
+                        { null, null, null, null, null, null, null, null, null, null }
+                },
+                new String[] {
+                        "Mã hóa đơn", "Mã hợp đồng", "Tiền tháng", "Tiền năm", "Nợ cũ", "Giảm giá", "Tổng",
+                        "Trạng thái", "Ngày hết hạn", "Ngày tạo"
+                }));
         TblInvoices.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TblInvoicesMouseClicked(evt);
@@ -160,31 +159,30 @@ public class InvoicesManagerJDialog extends javax.swing.JDialog implements Invoi
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 783, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnCheckAll)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnUnCheckAll)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnDeleteCheckedItems)
-                .addContainerGap())
-        );
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 783, Short.MAX_VALUE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnCheckAll)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnUnCheckAll)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnDeleteCheckedItems)
+                                .addContainerGap()));
         jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCheckAll)
-                    .addComponent(btnUnCheckAll)
-                    .addComponent(btnDeleteCheckedItems))
-                .addContainerGap(15, Short.MAX_VALUE))
-        );
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 318,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(btnCheckAll)
+                                        .addComponent(btnUnCheckAll)
+                                        .addComponent(btnDeleteCheckedItems))
+                                .addContainerGap(15, Short.MAX_VALUE)));
 
         jTabbedPane1.addTab("Danh sách", jPanel1);
 
@@ -329,276 +327,350 @@ public class InvoicesManagerJDialog extends javax.swing.JDialog implements Invoi
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(Create1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Update1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Delete1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Reset1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnMoveFirst1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnMovePrevious1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnMoveNext1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnMoveLast1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
+                jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(Create1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(Update1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Delete1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Reset1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnMoveFirst1, javax.swing.GroupLayout.PREFERRED_SIZE, 44,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnMovePrevious1, javax.swing.GroupLayout.PREFERRED_SIZE, 47,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnMoveNext1, javax.swing.GroupLayout.PREFERRED_SIZE, 47,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnMoveLast1, javax.swing.GroupLayout.PREFERRED_SIZE, 44,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(4, 4, 4))
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addContainerGap()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel11)
-                                    .addComponent(jLabel13)
-                                    .addComponent(jLabel12))
-                                .addGap(239, 239, 239)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel15)
-                                    .addComponent(jLabel16)
-                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jLabel14)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(txtDiscount, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtTotalamount, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel9)
-                                    .addComponent(txtDueDate, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtBillingPeriodMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtBillingPeriodYear, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtCreatedAt, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtPreviousDebt, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap(221, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(txtIdInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtIdContract, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(31, 31, 31)
-                                .addComponent(btnViewInvoicesManager))
-                            .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 4, Short.MAX_VALUE))))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(Create)
-                .addGap(4, 4, 4)
-                .addComponent(Update)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Delete)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Reset)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnMoveFirst, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnMovePrevious, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnMoveNext, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnMoveLast, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+                                        .addGroup(jPanel3Layout.createSequentialGroup()
+                                                .addGroup(jPanel3Layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(jPanel3Layout.createSequentialGroup()
+                                                                .addGroup(jPanel3Layout.createParallelGroup(
+                                                                        javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addComponent(jLabel11)
+                                                                        .addComponent(jLabel13)
+                                                                        .addComponent(jLabel12))
+                                                                .addGap(239, 239, 239)
+                                                                .addGroup(jPanel3Layout.createParallelGroup(
+                                                                        javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addComponent(jLabel15)
+                                                                        .addComponent(jLabel16)
+                                                                        .addComponent(jLabel10,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                73,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                        .addComponent(jLabel14)
+                                                        .addGroup(jPanel3Layout.createSequentialGroup()
+                                                                .addComponent(txtDiscount,
+                                                                        javax.swing.GroupLayout.PREFERRED_SIZE, 272,
+                                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addGap(18, 18, 18)
+                                                                .addComponent(txtTotalamount,
+                                                                        javax.swing.GroupLayout.PREFERRED_SIZE, 272,
+                                                                        javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addGroup(jPanel3Layout.createSequentialGroup()
+                                                                .addGroup(jPanel3Layout.createParallelGroup(
+                                                                        javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addComponent(txtStatus,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                272,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                        .addComponent(jLabel9)
+                                                                        .addComponent(txtDueDate,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                272,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                        .addComponent(txtBillingPeriodMonth,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                272,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                .addGap(18, 18, 18)
+                                                                .addGroup(jPanel3Layout.createParallelGroup(
+                                                                        javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addComponent(txtBillingPeriodYear,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                272,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                        .addGroup(jPanel3Layout.createSequentialGroup()
+                                                                                .addGap(6, 6, 6)
+                                                                                .addComponent(jLabel18,
+                                                                                        javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                        90,
+                                                                                        javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                        .addComponent(jLabel7,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                90,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                        .addComponent(txtCreatedAt,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                272,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                        .addComponent(txtPreviousDebt,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                272,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                .addContainerGap(221, Short.MAX_VALUE))
+                                        .addGroup(jPanel3Layout.createSequentialGroup()
+                                                .addGroup(jPanel3Layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(jPanel3Layout.createSequentialGroup()
+                                                                .addComponent(txtIdInvoice,
+                                                                        javax.swing.GroupLayout.PREFERRED_SIZE, 272,
+                                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addGap(18, 18, 18)
+                                                                .addComponent(txtIdContract,
+                                                                        javax.swing.GroupLayout.PREFERRED_SIZE, 272,
+                                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addGap(31, 31, 31)
+                                                                .addComponent(btnViewInvoicesManager))
+                                                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGap(0, 4, Short.MAX_VALUE))))
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(Create)
+                                .addGap(4, 4, 4)
+                                .addComponent(Update)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Delete)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Reset)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnMoveFirst, javax.swing.GroupLayout.PREFERRED_SIZE, 44,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnMovePrevious, javax.swing.GroupLayout.PREFERRED_SIZE, 47,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnMoveNext, javax.swing.GroupLayout.PREFERRED_SIZE, 47,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnMoveLast, javax.swing.GroupLayout.PREFERRED_SIZE, 44,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap()));
         jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel16)
-                    .addComponent(jLabel11))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtIdInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtIdContract, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnViewInvoicesManager))
-                .addGap(11, 11, 11)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel15)
-                    .addComponent(jLabel12))
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtDiscount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtTotalamount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel13))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPreviousDebt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(7, 7, 7)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtBillingPeriodYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtBillingPeriodMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel17)
-                    .addComponent(jLabel18))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCreatedAt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDueDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Create)
-                    .addComponent(Delete)
-                    .addComponent(Update)
-                    .addComponent(Reset)
-                    .addComponent(btnMoveFirst)
-                    .addComponent(btnMovePrevious)
-                    .addComponent(btnMoveNext)
-                    .addComponent(btnMoveLast))
-                .addGap(123, 123, 123)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(Delete1)
-                        .addComponent(Reset1)
-                        .addComponent(btnMoveFirst1)
-                        .addComponent(btnMovePrevious1)
-                        .addComponent(btnMoveNext1)
-                        .addComponent(btnMoveLast1))
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(Create1)
-                        .addComponent(Update1))
-                    .addComponent(jLabel14))
-                .addGap(18, 18, 18))
-        );
+                jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(14, 14, 14)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel16)
+                                        .addComponent(jLabel11))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(txtIdInvoice, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtIdContract, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnViewInvoicesManager))
+                                .addGap(11, 11, 11)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel15)
+                                        .addComponent(jLabel12))
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel3Layout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addGroup(jPanel3Layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(txtDiscount,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(txtTotalamount,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+                                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(jLabel13))
+                                        .addGroup(jPanel3Layout.createSequentialGroup()
+                                                .addGap(30, 30, 30)
+                                                .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(txtStatus, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtPreviousDebt, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(7, 7, 7)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel7)
+                                        .addComponent(jLabel9))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(txtBillingPeriodYear, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtBillingPeriodMonth, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel17)
+                                        .addComponent(jLabel18))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(txtCreatedAt, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtDueDate, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(Create)
+                                        .addComponent(Delete)
+                                        .addComponent(Update)
+                                        .addComponent(Reset)
+                                        .addComponent(btnMoveFirst)
+                                        .addComponent(btnMovePrevious)
+                                        .addComponent(btnMoveNext)
+                                        .addComponent(btnMoveLast))
+                                .addGap(123, 123, 123)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel3Layout
+                                                .createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addComponent(Delete1)
+                                                .addComponent(Reset1)
+                                                .addComponent(btnMoveFirst1)
+                                                .addComponent(btnMovePrevious1)
+                                                .addComponent(btnMoveNext1)
+                                                .addComponent(btnMoveLast1))
+                                        .addGroup(jPanel3Layout
+                                                .createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addComponent(Create1)
+                                                .addComponent(Update1))
+                                        .addComponent(jLabel14))
+                                .addGap(18, 18, 18)));
 
         jTabbedPane1.addTab("Biểu Mẫu", jPanel3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane1)
-                .addContainerGap())
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addComponent(jTabbedPane1)
+                                .addContainerGap()));
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 409, Short.MAX_VALUE)
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 409, Short.MAX_VALUE));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtIdContractActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdContractActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtIdContractActionPerformed
+    private void txtIdContractActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txtIdContractActionPerformed
 
-    private void TblInvoicesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TblInvoicesMouseClicked
-        // TODO add your handling code here:
-         if (evt.getClickCount() == 2) { 
-        int row = TblInvoices.getSelectedRow();
-        if (row >= 0) {
-            edit(); 
+    }// GEN-LAST:event_txtIdContractActionPerformed
+
+    private void TblInvoicesMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_TblInvoicesMouseClicked
+
+        if (evt.getClickCount() == 2) {
+            int row = TblInvoices.getSelectedRow();
+            if (row >= 0) {
+                edit();
+            }
         }
-    }
-    }//GEN-LAST:event_TblInvoicesMouseClicked
+    }// GEN-LAST:event_TblInvoicesMouseClicked
 
     private void Update1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_Update1ActionPerformed
-        // TODO add your handling code here:
 
     }// GEN-LAST:event_Update1ActionPerformed
 
     private void Delete1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_Delete1ActionPerformed
-        // TODO add your handling code here:
+
     }// GEN-LAST:event_Delete1ActionPerformed
 
     private void Reset1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_Reset1ActionPerformed
-        // TODO add your handling code here:
+
     }// GEN-LAST:event_Reset1ActionPerformed
 
     private void btnMovePrevious1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnMovePrevious1ActionPerformed
-        // TODO add your handling code here:
+
     }// GEN-LAST:event_btnMovePrevious1ActionPerformed
 
     private void btnMoveNext1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnMoveNext1ActionPerformed
-        // TODO add your handling code here:
+
     }// GEN-LAST:event_btnMoveNext1ActionPerformed
 
     private void btnMoveNextActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnMoveNextActionPerformed
-        // TODO add your handling code here:
+
         this.moveNext();
     }// GEN-LAST:event_btnMoveNextActionPerformed
 
     private void btnMovePreviousActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnMovePreviousActionPerformed
-        // TODO add your handling code here:
+
         this.movePrevious();
 
     }// GEN-LAST:event_btnMovePreviousActionPerformed
 
     private void ResetActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_ResetActionPerformed
-        // TODO add your handling code here:
+
         clearForm();
     }// GEN-LAST:event_ResetActionPerformed
 
     private void UpdateActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_UpdateActionPerformed
-        // TODO add your handling code here:
+
         this.update();
     }// GEN-LAST:event_UpdateActionPerformed
 
     private void DeleteActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_DeleteActionPerformed
-        // TODO add your handling code here:
+
         this.delete();
     }// GEN-LAST:event_DeleteActionPerformed
 
     private void CreateActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_CreateActionPerformed
-        // TODO add your handling code here:
+
         this.create();
     }// GEN-LAST:event_CreateActionPerformed
 
     private void txtPreviousDebtActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txtPreviousDebtActionPerformed
-  
+
     }// GEN-LAST:event_txtPreviousDebtActionPerformed
 
     private void btnMoveFirstActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnMoveFirstActionPerformed
-        // TODO add your handling code here:
+
         this.moveFirst();
     }// GEN-LAST:event_btnMoveFirstActionPerformed
 
     private void btnMoveLastActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnMoveLastActionPerformed
-        // TODO add your handling code here:
+
         this.moveLast();
     }// GEN-LAST:event_btnMoveLastActionPerformed
 
     private void btnViewInvoicesManagerActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnViewInvoicesManagerActionPerformed
-        // TODO add your handling code here:
+
         this.showInvoiceDetailsManagerJDialog();
     }// GEN-LAST:event_btnViewInvoicesManagerActionPerformed
 
     private void btnCheckAllActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnCheckAllActionPerformed
-        // TODO add your handling code here:
+
         this.checkAll();
     }// GEN-LAST:event_btnCheckAllActionPerformed
 
     private void btnUnCheckAllActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnUnCheckAllActionPerformed
-        // TODO add your handling code here:
+
         this.uncheckAll();
     }// GEN-LAST:event_btnUnCheckAllActionPerformed
 
     private void btnDeleteCheckedItemsActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnDeleteCheckedItemsActionPerformed
-        // TODO add your handling code here:
+
         this.deleteCheckedItems();
     }// GEN-LAST:event_btnDeleteCheckedItemsActionPerformed
 
@@ -792,19 +864,19 @@ public class InvoicesManagerJDialog extends javax.swing.JDialog implements Invoi
     }
 
     @Override
-public void moveFirst() {
-    if (TblInvoices.getRowCount() > 0) {
-        moveTo(0);
+    public void moveFirst() {
+        if (TblInvoices.getRowCount() > 0) {
+            moveTo(0);
+        }
     }
-}
 
     @Override
-public void moveLast() {
-    int rowCount = TblInvoices.getRowCount();
-    if (rowCount > 0) {
-        moveTo(rowCount - 1);
+    public void moveLast() {
+        int rowCount = TblInvoices.getRowCount();
+        if (rowCount > 0) {
+            moveTo(rowCount - 1);
+        }
     }
-}
 
     public void edit() {
         int row = TblInvoices.getSelectedRow();
@@ -907,265 +979,284 @@ public void moveLast() {
     @Override
     public void create() {
         try {
-        Invoice invoice = new Invoice();
+            Invoice invoice = new Invoice();
 
-        String contractIdStr = txtIdContract.getText().trim();
-        if (contractIdStr.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Vui lòng nhập Mã hợp đồng", "Thông báo", JOptionPane.WARNING_MESSAGE);
-            return;
+            String contractIdStr = txtIdContract.getText().trim();
+            if (contractIdStr.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập Mã hợp đồng", "Thông báo",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            int contractId;
+            try {
+                contractId = Integer.parseInt(contractIdStr);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Tạo mới Mã hợp đồng là chữ", "Lỗi nhập liệu",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (!contractDAO.existsById(contractId)) {
+                JOptionPane.showMessageDialog(this, "❌ Mã hợp đồng không tồn tại!", "Thông báo",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            invoice.setContractid(contractId);
+
+            Date now = new Date();
+            invoice.setCreated_at(now);
+
+            @SuppressWarnings("deprecation")
+            int month = now.getMonth() + 1;
+            @SuppressWarnings("deprecation")
+            int year = now.getYear() + 1900;
+            invoice.setBilling_period_month(month);
+            invoice.setBilling_period_year(year);
+
+            // Ngày hết hạn
+            String dueDateStr = txtDueDate.getText().trim();
+            if (dueDateStr.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Tạo mới trống Ngày hết hạn", "Thông báo",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            Date dueDate;
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                dueDate = sdf.parse(dueDateStr);
+            } catch (ParseException e) {
+                JOptionPane.showMessageDialog(this, "Tạo mới Ngày hết hạn sai định dạng (yyyy-MM-dd)", "Lỗi định dạng",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            invoice.setDue_date(dueDate);
+
+            // Nợ cũ
+            String prevDebtStr = txtPreviousDebt.getText().trim();
+            if (prevDebtStr.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Tạo mới trống Nợ cũ", "Thông báo", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            try {
+                invoice.setPrevious_debt(new BigDecimal(prevDebtStr));
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Tạo mới Nợ cũ là chữ", "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Giảm giá
+            String discountStr = txtDiscount.getText().trim();
+            if (discountStr.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Tạo mới trống Giảm giá", "Thông báo", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            try {
+                invoice.setDiscount(new BigDecimal(discountStr));
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Tạo mới Giảm giá là chữ", "Lỗi nhập liệu",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Tổng tiền
+            String totalStr = txtTotalamount.getText().trim();
+            if (totalStr.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Tạo mới trống Tổng", "Thông báo", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            try {
+                invoice.setTotalamount(new BigDecimal(totalStr));
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Tạo mới Tổng là chữ", "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Trạng thái
+            String statusStr = txtStatus.getText().trim();
+            if (statusStr.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Tạo mới trống Trạng thái", "Thông báo",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            if (statusStr.equalsIgnoreCase("Chưa thanh toán")) {
+                invoice.setStatus(false);
+            } else if (statusStr.equalsIgnoreCase("Đã thanh toán")) {
+                invoice.setStatus(true);
+            } else {
+                JOptionPane.showMessageDialog(this,
+                        "Trạng thái không hợp lệ! Chỉ được nhập: 'Chưa thanh toán' hoặc 'Đã thanh toán'.",
+                        "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            invoiceDAO.create(invoice);
+            loadInvoicesToTable();
+            clearForm();
+
+            JOptionPane.showMessageDialog(this, "✔ Tạo hóa đơn thành công!", "Thành công",
+                    JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "❗ Đã xảy ra lỗi: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
-        int contractId;
-        try {
-            contractId = Integer.parseInt(contractIdStr);
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Tạo mới Mã hợp đồng là chữ", "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        if (!contractDAO.existsById(contractId)) {
-            JOptionPane.showMessageDialog(this, "❌ Mã hợp đồng không tồn tại!", "Thông báo", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        invoice.setContractid(contractId);
-
-        Date now = new Date();
-        invoice.setCreated_at(now);
-
-        @SuppressWarnings("deprecation")
-        int month = now.getMonth() + 1;
-        @SuppressWarnings("deprecation")
-        int year = now.getYear() + 1900;
-        invoice.setBilling_period_month(month);
-        invoice.setBilling_period_year(year);
-
-        // Ngày hết hạn
-        String dueDateStr = txtDueDate.getText().trim();
-        if (dueDateStr.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Tạo mới trống Ngày hết hạn", "Thông báo", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        Date dueDate;
-        try {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            dueDate = sdf.parse(dueDateStr);
-        } catch (ParseException e) {
-            JOptionPane.showMessageDialog(this, "Tạo mới Ngày hết hạn sai định dạng (yyyy-MM-dd)", "Lỗi định dạng", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        invoice.setDue_date(dueDate);
-
-        // Nợ cũ
-        String prevDebtStr = txtPreviousDebt.getText().trim();
-        if (prevDebtStr.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Tạo mới trống Nợ cũ", "Thông báo", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        try {
-            invoice.setPrevious_debt(new BigDecimal(prevDebtStr));
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Tạo mới Nợ cũ là chữ", "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        // Giảm giá
-        String discountStr = txtDiscount.getText().trim();
-        if (discountStr.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Tạo mới trống Giảm giá", "Thông báo", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        try {
-            invoice.setDiscount(new BigDecimal(discountStr));
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Tạo mới Giảm giá là chữ", "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        // Tổng tiền
-        String totalStr = txtTotalamount.getText().trim();
-        if (totalStr.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Tạo mới trống Tổng", "Thông báo", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        try {
-            invoice.setTotalamount(new BigDecimal(totalStr));
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Tạo mới Tổng là chữ", "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        // Trạng thái
-        String statusStr = txtStatus.getText().trim();
-    if (statusStr.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Tạo mới trống Trạng thái", "Thông báo", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
-
-    if (statusStr.equalsIgnoreCase("Chưa thanh toán")) {
-        invoice.setStatus(false);
-    } else if (statusStr.equalsIgnoreCase("Đã thanh toán")) {
-        invoice.setStatus(true);
-    } else {
-        JOptionPane.showMessageDialog(this,
-                "Trạng thái không hợp lệ! Chỉ được nhập: 'Chưa thanh toán' hoặc 'Đã thanh toán'.",
-                "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
-
-        invoiceDAO.create(invoice);
-        loadInvoicesToTable();
-        clearForm();
-
-        JOptionPane.showMessageDialog(this, "✔ Tạo hóa đơn thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
-
-    } catch (Exception e) {
-        e.printStackTrace();
-        JOptionPane.showMessageDialog(this, "❗ Đã xảy ra lỗi: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
-    }
     }
 
     @Override
     public void update() {
         try {
-        Invoice invoice = new Invoice();
+            Invoice invoice = new Invoice();
 
-        String contractIdStr = txtIdContract.getText().trim();
-        if (contractIdStr.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Cập nhật trống Mã hợp đồng", "Thông báo", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        int contractId;
-        try {
-            contractId = Integer.parseInt(contractIdStr);
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Cập nhật Mã hợp đồng là chữ", "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        if (!contractDAO.existsById(contractId)) {
-            JOptionPane.showMessageDialog(this, "❌ Mã hợp đồng không tồn tại!", "Thông báo", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        invoice.setContractid(contractId);
+            String contractIdStr = txtIdContract.getText().trim();
+            if (contractIdStr.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Cập nhật trống Mã hợp đồng", "Thông báo",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            int contractId;
+            try {
+                contractId = Integer.parseInt(contractIdStr);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Cập nhật Mã hợp đồng là chữ", "Lỗi nhập liệu",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (!contractDAO.existsById(contractId)) {
+                JOptionPane.showMessageDialog(this, "❌ Mã hợp đồng không tồn tại!", "Thông báo",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            invoice.setContractid(contractId);
 
-        // Hóa đơn tháng
-        String monthStr = txtBillingPeriodMonth.getText().trim();
-        if (monthStr.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Cập nhật trống Hóa đơn tháng", "Thông báo", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        try {
-            invoice.setBilling_period_month(Integer.parseInt(monthStr));
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Cập nhật Hóa đơn tháng là chữ", "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+            // Hóa đơn tháng
+            String monthStr = txtBillingPeriodMonth.getText().trim();
+            if (monthStr.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Cập nhật trống Hóa đơn tháng", "Thông báo",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            try {
+                invoice.setBilling_period_month(Integer.parseInt(monthStr));
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Cập nhật Hóa đơn tháng là chữ", "Lỗi nhập liệu",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
-        // Hóa đơn năm
-        String yearStr = txtBillingPeriodYear.getText().trim();
-        if (yearStr.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Cập nhật trống Hóa đơn năm", "Thông báo", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        try {
-            invoice.setBilling_period_year(Integer.parseInt(yearStr));
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Cập nhật Hóa đơn năm là chữ", "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+            // Hóa đơn năm
+            String yearStr = txtBillingPeriodYear.getText().trim();
+            if (yearStr.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Cập nhật trống Hóa đơn năm", "Thông báo",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            try {
+                invoice.setBilling_period_year(Integer.parseInt(yearStr));
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Cập nhật Hóa đơn năm là chữ", "Lỗi nhập liệu",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
-        // Ngày hết hạn
-        String dueDateStr = txtDueDate.getText().trim();
-        if (dueDateStr.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Cập nhật trống Ngày hết hạn", "Thông báo", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        Date dueDate;
-        try {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            dueDate = sdf.parse(dueDateStr);
-        } catch (ParseException e) {
-            JOptionPane.showMessageDialog(this, "Cập nhật Ngày hết hạn sai định dạng (yyyy-MM-dd)", "Lỗi định dạng", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        invoice.setDue_date(dueDate);
+            String dueDateStr = txtDueDate.getText().trim();
+            if (dueDateStr.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Cập nhật trống Ngày hết hạn", "Thông báo",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            Date dueDate;
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                dueDate = sdf.parse(dueDateStr);
+            } catch (ParseException e) {
+                JOptionPane.showMessageDialog(this, "Cập nhật Ngày hết hạn sai định dạng (yyyy-MM-dd)", "Lỗi định dạng",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            invoice.setDue_date(dueDate);
 
-        // Nợ cũ
-        String prevDebtStr = txtPreviousDebt.getText().trim();
-        if (prevDebtStr.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Cập nhật trống Nợ cũ", "Thông báo", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        try {
-            invoice.setPrevious_debt(new BigDecimal(prevDebtStr));
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Cập nhật Nợ cũ là chữ", "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+            String prevDebtStr = txtPreviousDebt.getText().trim();
+            if (prevDebtStr.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Cập nhật trống Nợ cũ", "Thông báo", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            try {
+                invoice.setPrevious_debt(new BigDecimal(prevDebtStr));
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Cập nhật Nợ cũ là chữ", "Lỗi nhập liệu",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
-        // Giảm giá
-        String discountStr = txtDiscount.getText().trim();
-        if (discountStr.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Cập nhật trống Giảm giá", "Thông báo", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        try {
-            invoice.setDiscount(new BigDecimal(discountStr));
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Cập nhật Giảm giá là chữ", "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+            String discountStr = txtDiscount.getText().trim();
+            if (discountStr.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Cập nhật trống Giảm giá", "Thông báo",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            try {
+                invoice.setDiscount(new BigDecimal(discountStr));
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Cập nhật Giảm giá là chữ", "Lỗi nhập liệu",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
-        // Tổng tiền
-        String totalStr = txtTotalamount.getText().trim();
-        if (totalStr.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Cập nhật trống Tổng", "Thông báo", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        try {
-            invoice.setTotalamount(new BigDecimal(totalStr));
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Cập nhật Tổng là chữ", "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+            String totalStr = txtTotalamount.getText().trim();
+            if (totalStr.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Cập nhật trống Tổng", "Thông báo", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            try {
+                invoice.setTotalamount(new BigDecimal(totalStr));
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Cập nhật Tổng là chữ", "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
-        // Trạng thái
-        String statusStr = txtStatus.getText().trim();
-        if (statusStr.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Cập nhật trống Trạng thái", "Thông báo", JOptionPane.WARNING_MESSAGE);
-            return;
+            // Trạng thái
+            String statusStr = txtStatus.getText().trim();
+            if (statusStr.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Cập nhật trống Trạng thái", "Thông báo",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            try {
+                int statusInt = Integer.parseInt(statusStr);
+                invoice.setStatus(statusInt == 1);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Cập nhật Trạng thái là chữ", "Lỗi nhập liệu",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            invoiceDAO.update(invoice);
+            loadInvoicesToTable();
+
+            JOptionPane.showMessageDialog(this, "✔ Cập nhật hóa đơn thành công!", "Thành công",
+                    JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "❗ Đã xảy ra lỗi: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
-        try {
-            int statusInt = Integer.parseInt(statusStr);
-            invoice.setStatus(statusInt == 1);
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Cập nhật Trạng thái là chữ", "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        invoiceDAO.update(invoice);
-        loadInvoicesToTable();
-
-        JOptionPane.showMessageDialog(this, "✔ Cập nhật hóa đơn thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
-
-    } catch (Exception e) {
-        e.printStackTrace();
-        JOptionPane.showMessageDialog(this, "❗ Đã xảy ra lỗi: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
-    }
     }
 
     @Override
     public void delete() {
         int selectedRow = TblInvoices.getSelectedRow();
-    if (selectedRow == -1) {
-        JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng cần xóa!");
-        return;
-    }
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng cần xóa!");
+            return;
+        }
 
-    if (XDialog.confirm("Bạn thực sự muốn xóa?")) {
-        String id = txtIdInvoice.getText();
-        dao.deleteById(id);
-        this.fillToTable();
-        this.clear();
+        if (XDialog.confirm("Bạn thực sự muốn xóa?")) {
+            String id = txtIdInvoice.getText();
+            dao.deleteById(id);
+            this.fillToTable();
+            this.clear();
+        }
     }
-}
 
     @Override
     public void clear() {
@@ -1182,24 +1273,24 @@ public void moveLast() {
     @Override
     public void checkAll() {
         TblInvoices.getSelectionModel().setValueIsAdjusting(true);
-    if (TblInvoices.getRowCount() > 0) {
-        TblInvoices.setRowSelectionInterval(0, TblInvoices.getRowCount() - 1);
-    }
+        if (TblInvoices.getRowCount() > 0) {
+            TblInvoices.setRowSelectionInterval(0, TblInvoices.getRowCount() - 1);
+        }
 
-    TblInvoices.getSelectionModel().setValueIsAdjusting(false);
+        TblInvoices.getSelectionModel().setValueIsAdjusting(false);
 
-    JOptionPane.showMessageDialog(this, "Đã chọn tất cả!");
+        JOptionPane.showMessageDialog(this, "Đã chọn tất cả!");
     }
 
     @Override
     public void uncheckAll() {
-    if (TblInvoices.getSelectedRowCount() == 0) {
-        JOptionPane.showMessageDialog(this, "Không có dòng nào để bỏ chọn!");
-        return;
-    }
-    
-    TblInvoices.clearSelection();
-    JOptionPane.showMessageDialog(this, "Đã hủy chọn tất cả!");
+        if (TblInvoices.getSelectedRowCount() == 0) {
+            JOptionPane.showMessageDialog(this, "Không có dòng nào để bỏ chọn!");
+            return;
+        }
+
+        TblInvoices.clearSelection();
+        JOptionPane.showMessageDialog(this, "Đã hủy chọn tất cả!");
     }
 
     @Override
@@ -1213,19 +1304,19 @@ public void moveLast() {
     }
 
     @Override
-public void movePrevious() {
-    int selectedRow = TblInvoices.getSelectedRow();
-    if (selectedRow > 0) {
-        moveTo(selectedRow - 1);
+    public void movePrevious() {
+        int selectedRow = TblInvoices.getSelectedRow();
+        if (selectedRow > 0) {
+            moveTo(selectedRow - 1);
+        }
     }
-}
 
-@Override
-public void moveNext() {
-    int selectedRow = TblInvoices.getSelectedRow();
-    if (selectedRow >= 0 && selectedRow < TblInvoices.getRowCount() - 1) {
-        moveTo(selectedRow + 1);
+    @Override
+    public void moveNext() {
+        int selectedRow = TblInvoices.getSelectedRow();
+        if (selectedRow >= 0 && selectedRow < TblInvoices.getRowCount() - 1) {
+            moveTo(selectedRow + 1);
+        }
     }
-}
 
 }

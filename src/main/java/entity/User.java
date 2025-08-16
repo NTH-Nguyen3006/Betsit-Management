@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Builder.Default;
 import lombok.experimental.FieldDefaults;
 
 @Data
@@ -23,5 +24,6 @@ public class User {
     int roleId;
     boolean status;
     Date created_at;
+    @Default
     String photo = "";
 }

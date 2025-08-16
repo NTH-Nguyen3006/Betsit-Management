@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package impl;
 
 import dao.ServiceUsagesDAO;
@@ -11,10 +8,6 @@ import java.util.List;
 import utils.XJdbc;
 import utils.XQuery;
 
-/**
- *
- * @author ADMIN
- */
 public class ServiceUsagesDAOImpl implements ServiceUsagesDAO {
     private final String INSERT_SQL = "INSERT INTO ServiceUsages (ServiceId, ContractId, StartDate, EndDate) VALUES (?, ?, ?, ?)";
     private final String UPDATE_SQL = "UPDATE ServiceUsages SET StartDate=?, EndDate=? WHERE ServiceId=? AND ContractId=?";
@@ -60,9 +53,10 @@ public class ServiceUsagesDAOImpl implements ServiceUsagesDAO {
     public ServiceUsages findById(int serviceId, int contractId) {
         return XQuery.getSingleBean(ServiceUsages.class, SELECT_BY_ID_SQL, serviceId, contractId);
     }
-    
+
     @Override
     public List<ServiceUsages> findByTimeRange(Date begin, Date end) {
-        return XQuery.getBeanList(ServiceUsages.class, FIND_BY_TINERANGE_SQL, new java.sql.Timestamp(begin.getTime()), new java.sql.Timestamp(end.getTime()));
+        return XQuery.getBeanList(ServiceUsages.class, FIND_BY_TINERANGE_SQL, new java.sql.Timestamp(begin.getTime()),
+                new java.sql.Timestamp(end.getTime()));
     }
 }

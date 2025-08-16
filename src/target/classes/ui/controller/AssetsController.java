@@ -6,10 +6,6 @@ package ui.controller;
 
 import entity.Assets;
 
-/**
- *
- * @author nhukhue
- */
-public interface AssetsController extends CrudController<Assets>{
+public interface AssetsController extends CrudController<Assets> {
     void fillroom();
 }

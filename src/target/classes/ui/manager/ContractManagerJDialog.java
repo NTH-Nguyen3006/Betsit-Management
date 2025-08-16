@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
+
 package ui.manager;
 
 import java.awt.Frame;
@@ -45,8 +42,7 @@ public class ContractManagerJDialog extends javax.swing.JDialog implements Contr
         pack();
         txtIdContractManager.setEnabled(false);
         StartDate.setEnabled(false);
-        
-        
+
     }
 
     /**
@@ -486,74 +482,74 @@ public class ContractManagerJDialog extends javax.swing.JDialog implements Contr
     }// </editor-fold>//GEN-END:initComponents
 
     private void UpdateActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_UpdateActionPerformed
-        // TODO add your handling code here:
+
         this.update();
     }// GEN-LAST:event_UpdateActionPerformed
 
     private void DeleteActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_DeleteActionPerformed
-        // TODO add your handling code here:
+
         this.delete();
     }// GEN-LAST:event_DeleteActionPerformed
 
     private void ResetActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_ResetActionPerformed
-        // TODO add your handling code here:
+
         this.clear();
     }// GEN-LAST:event_ResetActionPerformed
 
     private void btnMovePreviousActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnMovePreviousActionPerformed
-        // TODO add your handling code here:
+
         this.movePrevious();
     }// GEN-LAST:event_btnMovePreviousActionPerformed
 
     private void btnMoveNextActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnMoveNextActionPerformed
-        // TODO add your handling code here:
+
         this.moveNext();
 
     }// GEN-LAST:event_btnMoveNextActionPerformed
 
     private void StartDateActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_StartDateActionPerformed
-        // TODO add your handling code here:
+
     }// GEN-LAST:event_StartDateActionPerformed
 
     private void EndDateActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_EndDateActionPerformed
-        // TODO add your handling code here:
+
     }// GEN-LAST:event_EndDateActionPerformed
 
     private void txtContractScanUrlActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txtContractScanUrlActionPerformed
-        // TODO add your handling code here:
+
     }// GEN-LAST:event_txtContractScanUrlActionPerformed
 
     private void NoteActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_NoteActionPerformed
-        // TODO add your handling code here:
+
     }// GEN-LAST:event_NoteActionPerformed
 
     private void ContractScanUrlMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_ContractScanUrlMouseClicked
-        // TODO add your handling code here:
+
         this.chooseFrontImage();
     }// GEN-LAST:event_ContractScanUrlMouseClicked
 
     private void CreateActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_CreateActionPerformed
-        // TODO add your handling code here:
+
         this.create();
     }// GEN-LAST:event_CreateActionPerformed
 
     private void btnCheckAllActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnCheckAllActionPerformed
-        // TODO add your handling code here:
+
         this.checkAll();
     }// GEN-LAST:event_btnCheckAllActionPerformed
 
     private void btnUnCheckAllActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnUnCheckAllActionPerformed
-        // TODO add your handling code here:
+
         this.uncheckAll();
     }// GEN-LAST:event_btnUnCheckAllActionPerformed
 
     private void btnDeleteCheckedItemsActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnDeleteCheckedItemsActionPerformed
-        // TODO add your handling code here:
+
         this.delete();
     }// GEN-LAST:event_btnDeleteCheckedItemsActionPerformed
 
     private void tblContractManagerMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_tblContractManagerMouseClicked
-        // TODO add your handling code here:
+
         if (evt.getClickCount() == 2) {
             this.edit();
         }

@@ -4,10 +4,6 @@
  */
 package ui.controller;
 
-/**
- *
- * @author ADMIN
- */
 public interface CrudController<Entity> {
 
     void open(); // Xử lý mở cửa sổ

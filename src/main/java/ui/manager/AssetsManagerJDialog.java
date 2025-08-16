@@ -1,8 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
+
 package ui.manager;
+
+import java.io.File;
+import java.util.List;
+import java.util.function.Consumer;
+
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableModel;
 
 import dao.AssetsDAO;
 import dao.RoomDAO;
@@ -10,23 +15,13 @@ import entity.Assets;
 import entity.Room;
 import impl.AssetsDAOImpl;
 import impl.RoomDAOImpl;
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.List;
-import java.util.function.Consumer;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.table.DefaultTableModel;
 import lombok.Getter;
 import lombok.Setter;
 import ui.controller.AssetsController;
 import utils.XDialog;
 import utils.XIcon;
 
-
-public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsController{
+public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsController {
 
     /**
      * Creates new form AssetsManagerJDialog
@@ -35,8 +30,10 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
         super(parent, modal);
         initComponents();
     }
+
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         fileChooser = new javax.swing.JFileChooser();
@@ -85,19 +82,18 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
         });
 
         tblAssets.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+                new Object[][] {
 
-            },
-            new String [] {
-                "Mã tài sản", "Tên tài sản", "Số lượng", "Trạng thái", "Ngày thêm"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                },
+                new String[] {
+                        "Mã tài sản", "Tên tài sản", "Số lượng", "Trạng thái", "Ngày thêm"
+                }) {
+            boolean[] canEdit = new boolean[] {
+                    false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+                return canEdit[columnIndex];
             }
         });
         tblAssets.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -135,19 +131,18 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
         });
 
         tblRooms.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+                new Object[][] {
 
-            },
-            new String [] {
-                "Mã Phòng"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false
+                },
+                new String[] {
+                        "Mã Phòng"
+                }) {
+            boolean[] canEdit = new boolean[] {
+                    false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+                return canEdit[columnIndex];
             }
         });
         tblRooms.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -160,34 +155,37 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 579, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnCheckAll)
-                .addGap(31, 31, 31)
-                .addComponent(btnUncheckAll)
-                .addGap(27, 27, 27)
-                .addComponent(btnDeleteCheckedItems)
-                .addGap(20, 20, 20))
-        );
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 579,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnCheckAll)
+                                .addGap(31, 31, 31)
+                                .addComponent(btnUncheckAll)
+                                .addGap(27, 27, 27)
+                                .addComponent(btnDeleteCheckedItems)
+                                .addGap(20, 20, 20)));
         jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnCheckAll)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnUncheckAll)
-                        .addComponent(btnDeleteCheckedItems)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout
+                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 303,
+                                                Short.MAX_VALUE)
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0,
+                                                Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(btnCheckAll)
+                                        .addGroup(jPanel1Layout
+                                                .createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addComponent(btnUncheckAll)
+                                                .addComponent(btnDeleteCheckedItems)))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 
         tabs.addTab("Danh Sách", jPanel1);
 
@@ -289,229 +287,273 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 143, Short.MAX_VALUE)
-            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel3Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
+                jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 143, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 143,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))));
         jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 162, Short.MAX_VALUE)
-            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel3Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
+                jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 162, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 162,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(51, 51, 51)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txtCondition, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtAssetName, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtId, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addContainerGap()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel3)
-                                            .addComponent(jLabel4))
-                                        .addGap(225, 225, 225))
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtQuantity, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
-                                            .addComponent(txtRoomId, javax.swing.GroupLayout.Alignment.TRAILING))
-                                        .addContainerGap())))))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jSeparator1)
-                        .addContainerGap())))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(btnMoveFirst, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(2, 2, 2)
-                .addComponent(btnMovePrevious)
-                .addGap(2, 2, 2)
-                .addComponent(btnMoveNext)
-                .addGap(2, 2, 2)
-                .addComponent(btnMoveLast, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnCreate)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnUpdate)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnDelete)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnNewInput)
-                .addGap(25, 25, 25))
-        );
+                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                                .addGap(46, 46, 46)
+                                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(51, 51, 51)
+                                                .addGroup(jPanel2Layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(jLabel5)
+                                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                                                .addGroup(jPanel2Layout.createParallelGroup(
+                                                                        javax.swing.GroupLayout.Alignment.TRAILING,
+                                                                        false)
+                                                                        .addComponent(txtCondition,
+                                                                                javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addComponent(jLabel1,
+                                                                                javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addComponent(txtAssetName,
+                                                                                javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addComponent(txtId,
+                                                                                javax.swing.GroupLayout.Alignment.LEADING,
+                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                241, Short.MAX_VALUE)
+                                                                        .addComponent(jLabel2,
+                                                                                javax.swing.GroupLayout.Alignment.LEADING))
+                                                                .addPreferredGap(
+                                                                        javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addGroup(jPanel2Layout.createParallelGroup(
+                                                                        javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                                                                .addGroup(jPanel2Layout
+                                                                                        .createParallelGroup(
+                                                                                                javax.swing.GroupLayout.Alignment.LEADING)
+                                                                                        .addComponent(jLabel3)
+                                                                                        .addComponent(jLabel4))
+                                                                                .addGap(225, 225, 225))
+                                                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                                                                .addGroup(jPanel2Layout
+                                                                                        .createParallelGroup(
+                                                                                                javax.swing.GroupLayout.Alignment.LEADING)
+                                                                                        .addComponent(txtQuantity,
+                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                                289, Short.MAX_VALUE)
+                                                                                        .addComponent(txtRoomId,
+                                                                                                javax.swing.GroupLayout.Alignment.TRAILING))
+                                                                                .addContainerGap())))))
+                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                                .addComponent(jSeparator1)
+                                                .addContainerGap())))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addGap(22, 22, 22)
+                                .addComponent(btnMoveFirst, javax.swing.GroupLayout.PREFERRED_SIZE, 49,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(2, 2, 2)
+                                .addComponent(btnMovePrevious)
+                                .addGap(2, 2, 2)
+                                .addComponent(btnMoveNext)
+                                .addGap(2, 2, 2)
+                                .addComponent(btnMoveLast, javax.swing.GroupLayout.PREFERRED_SIZE, 49,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnCreate)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnUpdate)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnDelete)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnNewInput)
+                                .addGap(25, 25, 25)));
         jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, 0)
-                        .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addComponent(jLabel2)
-                        .addGap(0, 0, 0)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtAssetName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(30, 30, 30)
-                        .addComponent(jLabel5)
-                        .addGap(1, 1, 1)
-                        .addComponent(txtCondition, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(0, 0, 0)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(txtRoomId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(34, 34, 34)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                                .addComponent(jLabel1)
+                                                .addGap(0, 0, 0)
+                                                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(29, 29, 29)
+                                                .addComponent(jLabel2)
+                                                .addGap(0, 0, 0)
+                                                .addGroup(jPanel2Layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(txtAssetName,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(txtQuantity,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGap(30, 30, 30)
+                                                .addComponent(jLabel5)
+                                                .addGap(1, 1, 1)
+                                                .addComponent(txtCondition, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                                .addComponent(jLabel3)
+                                                .addGap(0, 0, 0)
+                                                .addGroup(jPanel2Layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                                                .addComponent(txtRoomId,
+                                                                        javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addGap(29, 29, 29)
+                                                                .addComponent(jLabel4))
+                                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                                                .addGap(12, 12, 12)
+                                                                .addComponent(jPanel3,
+                                                                        javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                        javax.swing.GroupLayout.PREFERRED_SIZE)))))
                                 .addGap(29, 29, 29)
-                                .addComponent(jLabel4))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(29, 29, 29)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnCreate)
-                        .addComponent(btnUpdate)
-                        .addComponent(btnDelete)
-                        .addComponent(btnNewInput))
-                    .addComponent(btnMoveFirst)
-                    .addComponent(btnMovePrevious)
-                    .addComponent(btnMoveNext)
-                    .addComponent(btnMoveLast))
-                .addContainerGap(38, Short.MAX_VALUE))
-        );
+                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel2Layout
+                                                .createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addComponent(btnCreate)
+                                                .addComponent(btnUpdate)
+                                                .addComponent(btnDelete)
+                                                .addComponent(btnNewInput))
+                                        .addComponent(btnMoveFirst)
+                                        .addComponent(btnMovePrevious)
+                                        .addComponent(btnMoveNext)
+                                        .addComponent(btnMoveLast))
+                                .addContainerGap(38, Short.MAX_VALUE)));
 
         tabs.addTab("Biểu Mẫu", jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabs)
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(tabs));
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabs, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 372, Short.MAX_VALUE)
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(tabs, javax.swing.GroupLayout.Alignment.TRAILING,
+                                javax.swing.GroupLayout.PREFERRED_SIZE, 372, Short.MAX_VALUE));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tblAssetsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAssetsMouseClicked
+    private void tblAssetsMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_tblAssetsMouseClicked
         if (evt.getClickCount() == 2) {
             this.edit();
         }
-    }//GEN-LAST:event_tblAssetsMouseClicked
+    }// GEN-LAST:event_tblAssetsMouseClicked
 
-    private void btnDeleteCheckedItemsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteCheckedItemsActionPerformed
+    private void btnDeleteCheckedItemsActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnDeleteCheckedItemsActionPerformed
         this.deleteCheckedItems();
-    }//GEN-LAST:event_btnDeleteCheckedItemsActionPerformed
+    }// GEN-LAST:event_btnDeleteCheckedItemsActionPerformed
 
-    private void btnUncheckAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUncheckAllActionPerformed
+    private void btnUncheckAllActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnUncheckAllActionPerformed
         this.uncheckAll();
-    }//GEN-LAST:event_btnUncheckAllActionPerformed
+    }// GEN-LAST:event_btnUncheckAllActionPerformed
 
-    private void btnCheckAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckAllActionPerformed
+    private void btnCheckAllActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnCheckAllActionPerformed
         this.checkAll();
-    }//GEN-LAST:event_btnCheckAllActionPerformed
+    }// GEN-LAST:event_btnCheckAllActionPerformed
 
-    private void tblRoomsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblRoomsMouseClicked
+    private void tblRoomsMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_tblRoomsMouseClicked
         this.fillToTable();
-        }//GEN-LAST:event_tblRoomsMouseClicked
+    }// GEN-LAST:event_tblRoomsMouseClicked
 
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {// GEN-FIRST:event_formWindowOpened
         this.open();
-    }//GEN-LAST:event_formWindowOpened
+    }// GEN-LAST:event_formWindowOpened
 
-    private void jScrollPane3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane3MouseClicked
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_jScrollPane3MouseClicked
+    private void jScrollPane3MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jScrollPane3MouseClicked
 
-    private void btnNewInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewInputActionPerformed
+    }// GEN-LAST:event_jScrollPane3MouseClicked
+
+    private void btnNewInputActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnNewInputActionPerformed
         this.clear();
-    }//GEN-LAST:event_btnNewInputActionPerformed
+    }// GEN-LAST:event_btnNewInputActionPerformed
 
-    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnDeleteActionPerformed
         this.delete();
-    }//GEN-LAST:event_btnDeleteActionPerformed
+    }// GEN-LAST:event_btnDeleteActionPerformed
 
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnUpdateActionPerformed
         this.update();
-    }//GEN-LAST:event_btnUpdateActionPerformed
+    }// GEN-LAST:event_btnUpdateActionPerformed
 
-    private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
-        // TODO add your handling code here:
+    private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnCreateActionPerformed
+
         this.create();
-    }//GEN-LAST:event_btnCreateActionPerformed
+    }// GEN-LAST:event_btnCreateActionPerformed
 
-    private void btnMoveFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveFirstActionPerformed
-        // TODO add your handling code here:
+    private void btnMoveFirstActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnMoveFirstActionPerformed
+
         this.moveFirst();
-    }//GEN-LAST:event_btnMoveFirstActionPerformed
+    }// GEN-LAST:event_btnMoveFirstActionPerformed
 
-    private void btnMovePreviousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMovePreviousActionPerformed
-        // TODO add your handling code here:
+    private void btnMovePreviousActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnMovePreviousActionPerformed
+
         this.movePrevious();
-    }//GEN-LAST:event_btnMovePreviousActionPerformed
+    }// GEN-LAST:event_btnMovePreviousActionPerformed
 
-    private void btnMoveNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveNextActionPerformed
-        // TODO add your handling code here:
+    private void btnMoveNextActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnMoveNextActionPerformed
+
         this.moveNext();
-    }//GEN-LAST:event_btnMoveNextActionPerformed
+    }// GEN-LAST:event_btnMoveNextActionPerformed
 
-    private void btnMoveLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveLastActionPerformed
-        // TODO add your handling code here:
+    private void btnMoveLastActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnMoveLastActionPerformed
+
         this.moveLast();
-    }//GEN-LAST:event_btnMoveLastActionPerformed
+    }// GEN-LAST:event_btnMoveLastActionPerformed
 
-    private void lblPictureMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPictureMouseClicked
-        // TODO add your handling code here:
-        if(fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION){
+    private void lblPictureMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_lblPictureMouseClicked
+
+        if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             File file = XIcon.copyTo(fileChooser.getSelectedFile(), this.folder);
             this.setIcon(file.getName());
-            if(this.fileChanged != null){
+            if (this.fileChanged != null) {
                 this.fileChanged.accept(file);
             }
         }
-    }//GEN-LAST:event_lblPictureMouseClicked
+    }// GEN-LAST:event_lblPictureMouseClicked
 
-    private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
-        // TODO add your handling code here:
+    private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jPanel4MouseClicked
+
         this.chooseFile();
-    }//GEN-LAST:event_jPanel4MouseClicked
+    }// GEN-LAST:event_jPanel4MouseClicked
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+        // <editor-fold defaultstate="collapsed" desc=" Look and feel setting code
+        // (optional) ">
+        /*
+         * If Nimbus (introduced in Java SE 6) is not available, stay with the default
+         * look and feel.
+         * For details see
+         * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -521,15 +563,19 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AssetsManagerJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AssetsManagerJDialog.class.getName()).log(java.util.logging.Level.SEVERE,
+                    null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AssetsManagerJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AssetsManagerJDialog.class.getName()).log(java.util.logging.Level.SEVERE,
+                    null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AssetsManagerJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AssetsManagerJDialog.class.getName()).log(java.util.logging.Level.SEVERE,
+                    null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AssetsManagerJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AssetsManagerJDialog.class.getName()).log(java.util.logging.Level.SEVERE,
+                    null, ex);
         }
-        //</editor-fold>
+        // </editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -584,21 +630,20 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
     // End of variables declaration//GEN-END:variables
     List<Room> rooms = List.of();
     List<Assets> items = List.of();
-    AssetsDAO dao = new AssetsDAOImpl();   
+    AssetsDAO dao = new AssetsDAOImpl();
     private List<Room> listRooms;
     AssetsDAO assetsDAO = new AssetsDAOImpl(); // Khởi tạo AssetsDAO
-    RoomDAO roomDAO = new RoomDAOImpl();       // Khởi tạo RoomDAO
+    RoomDAO roomDAO = new RoomDAOImpl(); // Khởi tạo RoomDAO
     int row = -1;
-   
-    
+
     @Override
     public void open() {
         setLocationRelativeTo(null);
         fillroom();
         fillToTable();
-//        fillCondition();
+        // fillCondition();
     }
-    
+
     @Override
     public void fillroom() {
         DefaultTableModel tblModel = (DefaultTableModel) tblRooms.getModel();
@@ -608,12 +653,12 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
         rooms = rdao.findAll();
 
         rooms.forEach(room -> {
-            tblModel.addRow(new Object[]{room.getRoomId()});
+            tblModel.addRow(new Object[] { room.getRoomId() });
         });
 
         tblRooms.setRowSelectionInterval(0, 0);
     }
-    
+
     @Override
     public void fillToTable() {
         DefaultTableModel model = (DefaultTableModel) tblAssets.getModel();
@@ -623,19 +668,19 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
         items = dao.findByRoomId(String.valueOf(room.getRoomId()));
         items.forEach(item -> {
             Object[] rowData = {
-                item.getId(),
-                item.getAssetName(),
-                item.getQuantity(),
-                item.getCondition(),
-                item.getCreated_at(),
-                
-//                false
+                    item.getId(),
+                    item.getAssetName(),
+                    item.getQuantity(),
+                    item.getCondition(),
+                    item.getCreated_at(),
+
+                    // false
             };
             model.addRow(rowData);
         });
         this.clear();
     }
-   
+
     @Override
     public void edit() {
         Assets entity = items.get(tblAssets.getSelectedRow());
@@ -651,103 +696,104 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
 
     @Override
     public void uncheckAll() {
-        if(tblAssets.getSelectedRowCount()==0){
+        if (tblAssets.getSelectedRowCount() == 0) {
             XDialog.alert("bạn đang không chọn bất kì dòng nào cả", "cảnh báo không chọn");
         }
         tblAssets.clearSelection();
         this.setEditable(false);
-        
+
     }
-    
+
     private void setCheckedAll(boolean checked) {
         tblAssets.selectAll();
-        
+
     }
-    
+
     @Override
     public void setForm(Assets entity) {
         txtId.setText(String.valueOf(entity.getId()));
         txtAssetName.setText(entity.getAssetName());
         txtQuantity.setText(String.valueOf(entity.getQuantity()));
         txtCondition.setText(entity.getCondition());
-        txtRoomId.setText(String.valueOf(entity.getRoomId()));    
+        txtRoomId.setText(String.valueOf(entity.getRoomId()));
     }
 
     @Override
     public Assets getForm() {
         Assets asset = new Assets();
-        if(txtRoomId.getText().isEmpty() && txtAssetName.getText().isEmpty() && txtQuantity.getText().isEmpty() && txtCondition.getText().isEmpty()){
+        if (txtRoomId.getText().isEmpty() && txtAssetName.getText().isEmpty() && txtQuantity.getText().isEmpty()
+                && txtCondition.getText().isEmpty()) {
             XDialog.alert("bạn chưa nhập bất kì mục nào", "Thông báo nhập");
             return null;
-        }else {
-            if(txtRoomId.getText().isEmpty()){
+        } else {
+            if (txtRoomId.getText().isEmpty()) {
                 XDialog.alert("Không được để trống mã phòng", "Thông báo nhập");
                 return null;
-            }else if(txtAssetName.getText().isEmpty()){
-                XDialog.alert("Không được để trống tên tài sản","Thông báo nhập");
+            } else if (txtAssetName.getText().isEmpty()) {
+                XDialog.alert("Không được để trống tên tài sản", "Thông báo nhập");
                 return null;
-            }else if(txtQuantity.getText().isEmpty()){
-                XDialog.alert("Không được để trống số lượng","Thông báo nhập");
+            } else if (txtQuantity.getText().isEmpty()) {
+                XDialog.alert("Không được để trống số lượng", "Thông báo nhập");
                 return null;
-            }else if(txtCondition.getText().isEmpty()){
-                XDialog.alert("Không được để trống chất lượng","Thông báo nhập");
+            } else if (txtCondition.getText().isEmpty()) {
+                XDialog.alert("Không được để trống chất lượng", "Thông báo nhập");
                 return null;
             }
         }
-        
+
         asset.setId(Integer.parseInt(txtId.getText()));
         asset.setAssetName(txtAssetName.getText());
-        try{
+        try {
 
             asset.setQuantity(Integer.parseInt(txtQuantity.getText()));
             asset.setRoomId(Integer.parseInt(txtRoomId.getText()));
-        }catch(NumberFormatException e){
-                XDialog.alert("Mã phòng và số lượng phải là số", "Sai định dạng");
-                System.out.println(e.getMessage());
-                return null;
+        } catch (NumberFormatException e) {
+            XDialog.alert("Mã phòng và số lượng phải là số", "Sai định dạng");
+            System.out.println(e.getMessage());
+            return null;
         }
         asset.setCondition(txtCondition.getText());
-        return asset;    
+        return asset;
     }
-    
-        public Assets getFormCreate() {
+
+    public Assets getFormCreate() {
         Assets asset = new Assets();
-        if(txtRoomId.getText().isEmpty() && txtAssetName.getText().isEmpty() && txtQuantity.getText().isEmpty() && txtCondition.getText().isEmpty()){
+        if (txtRoomId.getText().isEmpty() && txtAssetName.getText().isEmpty() && txtQuantity.getText().isEmpty()
+                && txtCondition.getText().isEmpty()) {
             XDialog.alert("bạn chưa nhập bất kì mục nào", "Thông báo nhập");
             return null;
-        }else {
-            if(txtRoomId.getText().isEmpty()){
+        } else {
+            if (txtRoomId.getText().isEmpty()) {
                 XDialog.alert("Không được để trống mã phòng", "Thông báo nhập");
                 return null;
-            }else if(txtAssetName.getText().isEmpty()){
-                XDialog.alert("Không được để trống tên tài sản","Thông báo nhập");
+            } else if (txtAssetName.getText().isEmpty()) {
+                XDialog.alert("Không được để trống tên tài sản", "Thông báo nhập");
                 return null;
-            }else if(txtQuantity.getText().isEmpty()){
-                XDialog.alert("Không được để trống số lượng","Thông báo nhập");
+            } else if (txtQuantity.getText().isEmpty()) {
+                XDialog.alert("Không được để trống số lượng", "Thông báo nhập");
                 return null;
-            }else if(txtCondition.getText().isEmpty()){
-                XDialog.alert("Không được để trống chất lượng","Thông báo nhập");
+            } else if (txtCondition.getText().isEmpty()) {
+                XDialog.alert("Không được để trống chất lượng", "Thông báo nhập");
                 return null;
             }
         }
-        
-//        asset.setId(Integer.parseInt(txtId.getText()));
+
+        // asset.setId(Integer.parseInt(txtId.getText()));
         asset.setAssetName(txtAssetName.getText());
-        try{
+        try {
 
             asset.setQuantity(Integer.parseInt(txtQuantity.getText()));
             asset.setRoomId(Integer.parseInt(txtRoomId.getText()));
-        }catch(NumberFormatException e){
-                XDialog.alert("Mã phòng và số lượng phải là số", "Sai định dạng");
-                System.out.println(e.getMessage());
-                return null;
+        } catch (NumberFormatException e) {
+            XDialog.alert("Mã phòng và số lượng phải là số", "Sai định dạng");
+            System.out.println(e.getMessage());
+            return null;
         }
         asset.setCondition(txtCondition.getText());
-        return asset;    
-        
-        
-        
+        return asset;
+
     }
+
     @Override
     public void create() {
         Assets asset = this.getFormCreate();
@@ -771,15 +817,15 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
         if (entity != null) {
             try {
                 dao.update(entity);
-                XDialog.alert("Cập nhật tài sản công","Thông báo cập nhật");
+                XDialog.alert("Cập nhật tài sản công", "Thông báo cập nhật");
                 this.fillroom();
-                this.fillToTable();     
+                this.fillToTable();
                 this.clear();
             } catch (Exception e) {
                 XDialog.alert("Cập nhật thất bại! ");
                 System.out.println(e.getMessage());
-            }    
-        }  
+            }
+        }
     }
 
     @Override
@@ -790,10 +836,10 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
                 assetsDAO.deleteById(assetId);
                 XDialog.alert("Xóa thành công!");
                 this.fillToTable();// Sau khi xóa, tải lại bảng tài sản cho phòng hiện tại
-                this.clear(); 
+                this.clear();
                 this.setEditable(false);
             } catch (Exception e) {
-                XDialog.alert("Xóa thất bại! " + e.getMessage());               
+                XDialog.alert("Xóa thất bại! " + e.getMessage());
             }
         }
     }
@@ -820,7 +866,6 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
         btnMoveNext.setEnabled(editable && rowCount > 0);
         btnMoveLast.setEnabled(editable && rowCount > 0);
     }
-
 
     @Override
     public void moveFirst() {
@@ -852,7 +897,7 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
         }
 
         if (index < 0) {
-            this.moveLast();  // Chuyển đến dòng cuối cùng nếu index âm
+            this.moveLast(); // Chuyển đến dòng cuối cùng nếu index âm
         } else if (index >= rowCount) {
             this.moveFirst(); // Chuyển đến dòng đầu tiên nếu index quá lớn
         } else {
@@ -862,18 +907,20 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
         }
 
     }
+
     private void chooseFile() {
-        
-        String[] fileTypeAllow = {"png", "jpg", "jpeg"};
+
+        String[] fileTypeAllow = { "png", "jpg", "jpeg" };
         fileChooser.setFileFilter(new FileNameExtensionFilter("Chọn ảnh image/*", fileTypeAllow));
-        if(fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION){
+        if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
             File file = XIcon.copyTo(selectedFile, "images");
             lblImage.setToolTipText(file.getName());
             XIcon.setIcon(lblImage, file);
         }
     }
-        @Getter
+
+    @Getter
     @Setter
     String folder = "images";
     Consumer<File> fileChanged;
@@ -887,15 +934,15 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
         lblPicture.setToolTipText(icon);
         XIcon.setIcon(lblPicture, new File(this.folder, icon));
     }
-    
+
     @Override
     public void deleteCheckedItems() {
         int[] selectedRows = tblAssets.getSelectedRows();
-        if(selectedRows.length == 0){
+        if (selectedRows.length == 0) {
             XDialog.alert("Đang không chọn bất kì dòng nào để xóa", "Vui lòng chọn");
         }
         if (XDialog.confirm("Bạn chắc chắn muốn xóa mục này chứ?", "Cảnh báo xóa")) {
-            try {                
+            try {
                 if (selectedRows.length > 0) {
                     // Iterate in reverse to avoid issues with index changes after deletion
                     for (int i = selectedRows.length - 1; i >= 0; i--) {
@@ -905,7 +952,7 @@ public class AssetsManagerJDialog extends javax.swing.JDialog implements AssetsC
                     this.fillToTable();
                     this.clear();
                 }
-                
+
             } catch (Exception e) {
                 XDialog.alert("Xóa tài sản không thành công");
                 System.out.println(e.getMessage());

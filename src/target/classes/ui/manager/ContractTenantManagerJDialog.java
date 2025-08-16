@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
+
 package ui.manager;
 
 import java.util.List;
@@ -269,40 +266,40 @@ public class ContractTenantManagerJDialog extends javax.swing.JDialog implements
     }// </editor-fold>//GEN-END:initComponents
 
     private void UpdateActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_UpdateActionPerformed
-        // TODO add your handling code here:
+
         this.update();
     }// GEN-LAST:event_UpdateActionPerformed
 
     private void DeleteActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_DeleteActionPerformed
-        // TODO add your handling code here:
+
         this.delete();
     }// GEN-LAST:event_DeleteActionPerformed
 
     private void ResetActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_ResetActionPerformed
-        // TODO add your handling code here:
+
         this.clear();
     }// GEN-LAST:event_ResetActionPerformed
 
     private void btnMovePreviousActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnMovePreviousActionPerformed
-        // TODO add your handling code here:
+
         this.movePrevious();
     }// GEN-LAST:event_btnMovePreviousActionPerformed
 
     private void btnMoveNextActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnMoveNextActionPerformed
-        // TODO add your handling code here:
+
         this.moveNext();
     }// GEN-LAST:event_btnMoveNextActionPerformed
 
     private void txtIdContractTenantManagerActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txtIdContractTenantManagerActionPerformed
-        // TODO add your handling code here:
+
     }// GEN-LAST:event_txtIdContractTenantManagerActionPerformed
 
     private void txtCitizenIdContractTenantManagerActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txtCitizenIdContractTenantManagerActionPerformed
-        // TODO add your handling code here:
+
     }// GEN-LAST:event_txtCitizenIdContractTenantManagerActionPerformed
 
     private void CreateActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_CreateActionPerformed
-        // TODO add your handling code here:
+
         Create.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 create();

@@ -1,15 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
+
 package ui.manager;
 
 import java.awt.Frame;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.File;
 import java.math.BigDecimal;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -26,8 +23,6 @@ import entity.ContractDetail;
 import impl.ContractDAOImpl;
 import impl.ContractDetailDAOImpl;
 import impl.TenantDAOImpl;
-import java.text.ParseException;
-import java.util.Calendar;
 import ui.controller.ContractManagerController;
 import utils.XDialog;
 
@@ -48,8 +43,7 @@ public class ContractManagerJDialog extends javax.swing.JDialog implements Contr
         txtIdContractManager.setEnabled(false);
         StartDate.setEnabled(false);
         txtPaymentCycleMonth.setEnabled(false);
-            
-        
+
     }
 
     /**
@@ -59,7 +53,8 @@ public class ContractManagerJDialog extends javax.swing.JDialog implements Contr
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         tabs = new javax.swing.JTabbedPane();
@@ -101,29 +96,31 @@ public class ContractManagerJDialog extends javax.swing.JDialog implements Contr
         setTitle("Quản Lí Hợp Đồng");
 
         tblContractManager.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "Mã hợp đồng", "Mã phòng", "Mã người thuê", "Ngày bắt đầu", "Ngày kết thúc", "Tiền đặt cọc", "Tiền tháng", "Ảnh", "Ghi chú", ""
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+                new Object[][] {
+                        { null, null, null, null, null, null, null, null, null, null },
+                        { null, null, null, null, null, null, null, null, null, null },
+                        { null, null, null, null, null, null, null, null, null, null },
+                        { null, null, null, null, null, null, null, null, null, null }
+                },
+                new String[] {
+                        "Mã hợp đồng", "Mã phòng", "Mã người thuê", "Ngày bắt đầu", "Ngày kết thúc", "Tiền đặt cọc",
+                        "Tiền tháng", "Ảnh", "Ghi chú", ""
+                }) {
+            Class[] types = new Class[] {
+                    java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
+                    java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
+                    java.lang.Object.class, java.lang.Boolean.class
             };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, true
+            boolean[] canEdit = new boolean[] {
+                    false, false, false, false, false, false, false, false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
+                return types[columnIndex];
             }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+                return canEdit[columnIndex];
             }
         });
         tblContractManager.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -157,28 +154,28 @@ public class ContractManagerJDialog extends javax.swing.JDialog implements Contr
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 778, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnCheckAll)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnUnCheckAll)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnDeleteCheckedItems))
-        );
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 778, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btnCheckAll)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnUnCheckAll)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnDeleteCheckedItems)));
         jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCheckAll)
-                    .addComponent(btnUnCheckAll)
-                    .addComponent(btnDeleteCheckedItems))
-                .addContainerGap())
-        );
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 403,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28,
+                                        Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(btnCheckAll)
+                                        .addComponent(btnUnCheckAll)
+                                        .addComponent(btnDeleteCheckedItems))
+                                .addContainerGap()));
 
         tabs.addTab("Thông tin cơ bản", jPanel1);
 
@@ -315,226 +312,276 @@ public class ContractManagerJDialog extends javax.swing.JDialog implements Contr
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(246, 246, 246)
-                        .addComponent(jLabel6)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
+                jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addContainerGap()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addComponent(ContractScanUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Note)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jLabel8)
-                                        .addGap(0, 287, Short.MAX_VALUE))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jLabel11)
-                                        .addGap(251, 322, Short.MAX_VALUE))
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtIdContractManager)
-                                            .addComponent(txtDeposit_Amount))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel14)
-                                    .addComponent(txtIdRoom, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE)
-                                    .addComponent(txtTenant)))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(StartDate, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(EndDate))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jLabel12)
-                                        .addGap(315, 315, 315)
-                                        .addComponent(jLabel13))
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jLabel10)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(txtPaymentCycleMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(120, 120, 120))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(Create)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Update)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Delete)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Reset)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnMoveFirst, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnMovePrevious, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnMoveNext, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnMoveLast, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
-        );
+                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                                .addComponent(jLabel5)
+                                                .addGap(246, 246, 246)
+                                                .addComponent(jLabel6)
+                                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                                .addGroup(jPanel2Layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                                                .addGroup(jPanel2Layout.createParallelGroup(
+                                                                        javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addComponent(jLabel7)
+                                                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                                                                .addGap(6, 6, 6)
+                                                                                .addComponent(ContractScanUrl,
+                                                                                        javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                        302,
+                                                                                        javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                                .addGap(18, 18, 18)
+                                                                .addGroup(jPanel2Layout.createParallelGroup(
+                                                                        javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addComponent(Note)
+                                                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                                                                .addComponent(jLabel8)
+                                                                                .addGap(0, 287, Short.MAX_VALUE))))
+                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
+                                                                jPanel2Layout.createSequentialGroup()
+                                                                        .addGroup(jPanel2Layout.createParallelGroup(
+                                                                                javax.swing.GroupLayout.Alignment.LEADING)
+                                                                                .addGroup(jPanel2Layout
+                                                                                        .createSequentialGroup()
+                                                                                        .addComponent(jLabel11)
+                                                                                        .addGap(251, 322,
+                                                                                                Short.MAX_VALUE))
+                                                                                .addGroup(jPanel2Layout
+                                                                                        .createSequentialGroup()
+                                                                                        .addGroup(jPanel2Layout
+                                                                                                .createParallelGroup(
+                                                                                                        javax.swing.GroupLayout.Alignment.LEADING)
+                                                                                                .addComponent(
+                                                                                                        txtIdContractManager)
+                                                                                                .addComponent(
+                                                                                                        txtDeposit_Amount))
+                                                                                        .addPreferredGap(
+                                                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                                                        .addGroup(jPanel2Layout.createParallelGroup(
+                                                                                javax.swing.GroupLayout.Alignment.LEADING,
+                                                                                false)
+                                                                                .addComponent(jLabel14)
+                                                                                .addComponent(txtIdRoom,
+                                                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                        265, Short.MAX_VALUE)
+                                                                                .addComponent(txtTenant)))
+                                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                                                .addComponent(StartDate,
+                                                                        javax.swing.GroupLayout.PREFERRED_SIZE, 300,
+                                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addGap(18, 18, 18)
+                                                                .addComponent(EndDate))
+                                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                                                .addGroup(jPanel2Layout.createParallelGroup(
+                                                                        javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                                                                .addComponent(jLabel12)
+                                                                                .addGap(315, 315, 315)
+                                                                                .addComponent(jLabel13))
+                                                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                                                                .addComponent(jLabel10)
+                                                                                .addGap(18, 18, 18)
+                                                                                .addComponent(txtPaymentCycleMonth,
+                                                                                        javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                        374,
+                                                                                        javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                                .addGap(0, 0, Short.MAX_VALUE)))
+                                                .addGap(120, 120, 120))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout
+                                                .createSequentialGroup()
+                                                .addComponent(Create)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(Update)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(Delete)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(Reset)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+                                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(btnMoveFirst, javax.swing.GroupLayout.PREFERRED_SIZE, 44,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(btnMovePrevious, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                        47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(btnMoveNext, javax.swing.GroupLayout.PREFERRED_SIZE, 47,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(btnMoveLast, javax.swing.GroupLayout.PREFERRED_SIZE, 44,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addContainerGap()))));
         jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel13))
-                .addGap(10, 10, 10)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtIdContractManager, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtIdRoom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel14))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtDeposit_Amount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTenant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(txtPaymentCycleMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(StartDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(EndDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Note, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ContractScanUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(Delete)
-                        .addComponent(Reset)
-                        .addComponent(btnMoveFirst)
-                        .addComponent(btnMovePrevious)
-                        .addComponent(btnMoveNext)
-                        .addComponent(btnMoveLast))
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(Create)
-                        .addComponent(Update))))
-        );
+                jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel12)
+                                        .addComponent(jLabel13))
+                                .addGap(10, 10, 10)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(txtIdContractManager, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtIdRoom, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel11)
+                                        .addComponent(jLabel14))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(txtDeposit_Amount, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtTenant, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(22, 22, 22)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel10)
+                                        .addComponent(txtPaymentCycleMonth, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel5)
+                                        .addComponent(jLabel6))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(StartDate, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(EndDate, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel7)
+                                        .addComponent(jLabel8))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(Note, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(ContractScanUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 154,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39,
+                                        Short.MAX_VALUE)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel2Layout
+                                                .createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addComponent(Delete)
+                                                .addComponent(Reset)
+                                                .addComponent(btnMoveFirst)
+                                                .addComponent(btnMovePrevious)
+                                                .addComponent(btnMoveNext)
+                                                .addComponent(btnMoveLast))
+                                        .addGroup(jPanel2Layout
+                                                .createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addComponent(Create)
+                                                .addComponent(Update)))));
 
         tabs.addTab("Thông tin thêm", jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 778, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 778,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)));
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabs)
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(tabs));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnMoveFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveFirstActionPerformed
-        // TODO add your handling code here:
-        this.moveFirst();
-    }//GEN-LAST:event_btnMoveFirstActionPerformed
+    private void btnMoveFirstActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnMoveFirstActionPerformed
 
-    private void btnMoveLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveLastActionPerformed
-        // TODO add your handling code here:
+        this.moveFirst();
+    }// GEN-LAST:event_btnMoveFirstActionPerformed
+
+    private void btnMoveLastActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnMoveLastActionPerformed
+
         this.moveLast();
-    }//GEN-LAST:event_btnMoveLastActionPerformed
+    }// GEN-LAST:event_btnMoveLastActionPerformed
 
     private void UpdateActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_UpdateActionPerformed
-        // TODO add your handling code here:
+
         this.update();
     }// GEN-LAST:event_UpdateActionPerformed
 
     private void DeleteActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_DeleteActionPerformed
-        // TODO add your handling code here:
+
         this.delete();
     }// GEN-LAST:event_DeleteActionPerformed
 
     private void ResetActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_ResetActionPerformed
-        // TODO add your handling code here:
+
         this.clear();
     }// GEN-LAST:event_ResetActionPerformed
+
     private void btnMovePreviousActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnMovePreviousActionPerformed
-        // TODO add your handling code here:
+
         this.movePrevious();
     }// GEN-LAST:event_btnMovePreviousActionPerformed
 
     private void btnMoveNextActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnMoveNextActionPerformed
-        // TODO add your handling code here:
+
         this.moveNext();
 
     }// GEN-LAST:event_btnMoveNextActionPerformed
 
     private void StartDateActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_StartDateActionPerformed
-        // TODO add your handling code here:
+
     }// GEN-LAST:event_StartDateActionPerformed
 
     private void EndDateActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_EndDateActionPerformed
-        // TODO add your handling code here:
+
     }// GEN-LAST:event_EndDateActionPerformed
 
     private void txtContractScanUrlActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txtContractScanUrlActionPerformed
-        // TODO add your handling code here:
+
     }// GEN-LAST:event_txtContractScanUrlActionPerformed
 
     private void NoteActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_NoteActionPerformed
-        // TODO add your handling code here:
+
     }// GEN-LAST:event_NoteActionPerformed
 
     private void ContractScanUrlMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_ContractScanUrlMouseClicked
-        // TODO add your handling code here:
+
         this.chooseFrontImage();
     }// GEN-LAST:event_ContractScanUrlMouseClicked
 
     private void CreateActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_CreateActionPerformed
-        // TODO add your handling code here:
+
         this.create();
     }// GEN-LAST:event_CreateActionPerformed
 
     private void btnCheckAllActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnCheckAllActionPerformed
-        // TODO add your handling code here:
+
         this.checkAll();
     }// GEN-LAST:event_btnCheckAllActionPerformed
 
     private void btnUnCheckAllActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnUnCheckAllActionPerformed
-        // TODO add your handling code here:
+
         this.uncheckAll();
     }// GEN-LAST:event_btnUnCheckAllActionPerformed
 
     private void btnDeleteCheckedItemsActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnDeleteCheckedItemsActionPerformed
-        // TODO add your handling code here:
+
         this.delete();
     }// GEN-LAST:event_btnDeleteCheckedItemsActionPerformed
 
     private void tblContractManagerMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_tblContractManagerMouseClicked
-        // TODO add your handling code here:
+
         if (evt.getClickCount() == 2) {
             this.edit();
         }
@@ -692,24 +739,24 @@ public class ContractManagerJDialog extends javax.swing.JDialog implements Contr
     @Override
     public void checkAll() {
         tblContractManager.getSelectionModel().setValueIsAdjusting(true);
-    if (tblContractManager.getRowCount() > 0) {
-        tblContractManager.setRowSelectionInterval(0, tblContractManager.getRowCount() - 1);
-    }
+        if (tblContractManager.getRowCount() > 0) {
+            tblContractManager.setRowSelectionInterval(0, tblContractManager.getRowCount() - 1);
+        }
 
-    tblContractManager.getSelectionModel().setValueIsAdjusting(false);
+        tblContractManager.getSelectionModel().setValueIsAdjusting(false);
 
-    JOptionPane.showMessageDialog(this, "Đã chọn tất cả!");
+        JOptionPane.showMessageDialog(this, "Đã chọn tất cả!");
     }
 
     @Override
     public void uncheckAll() {
-    if (tblContractManager.getSelectedRowCount() == 0) {
-        JOptionPane.showMessageDialog(this, "Không có dòng nào để bỏ chọn!");
-        return;
-    }
-    
-    tblContractManager.clearSelection();
-    JOptionPane.showMessageDialog(this, "Đã hủy chọn tất cả!");
+        if (tblContractManager.getSelectedRowCount() == 0) {
+            JOptionPane.showMessageDialog(this, "Không có dòng nào để bỏ chọn!");
+            return;
+        }
+
+        tblContractManager.clearSelection();
+        JOptionPane.showMessageDialog(this, "Đã hủy chọn tất cả!");
     }
 
     private void setCheckedAll(boolean checked) {
@@ -750,137 +797,138 @@ public class ContractManagerJDialog extends javax.swing.JDialog implements Contr
         EndDate.setText(entity.getEndDate() == null ? "" : sdf.format(entity.getEndDate()));
         ContractScanUrl.setText(entity.getFile_scan_url() == null ? "" : entity.getFile_scan_url());
         Note.setText(entity.getNotes() == null ? "" : entity.getNotes());
-        txtPaymentCycleMonth.setText(entity.getPaymentCycleMonths() == null ? "" : String.valueOf(entity.getPaymentCycleMonths()));
+        txtPaymentCycleMonth
+                .setText(entity.getPaymentCycleMonths() == null ? "" : String.valueOf(entity.getPaymentCycleMonths()));
 
     }
 
     @Override
-public Contract getForm() {
-    return getForm(false);
-}
-
-public Contract getForm(boolean isCreate) {
-    Contract entity = new Contract();
-    if (!isCreate && !txtIdContractManager.getText().isEmpty()) {
-        entity.setId(Integer.parseInt(txtIdContractManager.getText()));
-    }
-    try {
-        entity.setId(Integer.parseInt(txtIdContractManager.getText()));
-    } catch (NumberFormatException e) {
-        entity.setId(null);
+    public Contract getForm() {
+        return getForm(false);
     }
 
-    try {
-        entity.setRoomId(Integer.parseInt(txtIdRoom.getText()));
-    } catch (NumberFormatException e) {
-        entity.setRoomId(null);
-    }
-
-    entity.setTenant(txtTenant.getText());
-
-    try {
-        entity.setDepositAmount(new BigDecimal(txtDeposit_Amount.getText()));
-    } catch (NumberFormatException e) {
-        entity.setDepositAmount(BigDecimal.ZERO);
-    }
-
-    Date startDate = null;
-    Date endDate = null;
-    try {
-        startDate = new SimpleDateFormat("yyyy-MM-dd").parse(StartDate.getText().trim());
-        entity.setStartDate(startDate);
-    } catch (Exception e) {
-        entity.setStartDate(null);
-    }
-
-    try {
-        endDate = new SimpleDateFormat("yyyy-MM-dd").parse(EndDate.getText().trim());
-        entity.setEndDate(endDate);
-    } catch (Exception e) {
-        entity.setEndDate(null);
-    }
-
-    entity.setFile_scan_url(ContractScanUrl.getText());
-    entity.setNotes(Note.getText());
-
-    String paymentText = txtPaymentCycleMonth.getText().trim();
-    if (paymentText.isEmpty() && startDate != null && endDate != null) {
-        Calendar startCal = Calendar.getInstance();
-        startCal.setTime(startDate);
-        Calendar endCal = Calendar.getInstance();
-        endCal.setTime(endDate);
-
-        int months = (endCal.get(Calendar.YEAR) - startCal.get(Calendar.YEAR)) * 12
-                   + (endCal.get(Calendar.MONTH) - startCal.get(Calendar.MONTH));
-        if (endCal.get(Calendar.DAY_OF_MONTH) < startCal.get(Calendar.DAY_OF_MONTH)) {
-            months--;
+    public Contract getForm(boolean isCreate) {
+        Contract entity = new Contract();
+        if (!isCreate && !txtIdContractManager.getText().isEmpty()) {
+            entity.setId(Integer.parseInt(txtIdContractManager.getText()));
         }
-
-        if (months < 1) {
-            months = 1;
-        }
-        entity.setPaymentCycleMonths(months);
-    } else {
         try {
-            entity.setPaymentCycleMonths(Integer.parseInt(paymentText));
+            entity.setId(Integer.parseInt(txtIdContractManager.getText()));
         } catch (NumberFormatException e) {
-            entity.setPaymentCycleMonths(1);
+            entity.setId(null);
         }
-    }
 
-    return entity;
-}
-
-    private ContractDetail getDetailForm() {
-    ContractDetail detail = new ContractDetail();
-    detail.setId(txtIdContractManager.getText());
-    detail.setRoomId(txtIdRoom.getText());
-    detail.setTenant(txtTenant.getText());
-    detail.setStartDate(StartDate.getText());
-    detail.setEndDate(EndDate.getText());
-    detail.setDepositAmount(txtDeposit_Amount.getText());
-
-    String paymentText = txtPaymentCycleMonth.getText().trim();
-    if (paymentText.isEmpty()) {
         try {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            Date startDate = sdf.parse(StartDate.getText().trim());
-            Date endDate = sdf.parse(EndDate.getText().trim());
+            entity.setRoomId(Integer.parseInt(txtIdRoom.getText()));
+        } catch (NumberFormatException e) {
+            entity.setRoomId(null);
+        }
 
+        entity.setTenant(txtTenant.getText());
+
+        try {
+            entity.setDepositAmount(new BigDecimal(txtDeposit_Amount.getText()));
+        } catch (NumberFormatException e) {
+            entity.setDepositAmount(BigDecimal.ZERO);
+        }
+
+        Date startDate = null;
+        Date endDate = null;
+        try {
+            startDate = new SimpleDateFormat("yyyy-MM-dd").parse(StartDate.getText().trim());
+            entity.setStartDate(startDate);
+        } catch (Exception e) {
+            entity.setStartDate(null);
+        }
+
+        try {
+            endDate = new SimpleDateFormat("yyyy-MM-dd").parse(EndDate.getText().trim());
+            entity.setEndDate(endDate);
+        } catch (Exception e) {
+            entity.setEndDate(null);
+        }
+
+        entity.setFile_scan_url(ContractScanUrl.getText());
+        entity.setNotes(Note.getText());
+
+        String paymentText = txtPaymentCycleMonth.getText().trim();
+        if (paymentText.isEmpty() && startDate != null && endDate != null) {
             Calendar startCal = Calendar.getInstance();
             startCal.setTime(startDate);
             Calendar endCal = Calendar.getInstance();
             endCal.setTime(endDate);
 
             int months = (endCal.get(Calendar.YEAR) - startCal.get(Calendar.YEAR)) * 12
-                       + (endCal.get(Calendar.MONTH) - startCal.get(Calendar.MONTH));
+                    + (endCal.get(Calendar.MONTH) - startCal.get(Calendar.MONTH));
             if (endCal.get(Calendar.DAY_OF_MONTH) < startCal.get(Calendar.DAY_OF_MONTH)) {
                 months--;
             }
 
             if (months < 1) {
-                JOptionPane.showMessageDialog(this, "Ngày kết thúc phải cách ngày bắt đầu ít nhất 1 tháng.");
-                return null;
+                months = 1;
             }
+            entity.setPaymentCycleMonths(months);
+        } else {
+            try {
+                entity.setPaymentCycleMonths(Integer.parseInt(paymentText));
+            } catch (NumberFormatException e) {
+                entity.setPaymentCycleMonths(1);
+            }
+        }
 
-            detail.setPaymentCycleMonths(months);
-        } catch (ParseException ex) {
-            JOptionPane.showMessageDialog(this, "Ngày bắt đầu hoặc kết thúc không đúng định dạng yyyy-MM-dd.");
-            return null;
-        }
-    } else {
-        try {
-            detail.setPaymentCycleMonths(Integer.parseInt(paymentText));
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Tháng thanh toán phải là số nguyên.");
-            return null;
-        }
+        return entity;
     }
 
-    detail.setFileScanUrl(ContractScanUrl.getText());
-    detail.setNotes(Note.getText());
-    return detail;
-}
+    private ContractDetail getDetailForm() {
+        ContractDetail detail = new ContractDetail();
+        detail.setId(txtIdContractManager.getText());
+        detail.setRoomId(txtIdRoom.getText());
+        detail.setTenant(txtTenant.getText());
+        detail.setStartDate(StartDate.getText());
+        detail.setEndDate(EndDate.getText());
+        detail.setDepositAmount(txtDeposit_Amount.getText());
+
+        String paymentText = txtPaymentCycleMonth.getText().trim();
+        if (paymentText.isEmpty()) {
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                Date startDate = sdf.parse(StartDate.getText().trim());
+                Date endDate = sdf.parse(EndDate.getText().trim());
+
+                Calendar startCal = Calendar.getInstance();
+                startCal.setTime(startDate);
+                Calendar endCal = Calendar.getInstance();
+                endCal.setTime(endDate);
+
+                int months = (endCal.get(Calendar.YEAR) - startCal.get(Calendar.YEAR)) * 12
+                        + (endCal.get(Calendar.MONTH) - startCal.get(Calendar.MONTH));
+                if (endCal.get(Calendar.DAY_OF_MONTH) < startCal.get(Calendar.DAY_OF_MONTH)) {
+                    months--;
+                }
+
+                if (months < 1) {
+                    JOptionPane.showMessageDialog(this, "Ngày kết thúc phải cách ngày bắt đầu ít nhất 1 tháng.");
+                    return null;
+                }
+
+                detail.setPaymentCycleMonths(months);
+            } catch (ParseException ex) {
+                JOptionPane.showMessageDialog(this, "Ngày bắt đầu hoặc kết thúc không đúng định dạng yyyy-MM-dd.");
+                return null;
+            }
+        } else {
+            try {
+                detail.setPaymentCycleMonths(Integer.parseInt(paymentText));
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Tháng thanh toán phải là số nguyên.");
+                return null;
+            }
+        }
+
+        detail.setFileScanUrl(ContractScanUrl.getText());
+        detail.setNotes(Note.getText());
+        return detail;
+    }
 
     private void setDetailForm(ContractDetail detail) {
         if (detail == null)
@@ -898,84 +946,85 @@ public Contract getForm(boolean isCreate) {
     }
 
     @Override
-public void create() {
-    try {
-        String roomIdText = txtIdRoom.getText().trim();
-        if (roomIdText.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Vui lòng nhập mã phòng");
-            return;
-        }
-        int roomId = Integer.parseInt(roomIdText);
-        if (roomId < 1 || roomId > 40) {
-            JOptionPane.showMessageDialog(this, "Mã phòng chỉ từ 1 đến 40.");
-            return;
-        }
-
-        String tenantId = txtTenant.getText().trim();
-        if (tenantId.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Vui lòng nhập mã CCCD người thuê");
-            return;
-        }
-        if (!tenantId.matches("\\d+")) {
-            JOptionPane.showMessageDialog(this, "CCCD không được chứa chữ cái. Vui lòng nhập số.");
-            return;
-        }
-        if (tenantDAO.findById(tenantId) == null) {
-            JOptionPane.showMessageDialog(this, "Mã CCCD người thuê không tồn tại!");
-            return;
-        }
-
-        String endDateText = EndDate.getText().trim();
-        if (endDateText.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Vui lòng nhập ngày kết thúc");
-            if (!endDateText.matches("\\d{4}-\\d{2}-\\d{2}")) {
-            JOptionPane.showMessageDialog(this, "Ngày kết thúc phải theo định dạng yyyy-MM-dd và không chứa chữ.");
-            return;
-        }
-
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        sdf.setLenient(false);
-        Date startDate = sdf.parse(StartDate.getText().trim());
-        Date endDate = sdf.parse(endDateText);
-
-        if (!endDate.after(startDate)) {
-            JOptionPane.showMessageDialog(this, "Ngày kết thúc phải sau ngày bắt đầu.");
-            return;
-        }
-            return;
-        }
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        sdf.setLenient(false);
-        Date endDate;
+    public void create() {
         try {
-            endDate = sdf.parse(endDateText);
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Ngày kết thúc không đúng định dạng yyyy-MM-dd.");
-            return;
+            String roomIdText = txtIdRoom.getText().trim();
+            if (roomIdText.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập mã phòng");
+                return;
+            }
+            int roomId = Integer.parseInt(roomIdText);
+            if (roomId < 1 || roomId > 40) {
+                JOptionPane.showMessageDialog(this, "Mã phòng chỉ từ 1 đến 40.");
+                return;
+            }
+
+            String tenantId = txtTenant.getText().trim();
+            if (tenantId.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập mã CCCD người thuê");
+                return;
+            }
+            if (!tenantId.matches("\\d+")) {
+                JOptionPane.showMessageDialog(this, "CCCD không được chứa chữ cái. Vui lòng nhập số.");
+                return;
+            }
+            if (tenantDAO.findById(tenantId) == null) {
+                JOptionPane.showMessageDialog(this, "Mã CCCD người thuê không tồn tại!");
+                return;
+            }
+
+            String endDateText = EndDate.getText().trim();
+            if (endDateText.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập ngày kết thúc");
+                if (!endDateText.matches("\\d{4}-\\d{2}-\\d{2}")) {
+                    JOptionPane.showMessageDialog(this,
+                            "Ngày kết thúc phải theo định dạng yyyy-MM-dd và không chứa chữ.");
+                    return;
+                }
+
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                sdf.setLenient(false);
+                Date startDate = sdf.parse(StartDate.getText().trim());
+                Date endDate = sdf.parse(endDateText);
+
+                if (!endDate.after(startDate)) {
+                    JOptionPane.showMessageDialog(this, "Ngày kết thúc phải sau ngày bắt đầu.");
+                    return;
+                }
+                return;
+            }
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            sdf.setLenient(false);
+            Date endDate;
+            try {
+                endDate = sdf.parse(endDateText);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Ngày kết thúc không đúng định dạng yyyy-MM-dd.");
+                return;
+            }
+
+            Date startDate = new Date();
+            Contract tenant = getForm();
+            tenant.setStartDate(startDate);
+            tenant.setEndDate(endDate);
+
+            ContractDetail detail = getDetailForm();
+
+            dao.create(tenant);
+            contractDetailDAO.create(detail);
+
+            fillToTable();
+            clear();
+
+            JOptionPane.showMessageDialog(this, "Thêm hợp đồng thành công!");
+
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Mã phòng phải là số nguyên.");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Đã xảy ra lỗi: " + e.getMessage());
+            e.printStackTrace();
         }
-
-        Date startDate = new Date();
-        Contract tenant = getForm();
-        tenant.setStartDate(startDate);
-        tenant.setEndDate(endDate);
-
-        ContractDetail detail = getDetailForm();
-
-        dao.create(tenant);
-        contractDetailDAO.create(detail);
-
-        fillToTable();
-        clear();
-
-        JOptionPane.showMessageDialog(this, "Thêm hợp đồng thành công!");
-
-    } catch (NumberFormatException ex) {
-        JOptionPane.showMessageDialog(this, "Mã phòng phải là số nguyên.");
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Đã xảy ra lỗi: " + e.getMessage());
-        e.printStackTrace();
     }
-}
 
     @Override
     public void update() {
@@ -989,21 +1038,21 @@ public void create() {
         this.clear();
     }
 
-   @Override
+    @Override
     public void delete() {
         int selectedRow = tblContractManager.getSelectedRow();
-    if (selectedRow == -1) {
-        JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng cần xóa!");
-        return;
-    }
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng cần xóa!");
+            return;
+        }
 
-    if (XDialog.confirm("Bạn thực sự muốn xóa?")) {
-        String id = txtIdContractManager.getText();
-        dao.deleteById(id);
-        this.fillToTable();
-        this.clear();
+        if (XDialog.confirm("Bạn thực sự muốn xóa?")) {
+            String id = txtIdContractManager.getText();
+            dao.deleteById(id);
+            this.fillToTable();
+            this.clear();
+        }
     }
-}
 
     @Override
     public void clear() {
@@ -1039,35 +1088,35 @@ public void create() {
     }
 
     @Override
-public void moveFirst() {
-    if (tblContractManager.getRowCount() > 0) {
-        moveTo(0);
+    public void moveFirst() {
+        if (tblContractManager.getRowCount() > 0) {
+            moveTo(0);
+        }
     }
-}
 
-@Override
-public void movePrevious() {
-    int selectedRow = tblContractManager.getSelectedRow();
-    if (selectedRow > 0) {
-        moveTo(selectedRow - 1);
+    @Override
+    public void movePrevious() {
+        int selectedRow = tblContractManager.getSelectedRow();
+        if (selectedRow > 0) {
+            moveTo(selectedRow - 1);
+        }
     }
-}
 
-@Override
-public void moveNext() {
-    int selectedRow = tblContractManager.getSelectedRow();
-    if (selectedRow >= 0 && selectedRow < tblContractManager.getRowCount() - 1) {
-        moveTo(selectedRow + 1);
+    @Override
+    public void moveNext() {
+        int selectedRow = tblContractManager.getSelectedRow();
+        if (selectedRow >= 0 && selectedRow < tblContractManager.getRowCount() - 1) {
+            moveTo(selectedRow + 1);
+        }
     }
-}
 
-@Override
-public void moveLast() {
-    int rowCount = tblContractManager.getRowCount();
-    if (rowCount > 0) {
-        moveTo(rowCount - 1);
+    @Override
+    public void moveLast() {
+        int rowCount = tblContractManager.getRowCount();
+        if (rowCount > 0) {
+            moveTo(rowCount - 1);
+        }
     }
-}
 
     @Override
     public void moveTo(int index) {

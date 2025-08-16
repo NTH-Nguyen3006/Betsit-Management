@@ -6,10 +6,6 @@ package ui.controller;
 
 import entity.Role;
 
-/**
- *
- * @author ADMIN
- */
-public interface RoleController extends CrudController<Role>{
-    
+public interface RoleController extends CrudController<Role> {
+
 }

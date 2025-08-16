@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package impl;
 
 import dao.UserDAO;
@@ -10,10 +7,6 @@ import java.util.List;
 import utils.XJdbc;
 import utils.XQuery;
 
-/**
- *
- * @author ADMIN
- */
 public class UserDAOImpl implements UserDAO {
     String createSql = "INSERT INTO Users (Username, Password, Fullname, Email, PhoneNumber, RoleId, Status, Created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     String updateSql = "UPDATE Users SET Password = ?, Fullname = ?, Email = ?, PhoneNumber = ?, RoleId = ?, Status = ?, Created_at = ?  WHERE Username = ?";

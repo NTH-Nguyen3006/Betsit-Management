@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package impl;
 
 import dao.TenantDetailDAO;
@@ -10,10 +7,6 @@ import java.util.List;
 import utils.XJdbc;
 import utils.XQuery;
 
-/**
- *
- * @author ADMIN
- */
 public class TenantDetailDAOImpl implements TenantDetailDAO {
     private final String INSERT_SQL = "INSERT INTO Tenant_Details (CitizenId, PerCardFrontImage, PerCardBackImage, ResidencyStatus, Occupation, Hometown) VALUES (?, ?, ?, ?, ?, ?)";
     private final String UPDATE_SQL = "UPDATE Tenant_Details SET PerCardFrontImage=?, PerCardBackImage=?, ResidencyStatus=?, Occupation=?, Hometown=? WHERE CitizenId=?";
