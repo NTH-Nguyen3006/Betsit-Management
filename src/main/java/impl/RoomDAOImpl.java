@@ -20,10 +20,6 @@ public class RoomDAOImpl implements RoomDAO {
 
     private final String findAllSql = "SELECT * FROM Rooms";
     private final String findByIdSql = findAllSql + " WHERE Roomid=?";
-    private final String findAllRoomTypesSql = "SELECT DISTINCT RoomType FROM Rooms WHERE RoomType IS NOT NULL AND RoomType <> '' ORDER BY RoomType"; // (dựa
-                                                                                                                                                      // trên
-                                                                                                                                                      // cột
-                                                                                                                                                      // RoomType)
     private final String findAllRoomIdSql = "SELECT * FROM Rooms";
 
     @Override
@@ -70,10 +66,6 @@ public class RoomDAOImpl implements RoomDAO {
     }
 
     @Override
-    public List<String> findAllRoomType() {
-        return XQuery.getList(String.class, findAllRoomTypesSql); // Sử dụng phương thức getList mới của XQuery
-    }
-
     public List<Room> findAllRoomIds() {
         return XQuery.getBeanList(Room.class, findAllRoomIdSql);
     }

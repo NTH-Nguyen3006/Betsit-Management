@@ -525,7 +525,7 @@ public class UserManagerJDailog extends javax.swing.JDialog implements UserContr
 
     UserDAO dao = new UserDAOImpl();
     RoleDAO cdao = new RoleDAOImpl();
-
+    User u = new User();
     List<Role> roles = List.of();
     List<User> items = List.of();
 
@@ -580,10 +580,15 @@ public class UserManagerJDailog extends javax.swing.JDialog implements UserContr
 
     @Override
     public void delete() {
-        
+        Role r = (Role) cboRoles.getSelectedItem();
+//        u.setRoleId(r.getId());
         if (XDialog.confirm("Bạn thực sự muốn xóa?")) {
             
             try {
+                if(r.getId()==1){
+                    XDialog.alert("Bạn không thể xóa admin", "Thông báo");
+                    return;
+                }
                 dao.deleteById(txtUsername.getText().trim());
                 fillToTable();
                 clear();
@@ -694,7 +699,7 @@ public class UserManagerJDailog extends javax.swing.JDialog implements UserContr
 
     @Override
     public User getForm() {
-        User u = new User();
+
         u.setUsername(txtUsername.getText());
         u.setPassword(txtPassword.getText());
         u.setFullname(txtFullname.getText());
